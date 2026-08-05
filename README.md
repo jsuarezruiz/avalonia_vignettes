@@ -54,6 +54,12 @@ The bar's top edge dips under whichever button is picked, and sloshes as that di
 
 Swipe between pages and the incoming one is revealed through a liquid edge that follows the pointer.
 
+<a href="vignettes/indie_3d"><img src="vignettes/indie_3d/images/indie_3d.gif" width="237"/></a>
+
+### [Feature Artist Carousel](vignettes/indie_3d)
+
+Swipe between artists while a field of 3D shapes drifts behind and in front of them.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

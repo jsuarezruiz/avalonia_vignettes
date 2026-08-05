@@ -1,0 +1,39 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Style Selector="TextBlock.chip">
+    <Setter Property="FontFamily" Value="{StaticResource DisplayFont}" />
+    <Setter Property="FontSize" Value="10.5" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="LetterSpacing" Value="2" />
+    <Setter Property="Foreground" Value="White" />
+  </Style>
+
+  <Style Selector="TextBlock.explore">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="LetterSpacing" Value="1.1" />
+    <Setter Property="Foreground" Value="Black" />
+  </Style>
+
+  <Style Selector="TextBlock.loading">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="LetterSpacing" Value="1.1" />
+  </Style>
+
+  <!-- The three page marks along the bottom. -->
+  <Style Selector="Border.dot">
+    <Setter Property="Width" Value="20" />
+    <Setter Property="Height" Value="5" />
+    <Setter Property="Margin" Value="2" />
+    <Setter Property="Background" Value="{StaticResource IndicatorBrush}" />
+  </Style>
+
+  <Style Selector="Border.dot.current">
+    <Setter Property="Background" Value="White" />
+  </Style>
+
+</Styles>

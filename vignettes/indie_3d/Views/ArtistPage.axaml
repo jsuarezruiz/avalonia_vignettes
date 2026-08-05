@@ -1,0 +1,67 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:Indie3D.Controls"
+             xmlns:views="using:Indie3D.Views"
+             x:Class="Indie3D.Views.ArtistPage"
+             x:DataType="views:ArtistPage"
+             ClipToBounds="True">
+
+  <Panel Background="{Binding PageBrush}">
+
+    <!-- The shapes behind the artist. -->
+    <controls:ShapeField Name="Behind"
+                         Scene="{Binding Scene}"
+                         Layer="{Binding BehindLayer}"
+                         BlendMode="HardLight"
+                         LayerOpacity="{Binding BehindOpacity}" />
+
+    <!-- The artist stands in the bottom four fifths of the page, scaled to fill that height. -->
+    <Grid RowDefinitions="20*,80*">
+      <Image Grid.Row="1"
+             Name="Artist"
+             Source="{Binding Artwork}"
+             Stretch="UniformToFill"
+             HorizontalAlignment="Center" />
+    </Grid>
+
+    <!-- And the ones in front of them. -->
+    <controls:ShapeField Name="InFront"
+                         Scene="{Binding Scene}"
+                         Layer="{Binding FrontLayer}"
+                         BlendMode="Exclusion" />
+
+    <controls:ClippedTitle Name="Titles"
+                           TopTitle="{Binding TopTitle}"
+                           BottomTitle="{Binding BottomTitle}"
+                           BottomScale="{Binding BottomTitleScale}"
+                           Margin="0,60,8,4" />
+
+    <!-- The grain over everything. -->
+    <controls:NoiseOverlay />
+
+    <TextBlock Classes="loading"
+               Text="Loading assets..."
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               IsVisible="{Binding IsLoading}" />
+
+    <Border Height="200" VerticalAlignment="Bottom">
+      <Border.Background>
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+          <GradientStop Offset="0" Color="#00000000" />
+          <GradientStop Offset="1" Color="#99000000" />
+        </LinearGradientBrush>
+      </Border.Background>
+    </Border>
+
+    <Border Background="White"
+            Padding="32,12"
+            Margin="0,0,0,60"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom">
+      <TextBlock Classes="explore" Text="EXPLORE NOW" />
+    </Border>
+
+  </Panel>
+
+</UserControl>

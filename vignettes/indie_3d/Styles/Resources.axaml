@@ -1,0 +1,18 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <FontFamily x:Key="BodyFont">avares://Indie3D/Assets/Fonts#Roboto</FontFamily>
+  <FontFamily x:Key="DisplayFont">avares://Indie3D/Assets/Fonts#Staatliches</FontFamily>
+
+  <!-- One background per artist. -->
+  <SolidColorBrush x:Key="Page0Brush" Color="#FF0DD479" />
+  <SolidColorBrush x:Key="Page1Brush" Color="#FFECA6C8" />
+  <SolidColorBrush x:Key="Page2Brush" Color="#FFFFD500" />
+
+  <SolidColorBrush x:Key="ChipBrush" Color="#FF010101" />
+  <SolidColorBrush x:Key="IndicatorBrush" Color="#FFAAAAAA" />
+
+  <!-- Material's menu icon, on its 24 unit grid. -->
+  <StreamGeometry x:Key="MenuIcon">M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z</StreamGeometry>
+
+</ResourceDictionary>

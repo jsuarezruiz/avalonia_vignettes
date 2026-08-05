@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:views="using:Indie3D.Views"
+             x:Class="Indie3D.Views.MainView">
+
+  <Panel Background="Black">
+
+    <shared:PageView Name="Pages" ViewportFraction="1">
+      <views:ArtistPage Name="Page0"
+                        PageIndex="0"
+                        TopTitle="MILES"
+                        BottomTitle="MILLER"
+                        PageBrush="{StaticResource Page0Brush}"
+                        BottomTitleScale="1" />
+      <views:ArtistPage Name="Page1"
+                        PageIndex="1"
+                        TopTitle="BRET"
+                        BottomTitle="HAMPTON"
+                        PageBrush="{StaticResource Page1Brush}"
+                        BottomTitleScale="0.9"
+                        BehindOpacity="1" />
+      <views:ArtistPage Name="Page2"
+                        PageIndex="2"
+                        TopTitle="CINDY"
+                        BottomTitle="GREY"
+                        PageBrush="{StaticResource Page2Brush}" />
+    </shared:PageView>
+
+    <!-- The bar and the indicator sit over every page. -->
+    <views:AppBar VerticalAlignment="Top" />
+
+    <StackPanel Name="Indicator"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,32">
+      <Border Classes="dot" />
+      <Border Classes="dot" />
+      <Border Classes="dot" />
+    </StackPanel>
+
+  </Panel>
+
+</UserControl>

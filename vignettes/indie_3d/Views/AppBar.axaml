@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             x:Class="Indie3D.Views.AppBar">
+
+  <Grid ColumnDefinitions="Auto,*,Auto">
+    <shared:MaterialIcon Grid.Column="0"
+                         Data="{StaticResource MenuIcon}"
+                         IconSize="32"
+                         Foreground="Black"
+                         Margin="20,10" />
+
+    <Border Grid.Column="2" Background="{StaticResource ChipBrush}" Padding="50,8,16,8">
+      <TextBlock Classes="chip" Text="FRESH BEATS BY" TextAlignment="Right" />
+    </Border>
+  </Grid>
+
+</UserControl>
