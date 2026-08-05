@@ -48,6 +48,12 @@ Tap a card and it springs open, then fills with liquid that sloshes as it settle
 
 The bar's top edge dips under whichever button is picked, and sloshes as that dip travels across.
 
+<a href="vignettes/gooey_edge"><img src="vignettes/gooey_edge/images/gooey_edge.gif" width="237"/></a>
+
+### [Mindfulness Gooey Transition](vignettes/gooey_edge)
+
+Swipe between pages and the incoming one is revealed through a liquid edge that follows the pointer.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

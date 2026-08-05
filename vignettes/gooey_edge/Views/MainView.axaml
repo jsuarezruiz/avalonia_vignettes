@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:GooeyEdge.Controls"
+             x:Class="GooeyEdge.Views.MainView">
+
+  <Panel>
+    <controls:GooeyCarousel x:Name="Carousel">
+
+      <controls:ContentCard Palette="Red"
+                            AccentBrush="{StaticResource RedAccentBrush}"
+                            Title="Wake up gently &#x0a;with sounds of nature"
+                            Subtitle="Relax your mind and create inner peace with soothing sounds of nature." />
+
+      <controls:ContentCard Palette="Yellow"
+                            AccentBrush="{StaticResource YellowAccentBrush}"
+                            Title="Clear your mind &#x0a;with breathing exercises"
+                            Subtitle="Melt your stresses and anxieties away with 50+ breathing exercises." />
+
+      <controls:ContentCard Palette="Blue"
+                            AccentBrush="{StaticResource BlueAccentBrush}"
+                            Title="Fall asleep &#x0a;with bedtime stories"
+                            Subtitle="Enjoy a restful night&#x2019;s sleep with relaxing activities and calm bedtime stories." />
+
+    </controls:GooeyCarousel>
+
+    <!-- Drawn over both pages, as the last child of the Flutter Stack. -->
+    <controls:SunAndMoon Index="{Binding #Carousel.DragIndex}"
+                         IsDragCompleted="{Binding #Carousel.IsDragCompleted}" />
+  </Panel>
+
+</UserControl>

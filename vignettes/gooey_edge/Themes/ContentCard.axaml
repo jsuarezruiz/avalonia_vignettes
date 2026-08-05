@@ -1,0 +1,96 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:GooeyEdge.Controls">
+
+  <!--
+    The call to action: a fully rounded pill, 16 px semibold with a little tracking, padded 16
+    vertically. Flutter's MaterialButton is flat here, so no elevation or ripple to reproduce.
+  -->
+  <ControlTheme x:Key="GetStartedButtonTheme" TargetType="Button">
+    <Setter Property="Padding" Value="0,16" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{StaticResource OnCardBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource BodySemiBoldFont}" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="LetterSpacing" Value="0.8" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" CornerRadius="50" Padding="{TemplateBinding Padding}">
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pressed /template/ Border">
+      <Setter Property="Opacity" Value="0.85" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:ContentCard}" TargetType="controls:ContentCard">
+    <Setter Property="ClipToBounds" Value="True" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+
+          <!--
+            The background is drawn oversized and drifted, so it must not be laid out against the
+            card's bounds; a top-left anchored Image carrying the drift transform does that.
+          -->
+          <Image Source="{TemplateBinding BackgroundImage}"
+                 Stretch="UniformToFill"
+                 Width="{Binding $parent[controls:ContentCard].Bounds.Width}"
+                 Height="{Binding $parent[controls:ContentCard].Bounds.Height}"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 RenderTransformOrigin="0%,0%"
+                 RenderTransform="{TemplateBinding BackgroundTransform}" />
+
+          <Grid Margin="0,75,0,25" RowDefinitions="3*,Auto,2*">
+
+            <Image Grid.Row="0"
+                   Margin="20,0"
+                   Source="{TemplateBinding IllustrationImage}"
+                   Stretch="Uniform" />
+
+            <Image Grid.Row="1"
+                   Height="14"
+                   Source="{TemplateBinding SliderImage}"
+                   Stretch="Uniform" />
+
+            <!-- spaceEvenly over the headline, the copy and the button. -->
+            <Grid Grid.Row="2" Margin="18,0" RowDefinitions="*,Auto,*,Auto,*,Auto,*">
+
+              <TextBlock Grid.Row="1"
+                         Text="{TemplateBinding Title}"
+                         TextAlignment="Center"
+                         TextWrapping="Wrap"
+                         FontFamily="{StaticResource SerifFont}"
+                         FontSize="30"
+                         LineHeight="36"
+                         ClipToBounds="False"
+                         Foreground="{StaticResource OnCardBrush}" />
+
+              <TextBlock Grid.Row="3"
+                         Text="{TemplateBinding Subtitle}"
+                         TextAlignment="Center"
+                         TextWrapping="Wrap"
+                         FontFamily="{StaticResource BodyLightFont}"
+                         FontSize="14"
+                         Foreground="{StaticResource OnCardBrush}" />
+
+              <Button Grid.Row="5"
+                      Margin="36,0"
+                      Theme="{StaticResource GetStartedButtonTheme}"
+                      Background="{TemplateBinding AccentBrush}"
+                      Content="Get Started" />
+            </Grid>
+          </Grid>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>
