@@ -1,0 +1,34 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:BasketballPullToRefresh.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:GameScoreBoard}" TargetType="controls:GameScoreBoard">
+    <Setter Property="FontFamily" Value="{StaticResource DisplayFont}" />
+    <Setter Property="FontSize" Value="28" />
+    <Setter Property="Foreground" Value="{StaticResource InkBrush}" />
+    <Setter Property="WinnerBrush" Value="{StaticResource WinnerBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <StackPanel Orientation="Horizontal">
+
+          <!-- A box one roll tall: the old score leaves through the top as the new one arrives. -->
+          <Panel Width="50" Height="{x:Static controls:GameScoreBoard.RollHeight}" ClipToBounds="True">
+            <TextBlock Name="PART_HomeCurrent" Width="50" TextAlignment="Right" />
+            <TextBlock Name="PART_HomeIncoming" Width="50" TextAlignment="Right" />
+          </Panel>
+
+          <TextBlock Text="-" Margin="16,0" VerticalAlignment="Center" />
+
+          <Panel Width="50" Height="{x:Static controls:GameScoreBoard.RollHeight}" ClipToBounds="True">
+            <TextBlock Name="PART_AwayCurrent" Width="50" TextAlignment="Left" />
+            <TextBlock Name="PART_AwayIncoming" Width="50" TextAlignment="Left" />
+          </Panel>
+
+        </StackPanel>
+
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

@@ -1,0 +1,54 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- One class per TextStyle. Anything left uncoloured takes Material's body colour. -->
+
+  <Style Selector="TextBlock.appBarTitle">
+    <Setter Property="FontFamily" Value="{StaticResource DisplayFont}" />
+    <Setter Property="FontSize" Value="18" />
+    <Setter Property="Foreground" Value="White" />
+  </Style>
+
+  <Style Selector="TextBlock.appBarDate">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="10" />
+    <Setter Property="Foreground" Value="White" />
+  </Style>
+
+  <Style Selector="TextBlock.pullCaption">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="Foreground" Value="{StaticResource PullCaptionBrush}" />
+    <Setter Property="TextAlignment" Value="Center" />
+  </Style>
+
+  <Style Selector="TextBlock.team">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="10" />
+    <Setter Property="Foreground" Value="{StaticResource OnCardBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.badge">
+    <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}" />
+    <Setter Property="FontSize" Value="8" />
+  </Style>
+
+  <!-- Live news is white on orange, anything settled black on grey. -->
+  <Style Selector="Border.badge">
+    <Setter Property="Padding" Value="14,2" />
+    <Setter Property="Background" Value="{StaticResource BadgeBrush}" />
+    <Setter Property="TextElement.Foreground" Value="{StaticResource OnBadgeBrush}" />
+  </Style>
+
+  <Style Selector="Border.badge.live">
+    <Setter Property="Background" Value="{StaticResource LiveBadgeBrush}" />
+    <Setter Property="TextElement.Foreground" Value="{StaticResource OnLiveBadgeBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.highlights">
+    <Setter Property="FontFamily" Value="{StaticResource SemiBoldFont}" />
+    <Setter Property="FontSize" Value="8" />
+    <Setter Property="Foreground" Value="{StaticResource OnCardBrush}" />
+  </Style>
+
+</Styles>

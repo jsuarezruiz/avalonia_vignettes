@@ -1,0 +1,37 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- Open Sans names its semibold as a family, not a weight, so it is asked for by name. -->
+  <FontFamily x:Key="BodyFont">avares://BasketballPullToRefresh/Assets/Fonts#Open Sans</FontFamily>
+  <FontFamily x:Key="SemiBoldFont">avares://BasketballPullToRefresh/Assets/Fonts#Open Sans SemiBold</FontFamily>
+  <FontFamily x:Key="DisplayFont">avares://BasketballPullToRefresh/Assets/Fonts#Fjalla One</FontFamily>
+
+  <!-- ThemeInfo, plus the colours the app bar and the pull area carry. -->
+  <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FFB4B4B4" />
+  <SolidColorBrush x:Key="CardBrush" Color="White" />
+
+  <!-- Material's body colour, which anything the original leaves unstyled comes out in. -->
+  <SolidColorBrush x:Key="OnCardBrush" Color="#DD000000" />
+  <SolidColorBrush x:Key="InkBrush" Color="#FF262626" />
+  <SolidColorBrush x:Key="WinnerBrush" Color="#FFFF6826" />
+  <SolidColorBrush x:Key="LiveBadgeBrush" Color="#FFFF733E" />
+  <SolidColorBrush x:Key="BadgeBrush" Color="#FFF5F5F5" />
+  <SolidColorBrush x:Key="OnBadgeBrush" Color="Black" />
+  <SolidColorBrush x:Key="OnLiveBadgeBrush" Color="White" />
+
+  <SolidColorBrush x:Key="PullBackgroundBrush" Color="#FFF0F0F0" />
+  <SolidColorBrush x:Key="PullCaptionBrush" Color="#FF808080" />
+
+  <Color x:Key="AppBarStartColor">#FF1094A7</Color>
+  <Color x:Key="AppBarEndColor">#FFF37B4D</Color>
+
+  <LinearGradientBrush x:Key="AppBarBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Offset="0" Color="{StaticResource AppBarStartColor}" />
+    <GradientStop Offset="1" Color="{StaticResource AppBarEndColor}" />
+  </LinearGradientBrush>
+
+  <!-- Material's arrow_back_ios and calendar_today, on their 24 unit grid. -->
+  <StreamGeometry x:Key="BackIcon">M17.77,3.77L16,2L6,12l10,10l1.77-1.77L9.54,12L17.77,3.77z</StreamGeometry>
+  <StreamGeometry x:Key="CalendarIcon">M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z</StreamGeometry>
+
+</ResourceDictionary>

@@ -1,0 +1,120 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:controls="using:BasketballPullToRefresh.Controls"
+             xmlns:models="using:BasketballPullToRefresh.Models"
+             xmlns:views="using:BasketballPullToRefresh.Views"
+             x:Class="BasketballPullToRefresh.Views.MainView"
+             x:DataType="views:MainView">
+
+  <DockPanel Background="{StaticResource PageBackgroundBrush}">
+
+    <views:ScoresAppBar DockPanel.Dock="Top" />
+
+    <!--
+      RefreshContainer runs the gesture: it recognises the pull, pushes the list down, sets the
+      threshold and holds the list open until the refresh is done. It cannot draw this indicator,
+      so its visualizer is left empty and the hoop is drawn behind the list. See MainView.axaml.cs.
+    -->
+    <RefreshContainer Name="Refresh" PullDirection="TopToBottom" IsMouseEnabled="True">
+
+      <RefreshContainer.Visualizer>
+        <RefreshVisualizer Name="Visualizer" Height="{Binding Metrics.Height}">
+          <Panel />
+        </RefreshVisualizer>
+      </RefreshContainer.Visualizer>
+
+      <Panel>
+
+        <!-- The scene the list uncovers as it is pulled down. -->
+        <Panel Height="{Binding Metrics.Height}"
+               VerticalAlignment="Top"
+               Background="{StaticResource PullBackgroundBrush}">
+          <TextBlock Classes="pullCaption"
+                     Text="{Binding #Hoop.Caption}"
+                     VerticalAlignment="Top"
+                     Margin="{Binding Metrics.CaptionMargin}" />
+          <controls:BasketballHoop Name="Hoop" Extent="{Binding Metrics.Extent}" />
+        </Panel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+          <ItemsControl Name="Games" Background="{StaticResource PageBackgroundBrush}">
+
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <!-- The original puts a one pixel padding between rows, which the grey shows through. -->
+                <StackPanel Spacing="1" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+              <DataTemplate DataType="models:GameSlot">
+
+                <Border Height="140" Background="{StaticResource CardBrush}" Padding="9,6">
+                  <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+
+                    <StackPanel VerticalAlignment="Center">
+                      <Image Width="64" Height="64" Source="{Binding Game.Home.Logo}" />
+                      <TextBlock Classes="team"
+                                 HorizontalAlignment="Center"
+                                 Text="{Binding Game.Home.City}" />
+                      <TextBlock Classes="team"
+                                 HorizontalAlignment="Center"
+                                 Text="{Binding Game.Home.Name}" />
+                    </StackPanel>
+
+                    <shared:FlexPanel MainAxisAlignment="SpaceEvenly">
+
+                      <ItemsControl ItemsSource="{Binding Game.Badges}" HorizontalAlignment="Center">
+                        <ItemsControl.ItemsPanel>
+                          <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                          </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                          <DataTemplate DataType="models:GameBadge">
+                            <Border Classes="badge" Classes.live="{Binding IsLive}">
+                              <TextBlock Classes="badge" Text="{Binding Text}" />
+                            </Border>
+                          </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                      </ItemsControl>
+
+                      <controls:GameScoreBoard Game="{Binding Game}" HorizontalAlignment="Center" />
+
+                      <Border BorderBrush="{StaticResource PageBackgroundBrush}"
+                              BorderThickness="1"
+                              CornerRadius="12"
+                              Padding="18,4"
+                              HorizontalAlignment="Center">
+                        <TextBlock Classes="highlights" Text="HIGHLIGHTS" />
+                      </Border>
+
+                    </shared:FlexPanel>
+
+                    <StackPanel VerticalAlignment="Center">
+                      <Image Width="64" Height="64" Source="{Binding Game.Away.Logo}" />
+                      <TextBlock Classes="team"
+                                 HorizontalAlignment="Center"
+                                 Text="{Binding Game.Away.City}" />
+                      <TextBlock Classes="team"
+                                 HorizontalAlignment="Center"
+                                 Text="{Binding Game.Away.Name}" />
+                    </StackPanel>
+
+                  </StackPanel>
+                </Border>
+
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+          </ItemsControl>
+        </ScrollViewer>
+
+      </Panel>
+
+    </RefreshContainer>
+
+  </DockPanel>
+
+</UserControl>

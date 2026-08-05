@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             x:Class="BasketballPullToRefresh.Views.ScoresAppBar"
+             Height="90">
+
+  <Panel Background="{StaticResource AppBarBrush}">
+
+    <!-- spaceAround over five children, two of them bare 40 point spacers. -->
+    <shared:FlexPanel Orientation="Horizontal" MainAxisAlignment="SpaceAround" Margin="16,0">
+
+      <shared:MaterialIcon Data="{StaticResource BackIcon}"
+                           IconSize="20"
+                           Foreground="White"
+                           VerticalAlignment="Center" />
+
+      <Panel Width="40" Height="40" />
+
+      <StackPanel VerticalAlignment="Center">
+        <TextBlock Classes="appBarTitle" Text="LIVE SCORES" HorizontalAlignment="Center" />
+        <TextBlock Classes="appBarDate" Text="OCT 24, 2019" HorizontalAlignment="Center" />
+      </StackPanel>
+
+      <Panel Width="40" Height="40" />
+
+      <shared:MaterialIcon Data="{StaticResource CalendarIcon}"
+                           IconSize="20"
+                           Foreground="White"
+                           VerticalAlignment="Center" />
+
+    </shared:FlexPanel>
+
+  </Panel>
+
+</UserControl>
