@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:DarkInkTransition.Controls"
+             x:Class="DarkInkTransition.Views.MainView"
+             x:Name="Root"
+             Background="White">
+
+  <!-- The whole demo toggles on a tap, which is how the original shows the transition off. -->
+  <Panel>
+
+    <Panel x:Name="Pages" ClipToBounds="True" />
+
+    <controls:DarkInkBar x:Name="Bar" VerticalAlignment="Top" />
+
+    <controls:DarkInkControls x:Name="Controls"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Bottom"
+                              Margin="0,0,0,16" />
+
+  </Panel>
+
+</UserControl>

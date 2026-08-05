@@ -24,6 +24,12 @@ A navigation bar whose buttons change size, shape and colour as they are picked.
 
 A starfield drawn behind the whole app, flying faster as the list is scrolled and as a page opens.
 
+<a href="vignettes/dark_ink_transition"><img src="vignettes/dark_ink_transition/images/dark_ink_transition.gif" width="237"/></a>
+
+### [Article Dark Mode](vignettes/dark_ink_transition)
+
+Ink spreads across the article to carry it between the light and dark schemes, masked by a frame sequence.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:
