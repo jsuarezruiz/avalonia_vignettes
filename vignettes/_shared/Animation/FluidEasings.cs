@@ -20,7 +20,9 @@ public sealed class LinearPointEasing : Easing
     private readonly double _upperScale;
     private readonly double _upperOffset;
 
-    /// <summary>Initializes a new instance of the <see cref="LinearPointEasing"/> class.</summary>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LinearPointEasing"/> class.
+    /// </summary>
     /// <param name="input">Where along the input the moved point sits.</param>
     /// <param name="output">Where that point is moved to.</param>
     public LinearPointEasing(double input, double output)
@@ -46,7 +48,9 @@ public sealed class LinearPointEasing : Easing
 /// </remarks>
 public sealed class CenteredElasticOutEasing : Easing
 {
-    /// <summary>Gets or sets the duration of the oscillation.</summary>
+    /// <summary>
+    /// Gets or sets the duration of the oscillation.
+    /// </summary>
     public double Period { get; set; } = 0.4d;
 
     /// <inheritdoc />
@@ -60,7 +64,9 @@ public sealed class CenteredElasticOutEasing : Easing
 /// </summary>
 public sealed class CenteredElasticInEasing : Easing
 {
-    /// <summary>Gets or sets the duration of the oscillation.</summary>
+    /// <summary>
+    /// Gets or sets the duration of the oscillation.
+    /// </summary>
     public double Period { get; set; } = 0.4d;
 
     /// <inheritdoc />

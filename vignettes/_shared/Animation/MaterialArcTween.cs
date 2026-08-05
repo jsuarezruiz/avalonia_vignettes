@@ -14,7 +14,9 @@ namespace AvaloniaVignettes.Shared.Animation;
 /// </remarks>
 public sealed class MaterialPointArcTween
 {
-    /// <summary>How far apart the points must be on an axis before the move counts as off-axis.</summary>
+    /// <summary>
+    /// How far apart the points must be on an axis before the move counts as off-axis.
+    /// </summary>
     private const double OnAxisDelta = 2d;
 
     private readonly Point _begin;
@@ -25,7 +27,9 @@ public sealed class MaterialPointArcTween
     private readonly double _endAngle;
     private readonly bool _isArc;
 
-    /// <summary>Initializes a new arc running from <paramref name="begin"/> to <paramref name="end"/>.</summary>
+    /// <summary>
+    /// Initializes a new arc running from <paramref name="begin"/> to <paramref name="end"/>.
+    /// </summary>
     public MaterialPointArcTween(Point begin, Point end)
     {
         _begin = begin;
@@ -84,7 +88,9 @@ public sealed class MaterialPointArcTween
         double SweepAngle() => 2d * Math.Asin(distance / (2d * _radius));
     }
 
-    /// <summary>Gets the point <paramref name="progress"/> of the way along the arc.</summary>
+    /// <summary>
+    /// Gets the point <paramref name="progress"/> of the way along the arc.
+    /// </summary>
     public Point Lerp(double progress)
     {
         if (progress <= 0d)
@@ -122,7 +128,9 @@ public sealed class MaterialRectArcTween
     private readonly MaterialPointArcTween _topLeft;
     private readonly MaterialPointArcTween _bottomRight;
 
-    /// <summary>Initializes a new tween running from <paramref name="begin"/> to <paramref name="end"/>.</summary>
+    /// <summary>
+    /// Initializes a new tween running from <paramref name="begin"/> to <paramref name="end"/>.
+    /// </summary>
     public MaterialRectArcTween(Rect begin, Rect end)
     {
         _begin = begin;
@@ -131,7 +139,9 @@ public sealed class MaterialRectArcTween
         _bottomRight = new MaterialPointArcTween(begin.BottomRight, end.BottomRight);
     }
 
-    /// <summary>Gets the rectangle <paramref name="progress"/> of the way through the flight.</summary>
+    /// <summary>
+    /// Gets the rectangle <paramref name="progress"/> of the way through the flight.
+    /// </summary>
     public Rect Lerp(double progress)
     {
         if (progress <= 0d)

@@ -17,7 +17,9 @@ namespace AvaloniaVignettes.Shared.Capture;
 /// </remarks>
 public static class FrameCapture
 {
-    /// <summary>Reads the capture directory out of the command line, if the switch is present.</summary>
+    /// <summary>
+    /// Reads the capture directory out of the command line, if the switch is present.
+    /// </summary>
     public static string? GetOutputDirectory(string[] args)
     {
         var index = Array.IndexOf(args, "--capture");
@@ -52,7 +54,9 @@ public static class FrameCapture
         Console.WriteLine($"captured {file}");
     }
 
-    /// <summary>Closes the app, which is what ends the run once the last frame is written.</summary>
+    /// <summary>
+    /// Closes the app, which is what ends the run once the last frame is written.
+    /// </summary>
     public static void Shutdown() =>
         Dispatcher.UIThread.Post(() =>
             (Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.Shutdown());

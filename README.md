@@ -12,6 +12,12 @@ Each port is written from the original Dart source, keeping its numbers and its 
 
 A custom pull to refresh: a basketball spins around the hoop while the scores reload.
 
+<a href="vignettes/bubble_tab_bar"><img src="vignettes/bubble_tab_bar/images/bubble_tab_bar.gif" width="237"/></a>
+
+### [Icon Flip Button Bar](vignettes/bubble_tab_bar)
+
+A navigation bar whose buttons change size, shape and colour as they are picked.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

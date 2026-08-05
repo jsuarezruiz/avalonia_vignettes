@@ -20,7 +20,9 @@ namespace AvaloniaVignettes.Shared.Media;
 /// </remarks>
 public static class Rotation3D
 {
-    /// <summary>The perspective factor Flutter's vignettes use: <c>1 / 1000</c>.</summary>
+    /// <summary>
+    /// The perspective factor Flutter's vignettes use: <c>1 / 1000</c>.
+    /// </summary>
     public const double DefaultPerspective = 0.001d;
 
     private const double DegreesToRadians = Math.PI / 180d;

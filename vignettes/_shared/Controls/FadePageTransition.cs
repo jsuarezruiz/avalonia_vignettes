@@ -25,22 +25,34 @@ namespace AvaloniaVignettes.Shared.Controls;
 /// </remarks>
 public sealed class FadePageTransition : IPageTransition
 {
-    /// <summary>Gets or sets how long the navigation takes.</summary>
+    /// <summary>
+    /// Gets or sets how long the navigation takes.
+    /// </summary>
     public TimeSpan Duration { get; set; } = TimeSpan.FromMilliseconds(1700);
 
-    /// <summary>Gets or sets when the page being pushed away has finished going.</summary>
+    /// <summary>
+    /// Gets or sets when the page being pushed away has finished going.
+    /// </summary>
     public double PushFadeOutEnd { get; set; } = 0.2d;
 
-    /// <summary>Gets or sets when the page being pushed in starts arriving.</summary>
+    /// <summary>
+    /// Gets or sets when the page being pushed in starts arriving.
+    /// </summary>
     public double PushFadeInStart { get; set; } = 0.7d;
 
-    /// <summary>Gets or sets when the page being popped has finished going.</summary>
+    /// <summary>
+    /// Gets or sets when the page being popped has finished going.
+    /// </summary>
     public double PopFadeOutEnd { get; set; } = 0.3d;
 
-    /// <summary>Gets or sets when the page being returned to starts arriving.</summary>
+    /// <summary>
+    /// Gets or sets when the page being returned to starts arriving.
+    /// </summary>
     public double PopFadeInStart { get; set; } = 0.8d;
 
-    /// <summary>Gets or sets the layer that carries a shared element across, if there is one.</summary>
+    /// <summary>
+    /// Gets or sets the layer that carries a shared element across, if there is one.
+    /// </summary>
     public HeroFlight? HeroFlight { get; set; }
 
     private Control? _hidden;

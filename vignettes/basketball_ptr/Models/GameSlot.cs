@@ -18,7 +18,9 @@ public sealed class GameSlot(BasketballGameData game) : INotifyPropertyChanged
     /// <inheritdoc />
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    /// <summary>Gets or sets the game reported in this row.</summary>
+    /// <summary>
+    /// Gets or sets the game reported in this row.
+    /// </summary>
     public BasketballGameData Game
     {
         get => _game;

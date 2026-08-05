@@ -15,44 +15,58 @@ namespace AvaloniaVignettes.Shared.Controls;
 /// </remarks>
 public abstract class PlaceholderBase : Control
 {
-    /// <summary>Defines the <see cref="Foreground"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Foreground"/> property.
+    /// </summary>
     public static readonly StyledProperty<IBrush?> ForegroundProperty =
         AvaloniaProperty.Register<PlaceholderBase, IBrush?>(
             nameof(Foreground), new SolidColorBrush(Color.FromRgb(0xF2, 0xF2, 0xF2)));
 
-    /// <summary>Defines the <see cref="Background"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Background"/> property.
+    /// </summary>
     public static readonly StyledProperty<IBrush?> BackgroundProperty =
         AvaloniaProperty.Register<PlaceholderBase, IBrush?>(nameof(Background), Brushes.White);
 
-    /// <summary>Defines the <see cref="CornerRadius"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="CornerRadius"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> CornerRadiusProperty =
         AvaloniaProperty.Register<PlaceholderBase, double>(nameof(CornerRadius), 4d);
 
     static PlaceholderBase() =>
         AffectsRender<PlaceholderBase>(ForegroundProperty, BackgroundProperty, CornerRadiusProperty);
 
-    /// <summary>Gets or sets the brush the skeleton bars are drawn in.</summary>
+    /// <summary>
+    /// Gets or sets the brush the skeleton bars are drawn in.
+    /// </summary>
     public IBrush? Foreground
     {
         get => GetValue(ForegroundProperty);
         set => SetValue(ForegroundProperty, value);
     }
 
-    /// <summary>Gets or sets the card's fill.</summary>
+    /// <summary>
+    /// Gets or sets the card's fill.
+    /// </summary>
     public IBrush? Background
     {
         get => GetValue(BackgroundProperty);
         set => SetValue(BackgroundProperty, value);
     }
 
-    /// <summary>Gets or sets the card's corner radius.</summary>
+    /// <summary>
+    /// Gets or sets the card's corner radius.
+    /// </summary>
     public double CornerRadius
     {
         get => GetValue(CornerRadiusProperty);
         set => SetValue(CornerRadiusProperty, value);
     }
 
-    /// <summary>Draws the card behind the skeleton.</summary>
+    /// <summary>
+    /// Draws the card behind the skeleton.
+    /// </summary>
     protected void DrawCard(DrawingContext context)
     {
         if (Background is { } background)
@@ -61,7 +75,9 @@ public abstract class PlaceholderBase : Control
         }
     }
 
-    /// <summary>Draws one skeleton bar.</summary>
+    /// <summary>
+    /// Draws one skeleton bar.
+    /// </summary>
     protected void DrawBar(DrawingContext context, double x, double y, double width, double height, double radius = 0d)
     {
         if (Foreground is not { } brush || width <= 0d)
@@ -75,20 +91,26 @@ public abstract class PlaceholderBase : Control
     }
 }
 
-/// <summary>A tall card: an avatar, a title and four lines. Port of <c>PlaceholderCardTall</c>.</summary>
+/// <summary>
+/// A tall card: an avatar, a title and four lines. Port of <c>PlaceholderCardTall</c>.
+/// </summary>
 public sealed class PlaceholderCardTall : PlaceholderBase
 {
     private const double Padding = 20d;
     private const double LineHeight = 14d;
     private const double AvatarSize = 45d;
 
-    /// <summary>The tops of the four lines, measured from the card's padding.</summary>
+    /// <summary>
+    /// The tops of the four lines, measured from the card's padding.
+    /// </summary>
     private static readonly double[] LineTops = [60d, 85d, 110d, 135d];
 
     private readonly double _titleWidth;
     private readonly double[] _lineInsets;
 
-    /// <summary>Initializes a new instance of the <see cref="PlaceholderCardTall"/> class.</summary>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PlaceholderCardTall"/> class.
+    /// </summary>
     public PlaceholderCardTall()
     {
         var random = Random.Shared;
@@ -122,7 +144,9 @@ public sealed class PlaceholderCardTall : PlaceholderBase
     }
 }
 
-/// <summary>A short card: two lines and a small square. Port of <c>PlaceholderCardShort</c>.</summary>
+/// <summary>
+/// A short card: two lines and a small square. Port of <c>PlaceholderCardShort</c>.
+/// </summary>
 public sealed class PlaceholderCardShort : PlaceholderBase
 {
     private const double Padding = 26d;
@@ -131,7 +155,9 @@ public sealed class PlaceholderCardShort : PlaceholderBase
     private readonly double _firstInset;
     private readonly double _secondInset;
 
-    /// <summary>Initializes a new instance of the <see cref="PlaceholderCardShort"/> class.</summary>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PlaceholderCardShort"/> class.
+    /// </summary>
     public PlaceholderCardShort()
     {
         var random = Random.Shared;
@@ -159,7 +185,9 @@ public sealed class PlaceholderCardShort : PlaceholderBase
     }
 }
 
-/// <summary>A framed mountain scene. Port of <c>PlaceholderImage</c>.</summary>
+/// <summary>
+/// A framed mountain scene. Port of <c>PlaceholderImage</c>.
+/// </summary>
 public sealed class PlaceholderImage : PlaceholderBase
 {
     /// <inheritdoc />
@@ -205,13 +233,19 @@ public sealed class PlaceholderImage : PlaceholderBase
     }
 }
 
-/// <summary>An image over a block of text. Port of <c>PlaceholderImageWithText</c>.</summary>
+/// <summary>
+/// An image over a block of text. Port of <c>PlaceholderImageWithText</c>.
+/// </summary>
 public sealed class PlaceholderImageWithText : PlaceholderBase
 {
-    /// <summary>The text block below the image is a fixed 94 tall.</summary>
+    /// <summary>
+    /// The text block below the image is a fixed 94 tall.
+    /// </summary>
     private const double TextBlockHeight = 94d;
 
-    /// <summary>Initializes a new instance of the <see cref="PlaceholderImageWithText"/> class.</summary>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PlaceholderImageWithText"/> class.
+    /// </summary>
     public PlaceholderImageWithText() => CornerRadius = 0d;
 
     /// <inheritdoc />

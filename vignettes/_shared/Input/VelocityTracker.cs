@@ -27,20 +27,28 @@ public sealed class VelocityTracker
     private readonly List<(TimeSpan Time, double Position)> _samples;
     private readonly int _capacity;
 
-    /// <summary>Initializes a new tracker keeping <paramref name="capacity"/> samples.</summary>
+    /// <summary>
+    /// Initializes a new tracker keeping <paramref name="capacity"/> samples.
+    /// </summary>
     public VelocityTracker(int capacity = 5)
     {
         _capacity = Math.Max(2, capacity);
         _samples = new List<(TimeSpan, double)>(_capacity);
     }
 
-    /// <summary>Reads the timestamp off a pointer event as a <see cref="TimeSpan"/>.</summary>
+    /// <summary>
+    /// Reads the timestamp off a pointer event as a <see cref="TimeSpan"/>.
+    /// </summary>
     public static TimeSpan TimestampOf(PointerEventArgs e) => TimeSpan.FromMilliseconds(e.Timestamp);
 
-    /// <summary>Drops every sample, ready for a new drag.</summary>
+    /// <summary>
+    /// Drops every sample, ready for a new drag.
+    /// </summary>
     public void Clear() => _samples.Clear();
 
-    /// <summary>Records where the pointer was at <paramref name="time"/>.</summary>
+    /// <summary>
+    /// Records where the pointer was at <paramref name="time"/>.
+    /// </summary>
     public void Add(TimeSpan time, double position)
     {
         if (_samples.Count == _capacity)
@@ -51,7 +59,9 @@ public sealed class VelocityTracker
         _samples.Add((time, position));
     }
 
-    /// <summary>Records the position carried by <paramref name="e"/>.</summary>
+    /// <summary>
+    /// Records the position carried by <paramref name="e"/>.
+    /// </summary>
     public void Add(PointerEventArgs e, double position) => Add(TimestampOf(e), position);
 
     /// <summary>

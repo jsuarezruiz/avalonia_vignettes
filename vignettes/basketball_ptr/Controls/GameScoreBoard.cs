@@ -24,7 +24,9 @@ namespace BasketballPullToRefresh.Controls;
 [TemplatePart(PartAwayIncoming, typeof(TextBlock))]
 public sealed class GameScoreBoard : TemplatedControl
 {
-    /// <summary>The height a number rolls through, which is the height of the board itself.</summary>
+    /// <summary>
+    /// The height a number rolls through, which is the height of the board itself.
+    /// </summary>
     public const double RollHeight = 36d;
 
     private const string PartHomeCurrent = "PART_HomeCurrent";
@@ -32,11 +34,15 @@ public sealed class GameScoreBoard : TemplatedControl
     private const string PartAwayCurrent = "PART_AwayCurrent";
     private const string PartAwayIncoming = "PART_AwayIncoming";
 
-    /// <summary>Defines the <see cref="Game"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Game"/> property.
+    /// </summary>
     public static readonly StyledProperty<BasketballGameData?> GameProperty =
         AvaloniaProperty.Register<GameScoreBoard, BasketballGameData?>(nameof(Game));
 
-    /// <summary>Defines the <see cref="WinnerBrush"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="WinnerBrush"/> property.
+    /// </summary>
     public static readonly StyledProperty<IBrush?> WinnerBrushProperty =
         AvaloniaProperty.Register<GameScoreBoard, IBrush?>(nameof(WinnerBrush));
 
@@ -52,18 +58,24 @@ public sealed class GameScoreBoard : TemplatedControl
     private BasketballGameData? _current;
     private BasketballGameData? _incoming;
 
-    /// <summary>Initializes a new instance of the <see cref="GameScoreBoard"/> class.</summary>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GameScoreBoard"/> class.
+    /// </summary>
     public GameScoreBoard() =>
         _roll = new AnimationController(this, OnRollProgressChanged) { Duration = RollDuration };
 
-    /// <summary>Gets or sets the game whose score is on the board.</summary>
+    /// <summary>
+    /// Gets or sets the game whose score is on the board.
+    /// </summary>
     public BasketballGameData? Game
     {
         get => GetValue(GameProperty);
         set => SetValue(GameProperty, value);
     }
 
-    /// <summary>Gets or sets the colour a finished game's winning score is printed in.</summary>
+    /// <summary>
+    /// Gets or sets the colour a finished game's winning score is printed in.
+    /// </summary>
     public IBrush? WinnerBrush
     {
         get => GetValue(WinnerBrushProperty);

@@ -85,7 +85,9 @@ public sealed class SpringSimulation
         }
     }
 
-    /// <summary>Gets the position at <paramref name="time"/> seconds after the simulation started.</summary>
+    /// <summary>
+    /// Gets the position at <paramref name="time"/> seconds after the simulation started.
+    /// </summary>
     public double PositionAt(double time)
     {
         var offset = _x(time);
@@ -93,7 +95,9 @@ public sealed class SpringSimulation
         return IsSettled(offset, _dx(time)) ? _endPosition : _endPosition + offset;
     }
 
-    /// <summary>Gets the velocity at <paramref name="time"/> seconds after the simulation started.</summary>
+    /// <summary>
+    /// Gets the velocity at <paramref name="time"/> seconds after the simulation started.
+    /// </summary>
     public double VelocityAt(double time)
     {
         var velocity = _dx(time);
@@ -101,7 +105,9 @@ public sealed class SpringSimulation
         return IsSettled(_x(time), velocity) ? 0d : velocity;
     }
 
-    /// <summary>Gets a value indicating whether the simulation has settled at its end position.</summary>
+    /// <summary>
+    /// Gets a value indicating whether the simulation has settled at its end position.
+    /// </summary>
     public bool IsDone(double time) => IsSettled(_x(time), _dx(time));
 
     // Both solutions are evaluated once and passed in: this is asked on every frame of a fling, and

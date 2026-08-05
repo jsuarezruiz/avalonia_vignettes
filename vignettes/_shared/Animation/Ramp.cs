@@ -17,16 +17,24 @@ public sealed class Ramp
     private TimeSpan _duration;
     private TimeSpan _elapsed;
 
-    /// <summary>Gets the current value.</summary>
+    /// <summary>
+    /// Gets the current value.
+    /// </summary>
     public double Value { get; private set; }
 
-    /// <summary>Gets a value indicating whether the value is still travelling.</summary>
+    /// <summary>
+    /// Gets a value indicating whether the value is still travelling.
+    /// </summary>
     public bool IsRunning { get; private set; }
 
-    /// <summary>Gets which way the value is travelling: -1, 0 or 1.</summary>
+    /// <summary>
+    /// Gets which way the value is travelling: -1, 0 or 1.
+    /// </summary>
     public int Sign { get; private set; }
 
-    /// <summary>Jumps to a value, abandoning any run in progress.</summary>
+    /// <summary>
+    /// Jumps to a value, abandoning any run in progress.
+    /// </summary>
     public void Set(double value)
     {
         Value = value;
@@ -34,7 +42,9 @@ public sealed class Ramp
         Sign = 0;
     }
 
-    /// <summary>Starts running to <paramref name="target"/> over <paramref name="duration"/>.</summary>
+    /// <summary>
+    /// Starts running to <paramref name="target"/> over <paramref name="duration"/>.
+    /// </summary>
     public void AnimateTo(double target, TimeSpan duration)
     {
         if (duration <= TimeSpan.Zero || target == Value)
@@ -52,7 +62,9 @@ public sealed class Ramp
         Sign = Math.Sign(target - Value);
     }
 
-    /// <summary>Advances the run by one frame.</summary>
+    /// <summary>
+    /// Advances the run by one frame.
+    /// </summary>
     public void Advance(TimeSpan step)
     {
         if (!IsRunning)

@@ -2,7 +2,9 @@ using Avalonia.Media.Imaging;
 
 namespace BasketballPullToRefresh.Models;
 
-/// <summary>One of the teams in the league.</summary>
+/// <summary>
+/// One of the teams in the league.
+/// </summary>
 /// <param name="City">The city the team plays for.</param>
 /// <param name="Name">The team's name.</param>
 /// <param name="Logo">The team's crest.</param>

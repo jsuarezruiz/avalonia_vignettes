@@ -15,52 +15,84 @@ namespace AvaloniaVignettes.Shared.Animation;
 /// </remarks>
 public static class FlutterEasings
 {
-    /// <summary>Flutter's <c>Curves.ease</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.ease</c>.
+    /// </summary>
     public static Easing Ease { get; } = new SplineEasing(0.25d, 0.1d, 0.25d, 1d);
 
-    /// <summary>Flutter's <c>Curves.easeIn</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeIn</c>.
+    /// </summary>
     public static Easing EaseIn { get; } = new SplineEasing(0.42d, 0d, 1d, 1d);
 
-    /// <summary>Flutter's <c>Curves.easeInOut</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeInOut</c>.
+    /// </summary>
     public static Easing EaseInOut { get; } = new SplineEasing(0.42d, 0d, 0.58d, 1d);
 
-    /// <summary>Flutter's <c>Curves.easeInSine</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeInSine</c>.
+    /// </summary>
     public static Easing EaseInSine { get; } = new SplineEasing(0.47d, 0d, 0.745d, 0.715d);
 
-    /// <summary>Flutter's <c>Curves.easeInCubic</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeInCubic</c>.
+    /// </summary>
     public static Easing EaseInCubic { get; } = new SplineEasing(0.55d, 0.055d, 0.675d, 0.19d);
 
-    /// <summary>Flutter's <c>Curves.easeOut</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeOut</c>.
+    /// </summary>
     public static Easing EaseOut { get; } = new SplineEasing(0d, 0d, 0.58d, 1d);
 
-    /// <summary>Flutter's <c>Curves.easeOutCubic</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeOutCubic</c>.
+    /// </summary>
     public static Easing EaseOutCubic { get; } = new SplineEasing(0.215d, 0.61d, 0.355d, 1d);
 
-    /// <summary>Flutter's <c>Curves.easeInExpo</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeInExpo</c>.
+    /// </summary>
     public static Easing EaseInExpo { get; } = new SplineEasing(0.95d, 0.05d, 0.795d, 0.035d);
 
-    /// <summary>Flutter's <c>Curves.easeInQuint</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeInQuint</c>.
+    /// </summary>
     public static Easing EaseInQuint { get; } = new SplineEasing(0.755d, 0.05d, 0.855d, 0.06d);
 
-    /// <summary>Flutter's <c>Curves.easeInQuad</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeInQuad</c>.
+    /// </summary>
     public static Easing EaseInQuad { get; } = new SplineEasing(0.55d, 0.085d, 0.68d, 0.53d);
 
-    /// <summary>Flutter's <c>Curves.easeInOutQuad</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeInOutQuad</c>.
+    /// </summary>
     public static Easing EaseInOutQuad { get; } = new SplineEasing(0.455d, 0.03d, 0.515d, 0.955d);
 
-    /// <summary>Flutter's <c>Curves.easeOutQuart</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeOutQuart</c>.
+    /// </summary>
     public static Easing EaseOutQuart { get; } = new SplineEasing(0.165d, 0.84d, 0.44d, 1d);
 
-    /// <summary>Flutter's <c>Curves.easeOutQuad</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeOutQuad</c>.
+    /// </summary>
     public static Easing EaseOutQuad { get; } = new SplineEasing(0.25d, 0.46d, 0.45d, 0.94d);
 
-    /// <summary>Flutter's <c>Curves.easeInOutSine</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeInOutSine</c>.
+    /// </summary>
     public static Easing EaseInOutSine { get; } = new SplineEasing(0.445d, 0.05d, 0.55d, 0.95d);
 
-    /// <summary>Flutter's <c>Curves.easeOutSine</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.easeOutSine</c>.
+    /// </summary>
     public static Easing EaseOutSine { get; } = new SplineEasing(0.39d, 0.575d, 0.565d, 1d);
 
-    /// <summary>Flutter's <c>Curves.linearToEaseOut</c>.</summary>
+    /// <summary>
+    /// Flutter's <c>Curves.linearToEaseOut</c>.
+    /// </summary>
     public static Easing LinearToEaseOut { get; } = new SplineEasing(0.35d, 0.91d, 0.33d, 0.97d);
 
     /// <summary>

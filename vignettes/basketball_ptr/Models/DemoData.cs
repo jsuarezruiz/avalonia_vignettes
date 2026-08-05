@@ -11,7 +11,9 @@ public static class DemoData
 {
     private const string ImageRoot = "avares://BasketballPullToRefresh/Assets/Images";
 
-    /// <summary>How many games the list reports.</summary>
+    /// <summary>
+    /// How many games the list reports.
+    /// </summary>
     public const int GameCount = 10;
 
     private static readonly Team Stars = new("Seattle", "Stars", Load("badge"));
@@ -23,19 +25,29 @@ public static class DemoData
 
     private static readonly Team[] League = [Stars, Avalonias, Birds, Dribblers, Cannons, Knights];
 
-    /// <summary>Gets the sheet the spinning ball is cut from: 10 columns of 400x400 frames.</summary>
+    /// <summary>
+    /// Gets the sheet the spinning ball is cut from: 10 columns of 400x400 frames.
+    /// </summary>
     public static Bitmap BallSpriteSheet { get; } = Load("basketball");
 
-    /// <summary>Gets the backboard the hoop hangs from.</summary>
+    /// <summary>
+    /// Gets the backboard the hoop hangs from.
+    /// </summary>
     public static Bitmap Backboard { get; } = Load("backboard");
 
-    /// <summary>Gets the net.</summary>
+    /// <summary>
+    /// Gets the net.
+    /// </summary>
     public static Bitmap Net { get; } = Load("net");
 
-    /// <summary>Gets the rim.</summary>
+    /// <summary>
+    /// Gets the rim.
+    /// </summary>
     public static Bitmap Rim { get; } = Load("rim");
 
-    /// <summary>Builds the scores the app opens on.</summary>
+    /// <summary>
+    /// Builds the scores the app opens on.
+    /// </summary>
     public static IReadOnlyList<GameSlot> CreateInitialGames()
     {
         BasketballGameData[] games =
@@ -55,7 +67,9 @@ public static class DemoData
         return [.. games.Select(game => new GameSlot(game))];
     }
 
-    /// <summary>Makes up a fresh set of scores, as a refresh does. Port of <c>randomize</c>.</summary>
+    /// <summary>
+    /// Makes up a fresh set of scores, as a refresh does. Port of <c>randomize</c>.
+    /// </summary>
     public static IReadOnlyList<BasketballGameData> CreateRandomGames()
     {
         var quarters = Enum.GetValues<BasketballGameQuarter>();

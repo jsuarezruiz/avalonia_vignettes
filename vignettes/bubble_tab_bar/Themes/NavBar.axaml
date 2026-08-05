@@ -1,0 +1,101 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+                    xmlns:controls="using:BubbleTabBar.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:NavBarButton}" TargetType="controls:NavBarButton">
+
+    <!-- The outer padding is only there to make the pill easier to hit. -->
+    <Setter Property="Padding" Value="4,16" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Padding="{TemplateBinding Padding}">
+          <Border Name="PART_Pill" CornerRadius="24" Padding="12">
+
+            <!--
+              The label is always laid out at its full width and simply overflows the pill while it
+              is small, so growing the pill reveals it rather than fading it in.
+            -->
+            <controls:ClippedView>
+              <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <shared:MaterialIcon Name="PART_Icon"
+                                     Data="{TemplateBinding Icon}"
+                                     IconSize="24"
+                                     VerticalAlignment="Center"
+                                     RenderTransformOrigin="50%,50%"
+                                     RenderTransform="{TemplateBinding IconTransform}" />
+                <TextBlock Name="PART_Title"
+                           Text="{TemplateBinding Title}"
+                           Margin="12,0,0,0"
+                           VerticalAlignment="Center"
+                           FontFamily="{StaticResource TitleFont}"
+                           Foreground="{StaticResource OnAccentBrush}" />
+              </StackPanel>
+            </controls:ClippedView>
+          </Border>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <!--
+      Width and fill are the whole effect, and they run for twice as long as the icon's turn, so the
+      pill is still settling after the icon has landed.
+    -->
+    <Style Selector="^ /template/ Border#PART_Pill">
+      <Setter Property="Width" Value="56" />
+      <Setter Property="Background" Value="{StaticResource BarBrush}" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Width" Duration="0:0:0.7" Easing="{StaticResource EaseOutCubic}" />
+          <BrushTransition Property="Background" Duration="0:0:0.7" Easing="{StaticResource EaseOutCubic}" />
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="^:selected /template/ Border#PART_Pill">
+      <Setter Property="Width" Value="{Binding $parent[controls:NavBarButton].ExpandedWidth}" />
+      <Setter Property="Background" Value="{Binding $parent[controls:NavBarButton].AccentBrush}" />
+    </Style>
+
+    <Style Selector="^ /template/ shared|MaterialIcon#PART_Icon">
+      <Setter Property="Foreground" Value="{StaticResource InactiveIconBrush}" />
+    </Style>
+
+    <Style Selector="^:selected /template/ shared|MaterialIcon#PART_Icon">
+      <Setter Property="Foreground" Value="{StaticResource OnAccentBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:NavBar}" TargetType="controls:NavBar">
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Orientation="Horizontal" />
+      </ItemsPanelTemplate>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel Background="{TemplateBinding Background}">
+
+          <!-- The bar carries two soft shadows rather than one, which reads as a wider falloff. -->
+          <Border DockPanel.Dock="Bottom"
+                  Height="80"
+                  Background="{StaticResource BarBrush}"
+                  BoxShadow="0 0 16 0 #1F000000, 0 0 24 0 #1F000000">
+            <controls:ClippedView>
+              <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </controls:ClippedView>
+          </Border>
+
+          <TransitioningContentControl Content="{TemplateBinding SelectedContent}"
+                                       ContentTemplate="{TemplateBinding SelectedContentTemplate}">
+            <TransitioningContentControl.PageTransition>
+              <CrossFade Duration="0:0:0.35" />
+            </TransitioningContentControl.PageTransition>
+          </TransitioningContentControl>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

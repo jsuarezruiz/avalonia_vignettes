@@ -22,13 +22,19 @@ public sealed class PageScrollEventArgs : RoutedEventArgs
         Page = page;
     }
 
-    /// <summary>Gets the current scroll offset in pixels.</summary>
+    /// <summary>
+    /// Gets the current scroll offset in pixels.
+    /// </summary>
     public double Pixels { get; }
 
-    /// <summary>Gets the change in <see cref="Pixels"/> since the previous notification.</summary>
+    /// <summary>
+    /// Gets the change in <see cref="Pixels"/> since the previous notification.
+    /// </summary>
     public double Delta { get; }
 
-    /// <summary>Gets the fractional page the view is resting at.</summary>
+    /// <summary>
+    /// Gets the fractional page the view is resting at.
+    /// </summary>
     public double Page { get; }
 }
 
@@ -44,39 +50,57 @@ public sealed class PageScrollEventArgs : RoutedEventArgs
 /// </remarks>
 public class PageView : ItemsControl
 {
-    /// <summary>Defines the <see cref="ViewportFraction"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="ViewportFraction"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> ViewportFractionProperty =
         AvaloniaProperty.Register<PageView, double>(nameof(ViewportFraction), 1d);
 
-    /// <summary>Defines the <see cref="ScrollPixels"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="ScrollPixels"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> ScrollPixelsProperty =
         AvaloniaProperty.Register<PageView, double>(nameof(ScrollPixels));
 
-    /// <summary>Defines the <see cref="Page"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Page"/> property.
+    /// </summary>
     public static readonly DirectProperty<PageView, double> PageProperty =
         AvaloniaProperty.RegisterDirect<PageView, double>(nameof(Page), o => o.Page);
 
-    /// <summary>Defines the <see cref="SelectedIndex"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="SelectedIndex"/> property.
+    /// </summary>
     public static readonly StyledProperty<int> SelectedIndexProperty =
         AvaloniaProperty.Register<PageView, int>(nameof(SelectedIndex), defaultBindingMode: Avalonia.Data.BindingMode.TwoWay);
 
-    /// <summary>Defines the <see cref="SelectedItem"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="SelectedItem"/> property.
+    /// </summary>
     public static readonly DirectProperty<PageView, object?> SelectedItemProperty =
         AvaloniaProperty.RegisterDirect<PageView, object?>(nameof(SelectedItem), o => o.SelectedItem);
 
-    /// <summary>Defines the <see cref="IsDragging"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="IsDragging"/> property.
+    /// </summary>
     public static readonly DirectProperty<PageView, bool> IsDraggingProperty =
         AvaloniaProperty.RegisterDirect<PageView, bool>(nameof(IsDragging), o => o.IsDragging);
 
-    /// <summary>Raised when a drag begins, equivalent to Flutter's <c>ScrollStartNotification</c>.</summary>
+    /// <summary>
+    /// Raised when a drag begins, equivalent to Flutter's <c>ScrollStartNotification</c>.
+    /// </summary>
     public static readonly RoutedEvent<PageScrollEventArgs> ScrollStartedEvent =
         RoutedEvent.Register<PageView, PageScrollEventArgs>(nameof(ScrollStarted), RoutingStrategies.Bubble);
 
-    /// <summary>Raised whenever the offset changes, equivalent to <c>ScrollUpdateNotification</c>.</summary>
+    /// <summary>
+    /// Raised whenever the offset changes, equivalent to <c>ScrollUpdateNotification</c>.
+    /// </summary>
     public static readonly RoutedEvent<PageScrollEventArgs> ScrollUpdatedEvent =
         RoutedEvent.Register<PageView, PageScrollEventArgs>(nameof(ScrollUpdated), RoutingStrategies.Bubble);
 
-    /// <summary>Raised when the pointer is lifted, before the snap simulation starts.</summary>
+    /// <summary>
+    /// Raised when the pointer is lifted, before the snap simulation starts.
+    /// </summary>
     public static readonly RoutedEvent<PageScrollEventArgs> DragReleasedEvent =
         RoutedEvent.Register<PageView, PageScrollEventArgs>(nameof(DragReleased), RoutingStrategies.Bubble);
 
@@ -106,21 +130,27 @@ public class PageView : ItemsControl
         BoundsProperty.Changed.AddClassHandler<PageView>((x, _) => x.RefreshPageWidth());
     }
 
-    /// <summary>Occurs when a drag begins.</summary>
+    /// <summary>
+    /// Occurs when a drag begins.
+    /// </summary>
     public event EventHandler<PageScrollEventArgs>? ScrollStarted
     {
         add => AddHandler(ScrollStartedEvent, value);
         remove => RemoveHandler(ScrollStartedEvent, value);
     }
 
-    /// <summary>Occurs whenever the scroll offset changes, whether by drag or by simulation.</summary>
+    /// <summary>
+    /// Occurs whenever the scroll offset changes, whether by drag or by simulation.
+    /// </summary>
     public event EventHandler<PageScrollEventArgs>? ScrollUpdated
     {
         add => AddHandler(ScrollUpdatedEvent, value);
         remove => RemoveHandler(ScrollUpdatedEvent, value);
     }
 
-    /// <summary>Occurs when the pointer is released after a drag.</summary>
+    /// <summary>
+    /// Occurs when the pointer is released after a drag.
+    /// </summary>
     public event EventHandler<PageScrollEventArgs>? DragReleased
     {
         add => AddHandler(DragReleasedEvent, value);
@@ -137,42 +167,54 @@ public class PageView : ItemsControl
         set => SetValue(ViewportFractionProperty, value);
     }
 
-    /// <summary>Gets or sets the scroll offset in pixels. Page <c>n</c> is centred at <c>n * pageWidth</c>.</summary>
+    /// <summary>
+    /// Gets or sets the scroll offset in pixels. Page <c>n</c> is centred at <c>n * pageWidth</c>.
+    /// </summary>
     public double ScrollPixels
     {
         get => GetValue(ScrollPixelsProperty);
         set => SetValue(ScrollPixelsProperty, value);
     }
 
-    /// <summary>Gets the fractional page currently on screen, the equivalent of <c>PageController.page</c>.</summary>
+    /// <summary>
+    /// Gets the fractional page currently on screen, the equivalent of <c>PageController.page</c>.
+    /// </summary>
     public double Page
     {
         get => _page;
         private set => SetAndRaise(PageProperty, ref _page, value);
     }
 
-    /// <summary>Gets or sets the index of the page nearest the centre of the viewport.</summary>
+    /// <summary>
+    /// Gets or sets the index of the page nearest the centre of the viewport.
+    /// </summary>
     public int SelectedIndex
     {
         get => GetValue(SelectedIndexProperty);
         set => SetValue(SelectedIndexProperty, value);
     }
 
-    /// <summary>Gets the item at <see cref="SelectedIndex"/>.</summary>
+    /// <summary>
+    /// Gets the item at <see cref="SelectedIndex"/>.
+    /// </summary>
     public object? SelectedItem
     {
         get => _selectedItem;
         private set => SetAndRaise(SelectedItemProperty, ref _selectedItem, value);
     }
 
-    /// <summary>Gets a value indicating whether the user is currently dragging the strip.</summary>
+    /// <summary>
+    /// Gets a value indicating whether the user is currently dragging the strip.
+    /// </summary>
     public bool IsDragging
     {
         get => _isDragging;
         private set => SetAndRaise(IsDraggingProperty, ref _isDragging, value);
     }
 
-    /// <summary>Gets the width of a single page.</summary>
+    /// <summary>
+    /// Gets the width of a single page.
+    /// </summary>
     public double PageWidth => _pageWidth > 0d ? _pageWidth : Math.Max(1d, Bounds.Width * ViewportFraction);
 
     /// <summary>
@@ -395,7 +437,9 @@ public class PageView : ItemsControl
         StartSnapSimulation(velocity);
     }
 
-    /// <summary>Estimates the release velocity in scroll pixels per second.</summary>
+    /// <summary>
+    /// Estimates the release velocity in scroll pixels per second.
+    /// </summary>
     /// <remarks>Negated because the scroll offset grows as the pointer travels left.</remarks>
     private double EstimateScrollVelocity() => -_velocity.Estimate();
 

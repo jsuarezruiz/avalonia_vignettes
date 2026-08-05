@@ -14,7 +14,9 @@ namespace AvaloniaVignettes.Shared.Controls;
 /// </summary>
 public interface IHeroPage
 {
-    /// <summary>Gets the control this page hands over to, and receives back.</summary>
+    /// <summary>
+    /// Gets the control this page hands over to, and receives back.
+    /// </summary>
     Control Hero { get; }
 }
 
@@ -34,15 +36,21 @@ public interface IHeroPage
 /// </remarks>
 public sealed class HeroFlight : Canvas
 {
-    /// <summary>Defines the <see cref="Content"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Content"/> property.
+    /// </summary>
     public static readonly StyledProperty<Control?> ContentProperty =
         AvaloniaProperty.Register<HeroFlight, Control?>(nameof(Content));
 
-    /// <summary>Defines the <see cref="Progress"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Progress"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> ProgressProperty =
         AvaloniaProperty.Register<HeroFlight, double>(nameof(Progress));
 
-    /// <summary>Defines the <see cref="ContentProgress"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="ContentProgress"/> property.
+    /// </summary>
     public static readonly DirectProperty<HeroFlight, double> ContentProgressProperty =
         AvaloniaProperty.RegisterDirect<HeroFlight, double>(nameof(ContentProgress), o => o.ContentProgress);
 
@@ -64,10 +72,14 @@ public sealed class HeroFlight : Canvas
         });
     }
 
-    /// <summary>Initializes a new instance of the <see cref="HeroFlight"/> class.</summary>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="HeroFlight"/> class.
+    /// </summary>
     public HeroFlight() => IsHitTestVisible = false;
 
-    /// <summary>Gets or sets the stand-in that flies between the two slots.</summary>
+    /// <summary>
+    /// Gets or sets the stand-in that flies between the two slots.
+    /// </summary>
     [Content]
     public Control? Content
     {
@@ -75,7 +87,9 @@ public sealed class HeroFlight : Canvas
         set => SetValue(ContentProperty, value);
     }
 
-    /// <summary>Gets or sets how far along its path the stand-in is, from 0 to 1.</summary>
+    /// <summary>
+    /// Gets or sets how far along its path the stand-in is, from 0 to 1.
+    /// </summary>
     public double Progress
     {
         get => GetValue(ProgressProperty);
@@ -180,7 +194,9 @@ public sealed class HeroFlight : Canvas
         return finalSize;
     }
 
-    /// <summary>The flight runs on Material's standard easing, in both directions.</summary>
+    /// <summary>
+    /// The flight runs on Material's standard easing, in both directions.
+    /// </summary>
     /// <remarks>
     /// The final value is held rather than released, so the stand-in stays where it landed for the
     /// frame in which the real control takes over. Releasing it would snap the stand-in back to the
@@ -223,7 +239,9 @@ public sealed class HeroFlight : Canvas
         _ => visual.GetVisualDescendants().OfType<IHeroPage>().FirstOrDefault()?.Hero,
     };
 
-    /// <summary>Where a control sits in this layer's coordinates, right now.</summary>
+    /// <summary>
+    /// Where a control sits in this layer's coordinates, right now.
+    /// </summary>
     private Rect RectOf(Visual control) =>
         new(control.TranslatePoint(default, this) ?? default, control.Bounds.Size);
 

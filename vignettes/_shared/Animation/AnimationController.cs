@@ -34,29 +34,43 @@ public sealed class AnimationController
         _onValueChanged = onValueChanged;
     }
 
-    /// <summary>Gets or sets the time a full 0 to 1 traverse takes.</summary>
+    /// <summary>
+    /// Gets or sets the time a full 0 to 1 traverse takes.
+    /// </summary>
     public TimeSpan Duration { get; set; } = TimeSpan.FromMilliseconds(300);
 
-    /// <summary>Gets the current value, between 0 and 1.</summary>
+    /// <summary>
+    /// Gets the current value, between 0 and 1.
+    /// </summary>
     public double Value { get; private set; }
 
-    /// <summary>Gets a value indicating whether the controller is currently running.</summary>
+    /// <summary>
+    /// Gets a value indicating whether the controller is currently running.
+    /// </summary>
     public bool IsAnimating => _direction != 0;
 
-    /// <summary>Runs towards 1 from wherever the value currently sits.</summary>
+    /// <summary>
+    /// Runs towards 1 from wherever the value currently sits.
+    /// </summary>
     public void Forward() => Run(1);
 
-    /// <summary>Runs towards 0 from wherever the value currently sits.</summary>
+    /// <summary>
+    /// Runs towards 0 from wherever the value currently sits.
+    /// </summary>
     public void Reverse() => Run(-1);
 
-    /// <summary>Stops without changing the value.</summary>
+    /// <summary>
+    /// Stops without changing the value.
+    /// </summary>
     public void Stop()
     {
         _direction = 0;
         _ticker.Stop();
     }
 
-    /// <summary>Jumps straight to <paramref name="value"/>, stopping any run in progress.</summary>
+    /// <summary>
+    /// Jumps straight to <paramref name="value"/>, stopping any run in progress.
+    /// </summary>
     public void SetValue(double value)
     {
         Stop();

@@ -18,19 +18,27 @@ namespace AvaloniaVignettes.Shared.Controls;
 /// </remarks>
 public sealed class MaterialIcon : Control
 {
-    /// <summary>Defines the <see cref="Data"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Data"/> property.
+    /// </summary>
     public static readonly StyledProperty<Geometry?> DataProperty =
         AvaloniaProperty.Register<MaterialIcon, Geometry?>(nameof(Data));
 
-    /// <summary>Defines the <see cref="IconSize"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="IconSize"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> IconSizeProperty =
         AvaloniaProperty.Register<MaterialIcon, double>(nameof(IconSize), DesignGrid);
 
-    /// <summary>Defines the <see cref="Foreground"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Foreground"/> property.
+    /// </summary>
     public static readonly StyledProperty<IBrush?> ForegroundProperty =
         TextElement.ForegroundProperty.AddOwner<MaterialIcon>();
 
-    /// <summary>The grid Material's icon outlines are drawn on.</summary>
+    /// <summary>
+    /// The grid Material's icon outlines are drawn on.
+    /// </summary>
     private const double DesignGrid = 24d;
 
     static MaterialIcon()
@@ -39,7 +47,9 @@ public sealed class MaterialIcon : Control
         AffectsMeasure<MaterialIcon>(IconSizeProperty);
     }
 
-    /// <summary>Gets or sets the outline, as authored on Material's 24 unit grid.</summary>
+    /// <summary>
+    /// Gets or sets the outline, as authored on Material's 24 unit grid.
+    /// </summary>
     public Geometry? Data
     {
         get => GetValue(DataProperty);
@@ -56,7 +66,9 @@ public sealed class MaterialIcon : Control
         set => SetValue(IconSizeProperty, value);
     }
 
-    /// <summary>Gets or sets the brush the outline is filled with.</summary>
+    /// <summary>
+    /// Gets or sets the brush the outline is filled with.
+    /// </summary>
     public IBrush? Foreground
     {
         get => GetValue(ForegroundProperty);

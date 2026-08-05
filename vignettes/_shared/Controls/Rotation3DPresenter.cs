@@ -16,19 +16,27 @@ namespace AvaloniaVignettes.Shared.Controls;
 /// </remarks>
 public sealed class Rotation3DPresenter : Decorator
 {
-    /// <summary>Defines the <see cref="RotationX"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="RotationX"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> RotationXProperty =
         AvaloniaProperty.Register<Rotation3DPresenter, double>(nameof(RotationX));
 
-    /// <summary>Defines the <see cref="RotationY"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="RotationY"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> RotationYProperty =
         AvaloniaProperty.Register<Rotation3DPresenter, double>(nameof(RotationY));
 
-    /// <summary>Defines the <see cref="RotationZ"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="RotationZ"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> RotationZProperty =
         AvaloniaProperty.Register<Rotation3DPresenter, double>(nameof(RotationZ));
 
-    /// <summary>Defines the <see cref="Perspective"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Perspective"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> PerspectiveProperty =
         AvaloniaProperty.Register<Rotation3DPresenter, double>(nameof(Perspective), Rotation3D.DefaultPerspective);
 
@@ -42,35 +50,45 @@ public sealed class Rotation3DPresenter : Decorator
         PerspectiveProperty.Changed.AddClassHandler<Rotation3DPresenter>((x, _) => x.UpdateTransform());
     }
 
-    /// <summary>Initializes a new instance of the <see cref="Rotation3DPresenter"/> class.</summary>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Rotation3DPresenter"/> class.
+    /// </summary>
     public Rotation3DPresenter()
     {
         RenderTransform = _transform;
         RenderTransformOrigin = RelativePoint.Center;
     }
 
-    /// <summary>Gets or sets the rotation around the X axis, in degrees.</summary>
+    /// <summary>
+    /// Gets or sets the rotation around the X axis, in degrees.
+    /// </summary>
     public double RotationX
     {
         get => GetValue(RotationXProperty);
         set => SetValue(RotationXProperty, value);
     }
 
-    /// <summary>Gets or sets the rotation around the Y axis, in degrees.</summary>
+    /// <summary>
+    /// Gets or sets the rotation around the Y axis, in degrees.
+    /// </summary>
     public double RotationY
     {
         get => GetValue(RotationYProperty);
         set => SetValue(RotationYProperty, value);
     }
 
-    /// <summary>Gets or sets the rotation around the Z axis, in degrees.</summary>
+    /// <summary>
+    /// Gets or sets the rotation around the Z axis, in degrees.
+    /// </summary>
     public double RotationZ
     {
         get => GetValue(RotationZProperty);
         set => SetValue(RotationZProperty, value);
     }
 
-    /// <summary>Gets or sets the perspective factor; see <see cref="Rotation3D.DefaultPerspective"/>.</summary>
+    /// <summary>
+    /// Gets or sets the perspective factor; see <see cref="Rotation3D.DefaultPerspective"/>.
+    /// </summary>
     public double Perspective
     {
         get => GetValue(PerspectiveProperty);

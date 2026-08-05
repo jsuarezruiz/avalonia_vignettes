@@ -14,7 +14,9 @@ namespace AvaloniaVignettes.Shared.Animation;
 /// </param>
 public readonly record struct TweenSegment(double From, double To, double Weight, Easing? Easing = null)
 {
-    /// <summary>Reads a <c>(from, to, weight)</c> tuple as a linear segment.</summary>
+    /// <summary>
+    /// Reads a <c>(from, to, weight)</c> tuple as a linear segment.
+    /// </summary>
     /// <param name="segment">The segment's start, end and weight.</param>
     public static implicit operator TweenSegment((double From, double To, double Weight) segment) =>
         new(segment.From, segment.To, segment.Weight);
@@ -53,7 +55,9 @@ public sealed class TweenSequence
         _segments = built;
     }
 
-    /// <summary>Gets the value at <paramref name="progress"/> through the whole sequence.</summary>
+    /// <summary>
+    /// Gets the value at <paramref name="progress"/> through the whole sequence.
+    /// </summary>
     public double Evaluate(double progress)
     {
         var t = Math.Clamp(progress, 0d, 1d);

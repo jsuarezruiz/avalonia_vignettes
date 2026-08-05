@@ -11,10 +11,14 @@ namespace BasketballPullToRefresh.Animation;
 /// </remarks>
 public sealed class SineEasing : Easing
 {
-    /// <summary>Gets or sets the phase the wave starts at, in radians.</summary>
+    /// <summary>
+    /// Gets or sets the phase the wave starts at, in radians.
+    /// </summary>
     public double Start { get; init; }
 
-    /// <summary>Gets or sets how much of the wave is traversed, in radians.</summary>
+    /// <summary>
+    /// Gets or sets how much of the wave is traversed, in radians.
+    /// </summary>
     public double Length { get; init; } = Math.PI * 2d;
 
     /// <inheritdoc />

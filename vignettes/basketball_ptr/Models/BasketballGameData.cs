@@ -2,7 +2,9 @@ using System.Globalization;
 
 namespace BasketballPullToRefresh.Models;
 
-/// <summary>One game on the scores list. Port of <c>BasketballGameData</c>.</summary>
+/// <summary>
+/// One game on the scores list. Port of <c>BasketballGameData</c>.
+/// </summary>
 /// <param name="Home">The home team.</param>
 /// <param name="Away">The away team.</param>
 /// <param name="HomeScore">The home team's points.</param>
@@ -17,16 +19,24 @@ public sealed record BasketballGameData(
     BasketballGameQuarter Quarter,
     TimeSpan? Time = null)
 {
-    /// <summary>Gets a value indicating whether the game is over.</summary>
+    /// <summary>
+    /// Gets a value indicating whether the game is over.
+    /// </summary>
     public bool IsFinished => Quarter == BasketballGameQuarter.Finished;
 
-    /// <summary>Gets a value indicating whether the home team has won.</summary>
+    /// <summary>
+    /// Gets a value indicating whether the home team has won.
+    /// </summary>
     public bool HomeHasWon => IsFinished && HomeScore > AwayScore;
 
-    /// <summary>Gets a value indicating whether the away team has won.</summary>
+    /// <summary>
+    /// Gets a value indicating whether the away team has won.
+    /// </summary>
     public bool AwayHasWon => IsFinished && AwayScore > HomeScore;
 
-    /// <summary>Gets the badges printed above the score. Port of <c>GameTime</c>.</summary>
+    /// <summary>
+    /// Gets the badges printed above the score. Port of <c>GameTime</c>.
+    /// </summary>
     public IReadOnlyList<GameBadge> Badges => Quarter switch
     {
         BasketballGameQuarter.HalfTime => [new GameBadge("Half Time", IsLive: true)],
@@ -43,7 +53,9 @@ public sealed record BasketballGameData(
         _ => string.Empty,
     };
 
-    /// <summary>Gets the clock, in whole minutes rather than wrapped at an hour.</summary>
+    /// <summary>
+    /// Gets the clock, in whole minutes rather than wrapped at an hour.
+    /// </summary>
     private string TimeText => Time is not { } time
         ? "00:00"
         : string.Create(

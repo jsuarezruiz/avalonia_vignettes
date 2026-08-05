@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Avalonia;
 using Avalonia.Logging;
 
-namespace BasketballPullToRefresh;
+namespace BubbleTabBar;
 
 /// <summary>
 /// Desktop bootstrapper.

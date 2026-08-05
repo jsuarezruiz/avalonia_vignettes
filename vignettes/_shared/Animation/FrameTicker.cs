@@ -28,10 +28,14 @@ public sealed class FrameTicker
         _onTick = onTick;
     }
 
-    /// <summary>Gets a value indicating whether the ticker is currently requesting frames.</summary>
+    /// <summary>
+    /// Gets a value indicating whether the ticker is currently requesting frames.
+    /// </summary>
     public bool IsRunning { get; private set; }
 
-    /// <summary>Starts (or restarts) the ticker, resetting the elapsed time to zero.</summary>
+    /// <summary>
+    /// Starts (or restarts) the ticker, resetting the elapsed time to zero.
+    /// </summary>
     public void Start()
     {
         _hasStartTime = false;
@@ -45,7 +49,9 @@ public sealed class FrameTicker
         RequestFrame();
     }
 
-    /// <summary>Stops the ticker. Safe to call when it is not running.</summary>
+    /// <summary>
+    /// Stops the ticker. Safe to call when it is not running.
+    /// </summary>
     public void Stop() => IsRunning = false;
 
     // Stopping and starting again from inside the tick would otherwise leave two frames asked for

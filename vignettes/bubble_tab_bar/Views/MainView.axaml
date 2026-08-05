@@ -1,0 +1,104 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:controls="using:BubbleTabBar.Controls"
+             xmlns:views="using:BubbleTabBar.Views"
+             x:Class="BubbleTabBar.Views.MainView"
+             x:DataType="views:MainView">
+
+  <controls:NavBar Background="{StaticResource PageBackgroundBrush}">
+
+    <controls:NavBarButton Title="Home"
+                           Icon="{StaticResource HomeIcon}"
+                           ExpandedWidth="110"
+                           AccentBrush="{StaticResource HomeAccentBrush}">
+      <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding CardItems}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Border Padding="0,12">
+                <shared:PlaceholderCardTall Height="200" />
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </controls:NavBarButton>
+
+    <controls:NavBarButton Title="Gallery"
+                           Icon="{StaticResource ImageIcon}"
+                           ExpandedWidth="110"
+                           AccentBrush="{StaticResource GalleryAccentBrush}">
+      <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding GridItems}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <controls:SquareGridPanel Columns="2" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <shared:PlaceholderImage Margin="12" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </controls:NavBarButton>
+
+    <controls:NavBarButton Title="Camera"
+                           Icon="{StaticResource CameraIcon}"
+                           ExpandedWidth="115"
+                           AccentBrush="{StaticResource CameraAccentBrush}">
+
+      <!-- The shutter button wears the tab's own accent, as Flutter's FAB takes the theme's. -->
+      <Panel Background="Black">
+        <Panel Width="90"
+               Height="90"
+               Margin="0,0,0,32"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Bottom">
+          <Ellipse Fill="{StaticResource CameraAccentBrush}" />
+          <Ellipse Margin="8" Fill="#4DFFFFFF" />
+        </Panel>
+      </Panel>
+    </controls:NavBarButton>
+
+    <controls:NavBarButton Title="Likes"
+                           Icon="{StaticResource FavoriteBorderIcon}"
+                           ExpandedWidth="100"
+                           AccentBrush="{StaticResource LikesAccentBrush}">
+      <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding CardItems}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Border Padding="12">
+                <shared:PlaceholderCardShort />
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </controls:NavBarButton>
+
+    <controls:NavBarButton Title="Saved"
+                           Icon="{StaticResource SaveIcon}"
+                           ExpandedWidth="105"
+                           AccentBrush="{StaticResource SavedAccentBrush}">
+      <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding GridItems}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <controls:SquareGridPanel Columns="2" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <shared:PlaceholderImageWithText Margin="10" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </controls:NavBarButton>
+  </controls:NavBar>
+
+</UserControl>

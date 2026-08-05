@@ -16,47 +16,63 @@ namespace AvaloniaVignettes.Shared.Controls;
 /// </remarks>
 public sealed class Sprite : Control
 {
-    /// <summary>Defines the <see cref="Source"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Source"/> property.
+    /// </summary>
     public static readonly StyledProperty<Bitmap?> SourceProperty =
         AvaloniaProperty.Register<Sprite, Bitmap?>(nameof(Source));
 
-    /// <summary>Defines the <see cref="FrameWidth"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="FrameWidth"/> property.
+    /// </summary>
     public static readonly StyledProperty<int> FrameWidthProperty =
         AvaloniaProperty.Register<Sprite, int>(nameof(FrameWidth), 1);
 
-    /// <summary>Defines the <see cref="FrameHeight"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="FrameHeight"/> property.
+    /// </summary>
     public static readonly StyledProperty<int> FrameHeightProperty =
         AvaloniaProperty.Register<Sprite, int>(nameof(FrameHeight), 1);
 
-    /// <summary>Defines the <see cref="Frame"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Frame"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> FrameProperty =
         AvaloniaProperty.Register<Sprite, double>(nameof(Frame));
 
     static Sprite() =>
         AffectsRender<Sprite>(SourceProperty, FrameWidthProperty, FrameHeightProperty, FrameProperty);
 
-    /// <summary>Gets or sets the sheet the frames are cut from.</summary>
+    /// <summary>
+    /// Gets or sets the sheet the frames are cut from.
+    /// </summary>
     public Bitmap? Source
     {
         get => GetValue(SourceProperty);
         set => SetValue(SourceProperty, value);
     }
 
-    /// <summary>Gets or sets the width of one frame within the sheet.</summary>
+    /// <summary>
+    /// Gets or sets the width of one frame within the sheet.
+    /// </summary>
     public int FrameWidth
     {
         get => GetValue(FrameWidthProperty);
         set => SetValue(FrameWidthProperty, value);
     }
 
-    /// <summary>Gets or sets the height of one frame within the sheet.</summary>
+    /// <summary>
+    /// Gets or sets the height of one frame within the sheet.
+    /// </summary>
     public int FrameHeight
     {
         get => GetValue(FrameHeightProperty);
         set => SetValue(FrameHeightProperty, value);
     }
 
-    /// <summary>Gets or sets which frame to draw, counting across the sheet then down.</summary>
+    /// <summary>
+    /// Gets or sets which frame to draw, counting across the sheet then down.
+    /// </summary>
     public double Frame
     {
         get => GetValue(FrameProperty);

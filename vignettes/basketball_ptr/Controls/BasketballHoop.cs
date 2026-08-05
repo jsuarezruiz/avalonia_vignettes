@@ -19,26 +19,38 @@ namespace BasketballPullToRefresh.Controls;
 /// </remarks>
 public sealed class BasketballHoop : Control
 {
-    /// <summary>How far the list can be pulled, as a multiple of <see cref="Extent"/>.</summary>
+    /// <summary>
+    /// How far the list can be pulled, as a multiple of <see cref="Extent"/>.
+    /// </summary>
     public const double MaxPull = 1.2d;
 
-    /// <summary>Defines the <see cref="Pull"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Pull"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> PullProperty =
         AvaloniaProperty.Register<BasketballHoop, double>(nameof(Pull));
 
-    /// <summary>Defines the <see cref="Extent"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Extent"/> property.
+    /// </summary>
     public static readonly StyledProperty<double> ExtentProperty =
         AvaloniaProperty.Register<BasketballHoop, double>(nameof(Extent), 180d);
 
-    /// <summary>Defines the <see cref="IsPending"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="IsPending"/> property.
+    /// </summary>
     public static readonly StyledProperty<bool> IsPendingProperty =
         AvaloniaProperty.Register<BasketballHoop, bool>(nameof(IsPending));
 
-    /// <summary>Defines the <see cref="Caption"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Caption"/> property.
+    /// </summary>
     public static readonly DirectProperty<BasketballHoop, string> CaptionProperty =
         AvaloniaProperty.RegisterDirect<BasketballHoop, string>(nameof(Caption), o => o.Caption);
 
-    /// <summary>The ball's flight, from off screen to dropping away.</summary>
+    /// <summary>
+    /// The ball's flight, from off screen to dropping away.
+    /// </summary>
     private static readonly TimeSpan ThrowDuration = TimeSpan.FromSeconds(2.5d);
 
     /// <summary>
@@ -47,10 +59,14 @@ public sealed class BasketballHoop : Control
     /// </summary>
     private const double ArrivedAt = 0.9d;
 
-    /// <summary>Where the caption says so.</summary>
+    /// <summary>
+    /// Where the caption says so.
+    /// </summary>
     private const double UpdatedAt = 6d / 7d;
 
-    /// <summary>Where the ball passes behind the rim and the net.</summary>
+    /// <summary>
+    /// Where the ball passes behind the rim and the net.
+    /// </summary>
     private const double BehindHoopAt = 0.28d;
 
     // The artwork's proportions, which turn each width into a height.
@@ -58,48 +74,68 @@ public sealed class BasketballHoop : Control
     private const double NetRatio = 0.984375d;
     private const double RimRatio = 0.121739d;
 
-    /// <summary>One frame of the ball sheet, which holds sixty in ten columns.</summary>
+    /// <summary>
+    /// One frame of the ball sheet, which holds sixty in ten columns.
+    /// </summary>
     private const int BallFrameSize = 400;
 
-    /// <summary>The first half of Flutter's <c>ElasticOutCurve(0.65)</c>.</summary>
+    /// <summary>
+    /// The first half of Flutter's <c>ElasticOutCurve(0.65)</c>.
+    /// </summary>
     private static readonly Easing HalfSpring = new HalfElasticOutEasing();
 
-    /// <summary>The wave the ball rattles across the rim on, out and back twice.</summary>
+    /// <summary>
+    /// The wave the ball rattles across the rim on, out and back twice.
+    /// </summary>
     private static readonly Easing BallSwing = new SineEasing { Start = -Math.PI / 2d, Length = Math.PI * 4d };
 
-    /// <summary>The wave the ball's size pulses on.</summary>
+    /// <summary>
+    /// The wave the ball's size pulses on.
+    /// </summary>
     private static readonly Easing BallPulse = new SineEasing { Length = Math.PI * 4d };
 
-    /// <summary>The half wave that lands the ball on the rim.</summary>
+    /// <summary>
+    /// The half wave that lands the ball on the rim.
+    /// </summary>
     private static readonly Easing BallDrop = new SineEasing { Start = -Math.PI / 2d, Length = Math.PI };
 
-    /// <summary>How much scale the pull takes off the hoop, and the spring back.</summary>
+    /// <summary>
+    /// How much scale the pull takes off the hoop, and the spring back.
+    /// </summary>
     private static readonly TweenSequence HoopScale = new(
         new TweenSegment(0.5d, 0d, 2d, HalfSpring),
         (0d, 0d, 5d));
 
-    /// <summary>Which frame to draw, spinning through four passes.</summary>
+    /// <summary>
+    /// Which frame to draw, spinning through four passes.
+    /// </summary>
     private static readonly TweenSequence BallFrame = new(
         (0d, 19d, 2d),
         (20d, 39d, 2d),
         (20d, 39d, 2d),
         (40d, 59d, 1d));
 
-    /// <summary>The ball's place across the screen, as a share of 160 scaled points.</summary>
+    /// <summary>
+    /// The ball's place across the screen, as a share of 160 scaled points.
+    /// </summary>
     private static readonly TweenSequence BallX = new(
         (0d, 0.08d, 1.2d),
         (0.08d, 0.12d, 0.6d),
         new TweenSegment(0.12d, -0.12d, 4.2d, BallSwing),
         new TweenSegment(0.12d, 0d, 1d, FlutterEasings.EaseInSine));
 
-    /// <summary>The ball's height above the rim, as a share of half the extent.</summary>
+    /// <summary>
+    /// The ball's height above the rim, as a share of half the extent.
+    /// </summary>
     private static readonly TweenSequence BallY = new(
         new TweenSegment(1.7d, -0.72d, 1.3d, FlutterEasings.EaseOutSine),
         new TweenSegment(-0.72d, 0.02d, 0.7d, BallDrop),
         (0.02d, 0.02d, 4d),
         new TweenSegment(0.02d, 0.3d, 1d, FlutterEasings.EaseInCubic));
 
-    /// <summary>The ball's size, relative to nominal.</summary>
+    /// <summary>
+    /// The ball's size, relative to nominal.
+    /// </summary>
     private static readonly TweenSequence BallSize = new(
         (1d, 1d, 2d),
         new TweenSegment(1.05d, 0.9d, 4d, BallPulse),
@@ -112,7 +148,9 @@ public sealed class BasketballHoop : Control
 
     static BasketballHoop() => AffectsRender<BasketballHoop>(PullProperty, ExtentProperty);
 
-    /// <summary>Initializes a new instance of the <see cref="BasketballHoop"/> class.</summary>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BasketballHoop"/> class.
+    /// </summary>
     public BasketballHoop()
     {
         _throw = new AnimationController(this, OnThrowProgressChanged) { Duration = ThrowDuration };
@@ -130,21 +168,27 @@ public sealed class BasketballHoop : Control
         set => SetValue(PullProperty, value);
     }
 
-    /// <summary>Gets or sets the height every measurement in the scene is a fraction of.</summary>
+    /// <summary>
+    /// Gets or sets the height every measurement in the scene is a fraction of.
+    /// </summary>
     public double Extent
     {
         get => GetValue(ExtentProperty);
         set => SetValue(ExtentProperty, value);
     }
 
-    /// <summary>Gets or sets whether letting go now would refresh.</summary>
+    /// <summary>
+    /// Gets or sets whether letting go now would refresh.
+    /// </summary>
     public bool IsPending
     {
         get => GetValue(IsPendingProperty);
         set => SetValue(IsPendingProperty, value);
     }
 
-    /// <summary>Gets the line above the hoop, which says what the pull will do.</summary>
+    /// <summary>
+    /// Gets the line above the hoop, which says what the pull will do.
+    /// </summary>
     public string Caption
     {
         get => _caption;
@@ -304,7 +348,9 @@ public sealed class BasketballHoop : Control
         _ => "Pull down to refresh",
     };
 
-    /// <summary>Flutter's <c>ElasticOutCurve(0.65)</c>, run only to its half way point.</summary>
+    /// <summary>
+    /// Flutter's <c>ElasticOutCurve(0.65)</c>, run only to its half way point.
+    /// </summary>
     private sealed class HalfElasticOutEasing : Easing
     {
         private static readonly ElasticOutEasing Spring = new() { Period = 0.65d };

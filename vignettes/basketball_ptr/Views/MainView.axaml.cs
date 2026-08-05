@@ -28,11 +28,15 @@ namespace BasketballPullToRefresh.Views;
 /// </remarks>
 public partial class MainView : UserControl
 {
-    /// <summary>Defines the <see cref="Metrics"/> property.</summary>
+    /// <summary>
+    /// Defines the <see cref="Metrics"/> property.
+    /// </summary>
     public static readonly DirectProperty<MainView, PullMetrics> MetricsProperty =
         AvaloniaProperty.RegisterDirect<MainView, PullMetrics>(nameof(Metrics), o => o.Metrics);
 
-    /// <summary>How long the list takes to close: the container's implicit offset animation.</summary>
+    /// <summary>
+    /// How long the list takes to close: the container's implicit offset animation.
+    /// </summary>
     private static readonly TimeSpan CloseDuration = TimeSpan.FromMilliseconds(150);
 
     private readonly IReadOnlyList<GameSlot> _games = DemoData.CreateInitialGames();
@@ -43,7 +47,9 @@ public partial class MainView : UserControl
     private double _pullOnRelease;
     private bool _isRefreshing;
 
-    /// <summary>Initializes a new instance of the <see cref="MainView"/> class.</summary>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MainView"/> class.
+    /// </summary>
     public MainView()
     {
         InitializeComponent();
@@ -63,7 +69,9 @@ public partial class MainView : UserControl
             .Subscribe(new AnonymousObserver<RefreshVisualizerState>(OnVisualizerStateChanged));
     }
 
-    /// <summary>Gets the sizes of the pull area, all derived from the height of the screen.</summary>
+    /// <summary>
+    /// Gets the sizes of the pull area, all derived from the height of the screen.
+    /// </summary>
     public PullMetrics Metrics
     {
         get => _metrics;

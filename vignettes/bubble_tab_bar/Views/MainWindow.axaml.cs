@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace BasketballPullToRefresh.Views;
+namespace BubbleTabBar.Views;
 
 /// <summary>
 /// Hosts the vignette at the size of the phone it was designed for.
