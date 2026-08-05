@@ -1,0 +1,13 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="using:DogSlider.Views"
+        x:Class="DogSlider.Views.MainWindow"
+        Title="Dog Slider"
+        Width="375"
+        Height="812"
+        Background="White"
+        RequestedThemeVariant="Light">
+
+  <views:MainView />
+
+</Window>

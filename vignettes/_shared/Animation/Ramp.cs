@@ -18,7 +18,8 @@ public sealed class Ramp
     private TimeSpan _elapsed;
 
     /// <summary>
-    /// Gets the current value.
+    /// Gets how far the run has reached, between where it set off from and the target it is
+    /// heading for. It stays where it is once the run is over.
     /// </summary>
     public double Value { get; private set; }
 

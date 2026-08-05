@@ -1,0 +1,73 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+                    xmlns:controls="using:DogSlider.Controls">
+
+  <ControlTheme x:Key="AddToCartButtonTheme" TargetType="Button">
+    <Setter Property="Padding" Value="32,16" />
+    <Setter Property="Background" Value="{StaticResource ButtonBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource OnButtonBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pressed /template/ Border">
+      <Setter Property="Opacity" Value="0.85" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:DogSlider}" TargetType="controls:DogSlider">
+    <Setter Property="Height" Value="100" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <!-- Background makes the whole strip draggable, not just the ball. -->
+        <Panel Background="{TemplateBinding Background}">
+
+          <controls:DogSliderTrack HandleX="{TemplateBinding HandleX}"
+                                   ArcScaleY="{TemplateBinding ArcScaleY}"
+                                   ArcRadius="{TemplateBinding ArcRadius}"
+                                   BottomPadding="15" />
+
+          <!-- The dog is positioned by the slider from its own physics. -->
+          <Canvas>
+            <controls:DogView Name="PART_Dog"
+                              Canvas.Bottom="28"
+                              Width="100"
+                              Height="64" />
+          </Canvas>
+
+          <Canvas>
+            <Panel Name="PART_Ball"
+                   Canvas.Left="{Binding $parent[controls:DogSlider].BallLeft}"
+                   Canvas.Bottom="{Binding $parent[controls:DogSlider].BallBottom}"
+                   Width="{Binding $parent[controls:DogSlider].BallSize}"
+                   Height="{Binding $parent[controls:DogSlider].BallSize}">
+              <Image Source="avares://DogSlider/Assets/Images/ball.png" Stretch="Uniform" />
+
+              <controls:BouncingIcon Margin="26,-2,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     IsShown="{Binding $parent[controls:DogSlider].IsArrowVisible}">
+                <shared:MaterialIcon Data="{StaticResource ForwardIcon}"
+                                     IconSize="22"
+                                     Foreground="{StaticResource InkBrush}" />
+              </controls:BouncingIcon>
+            </Panel>
+          </Canvas>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

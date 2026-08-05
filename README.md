@@ -30,6 +30,12 @@ A starfield drawn behind the whole app, flying faster as the list is scrolled an
 
 Ink spreads across the article to carry it between the light and dark schemes, masked by a frame sequence.
 
+<a href="vignettes/dog_slider"><img src="vignettes/dog_slider/images/dog_slider.gif" width="237"/></a>
+
+### [Dog Toy Slider](vignettes/dog_slider)
+
+Drag the ball along the track and the dog gives chase, then folds into a sit once it arrives.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

@@ -36,12 +36,12 @@ public static class DemoData
     public static Bitmap Backboard { get; } = Load("backboard");
 
     /// <summary>
-    /// Gets the net.
+    /// Gets the net, which the ball drops behind once it is through the hoop.
     /// </summary>
     public static Bitmap Net { get; } = Load("net");
 
     /// <summary>
-    /// Gets the rim.
+    /// Gets the rim, drawn last so it sits in front of both the net and the ball.
     /// </summary>
     public static Bitmap Rim { get; } = Load("rim");
 

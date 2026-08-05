@@ -1,0 +1,123 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:controls="using:DogSlider.Controls"
+             xmlns:views="using:DogSlider.Views"
+             x:Class="DogSlider.Views.MainView"
+             x:DataType="views:MainView">
+
+  <DockPanel Background="{StaticResource PageBackgroundBrush}">
+
+    <!-- Top nav: back, logo, basket. -->
+    <Grid DockPanel.Dock="Top" Margin="12" ColumnDefinitions="Auto,*,Auto">
+      <shared:MaterialIcon Grid.Column="0"
+                           Data="{StaticResource BackIcon}"
+                           IconSize="32"
+                           VerticalAlignment="Center"
+                           Foreground="{StaticResource InkBrush}" />
+      <Image Grid.Column="1"
+             Source="avares://DogSlider/Assets/Images/logo.png"
+             Height="26"
+             Stretch="Uniform"
+             HorizontalAlignment="Left"
+             Margin="12,0,0,0" />
+      <shared:MaterialIcon Grid.Column="2"
+                           Data="{StaticResource BasketIcon}"
+                           IconSize="32"
+                           VerticalAlignment="Center"
+                           Foreground="{StaticResource InkBrush}" />
+    </Grid>
+
+    <!-- Cart bar. -->
+    <Border DockPanel.Dock="Bottom"
+            Height="90"
+            Padding="22,0"
+            Background="{StaticResource PageBackgroundBrush}"
+            BoxShadow="0 0 20 0 #1A000000">
+      <Grid MaxWidth="500" VerticalAlignment="Center" ColumnDefinitions="Auto,6,Auto,*,Auto">
+        <TextBlock Grid.Column="0"
+                   Text="TOTAL"
+                   VerticalAlignment="Center"
+                   FontFamily="{StaticResource BodyFont}"
+                   FontSize="16"
+                   Foreground="{StaticResource InkBrush}" />
+        <TextBlock Grid.Column="2"
+                   Text="{Binding TotalLabel}"
+                   VerticalAlignment="Center"
+                   FontFamily="{StaticResource BodyFont}"
+                   FontWeight="Bold"
+                   FontSize="16"
+                   Foreground="{StaticResource InkBrush}" />
+        <Button Grid.Column="4"
+                Theme="{StaticResource AddToCartButtonTheme}"
+                Content="ADD TO CART" />
+      </Grid>
+    </Border>
+
+    <!-- The scene: hills and ground behind, copy in front, the slider through the middle. -->
+    <Panel Margin="0,20,0,0">
+
+      <!--
+        The scene is split in half: the hills sit on the bottom edge of the top half, and the ground
+        is centred a tenth of the way down the bottom half. Both overflow sideways by design.
+      -->
+      <Grid Margin="0,40,0,0" RowDefinitions="*,*">
+        <Image Grid.Row="0"
+               Source="avares://DogSlider/Assets/Images/background.png"
+               Height="150"
+               Stretch="Uniform"
+               VerticalAlignment="Bottom"
+               HorizontalAlignment="Center" />
+
+        <Grid Grid.Row="1" RowDefinitions="2*,8*">
+          <Image Grid.Row="0"
+                 Source="avares://DogSlider/Assets/Images/ground.png"
+                 Height="80"
+                 Stretch="Uniform"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center" />
+        </Grid>
+      </Grid>
+
+      <StackPanel MaxWidth="400" Margin="32,0" VerticalAlignment="Top">
+        <TextBlock Text="How many fetch balls&#x0a;does your dog want?"
+                   TextAlignment="Center"
+                   FontFamily="{StaticResource LightFont}"
+                   FontSize="26"
+                   Foreground="{StaticResource InkBrush}" />
+        <Panel Height="24" />
+        <TextBlock Text="{Binding TreatCount}"
+                   TextAlignment="Center"
+                   FontFamily="{StaticResource SemiBoldFont}"
+                   FontSize="48"
+                   Foreground="{StaticResource CountBrush}" />
+      </StackPanel>
+
+      <controls:DogSlider Name="Slider" VerticalAlignment="Center" Value="{Binding SliderValue, Mode=TwoWay}" />
+
+      <StackPanel MaxWidth="500" Margin="26,0" VerticalAlignment="Bottom">
+        <TextBlock Text="PRODUCT DETAIL"
+                   FontFamily="{StaticResource SemiBoldFont}"
+                   FontSize="14"
+                   Foreground="{StaticResource InkBrush}" />
+        <Panel Height="8" />
+        <TextBlock Text="Fetch Tennis Ball - 2.0 inch"
+                   FontFamily="{StaticResource BodyFont}"
+                   FontWeight="Bold"
+                   FontSize="13"
+                   Foreground="{StaticResource InkBrush}" />
+        <Panel Height="8" />
+        <TextBlock Text="Colour: Green" FontFamily="{StaticResource BodyFont}" FontSize="13" Foreground="{StaticResource InkBrush}" />
+        <TextBlock Text="Size: 2.5 inch" FontFamily="{StaticResource BodyFont}" FontSize="13" Foreground="{StaticResource InkBrush}" />
+        <Panel Height="8" />
+        <TextBlock Text="For stimulating playtime that encourages pets to leap and chase. Made from a high-quality natural latex and designed for the game of fetch. "
+                   TextWrapping="Wrap"
+                   FontFamily="{StaticResource BodyFont}"
+                   FontSize="13"
+                   Foreground="{StaticResource InkBrush}" />
+        <Panel Height="16" />
+      </StackPanel>
+    </Panel>
+  </DockPanel>
+
+</UserControl>
