@@ -36,6 +36,12 @@ Ink spreads across the article to carry it between the light and dark schemes, m
 
 Drag the ball along the track and the dog gives chase, then folds into a sit once it arrives.
 
+<a href="vignettes/drink_rewards_list"><img src="vignettes/drink_rewards_list/images/drink_rewards_list.gif" width="237"/></a>
+
+### [Liquid Rewards Cards](vignettes/drink_rewards_list)
+
+Tap a card and it springs open, then fills with liquid that sloshes as it settles.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

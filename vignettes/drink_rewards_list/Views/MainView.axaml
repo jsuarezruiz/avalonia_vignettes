@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:controls="using:DrinkRewardsList.Controls"
+             xmlns:models="using:DrinkRewardsList.Models"
+             xmlns:views="using:DrinkRewardsList.Views"
+             x:Class="DrinkRewardsList.Views.MainView"
+             x:DataType="views:MainView">
+
+  <Panel Background="{StaticResource PageBackgroundBrush}">
+
+    <!-- The list runs the full height and is scrolled out from under the header rather than inset. -->
+    <ScrollViewer Name="Scroller" VerticalScrollBarVisibility="Hidden">
+      <ItemsControl Name="Drinks" Margin="{Binding Header.ListPadding}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate DataType="models:Drink">
+            <controls:DrinkCard Margin="20,10"
+                                Drink="{Binding}"
+                                EarnedPoints="{Binding $parent[views:MainView].EarnedPoints}" />
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+
+    <!-- The header sits over the list, rounded off along its bottom edge only. -->
+    <Border Height="{Binding Header.Height}"
+            VerticalAlignment="Top"
+            CornerRadius="0,0,48,48"
+            BoxShadow="0 0 24 0 #41000000">
+      <Border CornerRadius="0,0,48,48" ClipToBounds="True">
+        <Image Source="avares://DrinkRewardsList/Assets/Images/Header-Dark.png" Stretch="Fill" />
+      </Border>
+    </Border>
+
+    <Panel Height="{Binding Header.Height}" VerticalAlignment="Top">
+      <DockPanel Margin="{Binding Header.Padding}" HorizontalAlignment="Center">
+        <TextBlock DockPanel.Dock="Top"
+                   Text="My Rewards"
+                   HorizontalAlignment="Center"
+                   FontFamily="{StaticResource BodyFont}"
+                   FontWeight="Bold"
+                   FontSize="{Binding Header.TitleFontSize}"
+                   Foreground="{StaticResource OnCardBrush}" />
+
+        <TextBlock DockPanel.Dock="Bottom"
+                   Text="Your Points Balance"
+                   HorizontalAlignment="Center"
+                   FontFamily="{StaticResource BodyFont}"
+                   FontSize="{Binding Header.BalanceFontSize}"
+                   Foreground="{StaticResource OnCardBrush}" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <shared:MaterialIcon Data="{StaticResource StarIcon}"
+                               IconSize="{Binding Header.StarSize}"
+                               VerticalAlignment="Center"
+                               Foreground="{StaticResource AccentBrush}" />
+          <TextBlock Text="{Binding EarnedPoints}"
+                     Margin="8,0,0,0"
+                     VerticalAlignment="Center"
+                     FontFamily="{StaticResource BodyFont}"
+                     FontWeight="Bold"
+                     FontSize="{Binding Header.PointsFontSize}"
+                     Foreground="{StaticResource OnCardBrush}" />
+        </StackPanel>
+      </DockPanel>
+    </Panel>
+  </Panel>
+
+</UserControl>

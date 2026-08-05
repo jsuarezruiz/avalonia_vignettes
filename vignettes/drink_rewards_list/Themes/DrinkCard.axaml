@@ -1,0 +1,179 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+                    xmlns:controls="using:DrinkRewardsList.Controls">
+
+  <ControlTheme x:Key="RedeemButtonTheme" TargetType="Button">
+    <Setter Property="MinWidth" Value="200" />
+    <Setter Property="Height" Value="40" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource OnCardBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" CornerRadius="24">
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pressed /template/ Border">
+      <Setter Property="Opacity" Value="0.85" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:DrinkCard}" TargetType="controls:DrinkCard">
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <!--
+          The shadow and the rounding live on separate borders, as the original's RoundedShadow has
+          them: a shadow cast by the outer one, and a clip applied by the inner.
+        -->
+        <Border BoxShadow="0 0 6 0 #20000000" CornerRadius="12">
+          <Border CornerRadius="12" ClipToBounds="True" Background="{StaticResource CardBrush}">
+            <Panel>
+
+              <controls:LiquidBackground Name="PART_Liquid" Opacity="0">
+                <controls:LiquidBackground.Transitions>
+                  <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.5" />
+                  </Transitions>
+                </controls:LiquidBackground.Transitions>
+              </controls:LiquidBackground>
+
+              <!--
+                Laid out from the top and left to overflow: while the card is short the lower half
+                simply runs past the bottom edge and is clipped away.
+              -->
+              <StackPanel Margin="24,0" VerticalAlignment="Top">
+                <Panel Height="24" />
+
+                <Grid ColumnDefinitions="50,24,*,Auto,4,Auto">
+                  <Image Grid.Column="0"
+                         Width="50"
+                         Stretch="Uniform"
+                         Source="{Binding $parent[controls:DrinkCard].Artwork}" />
+
+                  <TextBlock Grid.Column="2"
+                             Text="{Binding $parent[controls:DrinkCard].Drink.Label}"
+                             VerticalAlignment="Center"
+                             FontFamily="{StaticResource BodyFont}"
+                             FontWeight="Bold"
+                             FontSize="18"
+                             Foreground="{StaticResource OnCardBrush}" />
+
+                  <shared:MaterialIcon Grid.Column="3"
+                                       Data="{StaticResource StarIcon}"
+                                       IconSize="20"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource AccentBrush}" />
+
+                  <TextBlock Grid.Column="5"
+                             Text="{Binding $parent[controls:DrinkCard].Drink.RequiredPoints}"
+                             VerticalAlignment="Center"
+                             FontFamily="{StaticResource BodyFont}"
+                             FontWeight="Bold"
+                             FontSize="20"
+                             Foreground="{StaticResource OnCardBrush}" />
+                </Grid>
+
+                <Panel Height="12" />
+
+                <StackPanel Name="PART_Details" Opacity="0">
+                  <StackPanel.Transitions>
+                    <Transitions>
+                      <DoubleTransition Property="Opacity" Duration="0:0:0.5" Easing="{StaticResource EaseOut}" />
+                    </Transitions>
+                  </StackPanel.Transitions>
+
+                  <Panel>
+                    <StackPanel Name="PART_Countdown" Orientation="Horizontal" HorizontalAlignment="Center">
+                      <TextBlock Text="You're only "
+                                 FontFamily="{StaticResource BodyFont}"
+                                 FontSize="12"
+                                 VerticalAlignment="Center"
+                                 Foreground="{StaticResource OnCardBrush}" />
+                      <TextBlock Text="{Binding $parent[controls:DrinkCard].PointsRemainingLabel}"
+                                 Margin="4,0"
+                                 FontFamily="{StaticResource BodyFont}"
+                                 FontWeight="Bold"
+                                 FontSize="16"
+                                 VerticalAlignment="Center"
+                                 Foreground="{StaticResource AccentBrush}" />
+                      <TextBlock Text=" points away"
+                                 FontFamily="{StaticResource BodyFont}"
+                                 FontSize="12"
+                                 VerticalAlignment="Center"
+                                 Foreground="{StaticResource OnCardBrush}" />
+                    </StackPanel>
+
+                    <TextBlock Name="PART_Congratulations"
+                               Text="Congratulations!"
+                               HorizontalAlignment="Center"
+                               IsVisible="False"
+                               FontFamily="{StaticResource BodyFont}"
+                               FontWeight="Bold"
+                               FontSize="16"
+                               Foreground="{StaticResource OnCardBrush}" />
+                  </Panel>
+
+                  <Panel Height="16" />
+
+                  <TextBlock Text="Redeem your points for a cup of happiness! Our signature espresso is blanced with steamed milk and topped with a light layer of foam. "
+                             TextAlignment="Center"
+                             TextWrapping="Wrap"
+                             FontFamily="{StaticResource BodyFont}"
+                             FontSize="14"
+                             LineHeight="21"
+                             ClipToBounds="False"
+                             Foreground="{StaticResource OnCardBrush}" />
+
+                  <Panel Height="16" />
+
+                  <Button Name="PART_Redeem"
+                          Theme="{StaticResource RedeemButtonTheme}"
+                          Content="REDEEM"
+                          Opacity="0.6" />
+                </StackPanel>
+              </StackPanel>
+            </Panel>
+          </Border>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:open /template/ controls|LiquidBackground#PART_Liquid">
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <!-- The copy takes twice as long to arrive as it does to leave. -->
+    <Style Selector="^:open /template/ StackPanel#PART_Details">
+      <Setter Property="Opacity" Value="1" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Opacity" Duration="0:0:1" Easing="{StaticResource EaseOut}" />
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="^:redeemable /template/ StackPanel#PART_Countdown">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+
+    <Style Selector="^:redeemable /template/ TextBlock#PART_Congratulations">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="^:affordable /template/ Button#PART_Redeem">
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

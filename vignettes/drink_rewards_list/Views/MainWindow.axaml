@@ -1,0 +1,13 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="using:DrinkRewardsList.Views"
+        x:Class="DrinkRewardsList.Views.MainWindow"
+        Title="Drink Rewards List"
+        Width="375"
+        Height="812"
+        Background="{StaticResource PageBackgroundBrush}"
+        RequestedThemeVariant="Dark">
+
+  <views:MainView />
+
+</Window>

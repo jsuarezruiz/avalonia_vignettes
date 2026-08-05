@@ -1,0 +1,18 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <FontFamily x:Key="BodyFont">avares://DrinkRewardsList/Assets/Fonts#Poppins</FontFamily>
+
+  <!-- Flutter's Curves.easeOut, which is a bezier rather than Avalonia's CubicEaseOut polynomial. -->
+  <SplineEasing x:Key="EaseOut" X1="0" Y1="0" X2="0.58" Y2="1" />
+
+  <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FF22222B" />
+  <SolidColorBrush x:Key="CardBrush" Color="#FF303238" />
+  <SolidColorBrush x:Key="OnCardBrush" Color="White" />
+
+  <!-- The accent behind every star, point count and the redeem button. -->
+  <SolidColorBrush x:Key="AccentBrush" Color="#FFF1A35D" />
+
+  <StreamGeometry x:Key="StarIcon">M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z</StreamGeometry>
+
+</ResourceDictionary>
