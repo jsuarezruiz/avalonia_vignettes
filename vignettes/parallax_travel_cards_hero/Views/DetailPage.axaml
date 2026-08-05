@@ -1,0 +1,119 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:ParallaxTravelCardsHero.Controls"
+             xmlns:models="using:ParallaxTravelCardsHero.Models"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:views="using:ParallaxTravelCardsHero.Views"
+             x:Class="ParallaxTravelCardsHero.Views.DetailPage"
+             x:DataType="models:City"
+             x:Name="Root"
+             NavigationPage.HasNavigationBar="False"
+             Background="{StaticResource ScreenBackgroundBrush}">
+
+  <ContentPage.Styles>
+    <!-- Material's IconButton has no surface of its own, only the icon and its ripple. -->
+    <Style Selector="Button#Back /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+  </ContentPage.Styles>
+
+  <Panel>
+
+    <!-- Two expanded halves: the scene above, the write-up and the experience cards below. -->
+    <Grid RowDefinitions="*,*">
+
+      <controls:CityScenery x:Name="Scene"
+                            Grid.Row="0"
+                            AnimationValue="1"
+                            City="{Binding}"
+                            ScreenWidth="{Binding #Root.ScreenWidth}"
+                            ScreenHeight="{Binding #Root.ScreenHeight}" />
+
+      <shared:FlexPanel Grid.Row="1" MainAxisAlignment="SpaceEvenly">
+
+        <StackPanel>
+
+          <TextBlock Classes="appHeader"
+                     HorizontalAlignment="Center"
+                     Text="{Binding Title}" />
+
+          <TextBlock Classes="cardSubtitle"
+                     Margin="{StaticResource InformationPadding}"
+                     TextAlignment="Center"
+                     TextWrapping="Wrap"
+                     Text="{Binding Information}" />
+
+        </StackPanel>
+
+        <StackPanel>
+
+          <TextBlock Classes="detailsHeading"
+                     Margin="0,0,0,16"
+                     HorizontalAlignment="Center"
+                     Text="EXPERIENCES FOR EVERY INTEREST" />
+
+          <ItemsControl ItemsSource="{x:Static models:DemoData.Experiences}"
+                        Height="{Binding #Root.ExperiencesHeight}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <shared:FlexPanel Orientation="Horizontal" MainAxisAlignment="SpaceBetween" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="models:Experience">
+                <!--
+                  Material's Card: a 4 px margin, a 4 px radius, and the three-part shadow Material
+                  draws at an elevation of 1. Its contents are deliberately left unclipped, as the
+                  original's Card is.
+                -->
+                <Border Margin="4"
+                        Width="{Binding ExperienceWidth, RelativeSource={RelativeSource AncestorType=views:DetailPage}}"
+                        Background="{StaticResource ScreenBackgroundBrush}"
+                        CornerRadius="4"
+                        BoxShadow="0 2 1 -1 #33000000, 0 1 1 0 #24000000, 0 1 3 0 #1F000000">
+
+                  <DockPanel LastChildFill="True">
+
+                    <TextBlock Classes="detailsCardTitle"
+                               DockPanel.Dock="Bottom"
+                               Margin="8"
+                               Text="{Binding Title}" />
+
+                    <Image Source="{Binding Image}" Stretch="UniformToFill" ClipToBounds="True" />
+
+                  </DockPanel>
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+
+        </StackPanel>
+      </shared:FlexPanel>
+    </Grid>
+
+    <!--
+      Material's IconButton: a 48 square tap target with the icon inset by hzScreenPadding on the
+      leading edge.
+    -->
+    <Button x:Name="Back"
+            AutomationProperties.Name="Back"
+            Width="48"
+            Height="48"
+            Padding="18,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            Background="Transparent"
+            BorderThickness="0"
+            Cursor="Hand"
+            Click="OnBackClick">
+      <shared:MaterialIcon IconSize="18"
+                           Data="{StaticResource BackIconGeometry}"
+                           Foreground="{StaticResource BackIconBrush}" />
+    </Button>
+
+  </Panel>
+
+</ContentPage>

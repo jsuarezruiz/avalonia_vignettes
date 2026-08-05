@@ -1,0 +1,102 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:ParallaxTravelCardsHero.Controls"
+             xmlns:models="using:ParallaxTravelCardsHero.Models"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             x:Class="ParallaxTravelCardsHero.Views.ListPage"
+             x:DataType="models:City"
+             x:Name="Root"
+             NavigationPage.HasNavigationBar="False"
+             Background="{StaticResource ScreenBackgroundBrush}">
+
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+
+    <!--
+      Flutter clamps a Container's width to the constraints it is given, so `width: 400` on a 375
+      screen is 375. MaxWidth is the faithful translation; Width would hang the content off both
+      edges. The page is centred in the viewport whenever it is shorter than one.
+    -->
+    <StackPanel MaxWidth="400"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center">
+
+      <TextBlock Classes="appHeader"
+                 Margin="{StaticResource HeaderPadding}"
+                 HorizontalAlignment="Left"
+                 TextAlignment="Center"
+                 TextWrapping="Wrap"
+                 Text="Get ready for your trip!" />
+
+      <controls:CityScenery x:Name="Card"
+                            Margin="0,50"
+                            HorizontalAlignment="Center"
+                            Cursor="Hand"
+                            City="{Binding}"
+                            Width="{Binding #Root.CardWidth}"
+                            Height="{Binding #Root.CardHeight}"
+                            ScreenWidth="{Binding #Root.ScreenWidth}"
+                            ScreenHeight="{Binding #Root.ScreenHeight}" />
+
+      <!-- The hotel section. Styles.hzScreenPadding * 1.5 horizontally, 20 below. -->
+      <StackPanel Margin="{StaticResource HotelSectionPadding}">
+
+        <TextBlock Classes="hotelsHeading" Text="HOTELS" />
+
+        <ItemsControl ItemsSource="{Binding Hotels}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <shared:FlexPanel Orientation="Vertical" MainAxisAlignment="SpaceEvenly" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="models:Hotel">
+              <Grid ColumnDefinitions="*,Auto">
+
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+
+                  <TextBlock Classes="hotelTitle" Margin="0,0,0,3" Text="{Binding Name}" />
+
+                  <StackPanel Orientation="Horizontal">
+
+                    <ItemsControl ItemsSource="{Binding Stars}" VerticalAlignment="Center">
+                      <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                          <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                      </ItemsControl.ItemsPanel>
+                      <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                          <shared:MaterialIcon IconSize="13"
+                                               Data="{StaticResource StarIconGeometry}"
+                                               Foreground="{StaticResource StarBrush}" />
+                        </DataTemplate>
+                      </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBlock Classes="hotelScore"
+                               Margin="8,0"
+                               VerticalAlignment="Center"
+                               Text="{Binding RatingLabel}" />
+
+                    <TextBlock Classes="hotelData"
+                               VerticalAlignment="Center"
+                               Text="{Binding ReviewsLabel}" />
+
+                  </StackPanel>
+                </StackPanel>
+
+                <TextBlock Grid.Column="1"
+                           Classes="hotelPrice"
+                           VerticalAlignment="Center"
+                           Text="{Binding PriceLabel}" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+      </StackPanel>
+
+    </StackPanel>
+  </ScrollViewer>
+
+</ContentPage>

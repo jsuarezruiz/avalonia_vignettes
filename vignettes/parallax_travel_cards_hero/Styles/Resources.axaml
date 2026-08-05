@@ -1,0 +1,38 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!--
+    Fonts. Open Sans ships its semibold and bold weights under their own family names, so they are
+    referenced separately rather than through a FontWeight.
+  -->
+  <FontFamily x:Key="SerifFont">avares://ParallaxTravelCardsHero/Assets/Fonts#DM Serif Display</FontFamily>
+  <FontFamily x:Key="BodyFont">avares://ParallaxTravelCardsHero/Assets/Fonts#Open Sans</FontFamily>
+  <FontFamily x:Key="BodySemiBoldFont">avares://ParallaxTravelCardsHero/Assets/Fonts#Open Sans Semibold</FontFamily>
+
+  <!-- Palette, taken from styles.dart. -->
+  <SolidColorBrush x:Key="ScreenBackgroundBrush" Color="White" />
+  <SolidColorBrush x:Key="AppHeaderBrush" Color="#FF0E0E0E" />
+  <SolidColorBrush x:Key="CardTitleBrush" Color="#FF1A1A1A" />
+  <SolidColorBrush x:Key="CardSubtitleBrush" Color="#FF666666" />
+  <SolidColorBrush x:Key="CardActionBrush" Color="#FFA6998B" />
+  <SolidColorBrush x:Key="HotelHeadingBrush" Color="Black" />
+  <SolidColorBrush x:Key="HotelTitleBrush" Color="Black" />
+  <SolidColorBrush x:Key="HotelPriceBrush" Color="#FF4D4D4D" />
+  <SolidColorBrush x:Key="HotelScoreBrush" Color="#FF0E0E0E" />
+  <!-- Colors.grey[700]. -->
+  <SolidColorBrush x:Key="HotelDataBrush" Color="#FF616161" />
+  <SolidColorBrush x:Key="StarBrush" Color="#FFFEDA7D" />
+  <SolidColorBrush x:Key="DetailsHeadingBrush" Color="Black" />
+  <SolidColorBrush x:Key="DetailsCardTitleBrush" Color="Black" />
+  <SolidColorBrush x:Key="BackIconBrush" Color="Black" />
+
+  <!-- Metrics. Styles.hzScreenPadding is 18. -->
+  <Thickness x:Key="HeaderPadding">54,16,54,0</Thickness>
+  <Thickness x:Key="HotelSectionPadding">27,0,27,20</Thickness>
+  <Thickness x:Key="InformationPadding">27,8,27,0</Thickness>
+
+  <!-- Material icon geometries, drawn on the standard 24x24 grid. -->
+  <StreamGeometry x:Key="StarIconGeometry">M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2L9.19,8.63L2,9.24l5.46,4.73L5.82,21L12,17.27z</StreamGeometry>
+  <StreamGeometry x:Key="BackIconGeometry">M17.77,3.77L16,2L6,12l10,10l1.77-1.77L9.54,12L17.77,3.77z</StreamGeometry>
+
+</ResourceDictionary>

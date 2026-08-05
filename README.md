@@ -60,6 +60,12 @@ Swipe between pages and the incoming one is revealed through a liquid edge that 
 
 Swipe between artists while a field of 3D shapes drifts behind and in front of them.
 
+<a href="vignettes/parallax_travel_cards_hero"><img src="vignettes/parallax_travel_cards_hero/images/parallax_travel_cards_hero.gif" width="237"/></a>
+
+### [Paris Travel Hero Transition](vignettes/parallax_travel_cards_hero)
+
+Tap the city card and it opens into a full scene, the road unrolling and the skyline assembling as it grows.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

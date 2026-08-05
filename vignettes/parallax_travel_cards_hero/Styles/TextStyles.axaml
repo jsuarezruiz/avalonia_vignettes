@@ -1,0 +1,107 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!--
+    One class per TextStyle in styles.dart.
+
+    Flutter's `height` is the line height as a multiple of the font size, spelled out here as an
+    absolute LineHeight. Where that squeezes the line box below the font's natural height the glyphs
+    are meant to overflow it. Flutter draws them anyway, and TextBlock only clips them because
+    ClipToBounds defaults to true, so those styles turn it off.
+
+    Flutter also spreads a resized line box proportionally across ascent and descent, whereas
+    Avalonia keeps the glyph top-aligned in it. Each RenderTransform below is
+    `ascent * (lineHeight / naturalLineHeight - 1)`, which puts the painted text back on Flutter's
+    baseline without touching the box the layout sees. DM Serif Display measures 1.036 em to its
+    ascender and 1.371 em to its natural line; Open Sans, 1.0688 and 1.3618.
+  -->
+
+  <!-- height: 1.2 on a 24 px serif, whose natural line height is 32.90. -->
+  <Style Selector="TextBlock.appHeader">
+    <Setter Property="FontFamily" Value="{StaticResource SerifFont}" />
+    <Setter Property="FontSize" Value="24" />
+    <Setter Property="LineHeight" Value="28.8" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="RenderTransform" Value="translate(0px, -3.10px)" />
+    <Setter Property="Foreground" Value="{StaticResource AppHeaderBrush}" />
+  </Style>
+
+  <!-- height: 1 on a 25 px serif, whose natural line height is 34.28. -->
+  <Style Selector="TextBlock.cardTitle">
+    <Setter Property="FontFamily" Value="{StaticResource SerifFont}" />
+    <Setter Property="FontSize" Value="25" />
+    <Setter Property="LineHeight" Value="25" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="RenderTransform" Value="translate(0px, -7.01px)" />
+    <Setter Property="Foreground" Value="{StaticResource CardTitleBrush}" />
+  </Style>
+
+  <!-- height: 1.4 on a 12 px body face, a shade taller than its natural 16.34. -->
+  <Style Selector="TextBlock.cardSubtitle">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="LineHeight" Value="16.8" />
+    <Setter Property="RenderTransform" Value="translate(0px, 0.36px)" />
+    <Setter Property="Foreground" Value="{StaticResource CardSubtitleBrush}" />
+  </Style>
+
+  <!-- height: 1 on a 12 px semibold body face, whose natural line height is 16.34. -->
+  <Style Selector="TextBlock.cardAction">
+    <Setter Property="FontFamily" Value="{StaticResource BodySemiBoldFont}" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="LineHeight" Value="12" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="RenderTransform" Value="translate(0px, -3.41px)" />
+    <Setter Property="LetterSpacing" Value="0.1" />
+    <Setter Property="Foreground" Value="{StaticResource CardActionBrush}" />
+  </Style>
+
+  <!-- height: 2 on a 14 px bold body face, well clear of its natural 19.07. -->
+  <Style Selector="TextBlock.hotelsHeading">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="LineHeight" Value="28" />
+    <Setter Property="RenderTransform" Value="translate(0px, 7.01px)" />
+    <Setter Property="Foreground" Value="{StaticResource HotelHeadingBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.hotelTitle">
+    <Setter Property="FontFamily" Value="{StaticResource BodySemiBoldFont}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Foreground" Value="{StaticResource HotelTitleBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.hotelPrice">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="Foreground" Value="{StaticResource HotelPriceBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.hotelScore">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="Foreground" Value="{StaticResource HotelScoreBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.hotelData">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="Foreground" Value="{StaticResource HotelDataBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.detailsHeading">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="Foreground" Value="{StaticResource DetailsHeadingBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.detailsCardTitle">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="10" />
+    <Setter Property="LetterSpacing" Value="0.5" />
+    <Setter Property="Foreground" Value="{StaticResource DetailsCardTitleBrush}" />
+  </Style>
+
+</Styles>

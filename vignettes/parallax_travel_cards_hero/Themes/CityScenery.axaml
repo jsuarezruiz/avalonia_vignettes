@@ -1,0 +1,62 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:ParallaxTravelCardsHero.Controls"
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:CityScenery}" TargetType="controls:CityScenery">
+
+    <!-- Flutter's Stack clips what its children overflow, and the scene relies on that. -->
+    <Setter Property="ClipToBounds" Value="True" />
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+
+          <!--
+            The card face. Its gradient warms, its corners square off, and the shadow is
+            Colors.black12 with a blur of 8.
+          -->
+          <Border Background="{TemplateBinding SceneryBrush}"
+                  CornerRadius="{TemplateBinding CardCornerRadius}"
+                  BoxShadow="0 0 8 0 #1F000000" />
+
+          <!--
+            The card copy, which fades out over the first fifth of the opening. The leading spacer is
+            the room the skyline needs; the column shares out whatever is left over.
+          -->
+          <shared:FlexPanel MainAxisAlignment="SpaceAround"
+                            Margin="35,0,35,8"
+                            Opacity="{TemplateBinding CardInfoOpacity}">
+
+            <Panel Height="{TemplateBinding SkylineReserve}" />
+
+            <TextBlock Classes="cardTitle"
+                       Margin="0,16,0,0"
+                       HorizontalAlignment="Center"
+                       Text="{Binding City.Title, RelativeSource={RelativeSource TemplatedParent}}" />
+
+            <TextBlock Classes="cardSubtitle"
+                       HorizontalAlignment="Center"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"
+                       Text="{Binding City.Description, RelativeSource={RelativeSource TemplatedParent}}" />
+
+            <TextBlock Classes="cardAction"
+                       Margin="0,4,0,12"
+                       HorizontalAlignment="Center"
+                       Text="LEARN MORE" />
+
+          </shared:FlexPanel>
+
+          <controls:SceneryLayers AnimationValue="{TemplateBinding AnimationValue}"
+                                  ScreenWidth="{TemplateBinding ScreenWidth}"
+                                  ScreenHeight="{TemplateBinding ScreenHeight}"
+                                  City="{TemplateBinding City}" />
+
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+  </ControlTheme>
+
+</ResourceDictionary>

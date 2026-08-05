@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:ParallaxTravelCardsHero.Controls"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:views="using:ParallaxTravelCardsHero.Views"
+             x:Class="ParallaxTravelCardsHero.Views.MainView"
+             x:Name="Root"
+             ClipToBounds="True"
+             Background="{StaticResource ScreenBackgroundBrush}">
+
+  <Panel>
+
+    <!--
+      The navigator. The original's route runs no chrome of its own (the details page draws its own
+      back button), so the navigation bar is turned off on both pages.
+    -->
+    <NavigationPage x:Name="Navigation">
+      <NavigationPage.Content>
+        <views:ListPage x:Name="List"
+                        ScreenWidth="{Binding #Root.Bounds.Width}"
+                        ScreenHeight="{Binding #Root.Bounds.Height}" />
+      </NavigationPage.Content>
+    </NavigationPage>
+
+    <!--
+      The shared element crosses above the navigation, because a page transition is only ever handed
+      the two pages and cannot carry a control between them.
+    -->
+    <shared:HeroFlight x:Name="Flight">
+      <controls:CityScenery x:Name="FlightCard"
+                            AnimationValue="{Binding #Flight.ContentProgress}"
+                            ScreenWidth="{Binding #Root.Bounds.Width}"
+                            ScreenHeight="{Binding #Root.Bounds.Height}" />
+    </shared:HeroFlight>
+
+  </Panel>
+
+</UserControl>
