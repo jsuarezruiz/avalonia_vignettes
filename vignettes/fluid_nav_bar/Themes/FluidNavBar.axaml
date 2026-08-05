@@ -1,0 +1,100 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:FluidNavBar.Controls"
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:FluidNavBarView}" TargetType="controls:FluidNavBarView">
+
+    <Setter Property="TabStripPlacement" Value="Bottom" />
+
+    <!-- MainAxisAlignment.spaceAround, which is what the button positions are calculated for. -->
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <shared:FlexPanel Orientation="Horizontal" MainAxisAlignment="SpaceAround" />
+      </ItemsPanelTemplate>
+    </Setter>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!--
+          `extendBody: true`: the pages run the full height of the screen and the bar floats over
+          them, so this is a stack rather than a dock.
+        -->
+        <Panel>
+
+          <Panel>
+            <ContentPresenter Name="PART_SelectedContentHost2"
+                              ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+            <ContentPresenter Name="PART_SelectedContentHost"
+                              Content="{TemplateBinding SelectedContent}"
+                              ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+          </Panel>
+
+          <Panel VerticalAlignment="Bottom" Height="56">
+
+            <controls:FluidPane DipX="{TemplateBinding DipX}"
+                                Depth="{TemplateBinding PaneDepth}"
+                                Fill="{StaticResource PaneBrush}" />
+
+            <!--
+              The buttons never spread wider than 400, and are centred in whatever is left. The
+              strip stops taking presses while the dip is travelling, which is how the original
+              refuses a second press mid-flight.
+            -->
+            <ItemsPresenter Name="PART_ItemsPresenter"
+                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                            MaxWidth="400"
+                            HorizontalAlignment="Stretch"
+                            IsHitTestVisible="{TemplateBinding IsSelectionEnabled}" />
+
+          </Panel>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:FluidNavBarButton}" TargetType="controls:FluidNavBarButton">
+
+    <!-- FluidNavBarButton.nominalExtent. -->
+    <Setter Property="Width" Value="64" />
+    <Setter Property="Height" Value="64" />
+    <Setter Property="Cursor" Value="Hand" />
+
+    <!--
+      The disc rises clear of its own box and of the bar. In Flutter that overflow is a paint-time
+      transform, so the Stack around it never registers it as overflow and never clips; here nothing
+      may clip it either, at any level between the disc and the bar.
+    -->
+    <Setter Property="ClipToBounds" Value="False" />
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!-- Opaque so the whole 64 square takes the press, not just the disc. -->
+        <Panel Background="Transparent">
+
+          <!-- The disc: 50 across, centred in the button's box, riding up out of the bar. -->
+          <Panel Width="50"
+                 Height="50"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center">
+
+            <Panel.RenderTransform>
+              <TranslateTransform Y="{Binding RiseOffset, RelativeSource={RelativeSource TemplatedParent}}" />
+            </Panel.RenderTransform>
+
+            <Ellipse Fill="{StaticResource PaneBrush}" />
+
+            <controls:FluidIcon Data="{TemplateBinding Icon}"
+                                FillAmount="{TemplateBinding IconFill}"
+                                ScaleY="{TemplateBinding IconScaleY}"
+                                IdleBrush="{StaticResource IconIdleBrush}"
+                                ActiveBrush="{StaticResource IconActiveBrush}" />
+          </Panel>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+  </ControlTheme>
+
+</ResourceDictionary>

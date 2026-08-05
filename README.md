@@ -42,6 +42,12 @@ Drag the ball along the track and the dog gives chase, then folds into a sit onc
 
 Tap a card and it springs open, then fills with liquid that sloshes as it settles.
 
+<a href="vignettes/fluid_nav_bar"><img src="vignettes/fluid_nav_bar/images/fluid_nav_bar.gif" width="237"/></a>
+
+### [Fluid Button Bar](vignettes/fluid_nav_bar)
+
+The bar's top edge dips under whichever button is picked, and sloshes as that dip travels across.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

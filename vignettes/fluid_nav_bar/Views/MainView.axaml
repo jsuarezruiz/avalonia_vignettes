@@ -1,0 +1,68 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:FluidNavBar.Controls"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:views="using:FluidNavBar.Views"
+             x:Class="FluidNavBar.Views.MainView"
+             x:DataType="views:MainView"
+             Background="{StaticResource ScreenBackgroundBrush}">
+
+  <UserControl.Styles>
+    <!-- The three pages are lists of skeletons in the same two blues. -->
+    <Style Selector=":is(shared|PlaceholderBase)">
+      <Setter Property="Foreground" Value="{StaticResource PlaceholderBrush}" />
+      <Setter Property="Background" Value="{StaticResource PlaceholderBackgroundBrush}" />
+    </Style>
+  </UserControl.Styles>
+
+  <controls:FluidNavBarView>
+
+    <!-- AnimatedSwitcher(duration: 500ms), which is what a page transition is here. -->
+    <controls:FluidNavBarView.PageTransition>
+      <CrossFade Duration="0:0:0.5" />
+    </controls:FluidNavBarView.PageTransition>
+
+    <controls:FluidNavBarButton Icon="{x:Static controls:FluidIconData.Home}">
+      <ScrollViewer Padding="20,20,20,0">
+        <ItemsControl ItemsSource="{Binding Rows}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <shared:PlaceholderCardTall Height="200" Margin="0,12" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </controls:FluidNavBarButton>
+
+    <controls:FluidNavBarButton Icon="{x:Static controls:FluidIconData.User}">
+      <ScrollViewer Padding="20,20,20,0">
+        <ItemsControl ItemsSource="{Binding Rows}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <shared:PlaceholderCardShort Margin="0,12" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </controls:FluidNavBarButton>
+
+    <controls:FluidNavBarButton Icon="{x:Static controls:FluidIconData.Window}">
+      <ScrollViewer Padding="8,20,8,0">
+        <ItemsControl ItemsSource="{Binding Tiles}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <UniformGrid Columns="2" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <shared:PlaceholderImageWithText Height="{Binding TileSize, RelativeSource={RelativeSource AncestorType=views:MainView}}" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </controls:FluidNavBarButton>
+
+  </controls:FluidNavBarView>
+
+</UserControl>

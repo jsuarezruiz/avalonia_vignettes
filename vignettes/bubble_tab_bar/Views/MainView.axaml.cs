@@ -8,7 +8,7 @@ namespace BubbleTabBar.Views;
 /// </summary>
 /// <remarks>
 /// The pages themselves are filler, so rather than five near-identical view files they are declared
-/// inline against two counted item sources, nine for the lists, twenty for the grids, which is
+/// inline against two counted item sources (nine for the lists, twenty for the grids), which is
 /// what the original's <c>itemCount</c> and <c>List.generate</c> come to.
 /// </remarks>
 public partial class MainView : UserControl
