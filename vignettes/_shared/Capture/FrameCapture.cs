@@ -32,7 +32,7 @@ public static class FrameCapture
     /// </summary>
     /// <remarks>
     /// A capture run drives controls it has to go looking for, and a bare <c>First</c> on an empty
-    /// run only reports that a sequence was empty — which of them was missing is the useful part.
+    /// run only reports that a sequence was empty, which of them was missing is the useful part.
     /// </remarks>
     public static T Find<T>(Visual root)
         where T : Visual =>

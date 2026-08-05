@@ -11,7 +11,7 @@ namespace AvaloniaVignettes.Shared.Controls;
 /// A navigation that empties the screen before refilling it: the page being left goes early, the one
 /// being entered arrives late, and in between there is nothing but the background. It is the shape
 /// several of the vignettes give a route so a shared element has the screen to itself while it
-/// crosses — <c>white_page_route.dart</c> and <c>fade_color_page_route.dart</c> are both this.
+/// crosses, <c>white_page_route.dart</c> and <c>fade_color_page_route.dart</c> are both this.
 /// </summary>
 /// <remarks>
 /// Those originals fade a coloured sheet in over the outgoing page rather than fading the page out.
@@ -62,7 +62,7 @@ public sealed class FadePageTransition : IPageTransition
     /// </summary>
     /// <remarks>
     /// A navigation adds the incoming page to the tree before it asks a transition to start, so
-    /// without this the page is drawn whole for the frame in between — it appears complete, then
+    /// without this the page is drawn whole for the frame in between, it appears complete, then
     /// vanishes behind the white as the transition finally begins.
     /// </remarks>
     public void Prepare(Control page)
@@ -108,7 +108,7 @@ public sealed class FadePageTransition : IPageTransition
     }
 
     /// <summary>
-    /// Builds a fade that holds, runs over a window of the navigation, then holds again — the
+    /// Builds a fade that holds, runs over a window of the navigation, then holds again, the
     /// equivalent of wrapping an <c>Interval</c> around a <c>Tween</c>.
     /// </summary>
     private Avalonia.Animation.Animation Fade(double from, double to, double begin, double end)

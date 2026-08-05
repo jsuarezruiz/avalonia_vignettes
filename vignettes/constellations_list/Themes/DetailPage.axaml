@@ -1,0 +1,28 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ControlTheme x:Key="ReturnButtonTheme" TargetType="Button">
+    <Setter Property="Padding" Value="48,12" />
+    <Setter Property="Background" Value="Black" />
+    <Setter Property="Foreground" Value="{StaticResource StarInkBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource ContentFont}" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{StaticResource ButtonBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="40"
+                Padding="{TemplateBinding Padding}">
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pressed /template/ Border">
+      <Setter Property="Opacity" Value="0.7" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

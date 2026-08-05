@@ -10,7 +10,7 @@ namespace BubbleTabBar.Controls;
 /// This is a <see cref="TabControl"/> because that is exactly what the vignette is: a strip of tabs
 /// that selects between pages. Deriving from it means selection, keyboard support and the content
 /// swap all come for free, and what is left to write is only the part that makes the vignette its
-/// own thing — the pills, and the cross-fade between pages.
+/// own thing, the pills, and the cross-fade between pages.
 /// </remarks>
 public sealed class NavBar : TabControl
 {

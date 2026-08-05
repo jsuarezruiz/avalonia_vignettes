@@ -96,7 +96,7 @@ public static class FlutterEasings
     public static Easing LinearToEaseOut { get; } = new SplineEasing(0.35d, 0.91d, 0.33d, 0.97d);
 
     /// <summary>
-    /// Flutter's <c>Curves.fastOutSlowIn</c> — the Material standard easing, and the curve every
+    /// Flutter's <c>Curves.fastOutSlowIn</c>, the Material standard easing, and the curve every
     /// <c>Hero</c> flight runs on.
     /// </summary>
     public static Easing FastOutSlowIn { get; } = new SplineEasing(0.4d, 0d, 0.2d, 1d);

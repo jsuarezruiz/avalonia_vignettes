@@ -30,7 +30,7 @@ public interface IHeroPage
 /// duration, and moves a stand-in between their two slots along the arc Material uses.
 /// <para>
 /// <see cref="ContentProgress"/> is the stand-in's own progress: it counts up on the way in and back
-/// down on the way out, so content that is a function of it — as the scenery is — opens as it flies
+/// down on the way out, so content that is a function of it, as the scenery is, opens as it flies
 /// and closes as it returns.
 /// </para>
 /// </remarks>
@@ -122,7 +122,7 @@ public sealed class HeroFlight : Canvas
         TimeSpan duration,
         CancellationToken cancellationToken)
     {
-        // The page being entered has only just been added, so it has no layout yet — and no
+        // The page being entered has only just been added, so it has no layout yet, and no
         // realised content either, which is what the search below needs.
         (to as Layoutable)?.UpdateLayout();
 
@@ -142,7 +142,7 @@ public sealed class HeroFlight : Canvas
         _to.Opacity = 0d;
 
         // The animation holds its final value after a run, which outranks a plain write, so the
-        // start of the next flight is set here rather than by resetting the animated property —
+        // start of the next flight is set here rather than by resetting the animated property,
         // otherwise a second departure would be drawn at the previous arrival for a frame.
         _current = 0d;
         Progress = 0d;
@@ -254,8 +254,8 @@ public sealed class HeroFlight : Canvas
 
         ContentProgress = _isForward ? _current : 1d - _current;
 
-        // Only a change of size needs a fresh measure. Where the two slots are the same size — a
-        // shared element that transforms in place rather than travelling — re-measuring every frame
+        // Only a change of size needs a fresh measure. Where the two slots are the same size, a
+        // shared element that transforms in place rather than travelling, re-measuring every frame
         // would put a full layout pass between each one for nothing.
         if (_path is not null && _path.Lerp(_current).Size != _measured)
         {

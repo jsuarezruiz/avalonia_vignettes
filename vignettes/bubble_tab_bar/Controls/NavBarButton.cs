@@ -12,7 +12,7 @@ namespace BubbleTabBar.Controls;
 /// </summary>
 /// <remarks>
 /// The label is always there. What changes is how much of the pill there is to see it through, so
-/// the text is revealed by the pill growing rather than by fading in — which is why the button is
+/// the text is revealed by the pill growing rather than by fading in, which is why the button is
 /// built around a <see cref="ClippedView"/> instead of simply hiding the label.
 /// <para>
 /// The icon turns a half circle about its vertical axis as the tab is taken, and unwinds when it is

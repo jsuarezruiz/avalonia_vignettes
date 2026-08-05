@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:ConstellationsList.Controls"
+             xmlns:views="using:ConstellationsList.Views"
+             x:Class="ConstellationsList.Views.DetailPage"
+             x:DataType="views:DetailPage">
+
+  <DockPanel Margin="0,24,0,0" HorizontalAlignment="Center">
+
+    <!--
+      Centred rather than stretched, so the card's bounds hug the name. Stretched, it reports the
+      full page width and the card flown in from the list targets its left edge instead of the text.
+    -->
+    <controls:ConstellationTitleCard Name="TitleCard"
+                                     DockPanel.Dock="Top"
+                                     HorizontalAlignment="Center"
+                                     Constellation="{Binding Constellation}"
+                                     IsRedMode="{Binding IsRedMode}" />
+
+    <Panel DockPanel.Dock="Bottom" Height="36" />
+
+    <Button DockPanel.Dock="Bottom"
+            Theme="{StaticResource ReturnButtonTheme}"
+            Content="Return to List"
+            HorizontalAlignment="Center"
+            Click="OnReturnClicked" />
+
+    <!--
+      The chart swells into place and the lettering fades in behind it, both driven from the same
+      clock so they overlap rather than run one after the other.
+    -->
+    <Panel Name="Chart" RenderTransformOrigin="50%,50%">
+      <Image Source="{Binding ChartImage}" Stretch="Uniform" />
+      <Image Name="Label" Source="{Binding LabelImage}" Stretch="Uniform" Opacity="0" />
+    </Panel>
+  </DockPanel>
+
+</UserControl>

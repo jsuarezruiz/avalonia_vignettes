@@ -1,0 +1,14 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <FontFamily x:Key="TitleFont">avares://ConstellationsList/Assets/Fonts#DM Serif Display</FontFamily>
+  <FontFamily x:Key="HeaderFont">avares://ConstellationsList/Assets/Fonts#Playfair Display</FontFamily>
+  <FontFamily x:Key="ContentFont">avares://ConstellationsList/Assets/Fonts#Montserrat</FontFamily>
+
+  <SolidColorBrush x:Key="SkyBrush" Color="Black" />
+  <SolidColorBrush x:Key="StarInkBrush" Color="White" />
+  <SolidColorBrush x:Key="RedInkBrush" Color="#FFCD4B4B" />
+  <SolidColorBrush x:Key="MutedInkBrush" Color="Gray" />
+  <SolidColorBrush x:Key="ButtonBorderBrush" Color="#FFC9C9C9" />
+
+</ResourceDictionary>

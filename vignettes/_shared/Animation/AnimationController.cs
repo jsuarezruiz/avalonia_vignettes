@@ -11,7 +11,7 @@ namespace AvaloniaVignettes.Shared.Animation;
 /// <remarks>
 /// The value is deliberately left un-eased: <see cref="Duration"/> is the time for a full traverse,
 /// so reversing half way through takes half the time, and applying a curve to
-/// <see cref="Value"/> yourself reproduces Flutter's ordering. A transition cannot do either — it
+/// <see cref="Value"/> yourself reproduces Flutter's ordering. A transition cannot do either, it
 /// always runs for its full duration and always eases the interpolation, which reverses the shape
 /// of the curve instead of the direction of travel.
 /// </remarks>

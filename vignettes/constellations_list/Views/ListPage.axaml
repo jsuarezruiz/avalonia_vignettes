@@ -1,0 +1,56 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:ConstellationsList.Controls"
+             xmlns:models="using:ConstellationsList.Models"
+             x:Class="ConstellationsList.Views.ListPage"
+             x:DataType="models:Constellation">
+
+  <!--
+    The guide is held to 600 wide and centred. MaxWidth rather than Width, because Flutter clamps a
+    Container's width to the constraints it is given — on a narrower screen its 600 becomes the
+    screen width — whereas Avalonia's Width is taken literally and would hang off both edges.
+  -->
+  <Panel MaxWidth="600" HorizontalAlignment="Center">
+
+    <ScrollViewer Name="Scroller" VerticalScrollBarVisibility="Hidden">
+      <ItemsControl Name="Entries" Margin="0,150,0,200" />
+    </ScrollViewer>
+
+    <!-- Black at both ends, so entries fade out rather than being cut off. -->
+    <Border IsHitTestVisible="False">
+      <Border.Background>
+        <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+          <GradientStop Color="Black" Offset="0" />
+          <GradientStop Color="#00000000" Offset="0.2" />
+          <GradientStop Color="#00000000" Offset="0.8" />
+          <GradientStop Color="Black" Offset="1" />
+        </LinearGradientBrush>
+      </Border.Background>
+    </Border>
+
+    <TextBlock Text="GUIDE TO THE STARS"
+               Width="180"
+               Margin="16,16,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               TextWrapping="Wrap"
+               FontFamily="{StaticResource HeaderFont}"
+               FontSize="28"
+               LineHeight="29.4"
+               ClipToBounds="False"
+               Foreground="{StaticResource StarInkBrush}" />
+
+    <TextBlock Text="New York City (USA, NY) 40.71 °N - 74.01 °W"
+               Width="120"
+               Margin="0,12,16,0"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Top"
+               TextAlignment="Right"
+               TextWrapping="Wrap"
+               FontFamily="{StaticResource ContentFont}"
+               FontSize="10"
+               LineHeight="18"
+               Foreground="{StaticResource MutedInkBrush}" />
+  </Panel>
+
+</UserControl>

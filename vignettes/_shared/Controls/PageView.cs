@@ -303,7 +303,7 @@ public class PageView : ItemsControl
     /// <summary>
     /// Recomputes the page width after a viewport or viewport-fraction change, keeping whichever
     /// page was on screen centred. Before the first layout there is no offset to preserve, so
-    /// <see cref="SelectedIndex"/> decides where the strip starts — this is what honours an initial
+    /// <see cref="SelectedIndex"/> decides where the strip starts, this is what honours an initial
     /// page set in markup.
     /// </summary>
     private void RefreshPageWidth()

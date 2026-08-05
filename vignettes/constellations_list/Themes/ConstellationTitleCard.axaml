@@ -1,0 +1,44 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:ConstellationsList.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:ConstellationTitleCard}" TargetType="controls:ConstellationTitleCard">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel HorizontalAlignment="Center">
+
+          <!--
+            42pt over a line box of 1.3, so the name sits with air above and below it. The original
+            pads the string with spaces to dodge a Flutter Hero bug; there is no such bug here, so
+            the padding is left out and the name is centred instead.
+          -->
+          <controls:OutlinedText Name="PART_Title"
+                                 Text="{Binding $parent[controls:ConstellationTitleCard].Constellation.Title}"
+                                 FontFamily="{StaticResource TitleFont}"
+                                 FontSize="42"
+                                 LineHeight="54.6"
+                                 HorizontalAlignment="Center"
+                                 Foreground="{StaticResource StarInkBrush}" />
+
+          <TextBlock Name="PART_Subtitle"
+                     Text="{Binding $parent[controls:ConstellationTitleCard].Constellation.Subtitle}"
+                     FontFamily="{StaticResource ContentFont}"
+                     FontSize="16"
+                     HorizontalAlignment="Center"
+                     Foreground="{StaticResource StarInkBrush}" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- The red entries are stroked rather than filled. -->
+    <Style Selector="^:red /template/ controls|OutlinedText#PART_Title">
+      <Setter Property="IsOutlined" Value="True" />
+      <Setter Property="Foreground" Value="{StaticResource RedInkBrush}" />
+    </Style>
+
+    <Style Selector="^:red /template/ TextBlock#PART_Subtitle">
+      <Setter Property="Foreground" Value="{StaticResource RedInkBrush}" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

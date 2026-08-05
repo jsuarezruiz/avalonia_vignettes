@@ -54,8 +54,8 @@ public sealed class FrameTicker
     /// </summary>
     public void Stop() => IsRunning = false;
 
-    // Stopping and starting again from inside the tick would otherwise leave two frames asked for
-    // — one from the restart, one from the tail below — and the callback would run twice a frame.
+    // Stopping and starting again from inside the tick would otherwise leave two frames asked for:
+    // one from the restart and one from the tail below, so the callback would run twice a frame.
     private void RequestFrame()
     {
         if (_framePending)

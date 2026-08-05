@@ -1,0 +1,21 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:ConstellationsList.Controls"
+             x:Class="ConstellationsList.Views.MainView">
+
+  <Panel Background="{StaticResource SkyBrush}">
+
+    <controls:StarField Name="Stars" StarCount="400" />
+
+    <!-- Pages have no background of their own, so they cross-fade over the stars. -->
+    <TransitioningContentControl Name="Pages">
+      <TransitioningContentControl.PageTransition>
+        <CrossFade Duration="0:0:1" />
+      </TransitioningContentControl.PageTransition>
+    </TransitioningContentControl>
+
+    <!-- The card in flight between the two pages rides above both. -->
+    <Canvas Name="FlightLayer" IsHitTestVisible="False" />
+  </Panel>
+
+</UserControl>

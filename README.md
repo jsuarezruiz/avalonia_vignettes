@@ -18,6 +18,12 @@ A custom pull to refresh: a basketball spins around the hoop while the scores re
 
 A navigation bar whose buttons change size, shape and colour as they are picked.
 
+<a href="vignettes/constellations_list"><img src="vignettes/constellations_list/images/constellations_list.gif" width="237"/></a>
+
+### [Guide To the Stars Particles](vignettes/constellations_list)
+
+A starfield drawn behind the whole app, flying faster as the list is scrolled and as a page opens.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:
