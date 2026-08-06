@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:ParallaxTravelCardsList.Controls"
+             xmlns:models="using:ParallaxTravelCardsList.Models"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             x:Class="ParallaxTravelCardsList.Views.MainView"
+             x:Name="Root"
+             Background="{StaticResource ScreenBackgroundBrush}">
+
+  <DockPanel LastChildFill="True">
+
+    <!-- AppBar: flat, white, a menu icon leading and a search icon trailing. -->
+    <Grid DockPanel.Dock="Top" Height="56" Background="{StaticResource ScreenBackgroundBrush}">
+      <Path Classes="appBarIcon"
+            Data="{StaticResource MenuIconGeometry}"
+            HorizontalAlignment="Left"
+            Margin="16,0,0,0" />
+      <Path Classes="appBarIcon"
+            Data="{StaticResource SearchIconGeometry}"
+            HorizontalAlignment="Right"
+            Margin="{StaticResource ScreenPaddingThickness}" />
+    </Grid>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+      <StackPanel>
+
+        <TextBlock Classes="appHeader"
+                   Margin="{StaticResource ScreenPaddingThickness}"
+                   Text="Where are you going next?"
+                   TextWrapping="Wrap"
+                   MaxLines="2"
+                   TextTrimming="CharacterEllipsis" />
+
+        <!--
+          Flutter reads the card metrics from MediaQuery. This view fills the window's client area
+          exactly as the Scaffold fills the screen, so its bounds serve the same purpose.
+        -->
+        <controls:TravelCardList x:Name="Cards"
+                                 Margin="0,16"
+                                 ItemsSource="{x:Static models:DemoData.Pages}"
+                                 SelectedIndex="{x:Static models:DemoData.InitialPage}"
+                                 ScreenWidth="{Binding #Root.Bounds.Width}"
+                                 ScreenHeight="{Binding #Root.Bounds.Height}">
+          <controls:TravelCardList.ItemTemplate>
+            <DataTemplate x:DataType="models:City">
+              <!-- Rotation3d wraps the renderer in the Flutter original, so it does here too. -->
+              <shared:Rotation3DPresenter RotationY="{Binding $parent[controls:TravelCardList].RotationY}">
+                <controls:TravelCard Title="{Binding Title}"
+                                     Description="{Binding Description}"
+                                     CardBackground="{Binding Background}"
+                                     BackImage="{Binding BackImage}"
+                                     MiddleImage="{Binding MiddleImage}"
+                                     FrontImage="{Binding FrontImage}"
+                                     ParallaxOffset="{Binding $parent[controls:TravelCardList].NormalizedOffset}"
+                                     CardWidth="{Binding $parent[controls:TravelCardList].CardWidth}"
+                                     CardHeight="{Binding $parent[controls:TravelCardList].CardContentHeight}" />
+              </shared:Rotation3DPresenter>
+            </DataTemplate>
+          </controls:TravelCardList.ItemTemplate>
+        </controls:TravelCardList>
+
+        <controls:HotelList ScreenHeight="{Binding #Root.Bounds.Height}"
+                            ItemsSource="{Binding #Cards.SelectedCity.Hotels}" />
+
+      </StackPanel>
+    </ScrollViewer>
+
+  </DockPanel>
+
+</UserControl>

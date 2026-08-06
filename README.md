@@ -66,6 +66,12 @@ Swipe between artists while a field of 3D shapes drifts behind and in front of t
 
 Tap the city card and it opens into a full scene, the road unrolling and the skyline assembling as it grows.
 
+<a href="vignettes/parallax_travel_cards_list"><img src="vignettes/parallax_travel_cards_list/images/parallax_travel_cards_list.gif" width="237"/></a>
+
+### [Travel Cards](vignettes/parallax_travel_cards_list)
+
+Drag through the cards and the three artwork layers slide past each other while the card tilts in 3D.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

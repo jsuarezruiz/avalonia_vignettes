@@ -1,0 +1,81 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:ParallaxTravelCardsList.Controls"
+                    xmlns:models="using:ParallaxTravelCardsList.Models"
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:HotelList}" TargetType="controls:HotelList">
+
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <shared:FlexPanel Orientation="Vertical" MainAxisAlignment="SpaceEvenly" />
+      </ItemsPanelTemplate>
+    </Setter>
+
+    <Setter Property="ItemTemplate">
+      <DataTemplate x:DataType="models:Hotel">
+        <Grid ColumnDefinitions="*,Auto">
+
+          <StackPanel Grid.Column="0" VerticalAlignment="Center">
+            <TextBlock Classes="hotelTitle" Text="{Binding Name}" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+              <ItemsControl ItemsSource="{Binding Stars}" VerticalAlignment="Center">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Path Classes="star" Data="{StaticResource StarIconGeometry}" />
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+
+              <TextBlock Classes="hotelScore"
+                         Margin="8,0"
+                         VerticalAlignment="Center"
+                         Text="{Binding RatingLabel}" />
+
+              <TextBlock Classes="hotelData"
+                         VerticalAlignment="Center"
+                         Text="{Binding ReviewsLabel}" />
+            </StackPanel>
+          </StackPanel>
+
+          <TextBlock Grid.Column="1"
+                     Classes="hotelPrice"
+                     VerticalAlignment="Center"
+                     Text="{Binding PriceLabel}" />
+        </Grid>
+      </DataTemplate>
+    </Setter>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!--
+          Padding is Styles.hzScreenPadding * 1.5 horizontally and 10 vertically. The section is a
+          quarter of the screen tall, and no wider than 400.
+        -->
+        <Grid RowDefinitions="Auto,*"
+              Margin="{StaticResource HotelSectionPadding}"
+              MaxWidth="400"
+              Height="{TemplateBinding SectionHeight}">
+
+          <!--
+            The current Dart uses CrossAxisAlignment.center, which centres this over the rows. The
+            published preview aligns it with the rows' left edge, so that is what is used here.
+          -->
+          <TextBlock Grid.Row="0" Classes="hotelsHeading" Text="HOTELS" HorizontalAlignment="Left" />
+
+          <ItemsPresenter Grid.Row="1"
+                          x:Name="PART_FadeHost"
+                          ItemsPanel="{TemplateBinding ItemsPanel}" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+
+  </ControlTheme>
+
+</ResourceDictionary>

@@ -1,0 +1,90 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:ParallaxTravelCardsList.Controls">
+
+  <!--
+    The "Learn More" affordance. The Flutter original passes `onPressed: null`, so it renders as a
+    disabled Material TextButton: 36 tall, 64 wide at minimum, 8 of padding, and no hover feedback.
+  -->
+  <ControlTheme x:Key="LearnMoreButtonTheme" TargetType="Button">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="8" />
+    <Setter Property="MinWidth" Value="64" />
+    <Setter Property="MinHeight" Value="36" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:TravelCard}" TargetType="controls:TravelCard">
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <!-- The renderer's Container carries a top margin of 8. -->
+        <Panel Margin="0,8,0,0">
+
+          <!-- The pastel panel, inset from the page so neighbouring cards are separated. -->
+          <Border Margin="12,30,12,12"
+                  CornerRadius="8"
+                  Background="{TemplateBinding CardBackground}"
+                  BoxShadow="{TemplateBinding CardShadow}" />
+
+          <!-- The artwork, which breaks 15 pixels out over the top of the page. -->
+          <controls:ParallaxScenery Margin="0,-15,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Offset="{TemplateBinding ParallaxOffset}"
+                                    CardWidth="{TemplateBinding CardWidth}"
+                                    CardHeight="{TemplateBinding CardHeight}">
+            <Image Source="{TemplateBinding BackImage}"
+                   controls:ParallaxScenery.WidthFactor="0.8"
+                   controls:ParallaxScenery.MaxOffsetFactor="0.1" />
+            <Image Source="{TemplateBinding MiddleImage}"
+                   controls:ParallaxScenery.WidthFactor="0.9"
+                   controls:ParallaxScenery.MaxOffsetFactor="0.6" />
+            <Image Source="{TemplateBinding FrontImage}"
+                   controls:ParallaxScenery.WidthFactor="0.9"
+                   controls:ParallaxScenery.MaxOffsetFactor="1" />
+          </controls:ParallaxScenery>
+
+          <!-- The copy, which starts below the space reserved for the artwork. -->
+          <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto">
+            <Panel Grid.Row="0" Height="{TemplateBinding ArtworkReserve}" />
+
+            <TextBlock Grid.Row="1"
+                       Classes="cardTitle"
+                       Margin="12,0"
+                       Text="{TemplateBinding Title}"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap" />
+
+            <TextBlock Grid.Row="2"
+                       Classes="cardSubtitle"
+                       Margin="25,0"
+                       Text="{TemplateBinding Description}"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap" />
+
+            <Button Grid.Row="4"
+                    Theme="{StaticResource LearnMoreButtonTheme}"
+                    HorizontalAlignment="Center"
+                    IsEnabled="False">
+              <TextBlock Classes="cardAction" Text="LEARN MORE" />
+            </Button>
+
+            <Panel Grid.Row="5" Height="8" />
+          </Grid>
+
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

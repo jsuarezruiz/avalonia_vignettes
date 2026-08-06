@@ -1,0 +1,118 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!--
+    One class per TextStyle in styles.dart.
+
+    Flutter's `height` is the line height as a multiple of the font size, spelled out here as an
+    absolute LineHeight. Where that squeezes the line box below the font's natural height, the
+    glyphs are meant to overflow it. Flutter draws them anyway, and TextBlock only clips them
+    because ClipToBounds defaults to true, so those styles turn it off.
+  -->
+
+  <!-- height: 1 on a 36 px serif, whose natural line height is 49.4. -->
+  <Style Selector="TextBlock.appHeader">
+    <Setter Property="FontFamily" Value="{StaticResource SerifFont}" />
+    <Setter Property="FontSize" Value="36" />
+    <Setter Property="LineHeight" Value="36" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <!-- Flutter spreads a squeezed line box proportionally across ascent and descent; Avalonia
+         keeps the glyph top-aligned in it. This shifts the painted text onto Flutter's baseline
+         without touching the box the layout sees. -->
+    <Setter Property="RenderTransform" Value="translate(0px, -10.09px)" />
+    <Setter Property="Foreground" Value="{StaticResource AppHeaderBrush}" />
+  </Style>
+
+  <!-- height: 1 on a 25 px serif, whose natural line height is 34.3. -->
+  <Style Selector="TextBlock.cardTitle">
+    <Setter Property="FontFamily" Value="{StaticResource SerifFont}" />
+    <Setter Property="FontSize" Value="25" />
+    <Setter Property="LineHeight" Value="25" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <!-- Flutter spreads a squeezed line box proportionally across ascent and descent; Avalonia
+         keeps the glyph top-aligned in it. This shifts the painted text onto Flutter's baseline
+         without touching the box the layout sees. -->
+    <Setter Property="RenderTransform" Value="translate(0px, -7.01px)" />
+    <Setter Property="Foreground" Value="{StaticResource CardTitleBrush}" />
+  </Style>
+
+  <!-- height: 1.5 leaves room to spare, so no overflow to allow for. -->
+  <Style Selector="TextBlock.cardSubtitle">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="LineHeight" Value="18" />
+    <!-- Flutter spreads a squeezed line box proportionally across ascent and descent; Avalonia
+         keeps the glyph top-aligned in it. This shifts the painted text onto Flutter's baseline
+         without touching the box the layout sees. -->
+    <Setter Property="RenderTransform" Value="translate(0px, 1.30px)" />
+    <Setter Property="Foreground" Value="{StaticResource CardSubtitleBrush}" />
+  </Style>
+
+  <!-- height: 1 on a 10 px body face, whose natural line height is 13.6. -->
+  <Style Selector="TextBlock.cardAction">
+    <Setter Property="FontFamily" Value="{StaticResource BodySemiBoldFont}" />
+    <Setter Property="FontSize" Value="10" />
+    <Setter Property="LineHeight" Value="10" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <!-- Flutter spreads a squeezed line box proportionally across ascent and descent; Avalonia
+         keeps the glyph top-aligned in it. This shifts the painted text onto Flutter's baseline
+         without touching the box the layout sees. -->
+    <Setter Property="RenderTransform" Value="translate(0px, -2.84px)" />
+    <Setter Property="LetterSpacing" Value="0.1" />
+    <Setter Property="Foreground" Value="{StaticResource CardActionBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.hotelsHeading">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="LineHeight" Value="28" />
+    <!-- Flutter spreads a squeezed line box proportionally across ascent and descent; Avalonia
+         keeps the glyph top-aligned in it. This shifts the painted text onto Flutter's baseline
+         without touching the box the layout sees. -->
+    <Setter Property="RenderTransform" Value="translate(0px, 7.01px)" />
+    <Setter Property="Foreground" Value="{StaticResource HotelHeadingBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.hotelTitle">
+    <Setter Property="FontFamily" Value="{StaticResource BodySemiBoldFont}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Foreground" Value="{StaticResource HotelTitleBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.hotelPrice">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="Foreground" Value="{StaticResource HotelPriceBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.hotelScore">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="Foreground" Value="{StaticResource HotelScoreBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.hotelData">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="Foreground" Value="{StaticResource HotelDataBrush}" />
+  </Style>
+
+  <!-- The AppBar's leading and trailing Material icons, drawn at the default 24 dp. -->
+  <Style Selector="Path.appBarIcon">
+    <Setter Property="Fill" Value="{StaticResource AppBarIconBrush}" />
+    <Setter Property="Width" Value="24" />
+    <Setter Property="Height" Value="24" />
+    <Setter Property="Stretch" Value="Uniform" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+  <Style Selector="Path.star">
+    <Setter Property="Fill" Value="{StaticResource StarBrush}" />
+    <Setter Property="Width" Value="13" />
+    <Setter Property="Height" Value="13" />
+    <Setter Property="Stretch" Value="Uniform" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+</Styles>
