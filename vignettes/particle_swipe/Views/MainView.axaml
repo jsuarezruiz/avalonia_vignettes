@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:controls="using:ParticleSwipe.Controls"
+             xmlns:models="using:ParticleSwipe.Models"
+             x:Class="ParticleSwipe.Views.MainView"
+             x:DataType="models:Email">
+
+  <DockPanel Background="{StaticResource CanvasBrush}">
+
+    <Border DockPanel.Dock="Top" Background="{StaticResource AppBarBrush}" Padding="24,26">
+      <StackPanel Orientation="Horizontal">
+        <shared:MaterialIcon Data="{StaticResource MenuIcon}"
+                             IconSize="28"
+                             VerticalAlignment="Center"
+                             Foreground="{StaticResource OnCanvasBrush}" />
+        <TextBlock Text="Inbox"
+                   Margin="18,0,0,0"
+                   FontFamily="{StaticResource BodyFont}"
+                   FontSize="21"
+                   LetterSpacing="0.3"
+                   VerticalAlignment="Center"
+                   Foreground="{StaticResource OnCanvasBrush}" />
+      </StackPanel>
+    </Border>
+
+    <!--
+      The particle layer sits over the list rather than inside it, so a burst stays where it was
+      thrown while the rows carry on scrolling underneath.
+    -->
+    <Panel>
+      <ScrollViewer Name="Scroller" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+        <ItemsControl Name="Messages">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="models:Email">
+              <controls:SwipeItem Email="{Binding}" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+
+      <controls:ParticleFieldView Name="Particles" />
+    </Panel>
+  </DockPanel>
+
+</UserControl>

@@ -1,0 +1,99 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+                    xmlns:controls="using:ParticleSwipe.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:EmailCard}" TargetType="controls:EmailCard">
+    <Setter Property="Background" Value="{StaticResource RowBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource OnCanvasBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                Padding="20,12"
+                BoxShadow="0 0 8 0 #80000000">
+
+          <!--
+            Five rows spaced evenly, two of which are the bare spacers the original leaves in its
+            column. They carry no content but they do take a share of the spacing, so leaving them
+            out would bunch the text differently.
+          -->
+          <Grid RowDefinitions="*,Auto,*,Auto,*,Auto,*,Auto,*,Auto,*">
+
+            <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto">
+              <shared:MaterialIcon Grid.Column="0"
+                                   Name="PART_ReadMarker"
+                                   Data="{StaticResource LensIcon}"
+                                   IconSize="12"
+                                   Margin="0,0,8,0"
+                                   VerticalAlignment="Center"
+                                   IsVisible="False"
+                                   Foreground="{StaticResource ReadMarkerBrush}" />
+
+              <TextBlock Grid.Column="1"
+                         Text="{Binding $parent[controls:EmailCard].Email.From}"
+                         FontFamily="{TemplateBinding FontFamily}"
+                         FontWeight="Bold"
+                         FontSize="14"
+                         LetterSpacing="0.3"
+                         VerticalAlignment="Center"
+                         Foreground="{TemplateBinding Foreground}" />
+
+              <TextBlock Grid.Column="2"
+                         Text="11:45 PM"
+                         FontFamily="{TemplateBinding FontFamily}"
+                         FontSize="11"
+                         LetterSpacing="0.3"
+                         VerticalAlignment="Center"
+                         Foreground="{TemplateBinding Foreground}" />
+            </Grid>
+
+            <Grid Grid.Row="3" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Grid.Column="0"
+                         Text="{Binding $parent[controls:EmailCard].Email.Subject}"
+                         FontFamily="{TemplateBinding FontFamily}"
+                         FontSize="11"
+                         LetterSpacing="0.3"
+                         VerticalAlignment="Center"
+                         Foreground="{TemplateBinding Foreground}" />
+
+              <shared:MaterialIcon Grid.Column="2"
+                                   Name="PART_Star"
+                                   Data="{StaticResource StarIcon}"
+                                   IconSize="18"
+                                   VerticalAlignment="Center"
+                                   IsVisible="False"
+                                   Foreground="{StaticResource StarBrush}" />
+            </Grid>
+
+            <Panel Grid.Row="5" Height="2" />
+
+            <TextBlock Grid.Row="7"
+                       Text="{Binding $parent[controls:EmailCard].Email.Body}"
+                       FontFamily="{TemplateBinding FontFamily}"
+                       FontSize="11"
+                       LetterSpacing="0.3"
+                       TextWrapping="Wrap"
+                       MaxLines="2"
+                       TextTrimming="CharacterEllipsis"
+                       Foreground="{StaticResource PreviewBrush}" />
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^[IsAlternate=True]">
+      <Setter Property="Background" Value="{StaticResource AlternateRowBrush}" />
+    </Style>
+
+    <!-- The dot marks a message that has been read, which is the way round the original has it. -->
+    <Style Selector="^:read /template/ shared|MaterialIcon#PART_ReadMarker">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="^:starred /template/ shared|MaterialIcon#PART_Star">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

@@ -1,0 +1,71 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+                    xmlns:controls="using:ParticleSwipe.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:SwipeItem}" TargetType="controls:SwipeItem">
+    <Setter Property="ClipToBounds" Value="True" />
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <!-- The wash behind the row, which is all that is left of it once it starts collapsing. -->
+        <Border Background="{TemplateBinding IndicatorBrush}">
+          <Panel>
+
+            <!--
+              The indicator is pinned to the edge being swiped from and trails the row at half its
+              speed. The disc behind it fills the cut-out in the icon, so the mark inside reads white
+              on colour; leaving it clear is what makes an unstarred message show a hollow star.
+            -->
+            <Panel Name="PART_Indicator"
+                   HorizontalAlignment="{TemplateBinding IndicatorAlignment}"
+                   VerticalAlignment="Center"
+                   RenderTransformOrigin="50%,50%"
+                   RenderTransform="{TemplateBinding IndicatorTransform}">
+              <Border Name="PART_IndicatorDisc"
+                      Width="28"
+                      Height="28"
+                      CornerRadius="14"
+                      Background="{StaticResource OnCanvasBrush}"
+                      BoxShadow="{TemplateBinding IndicatorGlow}" />
+              <shared:MaterialIcon Name="PART_IndicatorIcon"
+                                   Data="{StaticResource CancelIcon}"
+                                   IconSize="36"
+                                   Foreground="{StaticResource DeleteBrush}" />
+            </Panel>
+
+            <controls:EmailCard Name="PART_Card"
+                                Email="{TemplateBinding Email}"
+                                IsAlternate="{TemplateBinding IsAlternate}"
+                                Opacity="{TemplateBinding ContentOpacity}"
+                                RenderTransformOrigin="50%,50%"
+                                RenderTransform="{TemplateBinding ContentTransform}" />
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:favorite-swipe /template/ shared|MaterialIcon#PART_IndicatorIcon">
+      <Setter Property="Data" Value="{StaticResource StarsIcon}" />
+      <Setter Property="Foreground" Value="{StaticResource FavoriteBrush}" />
+    </Style>
+
+    <Style Selector="^:favorite-swipe /template/ Border#PART_IndicatorDisc">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <Style Selector="^:favorite-swipe:starred /template/ Border#PART_IndicatorDisc">
+      <Setter Property="Background" Value="{StaticResource OnCanvasBrush}" />
+    </Style>
+
+    <!-- A row on its way out keeps only the wash, and closes on it. -->
+    <Style Selector="^:removing /template/ Panel#PART_Indicator">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+
+    <Style Selector="^:removing /template/ controls|EmailCard#PART_Card">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

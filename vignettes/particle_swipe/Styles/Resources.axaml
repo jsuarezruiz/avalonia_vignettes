@@ -1,0 +1,33 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <FontFamily x:Key="BodyFont">avares://ParticleSwipe/Assets/Fonts#Open Sans</FontFamily>
+
+  <SolidColorBrush x:Key="CanvasBrush" Color="#FF161719" />
+  <SolidColorBrush x:Key="OnCanvasBrush" Color="White" />
+
+  <!-- The two row fills, alternating down the list. -->
+  <SolidColorBrush x:Key="RowBrush" Color="#FF272845" />
+  <SolidColorBrush x:Key="AlternateRowBrush" Color="#FF323052" />
+
+  <SolidColorBrush x:Key="PreviewBrush" Color="#FF9293BF" />
+  <SolidColorBrush x:Key="ReadMarkerBrush" Color="#FFAA07DE" />
+  <SolidColorBrush x:Key="StarBrush" Color="#FF55C8D4" />
+
+  <!-- The indicators revealed by a swipe: cyan for starring, red for deleting. -->
+  <SolidColorBrush x:Key="FavoriteBrush" Color="#FF4AC0CB" />
+  <SolidColorBrush x:Key="DeleteBrush" Color="#FFCB4A65" />
+
+  <LinearGradientBrush x:Key="AppBarBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Color="#FFAA07DE" Offset="0" />
+    <GradientStop Color="#FFDE4ED6" Offset="1" />
+  </LinearGradientBrush>
+
+  <!-- Material's own icon outlines, drawn rather than set in an icon font. -->
+  <StreamGeometry x:Key="MenuIcon">M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z</StreamGeometry>
+  <StreamGeometry x:Key="LensIcon">M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z</StreamGeometry>
+  <StreamGeometry x:Key="StarIcon">M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z</StreamGeometry>
+  <StreamGeometry x:Key="StarsIcon">M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z</StreamGeometry>
+  <StreamGeometry x:Key="CancelIcon">M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z</StreamGeometry>
+
+</ResourceDictionary>

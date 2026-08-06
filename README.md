@@ -72,6 +72,12 @@ Tap the city card and it opens into a full scene, the road unrolling and the sky
 
 Drag through the cards and the three artwork layers slide past each other while the card tilts in 3D.
 
+<a href="vignettes/particle_swipe"><img src="vignettes/particle_swipe/images/particle_swipe.gif" width="237"/></a>
+
+### [Inbox Swipe Particles](vignettes/particle_swipe)
+
+Swipe a row left to delete it and it bursts into particles; swipe right to star it and the burst opens as a ring.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:
