@@ -1,0 +1,195 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:ProductDetailZoom.Controls"
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls">
+
+  <!--
+    The pulsing button's disc is drawn by its own ellipse, so the hosting button contributes no
+    surface of its own, only the darker tint the original gives it under the pointer and on press.
+  -->
+  <ControlTheme x:Key="BarePulsingButtonTheme" TargetType="Button">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <!--
+            CircleBorder inscribes the circle in the shorter side, so the ink is a 28 disc however
+            wide the button's tap target is, not an ellipse stretched across it.
+          -->
+          <Ellipse Name="PART_Tint"
+                   Width="28"
+                   Height="28"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Fill="Transparent" />
+          <ContentPresenter Name="PART_ContentPresenter"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Content="{TemplateBinding Content}"
+                            Padding="0" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover /template/ Ellipse#PART_Tint">
+      <Setter Property="Fill" Value="{StaticResource AccentPressedBrush}" />
+    </Style>
+
+    <Style Selector="^:pressed /template/ Ellipse#PART_Tint">
+      <Setter Property="Fill" Value="{StaticResource AccentPressedBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:PulsingButton}" TargetType="controls:PulsingButton">
+    <Setter Property="Width" Value="70" />
+    <Setter Property="Height" Value="70" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+
+          <!-- The halo: a 28 radius circle, swelling from half size to full as it fades. -->
+          <Ellipse Width="56"
+                   Height="56"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Fill="{StaticResource AccentBrush}"
+                   Opacity="{TemplateBinding HaloOpacity}"
+                   RenderTransformOrigin="50%,50%">
+            <Ellipse.RenderTransform>
+              <ScaleTransform ScaleX="{Binding HaloScale, RelativeSource={RelativeSource TemplatedParent}}"
+                              ScaleY="{Binding HaloScale, RelativeSource={RelativeSource TemplatedParent}}" />
+            </Ellipse.RenderTransform>
+          </Ellipse>
+
+          <!--
+            The button itself is only 28 across: MaterialButton is given a height of 28 and a
+            CircleBorder, which inscribes the circle in the shorter side. The 70 square around it is
+            the hit area, which is what the halo's SizedBox provides in the original.
+          -->
+          <Button Name="PART_Button"
+                  AutomationProperties.Name="Zoom in"
+                  Theme="{StaticResource BarePulsingButtonTheme}"
+                  Width="70"
+                  Height="28"
+                  Padding="0"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  CornerRadius="14"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  Cursor="Hand">
+            <Panel>
+              <Ellipse Width="28"
+                       Height="28"
+                       HorizontalAlignment="Center"
+                       Fill="{StaticResource AccentBrush}"
+                       Opacity="{TemplateBinding FillOpacity}" />
+              <shared:MaterialIcon IconSize="24"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Data="{TemplateBinding Icon}"
+                                   Foreground="{StaticResource ForegroundBrush}" />
+            </Panel>
+          </Button>
+
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:SpeakerSpec}" TargetType="controls:SpeakerSpec">
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!-- The line and the dot hang below the label, outside the callout's own box. -->
+        <Panel ClipToBounds="False">
+
+          <TextBlock Classes="attribute"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{TemplateBinding Text}"
+                     Opacity="{TemplateBinding LabelOpacity}">
+            <TextBlock.RenderTransform>
+              <TranslateTransform Y="{Binding LabelOffset, RelativeSource={RelativeSource TemplatedParent}}" />
+            </TextBlock.RenderTransform>
+          </TextBlock>
+
+          <Rectangle Width="1"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Margin="5,17,0,0"
+                     Fill="{StaticResource ForegroundBrush}"
+                     Height="{TemplateBinding LineExtent}" />
+
+          <Ellipse Width="6"
+                   Height="6"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Fill="{StaticResource ForegroundBrush}"
+                   Opacity="{TemplateBinding DotOpacity}"
+                   Margin="{TemplateBinding DotOffset}"
+                   RenderTransform="translate(-3px, -3px)" />
+
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:ProductDetailsOverlay}" TargetType="controls:ProductDetailsOverlay">
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel ClipToBounds="False">
+
+          <controls:SpeakerSpec Margin="45,25,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     Text="Spectacular tonal range"
+                                     LineLength="270"
+                                     Progress="{TemplateBinding FirstProgress}" />
+
+          <controls:SpeakerSpec Margin="95,75,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     Text="Superior-grade aluminum"
+                                     LineLength="250"
+                                     Progress="{TemplateBinding SecondProgress}" />
+
+          <controls:SpeakerSpec Margin="175,120,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     Text="Deep 30Hz bass"
+                                     LineLength="185"
+                                     Progress="{TemplateBinding ThirdProgress}" />
+
+          <!-- The headline, which scales, slides and swings in as one. -->
+          <StackPanel HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Opacity="{TemplateBinding HeadlineOpacity}"
+                      RenderTransformOrigin="50%,50%"
+                      RenderTransform="{TemplateBinding HeadlineTransform}">
+            <TextBlock Classes="headline" Text="PERFECT SOUND" TextWrapping="Wrap" />
+            <TextBlock Classes="headlineBody" Text="This is our best speaker yet." TextWrapping="Wrap" />
+          </StackPanel>
+
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:ProductFlight}" TargetType="controls:ProductFlight">
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel ClipToBounds="False">
+          <shared:Sprite Source="{TemplateBinding SpriteSheet}"
+                         FrameWidth="360"
+                         FrameHeight="500"
+                         Frame="{TemplateBinding SpriteFrame}" />
+          <controls:ProductDetailsOverlay AnimationValue="{TemplateBinding Progress}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

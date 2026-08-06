@@ -1,0 +1,46 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:ProductDetailZoom.Controls"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:views="using:ProductDetailZoom.Views"
+             x:Class="ProductDetailZoom.Views.DetailPage"
+             x:DataType="views:DetailPage"
+             x:Name="Root"
+             NavigationPage.HasNavigationBar="False"
+             Background="{StaticResource ScreenBackgroundBrush}">
+
+  <Panel>
+
+    <!-- The speaker at the end of its spin, which is the end of the flight that lives here. -->
+    <shared:Sprite x:Name="Speaker"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Width="{Binding FrameWidth}"
+                   Height="{Binding FrameHeight}"
+                   Source="{Binding SpriteSheet}"
+                   FrameWidth="360"
+                   FrameHeight="500"
+                   Frame="59" />
+
+    <controls:ProductDetailsOverlay HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Width="{Binding FrameWidth}"
+                                    Height="{Binding FrameHeight}"
+                                    AnimationValue="1" />
+
+    <Button Classes="pill filled"
+            Margin="76,0,76,18"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Stretch"
+            Content="BUY NOW $349.95" />
+
+    <controls:PulsingButton x:Name="Shrink"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Icon="{StaticResource RemoveIconGeometry}"
+                            Opacity="0"
+                            Pressed="OnShrinkPressed" />
+
+  </Panel>
+
+</ContentPage>

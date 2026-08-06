@@ -84,6 +84,12 @@ Swipe a row left to delete it and it bursts into particles; swipe right to star 
 
 A checkout in three pages, each sliding up over the last, with the submit button filling as the fields validate.
 
+<a href="vignettes/product_detail_zoom"><img src="vignettes/product_detail_zoom/images/product_detail_zoom.gif" width="237"/></a>
+
+### [Product Zoom Transition](vignettes/product_detail_zoom)
+
+Press the zoom and the speaker spins through a frame sequence, then the callouts draw themselves in over it.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

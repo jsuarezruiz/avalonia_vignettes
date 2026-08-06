@@ -1,0 +1,129 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!--
+    One class per TextStyle in the vignette. Work Sans ships Regular, Bold and Black under one family
+    name, so the weight picks the face. Flutter's `height` is spelled out as an absolute LineHeight.
+  -->
+
+  <Style Selector="TextBlock.productTitle">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontWeight" Value="Black" />
+    <Setter Property="FontSize" Value="30" />
+    <Setter Property="LineHeight" Value="33" />
+    <Setter Property="LetterSpacing" Value="5" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.productBody">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="LineHeight" Value="15.6" />
+    <Setter Property="LetterSpacing" Value="2.8" />
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.buttonLabel">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="LetterSpacing" Value="2" />
+  </Style>
+
+  <Style Selector="TextBlock.headline">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontWeight" Value="Black" />
+    <Setter Property="FontSize" Value="52" />
+    <Setter Property="LineHeight" Value="46.8" />
+    <Setter Property="LetterSpacing" Value="2" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.headlineBody">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="FontSize" Value="20" />
+    <Setter Property="LineHeight" Value="30" />
+    <Setter Property="LetterSpacing" Value="2" />
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+  </Style>
+
+  <Style Selector="TextBlock.attribute">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="13.5" />
+    <Setter Property="LetterSpacing" Value="3" />
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+  </Style>
+
+  <!--
+    MaterialButton: a 55 tall pill with a 50 radius. The label is a plain string, so the type is set
+    on the button and inherited by the presenter that renders it.
+  -->
+  <Style Selector="Button.pill">
+    <Setter Property="Height" Value="55" />
+    <Setter Property="CornerRadius" Value="50" />
+    <!-- CrossAxisAlignment.stretch: both pills take the full width, so they match. -->
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="LetterSpacing" Value="2" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Cursor" Value="Hand" />
+  </Style>
+
+  <Style Selector="Button.pill.filled">
+    <Setter Property="Foreground" Value="{StaticResource ScreenBackgroundBrush}" />
+  </Style>
+
+  <Style Selector="Button.pill.filled /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource ForegroundBrush}" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+
+  <Style Selector="Button.pill.outlined">
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+  </Style>
+
+  <Style Selector="Button.pill.outlined /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="{StaticResource ForegroundBrush}" />
+    <Setter Property="BorderThickness" Value="1.5" />
+  </Style>
+
+  <!--
+    The theme restyles a button under the pointer, foreground included, which would leave a white
+    label on a white pill. These vignettes are not hover-driven, so the pill keeps its colours in
+    every state; only the outlined one lifts slightly, as MaterialButton's highlight does.
+  -->
+  <Style Selector="Button.pill.filled:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource ForegroundBrush}" />
+    <Setter Property="TextElement.Foreground" Value="{StaticResource ScreenBackgroundBrush}" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+
+  <Style Selector="Button.pill.filled:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource ForegroundBrush}" />
+    <Setter Property="TextElement.Foreground" Value="{StaticResource ScreenBackgroundBrush}" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+
+  <Style Selector="Button.pill.outlined:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="#22FFFFFF" />
+    <Setter Property="TextElement.Foreground" Value="{StaticResource ForegroundBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ForegroundBrush}" />
+    <Setter Property="BorderThickness" Value="1.5" />
+  </Style>
+
+  <Style Selector="Button.pill.outlined:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="#33FFFFFF" />
+    <Setter Property="TextElement.Foreground" Value="{StaticResource ForegroundBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ForegroundBrush}" />
+    <Setter Property="BorderThickness" Value="1.5" />
+  </Style>
+
+</Styles>

@@ -1,0 +1,77 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:ProductDetailZoom.Controls"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:views="using:ProductDetailZoom.Views"
+             x:Class="ProductDetailZoom.Views.ProductPage"
+             x:DataType="views:ProductPage"
+             x:Name="Root"
+             NavigationPage.HasNavigationBar="False"
+             Background="{StaticResource ScreenBackgroundBrush}">
+
+  <Panel>
+
+    <!--
+      AppBar: 56 tall, transparent, a chevron leading and the bag trailing. An AppBar gives its
+      leading slot the toolbar's own height and centres the icon in it, so a 36 icon sits 10 in.
+    -->
+    <Grid Height="56" VerticalAlignment="Top" ColumnDefinitions="56,*,Auto">
+      <shared:MaterialIcon Grid.Column="0"
+                           IconSize="36"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Data="{StaticResource BackIconGeometry}"
+                           Foreground="{StaticResource ForegroundBrush}" />
+      <Image Grid.Column="2"
+             Width="20"
+             Height="20"
+             Margin="0,0,24,0"
+             VerticalAlignment="Center"
+             Stretch="Uniform"
+             Source="{Binding BagImage}" />
+    </Grid>
+
+    <!-- The speaker, which is the end of the flight that lives on this page. -->
+    <shared:Sprite x:Name="Speaker"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Width="{Binding FrameWidth}"
+                   Height="{Binding FrameHeight}"
+                   Source="{Binding SpriteSheet}"
+                   FrameWidth="360"
+                   FrameHeight="500"
+                   Frame="1" />
+
+    <controls:PulsingButton x:Name="Zoom"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            RenderTransform="translate(100px, -70px)"
+                            Icon="{StaticResource AddIconGeometry}"
+                            Opacity="0"
+                            Pressed="OnZoomPressed" />
+
+    <!-- The write-up and the two calls to action, in the bottom 43% of the screen. -->
+    <shared:FlexPanel x:Name="CopyPanel"
+                      MainAxisAlignment="SpaceEvenly"
+                      VerticalAlignment="Bottom"
+                      Margin="40,0"
+                      Height="{Binding CopyHeight}">
+
+      <StackPanel x:Name="Description">
+        <TextBlock Classes="productTitle" Text="CLASSIC SPEAKER 2700" TextWrapping="Wrap" />
+        <TextBlock Classes="productBody"
+                   Margin="0,8,0,0"
+                   TextWrapping="Wrap"
+                   Text="This speaker provides a home soundscape unlike any other with its high quality sound and sleek design. You won't believe it until you hear it." />
+      </StackPanel>
+
+      <StackPanel Margin="36,0">
+        <Button Classes="pill filled" Margin="0,18,0,12" Content="BUY NOW $349.95" />
+        <Button Classes="pill outlined" Content="LEARN MORE" />
+      </StackPanel>
+
+    </shared:FlexPanel>
+
+  </Panel>
+
+</ContentPage>

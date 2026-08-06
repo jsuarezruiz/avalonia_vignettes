@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:ProductDetailZoom.Controls"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:views="using:ProductDetailZoom.Views"
+             x:Class="ProductDetailZoom.Views.MainView"
+             x:Name="Root"
+             ClipToBounds="True"
+             Background="{StaticResource ScreenBackgroundBrush}">
+
+  <Panel>
+
+    <NavigationPage x:Name="Navigation">
+      <NavigationPage.Content>
+        <views:ProductPage x:Name="Product" />
+      </NavigationPage.Content>
+    </NavigationPage>
+
+    <!--
+      The speaker does not move between the pages (both draw it the same size at the top), so the
+      flight is not about travel at all. It exists to swap in something that can spin.
+    -->
+    <shared:HeroFlight x:Name="Flight">
+      <controls:ProductFlight x:Name="FlightContent" Progress="{Binding #Flight.ContentProgress}" />
+    </shared:HeroFlight>
+
+  </Panel>
+
+</UserControl>

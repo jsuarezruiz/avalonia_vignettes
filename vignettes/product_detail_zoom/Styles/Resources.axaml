@@ -1,0 +1,18 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <FontFamily x:Key="BodyFont">avares://ProductDetailZoom/Assets/Fonts#Work Sans</FontFamily>
+
+  <SolidColorBrush x:Key="ScreenBackgroundBrush" Color="Black" />
+  <SolidColorBrush x:Key="ForegroundBrush" Color="White" />
+  <SolidColorBrush x:Key="AccentBrush" Color="#FF27AEEF" />
+  <SolidColorBrush x:Key="AccentPressedBrush" Color="#FF0F668F" />
+
+  <!-- CupertinoIcons.left_chevron, on the 24 unit grid Material icons use. -->
+  <StreamGeometry x:Key="BackIconGeometry">M15.41,7.41L14,6l-6,6l6,6l1.41-1.41L10.83,12L15.41,7.41z</StreamGeometry>
+
+  <!-- Icons.add and Icons.remove. -->
+  <StreamGeometry x:Key="AddIconGeometry">M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6V13z</StreamGeometry>
+  <StreamGeometry x:Key="RemoveIconGeometry">M19,13H5v-2h14V13z</StreamGeometry>
+
+</ResourceDictionary>
