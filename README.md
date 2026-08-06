@@ -102,6 +102,12 @@ Twenty thousand particles in four presets, handed to Skia in a single `drawVerti
 
 Drag the chart through the months and it snaps to a whole one when let go, with the totals rolling over as it moves.
 
+<a href="vignettes/ticket_fold"><img src="vignettes/ticket_fold/images/ticket_fold.gif" width="237"/></a>
+
+### [Boarding Pass Cards](vignettes/ticket_fold)
+
+Tap a boarding pass and it concertinas open, one panel after another, each hinging on its own top edge.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

@@ -1,0 +1,161 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+                    xmlns:controls="using:TicketFold.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:FlightSummary}" TargetType="controls:FlightSummary">
+    <Setter Property="Background" Value="{StaticResource CardBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource LightInkBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource TicketFont}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+
+          <!--
+            Five rows spaced the way Flutter's spaceAround does it: a full gap between neighbours
+            and half a gap at each end, which the half-height star rows at the top and bottom give.
+          -->
+          <Grid Margin="16,0" RowDefinitions="0.5*,Auto,*,Auto,*,Auto,*,Auto,*,Auto,0.5*">
+
+            <!--
+              The airline. The original prints a wordmark image on the dark face and sets the name
+              in type on the light one; both are set in type here, because a rebranded wordmark
+              would have to be redrawn as artwork. The dark face keeps the larger of the two sizes
+              the original uses, so it still reads as the heavier of the pair.
+            -->
+            <StackPanel Grid.Row="1"
+                        Name="PART_Logo"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+              <Image Name="PART_LogoMark"
+                     Source="avares://TicketFold/Assets/Images/avalonia_logo.png"
+                     Height="10"
+                     Margin="4,0"
+                     Stretch="Uniform"
+                     VerticalAlignment="Center" />
+              <TextBlock Name="PART_LogoText"
+                         Text="AVALONIAIR"
+                         FontFamily="{StaticResource BodyFont}"
+                         FontWeight="Bold"
+                         FontSize="10"
+                         LetterSpacing="1.5"
+                         VerticalAlignment="Center"
+                         Foreground="{TemplateBinding Foreground}" />
+            </StackPanel>
+
+            <Border Grid.Row="3" Name="PART_Separator" Height="1" Background="{StaticResource LightSeparatorBrush}" />
+
+            <Grid Grid.Row="5" ColumnDefinitions="Auto,*,Auto">
+              <TextBlock Grid.Column="0"
+                         Text="{Binding $parent[controls:FlightSummary].PassengerLabel}"
+                         FontFamily="{StaticResource BodyFont}"
+                         FontWeight="Bold"
+                         FontSize="11"
+                         Foreground="{StaticResource BoardingInkBrush}" />
+              <TextBlock Grid.Column="2"
+                         Text="{Binding $parent[controls:FlightSummary].BoardingLabel}"
+                         FontFamily="{StaticResource BodyFont}"
+                         FontWeight="Bold"
+                         FontSize="11"
+                         Foreground="{StaticResource BoardingInkBrush}" />
+            </Grid>
+
+            <!--
+              Origin, route and destination are stacked rather than laid out in columns, so the
+              route stays centred on the card however wide the airport codes turn out to be.
+            -->
+            <Panel Grid.Row="7" Margin="18,0">
+
+              <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock Text="{Binding $parent[controls:FlightSummary].OriginCode}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           FontSize="42"
+                           HorizontalAlignment="Center"
+                           Foreground="{TemplateBinding Foreground}" />
+                <TextBlock Name="PART_OriginCity"
+                           Text="{Binding $parent[controls:FlightSummary].BoardingPass.Origin.City}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           FontSize="13"
+                           HorizontalAlignment="Center"
+                           Foreground="{StaticResource LightSecondaryInkBrush}" />
+              </StackPanel>
+
+              <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Panel Width="120" Height="58">
+                  <Image Name="PART_Route"
+                         Source="avares://TicketFold/Assets/Images/planeroute_blue.png"
+                         Width="120"
+                         Stretch="Uniform"
+                         VerticalAlignment="Center" />
+                  <Image Name="PART_Plane"
+                         Source="avares://TicketFold/Assets/Images/airplane_blue.png"
+                         Height="20"
+                         Stretch="Uniform"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center" />
+                </Panel>
+                <TextBlock Text="{Binding $parent[controls:FlightSummary].DurationLabel}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           FontSize="13"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Foreground="{TemplateBinding Foreground}" />
+              </StackPanel>
+
+              <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+                <TextBlock Text="{Binding $parent[controls:FlightSummary].DestinationCode}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           FontSize="42"
+                           HorizontalAlignment="Center"
+                           Foreground="{TemplateBinding Foreground}" />
+                <TextBlock Name="PART_DestinationCity"
+                           Text="{Binding $parent[controls:FlightSummary].BoardingPass.Destination.City}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           FontSize="13"
+                           HorizontalAlignment="Center"
+                           Foreground="{StaticResource LightSecondaryInkBrush}" />
+              </StackPanel>
+            </Panel>
+
+            <shared:MaterialIcon Grid.Row="9"
+                                 Name="PART_Chevron"
+                                 Data="{StaticResource ChevronDownIcon}"
+                                 IconSize="18"
+                                 HorizontalAlignment="Center"
+                                 Foreground="{TemplateBinding Foreground}" />
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- The dark face is the same card turned over: blue artwork, white ink, and the chevron up. -->
+    <Style Selector="^[Palette=Dark]">
+      <Setter Property="Background" Value="{StaticResource DarkCardBrush}" />
+      <Setter Property="Foreground" Value="{StaticResource DarkInkBrush}" />
+
+      <Style Selector="^ /template/ Image#PART_LogoMark">
+        <Setter Property="Source" Value="avares://TicketFold/Assets/Images/avalonia_logo_white.png" />
+        <Setter Property="Height" Value="12" />
+      </Style>
+      <Style Selector="^ /template/ TextBlock#PART_LogoText">
+        <Setter Property="FontSize" Value="12" />
+      </Style>
+      <Style Selector="^ /template/ Border#PART_Separator">
+        <Setter Property="Background" Value="{StaticResource DarkSeparatorBrush}" />
+      </Style>
+      <Style Selector="^ /template/ TextBlock#PART_OriginCity, ^ /template/ TextBlock#PART_DestinationCity">
+        <Setter Property="Foreground" Value="{StaticResource DarkSecondaryInkBrush}" />
+      </Style>
+      <Style Selector="^ /template/ Image#PART_Route">
+        <Setter Property="Source" Value="avares://TicketFold/Assets/Images/planeroute_white.png" />
+      </Style>
+      <Style Selector="^ /template/ Image#PART_Plane">
+        <Setter Property="Source" Value="avares://TicketFold/Assets/Images/airplane_white.png" />
+      </Style>
+      <Style Selector="^ /template/ shared|MaterialIcon#PART_Chevron">
+        <Setter Property="Data" Value="{StaticResource ChevronUpIcon}" />
+      </Style>
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

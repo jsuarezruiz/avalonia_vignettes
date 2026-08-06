@@ -1,0 +1,83 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:TicketFold.Controls">
+
+  <!--
+    Every field is a label over a value. The label sets its line box to the font size exactly, which
+    pulls the value up tight underneath it and needs the glyphs left unclipped to survive; the value
+    sets a line box nearly twice its size, which is what spaces the two rows of fields apart.
+  -->
+  <ControlTheme x:Key="DetailTitleTheme" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="{StaticResource BodySemiBoldFont}" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="LineHeight" Value="11" />
+    <Setter Property="LetterSpacing" Value="0.2" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Foreground" Value="{StaticResource DetailTitleBrush}" />
+  </ControlTheme>
+
+  <ControlTheme x:Key="DetailValueTheme" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="{StaticResource TicketFont}" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="LineHeight" Value="28.8" />
+    <Setter Property="LetterSpacing" Value="0.3" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Foreground" Value="{StaticResource DetailValueBrush}" />
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:FlightDetails}" TargetType="controls:FlightDetails">
+    <Setter Property="Background" Value="{StaticResource CardBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+
+          <!-- Two rows of fields, spaced evenly: equal gaps between them and at both ends. -->
+          <Grid RowDefinitions="*,Auto,*,Auto,*">
+
+            <Grid Grid.Row="1" ColumnDefinitions="0.5*,Auto,*,Auto,*,Auto,*,Auto,0.5*">
+              <StackPanel Grid.Column="1">
+                <TextBlock Text="GATE" Theme="{StaticResource DetailTitleTheme}" />
+                <TextBlock Text="{Binding $parent[controls:FlightDetails].BoardingPass.Gate}"
+                           Theme="{StaticResource DetailValueTheme}" />
+              </StackPanel>
+              <StackPanel Grid.Column="3">
+                <TextBlock Text="ZONE" Theme="{StaticResource DetailTitleTheme}" />
+                <TextBlock Text="{Binding $parent[controls:FlightDetails].BoardingPass.Zone}"
+                           Theme="{StaticResource DetailValueTheme}" />
+              </StackPanel>
+              <StackPanel Grid.Column="5">
+                <TextBlock Text="SEAT" Theme="{StaticResource DetailTitleTheme}" />
+                <TextBlock Text="{Binding $parent[controls:FlightDetails].BoardingPass.Seat}"
+                           Theme="{StaticResource DetailValueTheme}" />
+              </StackPanel>
+              <StackPanel Grid.Column="7">
+                <TextBlock Text="CLASS" Theme="{StaticResource DetailTitleTheme}" />
+                <TextBlock Text="{Binding $parent[controls:FlightDetails].BoardingPass.FlightClass}"
+                           Theme="{StaticResource DetailValueTheme}" />
+              </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="3" ColumnDefinitions="0.5*,Auto,*,Auto,*,Auto,0.5*">
+              <StackPanel Grid.Column="1">
+                <TextBlock Text="FLIGHT" Theme="{StaticResource DetailTitleTheme}" />
+                <TextBlock Text="{Binding $parent[controls:FlightDetails].BoardingPass.FlightNumber}"
+                           Theme="{StaticResource DetailValueTheme}" />
+              </StackPanel>
+              <StackPanel Grid.Column="3">
+                <TextBlock Text="DEPARTS" Theme="{StaticResource DetailTitleTheme}" />
+                <TextBlock Text="{Binding $parent[controls:FlightDetails].DepartsLabel}"
+                           Theme="{StaticResource DetailValueTheme}" />
+              </StackPanel>
+              <StackPanel Grid.Column="5">
+                <TextBlock Text="ARRIVES" Theme="{StaticResource DetailTitleTheme}" />
+                <TextBlock Text="{Binding $parent[controls:FlightDetails].ArrivesLabel}"
+                           Theme="{StaticResource DetailValueTheme}" />
+              </StackPanel>
+            </Grid>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

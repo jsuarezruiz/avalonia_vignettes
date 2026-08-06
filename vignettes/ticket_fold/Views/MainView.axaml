@@ -1,0 +1,49 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:controls="using:TicketFold.Controls"
+             xmlns:models="using:TicketFold.Models"
+             x:Class="TicketFold.Views.MainView"
+             x:DataType="models:BoardingPass">
+
+  <DockPanel Background="{StaticResource PageBackgroundBrush}">
+
+    <!-- The app bar sits flat on the page: same fill, no elevation, no divider. -->
+    <Grid DockPanel.Dock="Top" Height="56">
+      <shared:MaterialIcon Data="{StaticResource ArrowBackIcon}"
+                           IconSize="24"
+                           Margin="16,0,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Foreground="{StaticResource AppBarForegroundBrush}" />
+
+      <TextBlock Text="BOARDING PASSES"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 TextAlignment="Center"
+                 FontFamily="{StaticResource BodyFont}"
+                 FontWeight="Bold"
+                 FontSize="15"
+                 LetterSpacing="0.5"
+                 Foreground="{StaticResource AppBarForegroundBrush}" />
+
+      <shared:MaterialIcon Data="{StaticResource MoreHorizontalIcon}"
+                           IconSize="28"
+                           Margin="0,0,18,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="{StaticResource AppBarForegroundBrush}" />
+    </Grid>
+
+    <ScrollViewer Name="Scroller" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+      <ItemsControl Name="Tickets">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate DataType="models:BoardingPass">
+            <controls:Ticket BoardingPass="{Binding}" />
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </DockPanel>
+
+</UserControl>

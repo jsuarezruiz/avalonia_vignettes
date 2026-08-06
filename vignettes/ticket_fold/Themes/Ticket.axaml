@@ -1,0 +1,52 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:TicketFold.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:Ticket}" TargetType="controls:Ticket">
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <!--
+          The shadow sits on the folded stack itself rather than on the list row, so the margin has
+          to be outside it. It is drawn square while the panels are rounded, exactly as the original
+          has it, and it shows through any gap the fold opens up.
+        -->
+        <Border Margin="16" Background="Transparent" BoxShadow="0 0 10 1 #1A000000">
+          <controls:FoldingTicket IsOpen="{TemplateBinding IsOpen}">
+
+            <!-- The dark summary, hidden under the folded ticket until it opens. -->
+            <controls:FoldSegment Height="160">
+              <controls:FoldSegment.Front>
+                <controls:FlightSummary Palette="Dark"
+                                        BoardingPass="{Binding $parent[controls:Ticket].BoardingPass}"
+                                        IsOpen="{Binding $parent[controls:Ticket].IsOpen}" />
+              </controls:FoldSegment.Front>
+            </controls:FoldSegment>
+
+            <!-- Details on the front, the light summary on the reverse. -->
+            <controls:FoldSegment Height="160">
+              <controls:FoldSegment.Front>
+                <controls:FlightDetails BoardingPass="{Binding $parent[controls:Ticket].BoardingPass}" />
+              </controls:FoldSegment.Front>
+              <controls:FoldSegment.Back>
+                <controls:FlightSummary Palette="Light"
+                                        BoardingPass="{Binding $parent[controls:Ticket].BoardingPass}" />
+              </controls:FoldSegment.Back>
+            </controls:FoldSegment>
+
+            <!-- The barcode, with a blank reverse. -->
+            <controls:FoldSegment Height="80">
+              <controls:FoldSegment.Front>
+                <controls:FlightBarcode />
+              </controls:FoldSegment.Front>
+              <controls:FoldSegment.Back>
+                <Border CornerRadius="4" Background="{StaticResource CardReverseBrush}" />
+              </controls:FoldSegment.Back>
+            </controls:FoldSegment>
+          </controls:FoldingTicket>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

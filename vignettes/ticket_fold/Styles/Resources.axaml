@@ -1,0 +1,44 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!--
+    Open Sans registers its regular and bold weights under one family, but the semibold weight ships
+    as a family of its own, so it has to be asked for by name rather than by weight. Oswald names its
+    family after the file.
+  -->
+  <FontFamily x:Key="BodyFont">avares://TicketFold/Assets/Fonts#Open Sans</FontFamily>
+  <FontFamily x:Key="BodySemiBoldFont">avares://TicketFold/Assets/Fonts#Open Sans Semibold</FontFamily>
+  <FontFamily x:Key="TicketFont">avares://TicketFold/Assets/Fonts#Oswald Regular</FontFamily>
+
+  <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FFF0F0F0" />
+  <SolidColorBrush x:Key="AppBarForegroundBrush" Color="#FF212121" />
+
+  <!-- The summary face, printed either way round. -->
+  <SolidColorBrush x:Key="LightInkBrush" Color="#FF083E64" />
+  <SolidColorBrush x:Key="LightSecondaryInkBrush" Color="#FF838383" />
+  <SolidColorBrush x:Key="LightSeparatorBrush" Color="#FF396583" />
+  <SolidColorBrush x:Key="DarkInkBrush" Color="White" />
+  <SolidColorBrush x:Key="DarkSecondaryInkBrush" Color="#FF61849C" />
+  <SolidColorBrush x:Key="DarkSeparatorBrush" Color="#FFEAEAEA" />
+  <SolidColorBrush x:Key="BoardingInkBrush" Color="#FFE46565" />
+
+  <!-- The details face. -->
+  <SolidColorBrush x:Key="DetailTitleBrush" Color="#FFAFAFAF" />
+  <SolidColorBrush x:Key="DetailValueBrush" Color="#FF083E64" />
+
+  <!-- The blank reverse of the barcode panel. -->
+  <SolidColorBrush x:Key="CardReverseBrush" Color="#FFDCE6EF" />
+
+  <SolidColorBrush x:Key="CardBrush" Color="White" />
+
+  <ImageBrush x:Key="DarkCardBrush"
+              Source="avares://TicketFold/Assets/Images/bg_blue.png"
+              Stretch="UniformToFill" />
+
+  <!-- Material's own icon outlines, drawn rather than set in an icon font. -->
+  <StreamGeometry x:Key="ArrowBackIcon">M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z</StreamGeometry>
+  <StreamGeometry x:Key="MoreHorizontalIcon">M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z</StreamGeometry>
+  <StreamGeometry x:Key="ChevronDownIcon">M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z</StreamGeometry>
+  <StreamGeometry x:Key="ChevronUpIcon">M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z</StreamGeometry>
+
+</ResourceDictionary>
