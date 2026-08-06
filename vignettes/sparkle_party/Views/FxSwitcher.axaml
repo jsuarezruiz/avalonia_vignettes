@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="SparkleParty.Views.FxSwitcher"
+             Width="320"
+             Height="100">
+
+  <Grid ColumnDefinitions="*,*,*,*" VerticalAlignment="Center">
+    <Button Grid.Column="0" Classes="fx" Tag="0" Click="OnClick" AutomationProperties.Name="Waterfall effect">
+      <Image Name="Waterfall" Width="60" Height="60" />
+    </Button>
+    <Button Grid.Column="1" Classes="fx" Tag="1" Click="OnClick" AutomationProperties.Name="Fireworks effect">
+      <Image Name="Fireworks" Width="60" Height="60" />
+    </Button>
+    <Button Grid.Column="2" Classes="fx" Tag="2" Click="OnClick" AutomationProperties.Name="Comet effect">
+      <Image Name="Comet" Width="60" Height="60" />
+    </Button>
+    <Button Grid.Column="3" Classes="fx" Tag="3" Click="OnClick" AutomationProperties.Name="Pinwheel effect">
+      <Image Name="Pinwheel" Width="60" Height="60" />
+    </Button>
+  </Grid>
+
+</UserControl>

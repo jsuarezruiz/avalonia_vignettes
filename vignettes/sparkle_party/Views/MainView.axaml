@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:SparkleParty.Controls"
+             xmlns:views="using:SparkleParty.Views"
+             x:Class="SparkleParty.Views.MainView"
+             x:DataType="views:MainView">
+
+  <Panel>
+    <Image Source="avares://SparkleParty/Assets/Images/sparkleparty_bg.png" Stretch="UniformToFill" />
+
+    <!-- Flutter fits an unsized image to the space it is given, preserving its aspect. -->
+    <Image Source="avares://SparkleParty/Assets/Images/sparkleparty_logo.png"
+           Stretch="Uniform"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center" />
+
+    <!-- The effect fades out and back in as one is swapped for another. -->
+    <controls:ParticleView Name="Particles" Touched="OnTouched" />
+
+    <Image Source="avares://SparkleParty/Assets/Images/sparkleparty_logo_outline.png"
+           Stretch="Uniform"
+           IsHitTestVisible="False"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center" />
+
+    <TextBlock Name="Caption"
+               Classes="instruction"
+               Text="{Binding Instruction}"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Bottom"
+               Margin="0,0,0,136" />
+
+    <views:FxSwitcher Name="Switcher" VerticalAlignment="Bottom" />
+  </Panel>
+
+</UserControl>

@@ -90,6 +90,12 @@ A checkout in three pages, each sliding up over the last, with the submit button
 
 Press the zoom and the speaker spins through a frame sequence, then the callouts draw themselves in over it.
 
+<a href="vignettes/sparkle_party"><img src="vignettes/sparkle_party/images/sparkle_party.gif" width="237"/></a>
+
+### [Sparkle Party Particles](vignettes/sparkle_party)
+
+Twenty thousand particles in four presets, handed to Skia in a single `drawVertices` call.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:
