@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="PlantForms.Views.Header"
+             ClipToBounds="True">
+
+  <Panel>
+    <Image Source="avares://PlantForms/Assets/Images/plant_header_background.png" Stretch="UniformToFill" />
+
+    <!-- Screening white at 60% over an image is the same as laying that white over it. -->
+    <Panel Background="White" Opacity="0.6" />
+
+    <StackPanel Margin="0,8,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+      <TextBlock Classes="appTitle1" Text="THE" HorizontalAlignment="Center" />
+      <TextBlock Classes="appTitle2" Text="Plant Store" HorizontalAlignment="Center" />
+    </StackPanel>
+  </Panel>
+
+</UserControl>

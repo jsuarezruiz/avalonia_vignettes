@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:PlantForms.Controls"
+             xmlns:views="using:PlantForms.Views"
+             x:Class="PlantForms.Views.MainView">
+
+  <!-- The scene takes the top quarter; the cards are laid over the whole screen. -->
+  <Grid RowDefinitions="25*,75*" Background="White">
+
+    <views:Header Grid.Row="0" />
+
+    <controls:FormCardStack Name="Stack" Grid.Row="0" Grid.RowSpan="2">
+      <views:SummaryPage />
+      <views:InformationPage />
+      <views:PaymentPage />
+    </controls:FormCardStack>
+
+    <views:OptionsOverlay Name="Options" Grid.Row="0" Grid.RowSpan="2" />
+
+  </Grid>
+
+</UserControl>

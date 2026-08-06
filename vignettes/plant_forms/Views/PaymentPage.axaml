@@ -1,0 +1,90 @@
+<controls:FormPage xmlns="https://github.com/avaloniaui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:controls="using:PlantForms.Controls"
+                   xmlns:models="using:PlantForms.Models"
+                   x:Class="PlantForms.Views.PaymentPage"
+                   x:DataType="models:OrderForm"
+                   Title="Payment">
+
+  <StackPanel>
+
+    <TextBlock Classes="orderTotal" Text="$34.00" />
+
+    <Border Classes="separator" />
+
+    <Grid ColumnDefinitions="85,*" RowDefinitions="Auto,Auto,Auto">
+      <TextBlock Grid.Row="0" Grid.Column="0" Classes="orderLabel" Text="Contact" />
+      <TextBlock Grid.Row="0" Grid.Column="1" Classes="orderPrice" Text="{Binding Email}" />
+
+      <TextBlock Grid.Row="1" Grid.Column="0" Classes="orderLabel" Margin="0,12" Text="Ship to" />
+      <TextBlock Grid.Row="1" Grid.Column="1" Classes="orderPrice" Margin="0,12" Text="{Binding ShippingAddress}" />
+
+      <TextBlock Grid.Row="2" Grid.Column="0" Classes="orderLabel" Text="Method" />
+      <TextBlock Grid.Row="2" Grid.Column="1" Classes="orderPrice" Text="FREE" />
+    </Grid>
+
+    <Border Classes="separator" />
+
+    <TextBlock Classes="formSection" Margin="0,0,0,10" Text="GIFT CARD OR DISCOUNT CODE" />
+
+    <Grid ColumnDefinitions="4*,2*">
+      <controls:FormField Grid.Column="0"
+                          FieldKey="coupon"
+                          Helper="000 000 000 XX"
+                          InputType="Number"
+                          IsEnabled="False" />
+
+      <Button Grid.Column="1"
+              Classes="apply"
+              Margin="12,0,0,26"
+              IsEnabled="False">
+        <TextBlock Classes="submitButtonText" Text="Apply" />
+      </Button>
+    </Grid>
+
+    <TextBlock Classes="formSection" Margin="0,0,0,26" Text="PAYMENT" />
+
+    <controls:CreditCardField Name="CardNumber"
+                              FieldKey="ccNumber"
+                              Label="Card Number"
+                              Helper="4111 2222 3333 4440"
+                              CardInputType="Number" />
+
+    <controls:FormField FieldKey="ccName"
+                        Label="Card Name"
+                        Helper="Cardholder Name"
+                        IsRequired="True" />
+
+    <Grid ColumnDefinitions="*,24,*">
+      <controls:CreditCardField Grid.Column="0"
+                                FieldKey="ccExpDate"
+                                Label="Expiration"
+                                Helper="MM/YY"
+                                CardInputType="ExpirationDate" />
+
+      <controls:CreditCardField Grid.Column="2"
+                                FieldKey="ccCode"
+                                Label="Security Code"
+                                Helper="000"
+                                CardInputType="SecurityCode"
+                                Network="{Binding #CardNumber.Network}" />
+    </Grid>
+
+    <TextBlock Classes="formSection" Margin="0,0,0,10" Text="SHIPPING NOTIFICATIONS" />
+
+    <Border Classes="formBox" Height="56">
+      <CheckBox Classes="notify" Margin="12,0" IsChecked="True">
+        <TextBlock Classes="inputLabel" Text="Send shipping updates via email" />
+      </CheckBox>
+    </Border>
+
+    <controls:SubmitButton Name="Purchase" Click="OnPurchaseClick">
+      <Grid ColumnDefinitions="*,Auto" Margin="18,0">
+        <TextBlock Grid.Column="0" Classes="submitButtonText" Text="Purchase" />
+        <TextBlock Grid.Column="1" Classes="submitButtonText" Text="$34" />
+      </Grid>
+    </controls:SubmitButton>
+
+  </StackPanel>
+
+</controls:FormPage>

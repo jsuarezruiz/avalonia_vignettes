@@ -1,0 +1,77 @@
+<controls:FormPage xmlns="https://github.com/avaloniaui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:controls="using:PlantForms.Controls"
+                   xmlns:models="using:PlantForms.Models"
+                   x:Class="PlantForms.Views.SummaryPage"
+                   x:DataType="models:OrderForm"
+                   Title="Order Summary">
+
+  <StackPanel>
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+      <Panel>
+        <Border Width="135"
+                Height="135"
+                CornerRadius="4"
+                BorderThickness="1"
+                BorderBrush="{StaticResource GrayBrush}"
+                ClipToBounds="True">
+          <Image Source="avares://PlantForms/Assets/Images/plant_header_background.png" Stretch="UniformToFill" />
+        </Border>
+
+        <!--
+          The count sits proud of the picture's corner. The original moves it at paint time, out of
+          a stack that does not clip, so this is a render transform rather than a negative margin.
+        -->
+        <Border Width="24"
+                Height="24"
+                CornerRadius="12"
+                Background="{StaticResource GrayBrush}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                RenderTransform="translate(10px, -10px)">
+          <TextBlock Classes="imageBatch" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+      </Panel>
+
+      <StackPanel Margin="36,0,0,0" VerticalAlignment="Center">
+        <TextBlock Classes="productName" Text="Red Potted &#x0a;Plant w/ &#x0a;White Bowl" />
+        <TextBlock Classes="productPrice" Text="$34.00" />
+      </StackPanel>
+    </StackPanel>
+
+    <Border Classes="separator" />
+
+    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,12,Auto">
+      <TextBlock Grid.Row="0" Grid.Column="0" Classes="orderLabel" Text="Subtotal" />
+      <TextBlock Grid.Row="0" Grid.Column="1" Classes="orderPrice" Text="$34.00" />
+      <TextBlock Grid.Row="2" Grid.Column="0" Classes="orderLabel" Text="Shipping" />
+      <TextBlock Grid.Row="2" Grid.Column="1" Classes="orderPrice" Text="FREE" />
+    </Grid>
+
+    <Border Classes="separator" />
+
+    <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,30">
+      <TextBlock Grid.Column="0" Classes="orderTotalLabel" Text="Total" />
+      <TextBlock Grid.Column="1" Classes="orderTotal" Text="$34.00" />
+    </Grid>
+
+    <!-- Plain in the original too: no label, no validation, just a box to type into. -->
+    <Border Classes="formBox" Height="116.8">
+      <TextBox Name="Instructions"
+               AutomationProperties.Name="Special instructions"
+               Classes="formInput"
+               AcceptsReturn="True"
+               TextWrapping="Wrap"
+               VerticalContentAlignment="Top"
+               PlaceholderText="Special Instructions"
+               Text="{Binding Instructions, Mode=TwoWay}" />
+    </Border>
+
+    <controls:SubmitButton Name="Next" Margin="37,18" Click="OnNextClick">
+      <TextBlock Classes="submitButtonText" Text="Next" />
+    </controls:SubmitButton>
+
+  </StackPanel>
+
+</controls:FormPage>

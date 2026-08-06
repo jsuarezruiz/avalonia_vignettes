@@ -1,0 +1,180 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+                    xmlns:controls="using:PlantForms.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:FormPage}" TargetType="controls:FormPage">
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <!-- The rows are re-weighted from Proportion; these are the settings it starts at. -->
+        <Grid Name="PART_Root" RowDefinitions="15*,85*">
+
+          <!-- Tapping the scene above the card goes back a page. -->
+          <Panel Name="PART_BackArea" Grid.Row="0" Background="Transparent" />
+
+          <Border Grid.Row="1"
+                  Background="{StaticResource CardBrush}"
+                  BorderBrush="{StaticResource CardBorderBrush}"
+                  BorderThickness="1"
+                  CornerRadius="{StaticResource FormPageRadius}"
+                  BoxShadow="0 0 8 0 #1F000000"
+                  Padding="{StaticResource FormPagePadding}">
+
+            <DockPanel>
+              <TextBlock DockPanel.Dock="Top" Classes="formTitle" Text="{TemplateBinding Title}" />
+
+              <!--
+                The 20 the original pads its scroll view by goes on the content: a ScrollViewer's
+                own Padding comes out of the content's arrange rect without being added to the
+                extent, which leaves the last of the form unreachable.
+              -->
+              <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <ContentPresenter Content="{TemplateBinding Content}" Margin="0,20" />
+              </ScrollViewer>
+            </DockPanel>
+
+          </Border>
+
+        </Grid>
+
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:FormField}" TargetType="controls:FormField">
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <StackPanel>
+          <!--
+            Material reserves 18 above the box and hangs the label 4.8 clear of it, which is less
+            than the label is tall, so it overflows upwards. A canvas gives the label its own height
+            and the row a fixed one; a negative margin would squeeze the label and clip its tops.
+          -->
+          <!--
+            Material reserves 18 here and lets the label overflow it. Avalonia clips a control whose
+            slot is pulled in under it, so the label keeps its own height and the row runs 24.
+          -->
+          <TextBlock Classes="inputLabel"
+                     Margin="0,0,0,4.8"
+                     Text="{TemplateBinding Label}"
+                     IsVisible="{TemplateBinding Label, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+          <Panel>
+            <Border Name="PART_Box"
+                    Height="{TemplateBinding BoxHeight}"
+                    CornerRadius="4"
+                    BorderThickness="1"
+                    BorderBrush="{StaticResource LightGrayBrush}">
+              <DockPanel>
+                <ContentPresenter DockPanel.Dock="Right"
+                                  Content="{TemplateBinding Accessory}"
+                                  Margin="0,0,18,0"
+                                  VerticalAlignment="Center" />
+
+                <TextBox Name="PART_Input"
+                         Classes="formInput"
+                         Text="{TemplateBinding Value, Mode=TwoWay}"
+                         PlaceholderText="{TemplateBinding Helper}"
+                         AcceptsReturn="{TemplateBinding IsMultiline}"
+                         TextWrapping="Wrap"
+                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+              </DockPanel>
+            </Border>
+
+            <!-- The placeholder is promoted to a caption once the field has something in it. -->
+            <TextBlock Classes="labelOptional"
+                       Margin="12,6,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="{TemplateBinding Caption}" />
+
+            <TextBlock Classes="labelNotValid"
+                       Margin="0,8,14,0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       Text="{TemplateBinding ErrorText}" />
+          </Panel>
+
+          <!-- Material's helper row: an 8 point gap and a line of helper type, always reserved. -->
+          <Panel Height="27.2" />
+        </StackPanel>
+
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:invalid /template/ Border#PART_Box">
+      <Setter Property="BorderBrush" Value="{StaticResource ErrorBrush}" />
+    </Style>
+
+    <Style Selector="^:focus-within /template/ Border#PART_Box">
+      <Setter Property="BorderBrush" Value="{StaticResource SecondaryBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:DropDownField}" TargetType="controls:DropDownField">
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <StackPanel>
+          <Border Height="48"
+                  CornerRadius="4"
+                  BorderThickness="1"
+                  BorderBrush="{StaticResource LightGrayBrush}"
+                  Background="Transparent">
+            <DockPanel Margin="12,0">
+              <TextBlock DockPanel.Dock="Right"
+                         Classes="dropdownArrow"
+                         Margin="0,0,3,0"
+                         Text="&#x25BC;"
+                         VerticalAlignment="Center" />
+
+              <TextBlock Classes="orderTotalLabel"
+                         VerticalAlignment="Center"
+                         Text="{TemplateBinding Value}" />
+            </DockPanel>
+          </Border>
+
+          <Panel Height="27.2" />
+        </StackPanel>
+
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:SubmitButton}" TargetType="controls:SubmitButton">
+    <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+    <Setter Property="FillBrush" Value="{StaticResource SecondaryBrush}" />
+    <Setter Property="CornerRadius" Value="4" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Margin" Value="0,18" />
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <StackPanel>
+          <!--
+            The presenter is centred in the bar rather than filling it: content that stretches, like
+            a TextBlock, would otherwise be given the whole 48 and draw its line at the top.
+          -->
+          <Panel Height="48">
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Center"
+                              HorizontalContentAlignment="Center" />
+          </Panel>
+
+          <TextBlock Classes="formError"
+                     Margin="0,6,0,0"
+                     HorizontalAlignment="Center"
+                     Text="You haven’t finished filling out your information"
+                     IsVisible="{TemplateBinding IsErrorVisible}" />
+        </StackPanel>
+
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

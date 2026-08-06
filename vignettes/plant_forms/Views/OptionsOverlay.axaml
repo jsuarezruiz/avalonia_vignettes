@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:views="using:PlantForms.Views"
+             x:Class="PlantForms.Views.OptionsOverlay"
+             x:DataType="views:OptionsOverlay"
+             IsVisible="False">
+
+  <DockPanel Background="{StaticResource OptionsBackgroundBrush}">
+
+    <Panel DockPanel.Dock="Top" Height="56" Background="White">
+      <TextBlock Classes="optionsTitle"
+                 Text="{Binding Title}"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center" />
+
+      <Button Classes="text"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Center"
+              Margin="0,0,16,0"
+              Click="OnDoneClick">
+        <TextBlock Classes="textButton" Text="Done" />
+      </Button>
+    </Panel>
+
+    <Border BorderThickness="0,1,0,0" BorderBrush="{StaticResource GrayBrush}">
+      <ListBox Name="Options"
+               Classes="options"
+               SelectedItem="{Binding Selected, Mode=TwoWay}"
+               Background="Transparent">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Grid.Column="0"
+                         Classes="orderTotalLabel"
+                         Text="{Binding}"
+                         VerticalAlignment="Center" />
+              <shared:MaterialIcon Grid.Column="1"
+                                   Classes="tick"
+                                   Data="{StaticResource CheckIcon}"
+                                   IconSize="40" />
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </Border>
+
+  </DockPanel>
+
+</UserControl>

@@ -1,0 +1,34 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="using:System">
+
+  <!-- Barlow names its weights as one family, so the weight picks the face. -->
+  <FontFamily x:Key="BodyFont">avares://PlantForms/Assets/Fonts#Barlow</FontFamily>
+  <FontFamily x:Key="DisplayFont">avares://PlantForms/Assets/Fonts#Baloo</FontFamily>
+
+  <!-- Styles. -->
+  <SolidColorBrush x:Key="PrimaryBrush" Color="#FF00B27F" />
+  <SolidColorBrush x:Key="SecondaryBrush" Color="#FF007B80" />
+  <SolidColorBrush x:Key="BaseBrush" Color="#FF4A4A4A" />
+  <SolidColorBrush x:Key="LightGrayBrush" Color="#FFE6E6E6" />
+  <SolidColorBrush x:Key="GrayBrush" Color="#FF505050" />
+  <SolidColorBrush x:Key="DarkGrayBrush" Color="#FF2D2D2D" />
+  <SolidColorBrush x:Key="HelperBrush" Color="#FF787878" />
+  <SolidColorBrush x:Key="OptionalBrush" Color="#FFA7A7A7" />
+  <SolidColorBrush x:Key="ErrorBrush" Color="#FFEA6060" />
+  <SolidColorBrush x:Key="CardBrush" Color="White" />
+  <SolidColorBrush x:Key="CardBorderBrush" Color="#FFD4D4D4" />
+  <SolidColorBrush x:Key="OptionsBackgroundBrush" Color="#FFF4F4F4" />
+
+  <sys:Double x:Key="FormRadius">20</sys:Double>
+  <sys:Double x:Key="HorizontalPadding">37</sys:Double>
+  <sys:Double x:Key="VerticalFormPadding">18</sys:Double>
+
+  <Thickness x:Key="FormPagePadding">37,18,37,0</Thickness>
+  <CornerRadius x:Key="FormPageRadius">20,20,0,0</CornerRadius>
+
+  <!-- Material's check, on its 24 unit grid. -->
+  <StreamGeometry x:Key="CreditCardIcon">M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z</StreamGeometry>
+  <StreamGeometry x:Key="CheckIcon">M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z</StreamGeometry>
+
+</ResourceDictionary>

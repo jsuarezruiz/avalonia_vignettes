@@ -1,0 +1,73 @@
+using Avalonia.Data;
+using Avalonia.Threading;
+using Avalonia.Interactivity;
+using PlantForms.Controls;
+using PlantForms.Models;
+
+namespace PlantForms.Views;
+
+/// <summary>
+/// The last page: how it is being paid for. Port of <c>plant_form_payment.dart</c>.
+/// </summary>
+public partial class PaymentPage : FormPage
+{
+    /// <summary>
+    /// How long the original waits before moving the button on.
+    /// </summary>
+    private static readonly TimeSpan FillDelay = TimeSpan.FromMilliseconds(500);
+
+    private readonly FormProgress _progress = new();
+    private readonly DispatcherTimer _fill;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PaymentPage"/> class.
+    /// </summary>
+    public PaymentPage()
+    {
+        InitializeComponent();
+
+        AddHandler(FormField.ValidatedEvent, OnFieldValidated);
+
+        _fill = new DispatcherTimer { Interval = FillDelay };
+        _fill.Tick += OnFillTick;
+
+        Purchase.Bind(SubmitButton.IsErrorVisibleProperty, new Binding(nameof(FormProgress.IsErrorVisible)) { Source = _progress });
+    }
+
+    /// <summary>
+    /// Control themes resolve by exact type, so the page borrows its base's.
+    /// </summary>
+    protected override Type StyleKeyOverride => typeof(FormPage);
+
+    private OrderForm Order => DataContext as OrderForm ?? new OrderForm();
+
+    private void OnFieldValidated(object? sender, RoutedEventArgs e)
+    {
+        if (e.Source is not FormField field || field.FieldKey.Length == 0)
+        {
+            return;
+        }
+
+        Order[field.FieldKey] = field.Value;
+        _progress.Set(field.FieldKey, field.IsValid);
+
+        // The original lets the button catch up half a second later.
+        _fill.Stop();
+        _fill.Start();
+    }
+
+    private void OnFillTick(object? sender, EventArgs e)
+    {
+        _fill.Stop();
+
+        Purchase.Completion = _progress.Completion;
+    }
+
+    private void OnPurchaseClick(object? sender, RoutedEventArgs e)
+    {
+        if (!_progress.IsComplete)
+        {
+            _progress.IsErrorVisible = true;
+        }
+    }
+}

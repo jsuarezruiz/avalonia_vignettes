@@ -78,6 +78,12 @@ Drag through the cards and the three artwork layers slide past each other while 
 
 Swipe a row left to delete it and it bursts into particles; swipe right to star it and the burst opens as a ring.
 
+<a href="vignettes/plant_forms"><img src="vignettes/plant_forms/images/plant_forms.gif" width="237"/></a>
+
+### [Plant Shopping Cart](vignettes/plant_forms)
+
+A checkout in three pages, each sliding up over the last, with the submit button filling as the fields validate.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

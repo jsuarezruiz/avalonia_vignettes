@@ -1,0 +1,31 @@
+<controls:FormPage xmlns="https://github.com/avaloniaui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:controls="using:PlantForms.Controls"
+                   x:Class="PlantForms.Views.InformationPage"
+                   Title="Information">
+
+  <StackPanel>
+
+    <TextBlock Classes="formSection" Margin="0,0,0,10" Text="CONTACT INFORMATION" />
+
+    <controls:FormField FieldKey="email"
+                        Helper="Email"
+                        InputType="Email"
+                        IsRequired="True" />
+
+    <TextBlock Classes="formSection" Margin="0,0,0,10" Text="SHIPPING ADDRESS" />
+
+    <controls:DropDownField Name="Country" FieldKey="country" Label="Country / Region" />
+
+    <!-- Which fields follow, and in what order, is up to the country. -->
+    <StackPanel Name="CountryFields" />
+
+    <controls:FormField FieldKey="phone" Helper="Phone Number" InputType="Telephone" />
+
+    <controls:SubmitButton Name="Continue" Click="OnContinueClick">
+      <TextBlock Classes="submitButtonText" Text="Continue to payment" />
+    </controls:SubmitButton>
+
+  </StackPanel>
+
+</controls:FormPage>
