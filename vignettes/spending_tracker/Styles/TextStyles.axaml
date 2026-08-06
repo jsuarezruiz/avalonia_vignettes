@@ -1,0 +1,28 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!--
+    The two shared styles from main.dart. Lato's light face is what Flutter's w200 resolves to,
+    since it is the only face below regular the vignette ships.
+  -->
+  <Style Selector="TextBlock.text1">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="FontWeight" Value="Light" />
+    <Setter Property="Foreground" Value="{StaticResource Text1Brush}" />
+  </Style>
+
+  <Style Selector="TextBlock.text2">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="FontWeight" Value="Light" />
+    <Setter Property="Foreground" Value="{StaticResource Text2Brush}" />
+  </Style>
+
+  <Style Selector="TextBlock.appTitle">
+    <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+    <Setter Property="FontSize" Value="17" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+  </Style>
+
+</Styles>

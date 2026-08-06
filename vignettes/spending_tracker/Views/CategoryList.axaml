@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:SpendingTracker.Controls"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:views="using:SpendingTracker.Views"
+             x:Class="SpendingTracker.Views.CategoryList"
+             x:DataType="views:CategoryList">
+
+  <Border Background="{StaticResource Bg1Brush}">
+    <shared:FlexPanel MainAxisAlignment="SpaceEvenly">
+
+      <TextBlock Classes="text1"
+                 FontSize="13"
+                 FontWeight="Bold"
+                 Foreground="White"
+                 Text="EXPENSE CATEGORIES"
+                 HorizontalAlignment="Center" />
+
+      <shared:FlexPanel Orientation="Horizontal" MainAxisAlignment="SpaceEvenly">
+        <controls:CirclePercentage Title="Bills"
+                                   Percent="{Binding Bills}"
+                                   Color0="#FFA577E4"
+                                   Color1="#FF775F99" />
+
+        <controls:CirclePercentage Title="Personal"
+                                   Percent="{Binding Personal}"
+                                   Color0="#FF8DE4CA"
+                                   Color1="#FF509983" />
+
+        <controls:CirclePercentage Title="Restaurants"
+                                   Percent="{Binding Restaurants}"
+                                   Color0="#FFE38C8C"
+                                   Color1="#FF995E5E" />
+      </shared:FlexPanel>
+
+    </shared:FlexPanel>
+  </Border>
+
+</UserControl>

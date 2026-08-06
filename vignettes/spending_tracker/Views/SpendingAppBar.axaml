@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             x:Class="SpendingTracker.Views.SpendingAppBar">
+
+  <Border Background="{StaticResource Bg1Brush}" Height="88">
+
+    <!-- The three go to the edges and the middle, which leaves the title a little left of centre. -->
+    <shared:FlexPanel Orientation="Horizontal" MainAxisAlignment="SpaceBetween">
+      <shared:MaterialIcon Data="{StaticResource MenuIcon}"
+                           IconSize="28"
+                           Foreground="White"
+                           Margin="18,8"
+                           VerticalAlignment="Center" />
+
+      <Panel Width="140" VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+          <TextBlock Classes="appTitle" Text="Budget" Foreground="White" />
+          <TextBlock Classes="appTitle" Text="Tracker" Foreground="{StaticResource Text3Brush}" />
+        </StackPanel>
+      </Panel>
+
+      <Image Source="avares://SpendingTracker/Assets/Images/headshot.png"
+             Width="56"
+             Height="56"
+             Margin="16"
+             VerticalAlignment="Center" />
+    </shared:FlexPanel>
+
+  </Border>
+
+</UserControl>

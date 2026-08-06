@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:SpendingTracker.Controls"
+             xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:views="using:SpendingTracker.Views"
+             x:Class="SpendingTracker.Views.MainView"
+             x:DataType="views:MainView"
+             FontFamily="{StaticResource BodyFont}">
+
+  <DockPanel>
+    <views:SpendingAppBar DockPanel.Dock="Top" />
+
+    <Border Background="{StaticResource Bg0Brush}">
+      <DockPanel>
+        <views:CategoryList DockPanel.Dock="Bottom" Chart="{Binding $parent[views:MainView].Chart}" />
+
+        <shared:FlexPanel MainAxisAlignment="SpaceEvenly">
+          <views:IncomeExpenseHeader Chart="{Binding $parent[views:MainView].Chart}" />
+
+          <!-- The chart and the dates take what the summary leaves, and scroll if that is short. -->
+          <ScrollViewer shared:FlexPanel.Flexible="True"
+                        HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Hidden">
+            <StackPanel>
+              <controls:SpendingGraph Chart="{Binding $parent[views:MainView].Chart}" Interacted="OnInteracted" />
+              <Panel Height="24" />
+              <views:DateRange Chart="{Binding $parent[views:MainView].Chart}" />
+            </StackPanel>
+          </ScrollViewer>
+        </shared:FlexPanel>
+      </DockPanel>
+    </Border>
+  </DockPanel>
+
+</UserControl>

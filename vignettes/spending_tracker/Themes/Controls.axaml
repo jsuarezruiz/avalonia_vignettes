@@ -1,0 +1,65 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:SpendingTracker.Controls">
+
+  <ControlTheme x:Key="{x:Type controls:TextTransition}" TargetType="controls:TextTransition">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontWeight" Value="Light" />
+    <Setter Property="Foreground" Value="{StaticResource Text1Brush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <!-- One figure leaves through the top as the next arrives from the bottom. -->
+        <Panel ClipToBounds="True">
+          <TextBlock Text="{TemplateBinding Current}"
+                     TextAlignment="Center"
+                     VerticalAlignment="Top"
+                     HorizontalAlignment="Stretch">
+            <TextBlock.RenderTransform>
+              <TranslateTransform Y="{Binding $parent[controls:TextTransition].CurrentOffset}" />
+            </TextBlock.RenderTransform>
+          </TextBlock>
+
+          <TextBlock Text="{TemplateBinding Incoming}"
+                     TextAlignment="Center"
+                     VerticalAlignment="Top"
+                     HorizontalAlignment="Stretch">
+            <TextBlock.RenderTransform>
+              <TranslateTransform Y="{Binding $parent[controls:TextTransition].IncomingOffset}" />
+            </TextBlock.RenderTransform>
+          </TextBlock>
+        </Panel>
+
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type controls:CirclePercentage}" TargetType="controls:CirclePercentage">
+    <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+    <Setter Property="FontWeight" Value="Light" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Foreground" Value="{StaticResource Text1Brush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <StackPanel HorizontalAlignment="Center">
+          <TextBlock Text="{TemplateBinding Title}"
+                     Foreground="{StaticResource Text0Brush}"
+                     HorizontalAlignment="Center" />
+
+          <Panel Margin="12">
+            <controls:PercentageRing Percent="{TemplateBinding Value}"
+                                     Color0="{TemplateBinding Color0}"
+                                     Color1="{TemplateBinding Color1}" />
+
+            <TextBlock Text="{TemplateBinding Label}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+          </Panel>
+        </StackPanel>
+
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

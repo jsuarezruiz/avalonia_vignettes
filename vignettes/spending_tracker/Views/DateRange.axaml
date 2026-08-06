@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:SpendingTracker.Controls"
+             xmlns:views="using:SpendingTracker.Views"
+             x:Class="SpendingTracker.Views.DateRange"
+             x:DataType="views:DateRange">
+
+  <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+    <StackPanel VerticalAlignment="Center">
+      <TextBlock Classes="text2" FontSize="13" Text="From" HorizontalAlignment="Center" />
+      <Panel Height="6" />
+      <controls:TextTransition Text="{Binding From}" FontSize="14" FixedWidth="120" />
+    </StackPanel>
+
+    <Panel Width="30" />
+
+    <StackPanel VerticalAlignment="Center">
+      <TextBlock Classes="text2" FontSize="13" Text="To" HorizontalAlignment="Center" />
+      <Panel Height="6" />
+      <controls:TextTransition Text="{Binding To}" FontSize="14" FixedWidth="120" />
+    </StackPanel>
+
+  </StackPanel>
+
+</UserControl>

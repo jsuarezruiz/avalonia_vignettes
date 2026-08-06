@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:SpendingTracker.Controls"
+             xmlns:views="using:SpendingTracker.Views"
+             x:Class="SpendingTracker.Views.IncomeExpenseHeader"
+             x:DataType="views:IncomeExpenseHeader">
+
+  <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+    <!-- Income -->
+    <StackPanel VerticalAlignment="Center">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <Border Width="8" Height="8" Margin="0,0,8,0" Background="{StaticResource IncomeSwatchBrush}" />
+        <TextBlock Classes="text2" FontSize="11" Text="Income" />
+      </StackPanel>
+
+      <Panel Height="4" />
+
+      <controls:TextTransition Text="{Binding IncomeTotal}"
+                               FontSize="19"
+                               LetterSpacing="0.7"
+                               HorizontalAlignment="Center" />
+
+      <Panel Height="8" />
+
+      <TextBlock Classes="text1" FontSize="8" Text="{Binding IncomeAverage}" HorizontalAlignment="Center" />
+    </StackPanel>
+
+    <Panel Width="16" />
+    <Border Width="1" Height="32" Background="{StaticResource Accent1Brush}" VerticalAlignment="Center" />
+    <Panel Width="16" />
+
+    <!-- Expense -->
+    <StackPanel VerticalAlignment="Center">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <Border Width="8" Height="8" Margin="0,0,8,0" Background="{StaticResource ExpenseSwatchBrush}" />
+        <TextBlock Classes="text2" FontSize="11" Text="Expense" />
+      </StackPanel>
+
+      <Panel Height="4" />
+
+      <controls:TextTransition Text="{Binding ExpenseTotal}"
+                               FontSize="19"
+                               LetterSpacing="0.7"
+                               HorizontalAlignment="Center" />
+
+      <Panel Height="8" />
+
+      <TextBlock Classes="text1" FontSize="8" Text="{Binding ExpenseAverage}" HorizontalAlignment="Center" />
+    </StackPanel>
+
+  </StackPanel>
+
+</UserControl>

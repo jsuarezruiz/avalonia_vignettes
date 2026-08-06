@@ -1,0 +1,10 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="using:SpendingTracker.Views"
+        x:Class="SpendingTracker.Views.MainWindow"
+        Title="Spending Tracker"
+        Width="375"
+        Height="812"
+        Background="{StaticResource Bg0Brush}">
+  <views:MainView />
+</Window>

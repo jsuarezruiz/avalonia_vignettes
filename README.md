@@ -96,6 +96,12 @@ Press the zoom and the speaker spins through a frame sequence, then the callouts
 
 Twenty thousand particles in four presets, handed to Skia in a single `drawVertices` call.
 
+<a href="vignettes/spending_tracker"><img src="vignettes/spending_tracker/images/spending_tracker.gif" width="237"/></a>
+
+### [BudgetTracker Graphs](vignettes/spending_tracker)
+
+Drag the chart through the months and it snaps to a whole one when let go, with the totals rolling over as it moves.
+
 ## Running
 
 Needs the .NET 10 SDK. Each vignette is its own app:

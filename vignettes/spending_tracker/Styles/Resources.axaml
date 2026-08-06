@@ -1,0 +1,31 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <FontFamily x:Key="BodyFont">avares://SpendingTracker/Assets/Fonts#Lato</FontFamily>
+  <FontFamily x:Key="TitleFont">avares://SpendingTracker/Assets/Fonts#Titillium Web</FontFamily>
+
+  <!-- app_colors.dart -->
+  <SolidColorBrush x:Key="Bg0Brush" Color="#FF252B40" />
+  <SolidColorBrush x:Key="Bg1Brush" Color="#FF313852" />
+  <SolidColorBrush x:Key="Accent0Brush" Color="#FF4A78ED" />
+  <SolidColorBrush x:Key="Accent1Brush" Color="#FF4C5780" />
+  <SolidColorBrush x:Key="Text0Brush" Color="#FFC3C8D9" />
+  <SolidColorBrush x:Key="Text1Brush" Color="#FFDCE2F5" />
+  <SolidColorBrush x:Key="Text2Brush" Color="#FF98A7D9" />
+  <SolidColorBrush x:Key="Text3Brush" Color="#FF67ABDF" />
+
+  <!-- The swatch beside each summary, one gradient per series. -->
+  <LinearGradientBrush x:Key="IncomeSwatchBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Color="#FF4A78ED" Offset="0" />
+    <GradientStop Color="#FF5DB391" Offset="1" />
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="ExpenseSwatchBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+    <GradientStop Color="#FFA74CBA" Offset="0" />
+    <GradientStop Color="#FFF287A6" Offset="1" />
+  </LinearGradientBrush>
+
+  <!-- Material's menu icon, on its 24 unit grid. -->
+  <StreamGeometry x:Key="MenuIcon">M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z</StreamGeometry>
+
+</ResourceDictionary>
