@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>DarkInkTransition</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.darkinktransition</ApplicationId>
+    <ApplicationTitle>Article Dark Mode</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/Android/Vignette.Android.props" />
+
+</Project>

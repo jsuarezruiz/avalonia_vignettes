@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>FluidNavBar</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.fluidnavbar</ApplicationId>
+    <ApplicationTitle>Fluid Button Bar</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/iOS/Vignette.iOS.props" />
+
+</Project>

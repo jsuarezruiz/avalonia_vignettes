@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>DrinkRewardsList</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.drinkrewardslist</ApplicationId>
+    <ApplicationTitle>Liquid Rewards Cards</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/Android/Vignette.Android.props" />
+
+</Project>

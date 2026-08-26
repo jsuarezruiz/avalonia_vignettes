@@ -1,0 +1,11 @@
+<Project>
+  <!-- Keep Debug APKs self-contained so they also run when installed outside an IDE. -->
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+  </PropertyGroup>
+
+  <!-- Avalonia.iOS brings in SkiaSharp's managed API but not its iOS native framework. -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+    <PackageReference Include="SkiaSharp.NativeAssets.iOS" Version="$(SkiaSharpVersion)" />
+  </ItemGroup>
+</Project>

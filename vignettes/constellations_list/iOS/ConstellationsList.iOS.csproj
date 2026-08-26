@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>ConstellationsList</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.constellationslist</ApplicationId>
+    <ApplicationTitle>Guide To the Stars Particles</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/iOS/Vignette.iOS.props" />
+
+</Project>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="icon_background">#161C2D</color>
+  <string name="app_description">An article reader where animated ink spreads across the page between light and dark themes.</string>
+</resources>

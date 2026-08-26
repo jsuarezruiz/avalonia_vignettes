@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>SparkleParty</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.sparkleparty</ApplicationId>
+    <ApplicationTitle>Sparkle Party Particles</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/Android/Vignette.Android.props" />
+
+</Project>

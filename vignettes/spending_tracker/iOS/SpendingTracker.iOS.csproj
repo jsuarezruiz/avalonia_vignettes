@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>SpendingTracker</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.spendingtracker</ApplicationId>
+    <ApplicationTitle>BudgetTracker Graphs</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/iOS/Vignette.iOS.props" />
+
+</Project>

@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>BubbleTabBar</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.bubbletabbar</ApplicationId>
+    <ApplicationTitle>Icon Flip Button Bar</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/Android/Vignette.Android.props" />
+
+</Project>

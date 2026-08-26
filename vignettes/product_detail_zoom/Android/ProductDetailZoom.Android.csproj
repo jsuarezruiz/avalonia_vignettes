@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>ProductDetailZoom</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.productdetailzoom</ApplicationId>
+    <ApplicationTitle>Product Zoom Transition</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/Android/Vignette.Android.props" />
+
+</Project>

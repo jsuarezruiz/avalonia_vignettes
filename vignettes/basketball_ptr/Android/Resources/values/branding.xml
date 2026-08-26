@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="icon_background">#E85D2A</color>
+  <string name="app_description">A custom pull to refresh where a basketball spins around the hoop while scores reload.</string>
+</resources>

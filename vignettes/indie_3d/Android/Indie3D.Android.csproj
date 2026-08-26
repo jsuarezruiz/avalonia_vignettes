@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>Indie3D</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.indie3d</ApplicationId>
+    <ApplicationTitle>Feature Artist Carousel</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/Android/Vignette.Android.props" />
+
+</Project>

@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>PlantForms</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.plantforms</ApplicationId>
+    <ApplicationTitle>Plant Shopping Cart</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/iOS/Vignette.iOS.props" />
+
+</Project>

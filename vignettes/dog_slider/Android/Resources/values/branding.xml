@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="icon_background">#107F86</color>
+  <string name="app_description">A characterful slider where a dog chases a ball and settles into a sit.</string>
+</resources>

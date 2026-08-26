@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="icon_background">#5B46E8</color>
+  <string name="app_description">A playful navigation bar whose buttons change size, shape, and color as they are selected.</string>
+</resources>

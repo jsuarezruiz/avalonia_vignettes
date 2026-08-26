@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>DogSlider</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.dogslider</ApplicationId>
+    <ApplicationTitle>Dog Toy Slider</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/Android/Vignette.Android.props" />
+
+</Project>

@@ -1,0 +1,28 @@
+<Project>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <AppIcon>AppIcon</AppIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)VignetteApplication.cs" Link="VignetteApplication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Main.cs" Link="Main.cs" />
+    <None Include="$(MSBuildThisFileDirectory)Info.plist" Link="Info.plist" />
+    <BundleResource Include="$(MSBuildThisFileDirectory)Resources/LaunchMark.png" Link="LaunchMark.png" />
+    <InterfaceDefinition Include="$(MSBuildThisFileDirectory)Resources/LaunchScreen.xib" Link="LaunchScreen.xib" />
+    <PartialAppManifest Include="AppMetadata.plist" />
+    <Using Include="$(VignetteAssembly).App" Alias="VignetteApp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.iOS" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildProjectDirectory)/../$(VignetteAssembly).csproj" />
+  </ItemGroup>
+</Project>

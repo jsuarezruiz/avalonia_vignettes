@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="icon_background">#453576</color>
+  <string name="app_description">An animated spending tracker with draggable monthly charts and rolling totals.</string>
+</resources>

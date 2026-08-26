@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="icon_background">#9A2D3F</color>
+  <string name="app_description">An artist carousel surrounded by drifting three-dimensional shapes and bold typography.</string>
+</resources>

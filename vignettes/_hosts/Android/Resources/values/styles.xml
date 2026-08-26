@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="VignetteTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowActionBar">false</item>
+    <item name="android:windowBackground">@drawable/splash_screen</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:statusBarColor">@color/icon_background</item>
+    <item name="android:navigationBarColor">@color/icon_background</item>
+    <item name="android:windowLightStatusBar">false</item>
+  </style>
+</resources>

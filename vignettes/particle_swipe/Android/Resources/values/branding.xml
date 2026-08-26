@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="icon_background">#20345E</color>
+  <string name="app_description">An inbox where swipe actions burst into expressive animated particle effects.</string>
+</resources>

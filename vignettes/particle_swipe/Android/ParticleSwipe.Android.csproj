@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>ParticleSwipe</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.particleswipe</ApplicationId>
+    <ApplicationTitle>Inbox Swipe Particles</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/Android/Vignette.Android.props" />
+
+</Project>

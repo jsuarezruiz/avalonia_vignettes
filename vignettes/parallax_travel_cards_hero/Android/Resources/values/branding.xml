@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="icon_background">#196B9A</color>
+  <string name="app_description">A travel card that expands into a layered Paris scene with an animated hero transition.</string>
+</resources>

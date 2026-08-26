@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="icon_background">#65528F</color>
+  <string name="app_description">A product page with a cinematic zoom, spinning speaker, and animated detail callouts.</string>
+</resources>

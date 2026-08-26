@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="icon_background">#342A78</color>
+  <string name="app_description">A high-performance particle playground with fireworks, comets, pinwheels, and waterfalls.</string>
+</resources>

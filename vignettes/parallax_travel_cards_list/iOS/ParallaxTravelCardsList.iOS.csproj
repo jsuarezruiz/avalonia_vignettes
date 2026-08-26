@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>ParallaxTravelCardsList</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.parallaxtravelcardslist</ApplicationId>
+    <ApplicationTitle>Travel Cards</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/iOS/Vignette.iOS.props" />
+
+</Project>

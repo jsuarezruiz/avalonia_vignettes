@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>BasketballPullToRefresh</VignetteAssembly>
+    <ApplicationId>org.avaloniavignettes.basketballpulltorefresh</ApplicationId>
+    <ApplicationTitle>Sports App Pull To Refresh</ApplicationTitle>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/Android/Vignette.Android.props" />
+
+</Project>
