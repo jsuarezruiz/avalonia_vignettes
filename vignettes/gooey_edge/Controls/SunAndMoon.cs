@@ -19,28 +19,16 @@ namespace GooeyEdge.Controls;
 /// </remarks>
 public sealed class SunAndMoon : Panel
 {
-    /// <summary>
-    /// Defines the <see cref="Index"/> property.
-    /// </summary>
     public static readonly StyledProperty<int> IndexProperty =
         AvaloniaProperty.Register<SunAndMoon, int>(nameof(Index));
 
-    /// <summary>
-    /// Defines the <see cref="IsDragCompleted"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsDragCompletedProperty =
         AvaloniaProperty.Register<SunAndMoon, bool>(nameof(IsDragCompleted));
 
     private const string ImageRoot = "avares://GooeyEdge/Assets/Images";
 
-    /// <summary>
-    /// How far out the bodies orbit, in pixels.
-    /// </summary>
     private const double RotationRadius = 300d;
 
-    /// <summary>
-    /// The size each body is drawn at.
-    /// </summary>
     private const double BodySize = 60d;
 
     private static readonly TimeSpan RotationDuration = TimeSpan.FromMilliseconds(350);
@@ -53,9 +41,6 @@ public sealed class SunAndMoon : Panel
         ("Moon-Crescent", 180d),
     ];
 
-    /// <summary>
-    /// Defines the <see cref="RotationAngle"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> RotationAngleProperty =
         AvaloniaProperty.Register<SunAndMoon, double>(nameof(RotationAngle));
 
@@ -71,9 +56,6 @@ public sealed class SunAndMoon : Panel
         RotationAngleProperty.Changed.AddClassHandler<SunAndMoon>((x, e) => x._rotation.Angle = e.GetNewValue<double>());
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SunAndMoon"/> class.
-    /// </summary>
     public SunAndMoon()
     {
         IsHitTestVisible = false;
@@ -146,10 +128,8 @@ public sealed class SunAndMoon : Panel
         set => SetValue(RotationAngleProperty, value);
     }
 
-    /// <summary>
-    /// Turns the circle a third of a turn per page and crossfades to the body that belongs to it.
-    /// Only a committed swipe moves it, so a swipe that springs back leaves the sky alone.
-    /// </summary>
+    // Turns the circle a third of a turn per page and crossfades to the body that belongs to it.
+    // Only a committed swipe moves it, so a swipe that springs back leaves the sky alone.
     private void UpdateForIndex()
     {
         if (!IsDragCompleted || Index == _currentIndex)

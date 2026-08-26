@@ -53,9 +53,6 @@ public sealed record BasketballGameData(
         _ => string.Empty,
     };
 
-    /// <summary>
-    /// Gets the clock, in whole minutes rather than wrapped at an hour.
-    /// </summary>
     private string TimeText => Time is not { } time
         ? "00:00"
         : string.Create(

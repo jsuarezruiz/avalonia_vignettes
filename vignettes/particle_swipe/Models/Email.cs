@@ -22,7 +22,6 @@ public sealed class Email : INotifyPropertyChanged
         _isFavorite = isFavorite;
     }
 
-    /// <inheritdoc />
     public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>

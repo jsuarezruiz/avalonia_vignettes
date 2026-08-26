@@ -31,42 +31,21 @@ namespace SpendingTracker.Controls;
 /// </remarks>
 public sealed class SpendingGraph : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Chart"/> property.
-    /// </summary>
     public static readonly StyledProperty<Chart?> ChartProperty =
         AvaloniaProperty.Register<SpendingGraph, Chart?>(nameof(Chart));
 
-    /// <summary>
-    /// Defines the <see cref="FontFamily"/> property.
-    /// </summary>
     public static readonly StyledProperty<FontFamily> FontFamilyProperty =
         TextElement.FontFamilyProperty.AddOwner<SpendingGraph>();
 
-    /// <summary>
-    /// Defines the <see cref="Interacted"/> event.
-    /// </summary>
     public static readonly RoutedEvent<InteractEventArgs> InteractedEvent =
         RoutedEvent.Register<SpendingGraph, InteractEventArgs>(nameof(Interacted), RoutingStrategies.Bubble);
 
-    /// <summary>
-    /// The height the graph is laid out against, before the app scale.
-    /// </summary>
     private const double DesignHeight = 160d;
 
-    /// <summary>
-    /// The height of the plot itself, before the app scale.
-    /// </summary>
     private const double DesignPlotHeight = 150d;
 
-    /// <summary>
-    /// How far the first month sits in from the left edge.
-    /// </summary>
     private const double Inset = 28d;
 
-    /// <summary>
-    /// How far a pointer travels before a click is taken for a drag.
-    /// </summary>
     private const double DragSlop = 3d;
 
     private static readonly string[] MonthNames =
@@ -74,15 +53,9 @@ public sealed class SpendingGraph : Control
 
     private static readonly string[] AxisLabels = ["$8k", "$6k", "$4k", "$2k", "0"];
 
-    /// <summary>
-    /// The colours the curves are stroked with, two per series.
-    /// </summary>
     private static readonly Color[] LineColours =
         [Color.Parse("#FF4A78ED"), Color.Parse("#FF5DB391"), Color.Parse("#FFA74CBA"), Color.Parse("#FFF287A6")];
 
-    /// <summary>
-    /// The colours the areas under the curves are filled with, two per series.
-    /// </summary>
     private static readonly Color[] FillColours =
         [Color.Parse("#4C4AC3E5"), Color.Parse("#005290C7"), Color.Parse("#4CDEACD0"), Color.Parse("#00DEACD0")];
 
@@ -113,9 +86,6 @@ public sealed class SpendingGraph : Control
         AffectsRender<SpendingGraph>(ChartProperty, FontFamilyProperty);
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SpendingGraph"/> class.
-    /// </summary>
     public SpendingGraph()
     {
         _selectedFade = new AnimationController(this, _ => InvalidateVisual())
@@ -154,17 +124,10 @@ public sealed class SpendingGraph : Control
         set => SetValue(FontFamilyProperty, value);
     }
 
-    /// <summary>
-    /// Gets the face the labels are lettered in, which is Flutter's w200 for this family.
-    /// </summary>
     private Typeface Light => new(FontFamily, FontStyle.Normal, FontWeight.Light);
 
-    /// <summary>
-    /// Gets the face the picked month is lettered in.
-    /// </summary>
     private Typeface Bold => new(FontFamily, FontStyle.Normal, FontWeight.Bold);
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -196,13 +159,11 @@ public sealed class SpendingGraph : Control
         PaintValues(context, chart, width, height);
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize) =>
         new(
             double.IsInfinity(availableSize.Width) ? 0d : availableSize.Width,
             DesignHeight * AppScale.Of(this));
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -213,7 +174,6 @@ public sealed class SpendingGraph : Control
         }
     }
 
-    /// <inheritdoc />
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -224,7 +184,6 @@ public sealed class SpendingGraph : Control
         e.Pointer.Capture(this);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -251,7 +210,6 @@ public sealed class SpendingGraph : Control
         _lastAt = position;
     }
 
-    /// <inheritdoc />
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -275,7 +233,6 @@ public sealed class SpendingGraph : Control
         }
     }
 
-    /// <inheritdoc />
     protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
     {
         base.OnPointerWheelChanged(e);
@@ -291,9 +248,6 @@ public sealed class SpendingGraph : Control
     private static double Lerp(double from, double to, double progress) =>
         (from * (1d - progress)) + (to * progress);
 
-    /// <summary>
-    /// Draws the month gridlines, which step a whole month at a time.
-    /// </summary>
     private static void PaintGrid(DrawingContext context, Chart chart, double width, double height)
     {
         var span = chart.DomainEnd - chart.DomainStart;
@@ -308,9 +262,6 @@ public sealed class SpendingGraph : Control
         }
     }
 
-    /// <summary>
-    /// Ensures the gradients match the size they are being painted at.
-    /// </summary>
     private void EnsureGradients(double width, double height)
     {
         var size = new Size(width, height);
@@ -355,9 +306,6 @@ public sealed class SpendingGraph : Control
         }
     }
 
-    /// <summary>
-    /// Draws the month names under the plot, in the strip the original clips them to.
-    /// </summary>
     private void PaintMonths(DrawingContext context, Chart chart, double width, double height)
     {
         var start = chart.DomainStart;
@@ -380,9 +328,6 @@ public sealed class SpendingGraph : Control
         }
     }
 
-    /// <summary>
-    /// Draws one series: the curve, then the area beneath it.
-    /// </summary>
     private void PaintSeries(DrawingContext context, Chart chart, int index, double width, double height)
     {
         var curve = new StreamGeometry();
@@ -467,9 +412,6 @@ public sealed class SpendingGraph : Control
         }
     }
 
-    /// <summary>
-    /// Draws the line and the two halos calling out the picked month.
-    /// </summary>
     private void PaintMarker(DrawingContext context, Chart chart, double width, double height)
     {
         if (chart.SelectedDataPoint == -1)
@@ -506,9 +448,6 @@ public sealed class SpendingGraph : Control
         }
     }
 
-    /// <summary>
-    /// Draws the two columns of y axis labels, one down each edge.
-    /// </summary>
     private void PaintAxis(DrawingContext context, double width, double height)
     {
         var labels = Array.ConvertAll(
@@ -532,9 +471,6 @@ public sealed class SpendingGraph : Control
         }
     }
 
-    /// <summary>
-    /// Draws the two figures the picked month is worth.
-    /// </summary>
     private void PaintValues(DrawingContext context, Chart chart, double width, double height)
     {
         if (chart.SelectedDataPoint == -1)

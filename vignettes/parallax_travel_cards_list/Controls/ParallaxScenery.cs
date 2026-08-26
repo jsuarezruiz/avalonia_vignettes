@@ -26,33 +26,18 @@ public sealed class ParallaxScenery : Panel
     public static readonly AttachedProperty<double> MaxOffsetFactorProperty =
         AvaloniaProperty.RegisterAttached<ParallaxScenery, Control, double>("MaxOffsetFactor");
 
-    /// <summary>
-    /// Defines the <see cref="Offset"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> OffsetProperty =
         AvaloniaProperty.Register<ParallaxScenery, double>(nameof(Offset));
 
-    /// <summary>
-    /// Defines the <see cref="CardWidth"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> CardWidthProperty =
         AvaloniaProperty.Register<ParallaxScenery, double>(nameof(CardWidth));
 
-    /// <summary>
-    /// Defines the <see cref="CardHeight"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> CardHeightProperty =
         AvaloniaProperty.Register<ParallaxScenery, double>(nameof(CardHeight));
 
-    /// <summary>
-    /// Defines the <see cref="MaxParallax"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> MaxParallaxProperty =
         AvaloniaProperty.Register<ParallaxScenery, double>(nameof(MaxParallax), 30d);
 
-    /// <summary>
-    /// Defines the <see cref="BaselineFactor"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> BaselineFactorProperty =
         AvaloniaProperty.Register<ParallaxScenery, double>(nameof(BaselineFactor), 0.45d);
 
@@ -137,7 +122,6 @@ public sealed class ParallaxScenery : Panel
     public static void SetMaxOffsetFactor(Control control, double value) =>
         control.SetValue(MaxOffsetFactorProperty, value);
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         var size = new Size(Math.Max(0d, CardWidth - ContainerPadding), Math.Max(0d, CardHeight));
@@ -151,7 +135,6 @@ public sealed class ParallaxScenery : Panel
         return size;
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         var offset = Offset;

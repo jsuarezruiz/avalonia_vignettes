@@ -16,45 +16,24 @@ namespace ConstellationsList.Controls;
 /// </remarks>
 public sealed class OutlinedText : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Text"/> property.
-    /// </summary>
     public static readonly StyledProperty<string?> TextProperty =
         AvaloniaProperty.Register<OutlinedText, string?>(nameof(Text));
 
-    /// <summary>
-    /// Defines the <see cref="FontFamily"/> property.
-    /// </summary>
     public static readonly StyledProperty<FontFamily> FontFamilyProperty =
         TextBlock.FontFamilyProperty.AddOwner<OutlinedText>();
 
-    /// <summary>
-    /// Defines the <see cref="FontSize"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> FontSizeProperty =
         TextBlock.FontSizeProperty.AddOwner<OutlinedText>();
 
-    /// <summary>
-    /// Defines the <see cref="Foreground"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> ForegroundProperty =
         TextBlock.ForegroundProperty.AddOwner<OutlinedText>();
 
-    /// <summary>
-    /// Defines the <see cref="IsOutlined"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsOutlinedProperty =
         AvaloniaProperty.Register<OutlinedText, bool>(nameof(IsOutlined));
 
-    /// <summary>
-    /// Defines the <see cref="LineHeight"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> LineHeightProperty =
         AvaloniaProperty.Register<OutlinedText, double>(nameof(LineHeight), double.NaN);
 
-    /// <summary>
-    /// The width of the outline, when the text is stroked.
-    /// </summary>
     private const double StrokeWidth = 1d;
 
     static OutlinedText()
@@ -117,7 +96,6 @@ public sealed class OutlinedText : Control
         set => SetValue(LineHeightProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -159,7 +137,6 @@ public sealed class OutlinedText : Control
     private ImmutablePen? _stroke;
     private double _geometryTop = double.NaN;
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -178,7 +155,6 @@ public sealed class OutlinedText : Control
         }
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         if (Build() is not { } formatted)

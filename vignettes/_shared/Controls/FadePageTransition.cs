@@ -71,7 +71,6 @@ public sealed class FadePageTransition : IPageTransition
         page.Opacity = 0d;
     }
 
-    /// <inheritdoc />
     public async Task Start(Visual? from, Visual? to, bool forward, CancellationToken cancellationToken)
     {
         // Taking the fade over from Prepare, in that order: the page is only handed back once
@@ -107,10 +106,8 @@ public sealed class FadePageTransition : IPageTransition
         await Task.WhenAll(running);
     }
 
-    /// <summary>
-    /// Builds a fade that holds, runs over a window of the navigation, then holds again, the
-    /// equivalent of wrapping an <c>Interval</c> around a <c>Tween</c>.
-    /// </summary>
+    // Builds a fade that holds, runs over a window of the navigation, then holds again, the
+    // equivalent of wrapping an Interval around a Tween.
     private Avalonia.Animation.Animation Fade(double from, double to, double begin, double end)
     {
         var animation = new Avalonia.Animation.Animation { Duration = Duration, FillMode = FillMode.Forward };

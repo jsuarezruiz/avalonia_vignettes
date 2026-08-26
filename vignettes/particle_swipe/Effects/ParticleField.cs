@@ -59,24 +59,12 @@ public sealed class ParticleField
     /// </summary>
     public static readonly Color FavoriteColor = Color.FromRgb(0x54, 0xD8, 0xE6);
 
-    /// <summary>
-    /// Downward pull applied every frame.
-    /// </summary>
     private const double Gravity = 0.05d;
 
-    /// <summary>
-    /// How much life a particle loses every frame.
-    /// </summary>
     private const double LifeDecay = 0.01d;
 
-    /// <summary>
-    /// Alternate particles are drawn faintly, which is what gives a burst its depth.
-    /// </summary>
     private const double StrongAlpha = 0.8d;
 
-    /// <summary>
-    /// The alpha of the faint particles.
-    /// </summary>
     private const double FaintAlpha = 0.3d;
 
     private readonly List<Particle> _particles = [];

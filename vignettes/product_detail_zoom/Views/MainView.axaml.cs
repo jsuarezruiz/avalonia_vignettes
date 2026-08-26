@@ -19,19 +19,10 @@ namespace ProductDetailZoom.Views;
 /// </remarks>
 public partial class MainView : UserControl
 {
-    /// <summary>
-    /// How long the zoom takes, from <c>FadeColorPageRoute</c>.
-    /// </summary>
     private static readonly TimeSpan RouteDuration = TimeSpan.FromSeconds(3);
 
-    /// <summary>
-    /// How long the copy takes to slide aside, from <c>_transitionAnimController</c>.
-    /// </summary>
     private static readonly TimeSpan CopySlideDuration = TimeSpan.FromMilliseconds(1200);
 
-    /// <summary>
-    /// How long to let the button fade before the route starts.
-    /// </summary>
     private static readonly TimeSpan PressDelay = TimeSpan.FromMilliseconds(300);
 
     private readonly FadePageTransition _transition = new()
@@ -45,9 +36,6 @@ public partial class MainView : UserControl
 
     private DetailPage? _detail;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         InitializeComponent();
@@ -63,9 +51,6 @@ public partial class MainView : UserControl
         FadeIn(Product.ZoomButton, TimeSpan.FromMilliseconds(1000), TimeSpan.FromMilliseconds(350));
     }
 
-    /// <summary>
-    /// Fades a control in after a delay, as <c>DelayedFadeIn</c> does.
-    /// </summary>
     private static void FadeIn(Visual target, TimeSpan delay, TimeSpan duration) =>
         DispatcherTimer.RunOnce(
             () => _ = new Animation
@@ -129,10 +114,8 @@ public partial class MainView : UserControl
         Product.CopySlide = 0d;
     }
 
-    /// <summary>
-    /// Nudges the copy a tenth of its width to the left over the second half of its run, which is
-    /// just enough movement to read as the page giving way.
-    /// </summary>
+    // Nudges the copy a tenth of its width to the left over the second half of its run, which is
+    // just enough movement to read as the page giving way.
     private Task SlideCopyAside()
     {
         var animation = new Animation

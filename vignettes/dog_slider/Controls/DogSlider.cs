@@ -24,84 +24,42 @@ namespace DogSlider.Controls;
 /// </remarks>
 public sealed class DogSlider : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Value"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ValueProperty =
         AvaloniaProperty.Register<DogSlider, double>(nameof(Value), defaultBindingMode: Avalonia.Data.BindingMode.TwoWay);
 
-    /// <summary>
-    /// Defines the <see cref="HorizontalPadding"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> HorizontalPaddingProperty =
         AvaloniaProperty.Register<DogSlider, double>(nameof(HorizontalPadding), 40d);
 
-    /// <summary>
-    /// Defines the <see cref="ArcRadius"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ArcRadiusProperty =
         AvaloniaProperty.Register<DogSlider, double>(nameof(ArcRadius), 15d);
 
-    /// <summary>
-    /// Defines the <see cref="BallOffset"/> property.
-    /// </summary>
     public static readonly DirectProperty<DogSlider, double> BallOffsetProperty =
         AvaloniaProperty.RegisterDirect<DogSlider, double>(nameof(BallOffset), o => o.BallOffset);
 
-    /// <summary>
-    /// Defines the <see cref="ArcScaleY"/> property.
-    /// </summary>
     public static readonly DirectProperty<DogSlider, double> ArcScaleYProperty =
         AvaloniaProperty.RegisterDirect<DogSlider, double>(nameof(ArcScaleY), o => o.ArcScaleY);
 
-    /// <summary>
-    /// Defines the <see cref="HandleX"/> property.
-    /// </summary>
     public static readonly DirectProperty<DogSlider, double> HandleXProperty =
         AvaloniaProperty.RegisterDirect<DogSlider, double>(nameof(HandleX), o => o.HandleX);
 
-    /// <summary>
-    /// Defines the <see cref="BallSize"/> property.
-    /// </summary>
     public static readonly DirectProperty<DogSlider, double> BallSizeProperty =
         AvaloniaProperty.RegisterDirect<DogSlider, double>(nameof(BallSize), o => o.BallSize);
 
-    /// <summary>
-    /// Defines the <see cref="BallLeft"/> property.
-    /// </summary>
     public static readonly DirectProperty<DogSlider, double> BallLeftProperty =
         AvaloniaProperty.RegisterDirect<DogSlider, double>(nameof(BallLeft), o => o.BallLeft);
 
-    /// <summary>
-    /// Defines the <see cref="BallBottom"/> property.
-    /// </summary>
     public static readonly DirectProperty<DogSlider, double> BallBottomProperty =
         AvaloniaProperty.RegisterDirect<DogSlider, double>(nameof(BallBottom), o => o.BallBottom);
 
-    /// <summary>
-    /// Defines the <see cref="IsArrowVisible"/> property.
-    /// </summary>
     public static readonly DirectProperty<DogSlider, bool> IsArrowVisibleProperty =
         AvaloniaProperty.RegisterDirect<DogSlider, bool>(nameof(IsArrowVisible), o => o.IsArrowVisible);
 
-    /// <summary>
-    /// Where the dog waits when the slider reads zero: off the left edge.
-    /// </summary>
     private const double OffscreenX = -50d;
 
-    /// <summary>
-    /// How far the line sits above the bottom of the slider.
-    /// </summary>
     private const double BottomPadding = 15d;
 
-    /// <summary>
-    /// How high the ball hops when pressed.
-    /// </summary>
     private const double BallHop = 30d;
 
-    /// <summary>
-    /// How long the dog waits before it starts paying attention.
-    /// </summary>
     private static readonly TimeSpan StartDelay = TimeSpan.FromMilliseconds(500);
 
     private static readonly TimeSpan PressDuration = TimeSpan.FromMilliseconds(300);
@@ -124,12 +82,13 @@ public sealed class DogSlider : TemplatedControl
     private bool _isArrowVisible = true;
     private bool _isDragging;
 
-    static DogSlider() =>
+    static DogSlider()
+    {
         ValueProperty.Changed.AddClassHandler<DogSlider>((x, _) => x.OnValueChanged());
+        ArcRadiusProperty.Changed.AddClassHandler<DogSlider>((x, e) =>
+            x.OnArcRadiusChanged(e.GetOldValue<double>()));
+    }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DogSlider"/> class.
-    /// </summary>
     public DogSlider()
     {
         _ball = new AnimationController(this, OnBallProgressChanged) { Duration = PressDuration };
@@ -216,14 +175,12 @@ public sealed class DogSlider : TemplatedControl
         private set => SetAndRaise(IsArrowVisibleProperty, ref _isArrowVisible, value);
     }
 
-    /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
         _dog = e.NameScope.Find<DogView>("PART_Dog");
     }
 
-    /// <inheritdoc />
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -240,7 +197,6 @@ public sealed class DogSlider : TemplatedControl
         MoveHandleTo(e.GetPosition(this).X);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -251,7 +207,6 @@ public sealed class DogSlider : TemplatedControl
         }
     }
 
-    /// <inheritdoc />
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -260,14 +215,12 @@ public sealed class DogSlider : TemplatedControl
         e.Pointer.Capture(null);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
     {
         base.OnPointerCaptureLost(e);
         EndDrag();
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -276,7 +229,6 @@ public sealed class DogSlider : TemplatedControl
         _ticker.Start();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
@@ -285,7 +237,6 @@ public sealed class DogSlider : TemplatedControl
         _ball.Stop();
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         var arranged = base.ArrangeOverride(finalSize);
@@ -329,8 +280,10 @@ public sealed class DogSlider : TemplatedControl
             return;
         }
 
+        var oldBallLeft = BallLeft;
+
         HandleX = Math.Clamp(x, HorizontalPadding, Bounds.Width - HorizontalPadding);
-        RaisePropertyChanged(BallLeftProperty, default, BallLeft);
+        RaisePropertyChanged(BallLeftProperty, oldBallLeft, BallLeft);
 
         SetCurrentValue(
             ValueProperty,
@@ -360,18 +313,14 @@ public sealed class DogSlider : TemplatedControl
         // The original's start-up formula and its drag formula disagree; the drag one is used for
         // both here, so setting the value in code lands the ball exactly where dragging to it would.
         // They only agree at zero, which is where the original starts, so the difference never shows.
-        HandleX = HorizontalPadding + (Value * (width - (HorizontalPadding * 2d)));
+        var oldBallLeft = BallLeft;
 
-        RaisePropertyChanged(BallLeftProperty, default, BallLeft);
-        RaisePropertyChanged(BallSizeProperty, default, BallSize);
-        RaisePropertyChanged(BallBottomProperty, default, BallBottom);
+        HandleX = HorizontalPadding + (Value * (width - (HorizontalPadding * 2d)));
+        RaisePropertyChanged(BallLeftProperty, oldBallLeft, BallLeft);
 
         UpdateTarget();
     }
 
-    /// <summary>
-    /// Sends the dog off screen at zero, and after the ball everywhere else.
-    /// </summary>
     private void UpdateTarget() => _physics.TargetX = Value == 0d ? OffscreenX : HandleX;
 
     private void StartBall(double target, TimeSpan duration)
@@ -387,11 +336,12 @@ public sealed class DogSlider : TemplatedControl
     private void OnBallProgressChanged(double progress)
     {
         var easing = _ballTo > _ballFrom ? PressEasing : ReleaseEasing;
+        var oldBallBottom = BallBottom;
 
         _ballProgress = _ballFrom + ((_ballTo - _ballFrom) * easing.Ease(progress));
 
         BallOffset = _ballProgress * BallHop;
-        RaisePropertyChanged(BallBottomProperty, default, BallBottom);
+        RaisePropertyChanged(BallBottomProperty, oldBallBottom, BallBottom);
 
         // The dip flattens out in the first half of the hop and stays flat after that.
         ArcScaleY = Math.Max(0d, 1d - (_ballProgress * 2d));
@@ -400,6 +350,15 @@ public sealed class DogSlider : TemplatedControl
     }
 
     private void UpdateArrowVisibility() => IsArrowVisible = Value == 0d && _ballProgress < 0.2d;
+
+    private void OnArcRadiusChanged(double oldRadius)
+    {
+        var oldBallSize = oldRadius * 1.35d;
+        var oldBallLeft = HandleX - (oldBallSize / 2d);
+
+        RaisePropertyChanged(BallSizeProperty, oldBallSize, BallSize);
+        RaisePropertyChanged(BallLeftProperty, oldBallLeft, BallLeft);
+    }
 
     private void SetDogWalking(bool isWalking)
     {

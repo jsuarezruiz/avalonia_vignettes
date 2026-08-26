@@ -20,15 +20,9 @@ namespace TicketFold;
 /// </remarks>
 internal static class CaptureRunner
 {
-    /// <summary>
-    /// Milliseconds after the fold begins at which to grab a frame.
-    /// </summary>
     private static readonly int[] FrameTimes = [0, 100, 200, 300, 400, 500, 600, 700, 900, 1400];
 
 
-    /// <summary>
-    /// Renders every frame to <paramref name="outputDirectory"/> and shuts the app down.
-    /// </summary>
     public static async Task RunAsync(Window window, string outputDirectory)
     {
         Directory.CreateDirectory(outputDirectory);
@@ -55,7 +49,6 @@ internal static class CaptureRunner
             FrameCapture.Write(view, size, outputDirectory, time.ToString("0000", CultureInfo.InvariantCulture));
         }
 
-        FrameCapture.Shutdown();
     }
 
 }

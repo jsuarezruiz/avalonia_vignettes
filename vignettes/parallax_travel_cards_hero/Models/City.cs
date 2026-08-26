@@ -12,15 +12,6 @@ public sealed class City
 {
     private const string ImageRoot = "avares://ParallaxTravelCardsHero/Assets/Images";
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="City"/> class.
-    /// </summary>
-    /// <param name="name">The asset folder name, also used to build the image paths.</param>
-    /// <param name="title">The headline shown on the card and at the top of the details.</param>
-    /// <param name="description">The supporting copy shown on the card.</param>
-    /// <param name="information">The longer copy shown on the details page.</param>
-    /// <param name="color">The pastel colour the card starts out filled with.</param>
-    /// <param name="hotels">The hotel recommendations for this destination.</param>
     public City(
         string name,
         string title,

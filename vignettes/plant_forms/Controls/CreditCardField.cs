@@ -12,23 +12,14 @@ namespace PlantForms.Controls;
 /// </summary>
 public sealed class CreditCardField : FormField
 {
-    /// <summary>
-    /// Defines the <see cref="CardInputType"/> property.
-    /// </summary>
     public static readonly StyledProperty<CreditCardInputType> CardInputTypeProperty =
         AvaloniaProperty.Register<CreditCardField, CreditCardInputType>(nameof(CardInputType));
 
-    /// <summary>
-    /// Defines the <see cref="Network"/> property.
-    /// </summary>
     public static readonly StyledProperty<CreditCardNetwork> NetworkProperty =
         AvaloniaProperty.Register<CreditCardField, CreditCardNetwork>(
             nameof(Network),
             defaultBindingMode: Avalonia.Data.BindingMode.TwoWay);
 
-    /// <summary>
-    /// Defines the <see cref="NetworkLabel"/> property.
-    /// </summary>
     public static readonly DirectProperty<CreditCardField, string> NetworkLabelProperty =
         AvaloniaProperty.RegisterDirect<CreditCardField, string>(nameof(NetworkLabel), o => o.NetworkLabel);
 
@@ -63,10 +54,8 @@ public sealed class CreditCardField : FormField
         private set => SetAndRaise(NetworkLabelProperty, ref _networkLabel, value);
     }
 
-    /// <inheritdoc />
     protected override Type StyleKeyOverride => typeof(FormField);
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         if (change.Property == ValueProperty && !_isFormatting)
@@ -90,7 +79,6 @@ public sealed class CreditCardField : FormField
         }
     }
 
-    /// <inheritdoc />
     protected override void Check(out bool isValid, out string error)
     {
         if (Value.Length == 0)
@@ -110,14 +98,11 @@ public sealed class CreditCardField : FormField
         }
     }
 
-    /// <inheritdoc />
     protected override string BuildCaption() =>
         Value.Length > 0 && Label.Length == 0 ? Helper : string.Empty;
 
-    /// <summary>
-    /// The number field carries a card mark: the network's name once it is known, and Material's
-    /// card outline until then, which is the icon the original falls back to.
-    /// </summary>
+    // The number field carries a card mark: the network's name once it is known, and Material's
+    // card outline until then, which is the icon the original falls back to.
     private void UpdateAccessory()
     {
         if (CardInputType != CreditCardInputType.Number)

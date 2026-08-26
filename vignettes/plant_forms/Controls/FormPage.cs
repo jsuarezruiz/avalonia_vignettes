@@ -18,27 +18,15 @@ public class FormPage : ContentControl
     private const string PartRoot = "PART_Root";
     private const string PartBackArea = "PART_BackArea";
 
-    /// <summary>
-    /// Defines the <see cref="Title"/> property.
-    /// </summary>
     public static readonly StyledProperty<string> TitleProperty =
         AvaloniaProperty.Register<FormPage, string>(nameof(Title), string.Empty);
 
-    /// <summary>
-    /// Defines the <see cref="Proportion"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ProportionProperty =
         AvaloniaProperty.Register<FormPage, double>(nameof(Proportion), 0.85d);
 
-    /// <summary>
-    /// Defines the <see cref="BackRequested"/> event.
-    /// </summary>
     public static readonly RoutedEvent<RoutedEventArgs> BackRequestedEvent =
         RoutedEvent.Register<FormPage, RoutedEventArgs>(nameof(BackRequested), RoutingStrategies.Bubble);
 
-    /// <summary>
-    /// Defines the <see cref="NextRequested"/> event.
-    /// </summary>
     public static readonly RoutedEvent<RoutedEventArgs> NextRequestedEvent =
         RoutedEvent.Register<FormPage, RoutedEventArgs>(nameof(NextRequested), RoutingStrategies.Bubble);
 
@@ -85,7 +73,6 @@ public class FormPage : ContentControl
     /// </summary>
     protected void RequestNext() => RaiseEvent(new RoutedEventArgs(NextRequestedEvent));
 
-    /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -100,7 +87,6 @@ public class FormPage : ContentControl
         ApplyProportion();
     }
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);

@@ -17,56 +17,32 @@ namespace Indie3D.Controls;
 /// </remarks>
 public sealed class ClippedTitle : Control
 {
-    /// <summary>
-    /// Defines the <see cref="TopTitle"/> property.
-    /// </summary>
     public static readonly StyledProperty<string> TopTitleProperty =
         AvaloniaProperty.Register<ClippedTitle, string>(nameof(TopTitle), string.Empty);
 
-    /// <summary>
-    /// Defines the <see cref="BottomTitle"/> property.
-    /// </summary>
     public static readonly StyledProperty<string> BottomTitleProperty =
         AvaloniaProperty.Register<ClippedTitle, string>(nameof(BottomTitle), string.Empty);
 
-    /// <summary>
-    /// Defines the <see cref="TopProgress"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> TopProgressProperty =
         AvaloniaProperty.Register<ClippedTitle, double>(nameof(TopProgress), 1d);
 
-    /// <summary>
-    /// Defines the <see cref="BottomProgress"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> BottomProgressProperty =
         AvaloniaProperty.Register<ClippedTitle, double>(nameof(BottomProgress), 1d);
 
-    /// <summary>
-    /// Defines the <see cref="BottomScale"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> BottomScaleProperty =
         AvaloniaProperty.Register<ClippedTitle, double>(nameof(BottomScale), 1d);
 
     private const double TopSize = 72d;
     private const double BottomSize = 120d;
 
-    /// <summary>
-    /// Flutter's <c>height:</c> for each line, which squeezes the two together.
-    /// </summary>
     private const double TopLineFactor = 1d;
     private const double BottomLineFactor = 0.9d;
 
     private const double TopSpacing = 6d;
     private const double BottomSpacing = 8d;
 
-    /// <summary>
-    /// How far up the bottom line's wipe starts, relative to its own box.
-    /// </summary>
     private const double BottomWipeOffset = -10d;
 
-    /// <summary>
-    /// Staatliches sits 0.95 of its size above the baseline and is 1.25 tall in all.
-    /// </summary>
     private const double Ascent = 0.95d;
     private const double NaturalLine = 1.25d;
 
@@ -125,7 +101,6 @@ public sealed class ClippedTitle : Control
         set => SetValue(BottomScaleProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -155,9 +130,6 @@ public sealed class ClippedTitle : Control
             BottomWipeOffset);
     }
 
-    /// <summary>
-    /// Draws one line, wiped from its own top, and reports the height it took.
-    /// </summary>
     private double DrawLine(
         DrawingContext context,
         int line,
@@ -194,9 +166,6 @@ public sealed class ClippedTitle : Control
         return box;
     }
 
-    /// <summary>
-    /// Gets the line's glyphs, building them only when the line or its box changes.
-    /// </summary>
     private Geometry Glyphs(int line, string text, double size, double spacing, double y)
     {
         var key = (text, size, spacing, y, Bounds.Width);
@@ -210,10 +179,8 @@ public sealed class ClippedTitle : Control
         return _cached[line]!;
     }
 
-    /// <summary>
-    /// Lays the glyphs out one at a time so the line can carry letter spacing, and right aligns the
-    /// result. Kerning is lost, which display type at this spacing does not miss.
-    /// </summary>
+    // Lays the glyphs out one at a time so the line can carry letter spacing, and right aligns the
+    // result. Kerning is lost, which display type at this spacing does not miss.
     private Geometry BuildGlyphs(string text, double size, double spacing, double y)
     {
         var typeface = new Typeface(Fonts.Display, weight: FontWeight.Bold);

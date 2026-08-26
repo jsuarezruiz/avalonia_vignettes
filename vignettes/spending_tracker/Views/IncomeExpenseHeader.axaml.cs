@@ -15,33 +15,18 @@ namespace SpendingTracker.Views;
 /// </remarks>
 public partial class IncomeExpenseHeader : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="Chart"/> property.
-    /// </summary>
     public static readonly StyledProperty<Chart?> ChartProperty =
         AvaloniaProperty.Register<IncomeExpenseHeader, Chart?>(nameof(Chart));
 
-    /// <summary>
-    /// Defines the <see cref="IncomeTotal"/> property.
-    /// </summary>
     public static readonly DirectProperty<IncomeExpenseHeader, string> IncomeTotalProperty =
         AvaloniaProperty.RegisterDirect<IncomeExpenseHeader, string>(nameof(IncomeTotal), o => o.IncomeTotal);
 
-    /// <summary>
-    /// Defines the <see cref="IncomeAverage"/> property.
-    /// </summary>
     public static readonly DirectProperty<IncomeExpenseHeader, string> IncomeAverageProperty =
         AvaloniaProperty.RegisterDirect<IncomeExpenseHeader, string>(nameof(IncomeAverage), o => o.IncomeAverage);
 
-    /// <summary>
-    /// Defines the <see cref="ExpenseTotal"/> property.
-    /// </summary>
     public static readonly DirectProperty<IncomeExpenseHeader, string> ExpenseTotalProperty =
         AvaloniaProperty.RegisterDirect<IncomeExpenseHeader, string>(nameof(ExpenseTotal), o => o.ExpenseTotal);
 
-    /// <summary>
-    /// Defines the <see cref="ExpenseAverage"/> property.
-    /// </summary>
     public static readonly DirectProperty<IncomeExpenseHeader, string> ExpenseAverageProperty =
         AvaloniaProperty.RegisterDirect<IncomeExpenseHeader, string>(nameof(ExpenseAverage), o => o.ExpenseAverage);
 
@@ -51,9 +36,6 @@ public partial class IncomeExpenseHeader : UserControl
     private string _expenseTotal = string.Empty;
     private string _expenseAverage = string.Empty;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="IncomeExpenseHeader"/> class.
-    /// </summary>
     public IncomeExpenseHeader()
     {
         InitializeComponent();
@@ -106,7 +88,6 @@ public partial class IncomeExpenseHeader : UserControl
         private set => SetAndRaise(ExpenseAverageProperty, ref _expenseAverage, value);
     }
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);

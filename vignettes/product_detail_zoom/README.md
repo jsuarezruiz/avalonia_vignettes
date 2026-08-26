@@ -9,5 +9,5 @@ Press the zoom and the speaker spins through a frame sequence while the screen g
 ## Running
 
 ```
-dotnet run --project ProductDetailZoom.csproj
+dotnet run --project Desktop/ProductDetailZoom.Desktop.csproj
 ```

@@ -11,11 +11,7 @@
 
     <views:ScoresAppBar DockPanel.Dock="Top" />
 
-    <!--
-      RefreshContainer runs the gesture: it recognises the pull, pushes the list down, sets the
-      threshold and holds the list open until the refresh is done. It cannot draw this indicator,
-      so its visualizer is left empty and the hoop is drawn behind the list. See MainView.axaml.cs.
-    -->
+    <!-- Leave the visualizer empty so the custom hoop can appear behind the list. -->
     <RefreshContainer Name="Refresh" PullDirection="TopToBottom" IsMouseEnabled="True">
 
       <RefreshContainer.Visualizer>

@@ -16,67 +16,34 @@ namespace ProductDetailZoom.Controls;
 /// </remarks>
 public sealed class SpeakerSpec : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Text"/> property.
-    /// </summary>
     public static readonly StyledProperty<string?> TextProperty =
         AvaloniaProperty.Register<SpeakerSpec, string?>(nameof(Text));
 
-    /// <summary>
-    /// Defines the <see cref="LineLength"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> LineLengthProperty =
         AvaloniaProperty.Register<SpeakerSpec, double>(nameof(LineLength), 150d);
 
-    /// <summary>
-    /// Defines the <see cref="Progress"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ProgressProperty =
         AvaloniaProperty.Register<SpeakerSpec, double>(nameof(Progress));
 
-    /// <summary>
-    /// Defines the <see cref="LineExtent"/> property.
-    /// </summary>
     public static readonly DirectProperty<SpeakerSpec, double> LineExtentProperty =
         AvaloniaProperty.RegisterDirect<SpeakerSpec, double>(nameof(LineExtent), o => o.LineExtent);
 
-    /// <summary>
-    /// Defines the <see cref="DotOffset"/> property.
-    /// </summary>
     public static readonly DirectProperty<SpeakerSpec, Thickness> DotOffsetProperty =
         AvaloniaProperty.RegisterDirect<SpeakerSpec, Thickness>(nameof(DotOffset), o => o.DotOffset);
 
-    /// <summary>
-    /// Defines the <see cref="LabelOffset"/> property.
-    /// </summary>
     public static readonly DirectProperty<SpeakerSpec, double> LabelOffsetProperty =
         AvaloniaProperty.RegisterDirect<SpeakerSpec, double>(nameof(LabelOffset), o => o.LabelOffset);
 
-    /// <summary>
-    /// Defines the <see cref="LabelOpacity"/> property.
-    /// </summary>
     public static readonly DirectProperty<SpeakerSpec, double> LabelOpacityProperty =
         AvaloniaProperty.RegisterDirect<SpeakerSpec, double>(nameof(LabelOpacity), o => o.LabelOpacity);
 
-    /// <summary>
-    /// Defines the <see cref="DotOpacity"/> property.
-    /// </summary>
     public static readonly DirectProperty<SpeakerSpec, double> DotOpacityProperty =
         AvaloniaProperty.RegisterDirect<SpeakerSpec, double>(nameof(DotOpacity), o => o.DotOpacity);
 
-    /// <summary>
-    /// Where the line starts, below the label.
-    /// </summary>
     private const double LineTop = 17d;
 
-    /// <summary>
-    /// How far in from the left edge the line and the dot sit.
-    /// </summary>
     private const double LineLeft = 5d;
 
-    /// <summary>
-    /// The label's own line height, which is how far it slides in from.
-    /// </summary>
     private const double LabelHeight = 18d;
 
     private static readonly Easing LineGrowth = FlutterEasings.EaseInOutQuad;

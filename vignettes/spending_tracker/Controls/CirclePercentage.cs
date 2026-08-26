@@ -16,39 +16,21 @@ namespace SpendingTracker.Controls;
 /// </remarks>
 public sealed class CirclePercentage : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Title"/> property.
-    /// </summary>
     public static readonly StyledProperty<string?> TitleProperty =
         AvaloniaProperty.Register<CirclePercentage, string?>(nameof(Title));
 
-    /// <summary>
-    /// Defines the <see cref="Percent"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> PercentProperty =
         AvaloniaProperty.Register<CirclePercentage, double>(nameof(Percent));
 
-    /// <summary>
-    /// Defines the <see cref="Color0"/> property.
-    /// </summary>
     public static readonly StyledProperty<Color> Color0Property =
         PercentageRing.Color0Property.AddOwner<CirclePercentage>();
 
-    /// <summary>
-    /// Defines the <see cref="Color1"/> property.
-    /// </summary>
     public static readonly StyledProperty<Color> Color1Property =
         PercentageRing.Color1Property.AddOwner<CirclePercentage>();
 
-    /// <summary>
-    /// Defines the <see cref="Value"/> property.
-    /// </summary>
     public static readonly DirectProperty<CirclePercentage, double> ValueProperty =
         AvaloniaProperty.RegisterDirect<CirclePercentage, double>(nameof(Value), o => o.Value);
 
-    /// <summary>
-    /// Defines the <see cref="Label"/> property.
-    /// </summary>
     public static readonly DirectProperty<CirclePercentage, string> LabelProperty =
         AvaloniaProperty.RegisterDirect<CirclePercentage, string>(nameof(Label), o => o.Label);
 
@@ -58,9 +40,6 @@ public sealed class CirclePercentage : TemplatedControl
     private double _value;
     private string _label = "0%";
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CirclePercentage"/> class.
-    /// </summary>
     public CirclePercentage() =>
         _count = new InterpolationAnimation(this, OnCounted)
         {
@@ -121,7 +100,6 @@ public sealed class CirclePercentage : TemplatedControl
         private set => SetAndRaise(LabelProperty, ref _label, value);
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -132,7 +110,6 @@ public sealed class CirclePercentage : TemplatedControl
         _count.AnimateTo(Percent);
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
@@ -142,7 +119,6 @@ public sealed class CirclePercentage : TemplatedControl
         _count.Stop();
     }
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);

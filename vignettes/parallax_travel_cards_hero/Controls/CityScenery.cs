@@ -19,72 +19,36 @@ namespace ParallaxTravelCardsHero.Controls;
 /// </remarks>
 public sealed class CityScenery : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="AnimationValue"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> AnimationValueProperty =
         AvaloniaProperty.Register<CityScenery, double>(nameof(AnimationValue));
 
-    /// <summary>
-    /// Defines the <see cref="ScreenWidth"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScreenWidthProperty =
         AvaloniaProperty.Register<CityScenery, double>(nameof(ScreenWidth));
 
-    /// <summary>
-    /// Defines the <see cref="ScreenHeight"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScreenHeightProperty =
         AvaloniaProperty.Register<CityScenery, double>(nameof(ScreenHeight));
 
-    /// <summary>
-    /// Defines the <see cref="City"/> property.
-    /// </summary>
     public static readonly StyledProperty<City?> CityProperty =
         AvaloniaProperty.Register<CityScenery, City?>(nameof(City));
 
-    /// <summary>
-    /// Defines the <see cref="SceneryBrush"/> property.
-    /// </summary>
     public static readonly DirectProperty<CityScenery, IBrush?> SceneryBrushProperty =
         AvaloniaProperty.RegisterDirect<CityScenery, IBrush?>(nameof(SceneryBrush), o => o.SceneryBrush);
 
-    /// <summary>
-    /// Defines the <see cref="CardCornerRadius"/> property.
-    /// </summary>
     public static readonly DirectProperty<CityScenery, CornerRadius> CardCornerRadiusProperty =
         AvaloniaProperty.RegisterDirect<CityScenery, CornerRadius>(nameof(CardCornerRadius), o => o.CardCornerRadius);
 
-    /// <summary>
-    /// Defines the <see cref="CardInfoOpacity"/> property.
-    /// </summary>
     public static readonly DirectProperty<CityScenery, double> CardInfoOpacityProperty =
         AvaloniaProperty.RegisterDirect<CityScenery, double>(nameof(CardInfoOpacity), o => o.CardInfoOpacity);
 
-    /// <summary>
-    /// Defines the <see cref="SkylineReserve"/> property.
-    /// </summary>
     public static readonly DirectProperty<CityScenery, double> SkylineReserveProperty =
         AvaloniaProperty.RegisterDirect<CityScenery, double>(nameof(SkylineReserve), o => o.SkylineReserve);
 
-    /// <summary>
-    /// The corner radius of the closed card, <c>Styles.cardBorderRadius</c>.
-    /// </summary>
     private const double ClosedCornerRadius = 10d;
 
-    /// <summary>
-    /// The share of the screen's height the card copy leaves clear for the skyline.
-    /// </summary>
     private const double SkylineReserveFactor = 0.22d;
 
-    /// <summary>
-    /// The colour the top of the gradient reaches once the card is fully open.
-    /// </summary>
     private static readonly Color OpenGradientStart = Color.FromRgb(0xFD, 0xE9, 0xC8);
 
-    /// <summary>
-    /// The colour the bottom of the gradient reaches once the card is fully open.
-    /// </summary>
     private static readonly Color OpenGradientEnd = Color.FromRgb(0xFD, 0xF8, 0xF1);
 
     private static readonly Easing CardInfoFade = new IntervalEasing(0d, 0.22d);
@@ -203,9 +167,6 @@ public sealed class CityScenery : TemplatedControl
         CardInfoOpacity = 1d - CardInfoFade.Ease(value);
     }
 
-    /// <summary>
-    /// Blends two colours channel by channel, the way Flutter's <c>ColorTween</c> does.
-    /// </summary>
     private static Color Lerp(Color from, Color to, double progress)
     {
         return Color.FromArgb(

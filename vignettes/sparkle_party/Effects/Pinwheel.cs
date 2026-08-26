@@ -7,24 +7,17 @@ namespace SparkleParty.Effects;
 /// </summary>
 public sealed class Pinwheel : ParticleField
 {
-    /// <summary>
-    /// How many arms the wheel throws.
-    /// </summary>
     private const int Arms = 11;
 
     private double _hue;
     private Point _point;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Pinwheel"/> class.
-    /// </summary>
     public Pinwheel(SpriteSheet sheet, Size size)
         : base(sheet, size)
     {
         _point = Center;
     }
 
-    /// <inheritdoc />
     public override void Tick()
     {
         var target = TouchPoint ?? Center;

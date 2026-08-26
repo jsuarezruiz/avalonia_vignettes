@@ -15,21 +15,12 @@ namespace ParallaxTravelCardsList.Controls;
 /// </remarks>
 public sealed class HotelList : ItemsControl
 {
-    /// <summary>
-    /// Defines the <see cref="ScreenHeight"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScreenHeightProperty =
         AvaloniaProperty.Register<HotelList, double>(nameof(ScreenHeight));
 
-    /// <summary>
-    /// Defines the <see cref="SectionHeight"/> property.
-    /// </summary>
     public static readonly DirectProperty<HotelList, double> SectionHeightProperty =
         AvaloniaProperty.RegisterDirect<HotelList, double>(nameof(SectionHeight), o => o.SectionHeight);
 
-    /// <summary>
-    /// The section takes a quarter of the screen height, as in the Flutter original.
-    /// </summary>
     private const double SectionHeightFactor = 0.25d;
 
     private static readonly Animation FadeIn = new()
@@ -73,7 +64,6 @@ public sealed class HotelList : ItemsControl
         private set => SetAndRaise(SectionHeightProperty, ref _sectionHeight, value);
     }
 
-    /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);

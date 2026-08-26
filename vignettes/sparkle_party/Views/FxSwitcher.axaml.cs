@@ -12,9 +12,6 @@ namespace SparkleParty.Views;
 /// </summary>
 public partial class FxSwitcher : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="Selected"/> property.
-    /// </summary>
     public static readonly StyledProperty<int> SelectedProperty =
         AvaloniaProperty.Register<FxSwitcher, int>(nameof(Selected));
 
@@ -22,9 +19,6 @@ public partial class FxSwitcher : UserControl
 
     private Image[] _icons = [];
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FxSwitcher"/> class.
-    /// </summary>
     public FxSwitcher()
     {
         InitializeComponent();
@@ -48,7 +42,6 @@ public partial class FxSwitcher : UserControl
         set => SetValue(SelectedProperty, value);
     }
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);

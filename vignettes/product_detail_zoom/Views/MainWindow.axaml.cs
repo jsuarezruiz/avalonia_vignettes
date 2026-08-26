@@ -8,9 +8,6 @@ namespace ProductDetailZoom.Views;
 /// </summary>
 public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainWindow"/> class.
-    /// </summary>
     public MainWindow() => InitializeComponent();
 
     private void InitializeComponent() => AvaloniaXamlLoader.Load(this);

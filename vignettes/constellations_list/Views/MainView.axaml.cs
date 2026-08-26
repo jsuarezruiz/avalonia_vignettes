@@ -25,30 +25,19 @@ namespace ConstellationsList.Views;
 /// </remarks>
 public partial class MainView : UserControl
 {
-    /// <summary>
-    /// How fast the field drifts when nothing is happening.
-    /// </summary>
     private const double IdleSpeed = 0.2d;
 
-    /// <summary>
-    /// The fastest the list's own scrolling can drive the field.
-    /// </summary>
     private const double MaxSpeed = 10d;
 
-    /// <summary>
-    /// How long after the last scroll report the field drops back to its drift. Flutter keeps
-    /// sending scroll notifications as a list settles and ends with a delta of zero, which is what
-    /// returns it to idle there; Avalonia only reports while the offset is actually changing, so the
-    /// last delta would otherwise stand forever and the stars would fly on for good.
-    /// </summary>
+    // How long after the last scroll report the field drops back to its drift. Flutter keeps
+    // sending scroll notifications as a list settles and ends with a delta of zero, which is what
+    // returns it to idle there; Avalonia only reports while the offset is actually changing, so the
+    // last delta would otherwise stand forever and the stars would fly on for good.
     private static readonly TimeSpan ScrollRest = TimeSpan.FromMilliseconds(120);
 
     private static readonly TimeSpan FlightDuration = TimeSpan.FromMilliseconds(3000);
     private static readonly TimeSpan PageFade = TimeSpan.FromSeconds(1);
 
-    /// <summary>
-    /// The detail page waits out the flight, then a beat more, before revealing itself.
-    /// </summary>
     private static readonly TimeSpan ContentDelay = FlightDuration + TimeSpan.FromMilliseconds(1000);
 
     private readonly AnimationController _starFlight;
@@ -62,9 +51,6 @@ public partial class MainView : UserControl
     private Rect _flightFrom;
     private Rect _flightTo;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         InitializeComponent();
@@ -79,10 +65,8 @@ public partial class MainView : UserControl
         Pages.Content = _list;
     }
 
-    /// <summary>
-    /// The speed the field runs at part way through the flight. It is pulled back before being
-    /// thrown forward, and the three legs take a fifth, a third and a half of the run.
-    /// </summary>
+    // The speed the field runs at part way through the flight. It is pulled back before being
+    // thrown forward, and the three legs take a fifth, a third and a half of the run.
     private static double FlightSpeedAt(double progress) => progress switch
     {
         < 0.2d => Lerp(IdleSpeed, -2d, FlutterEasings.EaseOut.Ease(progress / 0.2d)),
@@ -196,16 +180,11 @@ public partial class MainView : UserControl
             DispatcherPriority.Loaded);
     }
 
-    /// <summary>
-    /// Where a control sits in this view's coordinates, right now.
-    /// </summary>
     private Rect RectOf(Control control) =>
         new(control.TranslatePoint(default, this) ?? default, control.Bounds.Size);
 
-    /// <summary>
-    /// Sends a copy of the card from one page's slot to the other's, hiding both ends while it is in
-    /// the air. This stands in for Flutter's <c>Hero</c>, which the nested navigator gives it for free.
-    /// </summary>
+    // Sends a copy of the card from one page's slot to the other's, hiding both ends while it is in
+    // the air. This stands in for Flutter's Hero, which the nested navigator gives it for free.
     private void StartCardFlight(
         Rect origin,
         Control from,

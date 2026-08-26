@@ -20,11 +20,6 @@ public sealed class LinearPointEasing : Easing
     private readonly double _upperScale;
     private readonly double _upperOffset;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="LinearPointEasing"/> class.
-    /// </summary>
-    /// <param name="input">Where along the input the moved point sits.</param>
-    /// <param name="output">Where that point is moved to.</param>
     public LinearPointEasing(double input, double output)
     {
         _input = input;
@@ -33,7 +28,6 @@ public sealed class LinearPointEasing : Easing
         _upperOffset = 1d - _upperScale;
     }
 
-    /// <inheritdoc />
     public override double Ease(double progress) =>
         progress < _input ? progress * _lowerScale : (progress * _upperScale) + _upperOffset;
 }
@@ -53,7 +47,6 @@ public sealed class CenteredElasticOutEasing : Easing
     /// </summary>
     public double Period { get; set; } = 0.4d;
 
-    /// <inheritdoc />
     public override double Ease(double progress) =>
         (Math.Pow(2d, -10d * progress) * Math.Sin(progress * 2d * Math.PI / Period)) + 0.5d;
 }
@@ -69,7 +62,6 @@ public sealed class CenteredElasticInEasing : Easing
     /// </summary>
     public double Period { get; set; } = 0.4d;
 
-    /// <inheritdoc />
     public override double Ease(double progress) =>
         (-Math.Pow(2d, 10d * (progress - 1d)) * Math.Sin((progress - 1d) * 2d * Math.PI / Period)) + 0.5d;
 }

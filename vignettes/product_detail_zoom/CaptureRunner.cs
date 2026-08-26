@@ -15,9 +15,6 @@ namespace ProductDetailZoom;
 internal static class CaptureRunner
 {
 
-    /// <summary>
-    /// Renders every frame to <paramref name="outputDirectory"/> and shuts the app down.
-    /// </summary>
     public static async Task RunAsync(Window window, string outputDirectory)
     {
         Directory.CreateDirectory(outputDirectory);
@@ -49,7 +46,6 @@ internal static class CaptureRunner
         await Task.Delay(1200);
         FrameCapture.Write(view, size, outputDirectory, "5_detail");
 
-        FrameCapture.Shutdown();
     }
 
 }

@@ -23,51 +23,24 @@ namespace DogSlider.Controls;
 /// </remarks>
 public sealed class DogView : Control
 {
-    /// <summary>
-    /// Defines the <see cref="IsWalking"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsWalkingProperty =
         AvaloniaProperty.Register<DogView, bool>(nameof(IsWalking));
 
-    /// <summary>
-    /// Defines the <see cref="IsFlipped"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsFlippedProperty =
         AvaloniaProperty.Register<DogView, bool>(nameof(IsFlipped));
 
-    /// <summary>
-    /// The grid the dog is drawn on, nose to tail.
-    /// </summary>
     private const double DesignWidth = 100d;
 
-    /// <summary>
-    /// The grid the dog is drawn on, ears to paws.
-    /// </summary>
     private const double DesignHeight = 56d;
 
-    /// <summary>
-    /// How long one full stride takes.
-    /// </summary>
     private const double StrideSeconds = 0.42d;
 
-    /// <summary>
-    /// How long the dog takes to fold into a sit.
-    /// </summary>
     private const double SitSeconds = 0.35d;
 
-    /// <summary>
-    /// How far a leg swings, in degrees.
-    /// </summary>
     private const double LegSwing = 24d;
 
-    /// <summary>
-    /// Where the legs hang from.
-    /// </summary>
     private const double HipY = 36d;
 
-    /// <summary>
-    /// How long a leg is. Short and stubby, as the original draws them.
-    /// </summary>
     private const double LegLength = 19d;
 
     private static readonly IBrush CoatBrush = new SolidColorBrush(Color.FromRgb(0xE7, 0xCB, 0xB9));
@@ -104,7 +77,6 @@ public sealed class DogView : Control
         set => SetValue(IsFlippedProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -138,10 +110,8 @@ public sealed class DogView : Control
         }
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize) => new(DesignWidth, DesignHeight);
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -150,7 +120,6 @@ public sealed class DogView : Control
         _ticker.Start();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
@@ -209,10 +178,8 @@ public sealed class DogView : Control
         DrawLeg(context, 70d, Math.Sin(phase) * swing, LegLength, CoatBrush);
     }
 
-    /// <summary>
-    /// The thigh the dog settles onto. It is hidden inside the barrel while standing and swings out
-    /// below it as the dog sits, which is what keeps the silhouette from simply swelling.
-    /// </summary>
+    // The thigh the dog settles onto. It is hidden inside the barrel while standing and swings out
+    // below it as the dog sits, which is what keeps the silhouette from simply swelling.
     private static void DrawHaunch(DrawingContext context, double sit)
     {
         context.DrawEllipse(
@@ -313,11 +280,9 @@ public sealed class DogView : Control
         }
     }
 
-    /// <summary>
-    /// Draws a leg as two segments with a knee between them. The knee tucks as the leg swings
-    /// through and straightens as it takes weight, which lifts the paw clear of the ground instead
-    /// of dragging it: a straight rod on a hinge reads as a pendulum, not a step.
-    /// </summary>
+    // Draws a leg as two segments with a knee between them. The knee tucks as the leg swings
+    // through and straightens as it takes weight, which lifts the paw clear of the ground instead
+    // of dragging it: a straight rod on a hinge reads as a pendulum, not a step.
     private static void DrawLeg(DrawingContext context, double x, double angle, double length, IBrush brush)
     {
         if (length <= 0d)
@@ -353,9 +318,6 @@ public sealed class DogView : Control
         }
     }
 
-    /// <summary>
-    /// Builds a closed shape from a start point and a run of cubic segments.
-    /// </summary>
     private static StreamGeometry Path(
         (double X, double Y) start,
         ((double X, double Y) C1, (double X, double Y) C2, (double X, double Y) End)[] curves)

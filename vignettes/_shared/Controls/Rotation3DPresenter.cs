@@ -16,27 +16,15 @@ namespace AvaloniaVignettes.Shared.Controls;
 /// </remarks>
 public sealed class Rotation3DPresenter : Decorator
 {
-    /// <summary>
-    /// Defines the <see cref="RotationX"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> RotationXProperty =
         AvaloniaProperty.Register<Rotation3DPresenter, double>(nameof(RotationX));
 
-    /// <summary>
-    /// Defines the <see cref="RotationY"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> RotationYProperty =
         AvaloniaProperty.Register<Rotation3DPresenter, double>(nameof(RotationY));
 
-    /// <summary>
-    /// Defines the <see cref="RotationZ"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> RotationZProperty =
         AvaloniaProperty.Register<Rotation3DPresenter, double>(nameof(RotationZ));
 
-    /// <summary>
-    /// Defines the <see cref="Perspective"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> PerspectiveProperty =
         AvaloniaProperty.Register<Rotation3DPresenter, double>(nameof(Perspective), Rotation3D.DefaultPerspective);
 
@@ -50,9 +38,6 @@ public sealed class Rotation3DPresenter : Decorator
         PerspectiveProperty.Changed.AddClassHandler<Rotation3DPresenter>((x, _) => x.UpdateTransform());
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Rotation3DPresenter"/> class.
-    /// </summary>
     public Rotation3DPresenter()
     {
         RenderTransform = _transform;

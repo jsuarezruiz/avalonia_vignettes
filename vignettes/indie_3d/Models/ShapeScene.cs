@@ -28,29 +28,14 @@ public sealed class ShapeScene
     /// </summary>
     public const int LayerCount = InstanceCount / LayerSize;
 
-    /// <summary>
-    /// How far the shapes drift up each second.
-    /// </summary>
     private const float RiseRate = 1f;
 
-    /// <summary>
-    /// Where a shape wraps round to the bottom.
-    /// </summary>
     private const float WrapHeight = 16f;
 
-    /// <summary>
-    /// How quickly a shape's velocities bleed away.
-    /// </summary>
     private const float Drag = 0.2f;
 
-    /// <summary>
-    /// How far back the camera sits.
-    /// </summary>
     private const float CameraDistance = 5.2f;
 
-    /// <summary>
-    /// How quickly the camera catches up with the page being scrolled to.
-    /// </summary>
     private const float CameraChase = 4f;
 
     private readonly Vector3[] _positions = new Vector3[InstanceCount];
@@ -64,9 +49,6 @@ public sealed class ShapeScene
     private Matrix4x4 _projection = Matrix4x4.Identity;
     private float _cameraOffset;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ShapeScene"/> class.
-    /// </summary>
     public ShapeScene()
     {
         _meshes = [ObjLoader.Load("torus"), ObjLoader.Load("star"), ObjLoader.Load("cube")];
@@ -180,9 +162,6 @@ public sealed class ShapeScene
         }
     }
 
-    /// <summary>
-    /// Bleeds a velocity away. Per frame rather than per second, as the original has it.
-    /// </summary>
     private static Vector3 Slowed(Vector3 velocity)
     {
         var length = velocity.Length();

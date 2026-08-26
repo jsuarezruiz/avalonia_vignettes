@@ -27,15 +27,9 @@ namespace SparkleParty.Controls;
 /// </remarks>
 public sealed class ParticleView : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Field"/> property.
-    /// </summary>
     public static readonly StyledProperty<ParticleField?> FieldProperty =
         AvaloniaProperty.Register<ParticleView, ParticleField?>(nameof(Field));
 
-    /// <summary>
-    /// Defines the <see cref="Touched"/> event.
-    /// </summary>
     public static readonly RoutedEvent<RoutedEventArgs> TouchedEvent =
         RoutedEvent.Register<ParticleView, RoutedEventArgs>(
             nameof(Touched),
@@ -43,9 +37,6 @@ public sealed class ParticleView : Control
 
     private readonly FrameTicker _ticker;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ParticleView"/> class.
-    /// </summary>
     public ParticleView()
     {
         _ticker = new FrameTicker(this, _ => Advance());
@@ -71,7 +62,6 @@ public sealed class ParticleView : Control
         set => SetValue(FieldProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -86,7 +76,6 @@ public sealed class ParticleView : Control
         }
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -95,7 +84,6 @@ public sealed class ParticleView : Control
         _ticker.Start();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
@@ -103,7 +91,6 @@ public sealed class ParticleView : Control
         _ticker.Stop();
     }
 
-    /// <inheritdoc />
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -112,7 +99,6 @@ public sealed class ParticleView : Control
         e.Pointer.Capture(this);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -123,7 +109,6 @@ public sealed class ParticleView : Control
         }
     }
 
-    /// <inheritdoc />
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -149,26 +134,18 @@ public sealed class ParticleView : Control
         InvalidateVisual();
     }
 
-    /// <summary>
-    /// Hands the effect's buffers to Skia, which is the whole of the drawing.
-    /// </summary>
     private sealed class ParticleDrawOperation(Rect bounds, ParticleField field) : ICustomDrawOperation
     {
-        /// <inheritdoc />
         public Rect Bounds { get; } = bounds;
 
-        /// <inheritdoc />
         public bool HitTest(Point p) => Bounds.Contains(p);
 
-        /// <inheritdoc />
         public bool Equals(ICustomDrawOperation? other) => false;
 
-        /// <inheritdoc />
         public void Dispose()
         {
         }
 
-        /// <inheritdoc />
         public void Render(ImmediateDrawingContext context)
         {
             if (context.TryGetFeature<ISkiaSharpApiLeaseFeature>() is not { } feature)

@@ -26,29 +26,17 @@ namespace Indie3D.Controls;
 /// </remarks>
 public sealed class ShapeField : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Scene"/> property.
-    /// </summary>
     public static readonly StyledProperty<ShapeScene?> SceneProperty =
         AvaloniaProperty.Register<ShapeField, ShapeScene?>(nameof(Scene));
 
-    /// <summary>
-    /// Defines the <see cref="Layer"/> property.
-    /// </summary>
     public static readonly StyledProperty<int> LayerProperty =
         AvaloniaProperty.Register<ShapeField, int>(nameof(Layer));
 
-    /// <summary>
-    /// Defines the <see cref="BlendMode"/> property.
-    /// </summary>
     public static readonly StyledProperty<BitmapBlendingMode> BlendModeProperty =
         AvaloniaProperty.Register<ShapeField, BitmapBlendingMode>(
             nameof(BlendMode),
             BitmapBlendingMode.SourceOver);
 
-    /// <summary>
-    /// Defines the <see cref="LayerOpacity"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> LayerOpacityProperty =
         AvaloniaProperty.Register<ShapeField, double>(nameof(LayerOpacity), 1d);
 
@@ -97,7 +85,6 @@ public sealed class ShapeField : Control
         set => SetValue(LayerOpacityProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -203,9 +190,6 @@ public sealed class ShapeField : Control
         return drawn;
     }
 
-    /// <summary>
-    /// Follows one closed outline round from an edge, emitting it as a figure.
-    /// </summary>
     private bool Loop(StreamGeometryContext sink, Mesh.Edge[] edges, int first)
     {
         var width = Bounds.Width;
@@ -255,9 +239,6 @@ public sealed class ShapeField : Control
         }
     }
 
-    /// <summary>
-    /// Projects the mesh and works out which way each of its triangles faces.
-    /// </summary>
     private void Project(Mesh mesh, Matrix4x4 transform)
     {
         if (_projected.Length != mesh.Vertices.Length)

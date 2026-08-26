@@ -17,15 +17,9 @@ namespace DrinkRewardsList;
 /// <remarks>Enabled with <c>--capture &lt;directory&gt;</c>.</remarks>
 internal static class CaptureRunner
 {
-    /// <summary>
-    /// Milliseconds after a card is opened at which to grab a frame.
-    /// </summary>
     private static readonly int[] FrameTimes = [120, 300, 500, 800, 1200, 1800, 2600];
 
 
-    /// <summary>
-    /// Renders every frame to <paramref name="outputDirectory"/> and shuts the app down.
-    /// </summary>
     public static async Task RunAsync(Window window, string outputDirectory)
     {
         Directory.CreateDirectory(outputDirectory);
@@ -57,7 +51,6 @@ internal static class CaptureRunner
             await Task.Delay(1400);
         }
 
-        FrameCapture.Shutdown();
     }
 
 }

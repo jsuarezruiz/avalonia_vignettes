@@ -110,11 +110,15 @@ Drag the chart through the months and it snaps to a whole one when let go, with 
 
 ## Running
 
-Needs the .NET 10 SDK. Each vignette is its own app:
+Needs the .NET 10 SDK. Each vignette has a reusable app project plus Desktop, Android and iOS heads. For example:
 
 ```
-dotnet run --project vignettes/basketball_ptr/BasketballPullToRefresh.csproj
+dotnet run --project vignettes/basketball_ptr/Desktop/BasketballPullToRefresh.Desktop.csproj
+dotnet build vignettes/basketball_ptr/Android/BasketballPullToRefresh.Android.csproj
+dotnet build vignettes/basketball_ptr/iOS/BasketballPullToRefresh.iOS.csproj -p:RuntimeIdentifier=iossimulator-arm64
 ```
+
+Android and iOS builds require their corresponding .NET workloads and native SDKs. Open `AvaloniaVignettes.slnx` to work with every platform project together.
 
 [`vignettes/_shared`](vignettes/_shared) holds what they have in common: Flutter's animation controller, ticker and curves, a `PageView`, `Hero` flights, perspective transforms.
 

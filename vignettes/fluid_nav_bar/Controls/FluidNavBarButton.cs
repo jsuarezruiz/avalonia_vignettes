@@ -18,38 +18,20 @@ namespace FluidNavBar.Controls;
 /// </remarks>
 public sealed class FluidNavBarButton : TabItem
 {
-    /// <summary>
-    /// Defines the <see cref="Icon"/> property.
-    /// </summary>
     public static new readonly StyledProperty<FluidIconData?> IconProperty =
         AvaloniaProperty.Register<FluidNavBarButton, FluidIconData?>(nameof(Icon));
 
-    /// <summary>
-    /// Defines the <see cref="RiseOffset"/> property.
-    /// </summary>
     public static readonly DirectProperty<FluidNavBarButton, double> RiseOffsetProperty =
         AvaloniaProperty.RegisterDirect<FluidNavBarButton, double>(nameof(RiseOffset), o => o.RiseOffset);
 
-    /// <summary>
-    /// Defines the <see cref="IconScaleY"/> property.
-    /// </summary>
     public static readonly DirectProperty<FluidNavBarButton, double> IconScaleYProperty =
         AvaloniaProperty.RegisterDirect<FluidNavBarButton, double>(nameof(IconScaleY), o => o.IconScaleY);
 
-    /// <summary>
-    /// Defines the <see cref="IconFill"/> property.
-    /// </summary>
     public static readonly DirectProperty<FluidNavBarButton, double> IconFillProperty =
         AvaloniaProperty.RegisterDirect<FluidNavBarButton, double>(nameof(IconFill), o => o.IconFill);
 
-    /// <summary>
-    /// How far the disc rises when picked.
-    /// </summary>
     private const double ActiveRise = 16d;
 
-    /// <summary>
-    /// How much of the squash comes from the elastic curve rather than sitting still.
-    /// </summary>
     private const double SquashShare = 0.5d;
 
     private static readonly TimeSpan RiseDuration = TimeSpan.FromMilliseconds(1666);
@@ -60,14 +42,8 @@ public sealed class FluidNavBarButton : TabItem
     private static readonly Easing SquashOut = new CenteredElasticOutEasing { Period = 0.6d };
     private static readonly Easing SquashIn = new CenteredElasticInEasing { Period = 0.6d };
 
-    /// <summary>
-    /// The rise and the squash sit out the first 28% of the clock.
-    /// </summary>
     private static readonly Easing MotionTiming = new LinearPointEasing(0.28d, 0d);
 
-    /// <summary>
-    /// The ink is in before the disc has begun to move.
-    /// </summary>
     private static readonly Easing FillTiming = new LinearPointEasing(0.25d, 1d);
 
     private readonly Ramp _ramp = new();
@@ -119,7 +95,6 @@ public sealed class FluidNavBarButton : TabItem
         private set => SetAndRaise(IconFillProperty, ref _iconFill, value);
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -128,7 +103,6 @@ public sealed class FluidNavBarButton : TabItem
         Restart();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);

@@ -25,27 +25,15 @@ namespace BubbleTabBar.Controls;
 /// </remarks>
 public sealed class NavBarButton : TabItem
 {
-    /// <summary>
-    /// Defines the <see cref="Title"/> property.
-    /// </summary>
     public static readonly StyledProperty<string?> TitleProperty =
         AvaloniaProperty.Register<NavBarButton, string?>(nameof(Title));
 
-    /// <summary>
-    /// Defines the <see cref="AccentBrush"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> AccentBrushProperty =
         AvaloniaProperty.Register<NavBarButton, IBrush?>(nameof(AccentBrush));
 
-    /// <summary>
-    /// Defines the <see cref="ExpandedWidth"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ExpandedWidthProperty =
         AvaloniaProperty.Register<NavBarButton, double>(nameof(ExpandedWidth), 110d);
 
-    /// <summary>
-    /// Defines the <see cref="IconTransform"/> property.
-    /// </summary>
     public static readonly DirectProperty<NavBarButton, ITransform> IconTransformProperty =
         AvaloniaProperty.RegisterDirect<NavBarButton, ITransform>(nameof(IconTransform), o => o.IconTransform);
 
@@ -54,9 +42,6 @@ public sealed class NavBarButton : TabItem
     /// </summary>
     public const double CollapsedWidth = 56d;
 
-    /// <summary>
-    /// How far the icon turns once the tab is taken.
-    /// </summary>
     private const double IconTurnDegrees = 180d;
 
     private static readonly TimeSpan IconTurnDuration = TimeSpan.FromMilliseconds(350);
@@ -67,9 +52,6 @@ public sealed class NavBarButton : TabItem
     static NavBarButton() =>
         IsSelectedProperty.Changed.AddClassHandler<NavBarButton>((x, e) => x.OnIsSelectedChanged(e));
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="NavBarButton"/> class.
-    /// </summary>
     public NavBarButton() =>
         _iconTurn = new AnimationController(this, OnIconTurnChanged) { Duration = IconTurnDuration };
 
@@ -105,7 +87,6 @@ public sealed class NavBarButton : TabItem
     /// </summary>
     public ITransform IconTransform => _iconTransform;
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);

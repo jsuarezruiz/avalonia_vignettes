@@ -10,63 +10,33 @@ namespace Indie3D.Views;
 /// </summary>
 public partial class ArtistPage : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="Scene"/> property.
-    /// </summary>
     public static readonly StyledProperty<ShapeScene?> SceneProperty =
         AvaloniaProperty.Register<ArtistPage, ShapeScene?>(nameof(Scene));
 
-    /// <summary>
-    /// Defines the <see cref="IsLoading"/> property.
-    /// </summary>
     public static readonly DirectProperty<ArtistPage, bool> IsLoadingProperty =
         AvaloniaProperty.RegisterDirect<ArtistPage, bool>(nameof(IsLoading), o => o.IsLoading);
 
-    /// <summary>
-    /// Defines the <see cref="PageIndex"/> property.
-    /// </summary>
     public static readonly StyledProperty<int> PageIndexProperty =
         AvaloniaProperty.Register<ArtistPage, int>(nameof(PageIndex));
 
-    /// <summary>
-    /// Defines the <see cref="TopTitle"/> property.
-    /// </summary>
     public static readonly StyledProperty<string> TopTitleProperty =
         AvaloniaProperty.Register<ArtistPage, string>(nameof(TopTitle), string.Empty);
 
-    /// <summary>
-    /// Defines the <see cref="BottomTitle"/> property.
-    /// </summary>
     public static readonly StyledProperty<string> BottomTitleProperty =
         AvaloniaProperty.Register<ArtistPage, string>(nameof(BottomTitle), string.Empty);
 
-    /// <summary>
-    /// Defines the <see cref="PageBrush"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> PageBrushProperty =
         AvaloniaProperty.Register<ArtistPage, IBrush?>(nameof(PageBrush));
 
-    /// <summary>
-    /// Defines the <see cref="Artwork"/> property.
-    /// </summary>
     public static readonly StyledProperty<IImage?> ArtworkProperty =
         AvaloniaProperty.Register<ArtistPage, IImage?>(nameof(Artwork));
 
-    /// <summary>
-    /// Defines the <see cref="BottomTitleScale"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> BottomTitleScaleProperty =
         AvaloniaProperty.Register<ArtistPage, double>(nameof(BottomTitleScale), 1d);
 
-    /// <summary>
-    /// Defines the <see cref="BehindOpacity"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> BehindOpacityProperty =
         AvaloniaProperty.Register<ArtistPage, double>(nameof(BehindOpacity), 0.85d);
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ArtistPage"/> class.
-    /// </summary>
     public ArtistPage()
     {
         InitializeComponent();
@@ -166,14 +136,19 @@ public partial class ArtistPage : UserControl
     /// </summary>
     public Controls.ClippedTitle Title => Titles;
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
 
         if (change.Property == SceneProperty)
         {
-            RaisePropertyChanged(IsLoadingProperty, !IsLoading, IsLoading);
+            var wasLoading = change.GetOldValue<ShapeScene?>() is null;
+            var isLoading = change.GetNewValue<ShapeScene?>() is null;
+
+            if (wasLoading != isLoading)
+            {
+                RaisePropertyChanged(IsLoadingProperty, wasLoading, isLoading);
+            }
         }
     }
 

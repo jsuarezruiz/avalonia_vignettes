@@ -228,9 +228,6 @@ public sealed class GooeyEdge
     private void AddPointTension(GooeyPoint point, double x, double t) =>
         point.VelocityX += (x - point.X) * PointTension * t;
 
-    /// <summary>
-    /// A single point of the edge, in the normalised space described on the class.
-    /// </summary>
     private sealed class GooeyPoint(double x, double y)
     {
         public double X { get; set; } = x;
@@ -240,10 +237,8 @@ public sealed class GooeyEdge
         public double VelocityX { get; set; }
     }
 
-    /// <summary>
-    /// Maps the edge's normalised space onto the control, rotating it a quarter turn at a time so
-    /// the same simulation serves all four sides. Equivalent to <c>_getTransform</c>.
-    /// </summary>
+    // Maps the edge's normalised space onto the control, rotating it a quarter turn at a time so
+    // the same simulation serves all four sides. Equivalent to _getTransform.
     private readonly struct EdgeTransform
     {
         private readonly GooeyEdgeSide _side;

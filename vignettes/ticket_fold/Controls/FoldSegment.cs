@@ -15,21 +15,12 @@ namespace TicketFold.Controls;
 /// </remarks>
 public sealed class FoldSegment : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Front"/> property.
-    /// </summary>
     public static readonly StyledProperty<Control?> FrontProperty =
         AvaloniaProperty.Register<FoldSegment, Control?>(nameof(Front));
 
-    /// <summary>
-    /// Defines the <see cref="Back"/> property.
-    /// </summary>
     public static readonly StyledProperty<Control?> BackProperty =
         AvaloniaProperty.Register<FoldSegment, Control?>(nameof(Back));
 
-    /// <summary>
-    /// The turn past which the front face is the one on show.
-    /// </summary>
     private const double FaceFlipRatio = 0.5d;
 
     static FoldSegment()
@@ -75,7 +66,6 @@ public sealed class FoldSegment : Control
         }
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         Front?.Measure(availableSize);
@@ -94,7 +84,6 @@ public sealed class FoldSegment : Control
         return new Size(width, height);
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         var bounds = new Rect(finalSize);

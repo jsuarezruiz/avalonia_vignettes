@@ -16,24 +16,14 @@ namespace DogSlider.Effects;
 /// </remarks>
 public sealed class CharacterPhysics
 {
-    /// <summary>
-    /// Velocities below this are treated as a standstill.
-    /// </summary>
     private const double RestVelocity = 0.1d;
 
-    /// <summary>
-    /// The physics are tuned per frame at 60fps, so elapsed time is scaled to that.
-    /// </summary>
     private const double FramesPerSecond = 60d;
 
     private double _velocity;
     private bool _hasLastTick;
     private TimeSpan _lastTick;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CharacterPhysics"/> class.
-    /// </summary>
-    /// <param name="startX">Where the character begins.</param>
     public CharacterPhysics(double startX = 0d)
     {
         Position = startX;

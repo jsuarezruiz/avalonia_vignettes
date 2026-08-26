@@ -24,36 +24,18 @@ namespace ConstellationsList.Controls;
 /// </remarks>
 public sealed class StarField : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Speed"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> SpeedProperty =
         AvaloniaProperty.Register<StarField, double>(nameof(Speed), 0.2d);
 
-    /// <summary>
-    /// Defines the <see cref="StarCount"/> property.
-    /// </summary>
     public static readonly StyledProperty<int> StarCountProperty =
         AvaloniaProperty.Register<StarField, int>(nameof(StarCount), 400);
 
-    /// <summary>
-    /// How far away a star can start.
-    /// </summary>
     private const double MaxZ = 500d;
 
-    /// <summary>
-    /// How close a star gets before it is thrown back to the far end.
-    /// </summary>
     private const double MinZ = 1d;
 
-    /// <summary>
-    /// How far a star can sit off the centre line, before perspective.
-    /// </summary>
     private const double Spread = 75d;
 
-    /// <summary>
-    /// The share of stars that are purple, larger, and carry a glow.
-    /// </summary>
     private const double GlowingShare = 0.1d;
 
     private static readonly Color GlowColor = Color.FromRgb(0xD4, 0xA1, 0xFF);
@@ -84,7 +66,6 @@ public sealed class StarField : Control
         set => SetValue(StarCountProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -129,7 +110,6 @@ public sealed class StarField : Control
         }
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -148,18 +128,15 @@ public sealed class StarField : Control
         _ticker.Start();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
         _ticker?.Stop();
     }
 
-    /// <summary>
-    /// Moves every star towards the viewer by <see cref="Speed"/>. A star that arrives is thrown
-    /// back to the far end with fresh values; one pushed out the back simply wraps to the front,
-    /// which is what lets a negative speed run the field in reverse without emptying it.
-    /// </summary>
+    // Moves every star towards the viewer by Speed. A star that arrives is thrown
+    // back to the far end with fresh values; one pushed out the back simply wraps to the front,
+    // which is what lets a negative speed run the field in reverse without emptying it.
     private void Advance()
     {
         foreach (var star in _stars)
@@ -201,9 +178,6 @@ public sealed class StarField : Control
         return star;
     }
 
-    /// <summary>
-    /// One star, in the field's own boxy 3D space.
-    /// </summary>
     private sealed class Star
     {
         public double X { get; set; }

@@ -8,9 +8,6 @@ namespace Indie3D.Views;
 /// </summary>
 public partial class AppBar : UserControl
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="AppBar"/> class.
-    /// </summary>
     public AppBar() => InitializeComponent();
 
     private void InitializeComponent() => AvaloniaXamlLoader.Load(this);

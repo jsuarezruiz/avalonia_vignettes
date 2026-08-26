@@ -14,7 +14,6 @@ public sealed class ElasticOutEasing : Easing
     /// </summary>
     public double Period { get; set; } = 0.4;
 
-    /// <inheritdoc />
     public override double Ease(double progress)
     {
         if (progress <= 0d)

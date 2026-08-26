@@ -15,9 +15,6 @@ namespace BubbleTabBar.Controls;
 /// </remarks>
 public sealed class SquareGridPanel : Panel
 {
-    /// <summary>
-    /// Defines the <see cref="Columns"/> property.
-    /// </summary>
     public static readonly StyledProperty<int> ColumnsProperty =
         AvaloniaProperty.Register<SquareGridPanel, int>(nameof(Columns), 2);
 
@@ -32,7 +29,6 @@ public sealed class SquareGridPanel : Panel
         set => SetValue(ColumnsProperty, value);
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         var columns = Math.Max(1, Columns);
@@ -48,7 +44,6 @@ public sealed class SquareGridPanel : Panel
         return new Size(cell * columns, cell * rows);
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         var columns = Math.Max(1, Columns);

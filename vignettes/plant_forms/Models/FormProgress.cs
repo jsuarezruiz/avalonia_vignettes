@@ -14,7 +14,6 @@ public sealed class FormProgress : INotifyPropertyChanged
     private double _completion;
     private bool _isErrorVisible;
 
-    /// <inheritdoc />
     public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>

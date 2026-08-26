@@ -20,9 +20,6 @@ public partial class InformationPage : FormPage
 {
     private readonly FormProgress _progress = new();
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="InformationPage"/> class.
-    /// </summary>
     public InformationPage()
     {
         InitializeComponent();
@@ -44,7 +41,6 @@ public partial class InformationPage : FormPage
 
     private Binding Bound(string property) => new(property) { Source = _progress };
 
-    /// <inheritdoc />
     protected override void OnDataContextChanged(EventArgs e)
     {
         base.OnDataContextChanged(e);

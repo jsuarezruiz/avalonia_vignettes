@@ -1,0 +1,19 @@
+<Project>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <ApplicationManifest>$(MSBuildProjectDirectory)/../app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Program.cs" Link="Program.cs" />
+    <Using Include="$(VignetteAssembly).App" Alias="VignetteApp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildProjectDirectory)/../$(VignetteAssembly).csproj" />
+  </ItemGroup>
+</Project>

@@ -9,5 +9,5 @@ A starfield drawn behind the whole app, flying faster as the list is scrolled an
 ## Running
 
 ```
-dotnet run --project ConstellationsList.csproj
+dotnet run --project Desktop/ConstellationsList.Desktop.csproj
 ```

@@ -47,15 +47,9 @@ public enum MainAxisAlignment
 /// </summary>
 public sealed class FlexPanel : Panel
 {
-    /// <summary>
-    /// Defines the <see cref="Orientation"/> property.
-    /// </summary>
     public static readonly StyledProperty<Orientation> OrientationProperty =
         AvaloniaProperty.Register<FlexPanel, Orientation>(nameof(Orientation), Orientation.Vertical);
 
-    /// <summary>
-    /// Defines the <see cref="MainAxisAlignment"/> property.
-    /// </summary>
     public static readonly StyledProperty<MainAxisAlignment> MainAxisAlignmentProperty =
         AvaloniaProperty.Register<FlexPanel, MainAxisAlignment>(nameof(MainAxisAlignment));
 
@@ -103,7 +97,6 @@ public sealed class FlexPanel : Panel
     /// </summary>
     public static void SetFlexible(Control control, bool value) => control.SetValue(FlexibleProperty, value);
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         var main = 0d;
@@ -142,7 +135,6 @@ public sealed class FlexPanel : Panel
         }
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         var extent = IsVertical ? finalSize.Height : finalSize.Width;

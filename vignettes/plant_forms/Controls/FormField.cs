@@ -19,87 +19,45 @@ public class FormField : TemplatedControl
 {
     private const string PartInput = "PART_Input";
 
-    /// <summary>
-    /// Defines the <see cref="FieldKey"/> property.
-    /// </summary>
     public static readonly StyledProperty<string> FieldKeyProperty =
         AvaloniaProperty.Register<FormField, string>(nameof(FieldKey), string.Empty);
 
-    /// <summary>
-    /// Defines the <see cref="Label"/> property.
-    /// </summary>
     public static readonly StyledProperty<string> LabelProperty =
         AvaloniaProperty.Register<FormField, string>(nameof(Label), string.Empty);
 
-    /// <summary>
-    /// Defines the <see cref="Helper"/> property.
-    /// </summary>
     public static readonly StyledProperty<string> HelperProperty =
         AvaloniaProperty.Register<FormField, string>(nameof(Helper), string.Empty);
 
-    /// <summary>
-    /// Defines the <see cref="Value"/> property.
-    /// </summary>
     public static readonly StyledProperty<string> ValueProperty =
         AvaloniaProperty.Register<FormField, string>(nameof(Value), string.Empty, defaultBindingMode: Avalonia.Data.BindingMode.TwoWay);
 
-    /// <summary>
-    /// Defines the <see cref="IsRequired"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsRequiredProperty =
         AvaloniaProperty.Register<FormField, bool>(nameof(IsRequired));
 
-    /// <summary>
-    /// Defines the <see cref="BoxHeight"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> BoxHeightProperty =
         AvaloniaProperty.Register<FormField, double>(nameof(BoxHeight), BoxHeightFor(1));
 
-    /// <summary>
-    /// Defines the <see cref="IsMultiline"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsMultilineProperty =
         AvaloniaProperty.Register<FormField, bool>(nameof(IsMultiline));
 
-    /// <summary>
-    /// Defines the <see cref="Accessory"/> property.
-    /// </summary>
     public static readonly StyledProperty<object?> AccessoryProperty =
         AvaloniaProperty.Register<FormField, object?>(nameof(Accessory));
 
-    /// <summary>
-    /// Defines the <see cref="VerticalContentAlignment"/> property.
-    /// </summary>
     public static readonly StyledProperty<VerticalAlignment> VerticalContentAlignmentProperty =
         ContentControl.VerticalContentAlignmentProperty.AddOwner<FormField>();
 
-    /// <summary>
-    /// Defines the <see cref="InputType"/> property.
-    /// </summary>
     public static readonly StyledProperty<InputType> InputTypeProperty =
         AvaloniaProperty.Register<FormField, InputType>(nameof(InputType));
 
-    /// <summary>
-    /// Defines the <see cref="Caption"/> property.
-    /// </summary>
     public static readonly DirectProperty<FormField, string> CaptionProperty =
         AvaloniaProperty.RegisterDirect<FormField, string>(nameof(Caption), o => o.Caption);
 
-    /// <summary>
-    /// Defines the <see cref="ErrorText"/> property.
-    /// </summary>
     public static readonly DirectProperty<FormField, string> ErrorTextProperty =
         AvaloniaProperty.RegisterDirect<FormField, string>(nameof(ErrorText), o => o.ErrorText);
 
-    /// <summary>
-    /// Defines the <see cref="IsValid"/> property.
-    /// </summary>
     public static readonly DirectProperty<FormField, bool> IsValidProperty =
         AvaloniaProperty.RegisterDirect<FormField, bool>(nameof(IsValid), o => o.IsValid);
 
-    /// <summary>
-    /// Defines the <see cref="Validated"/> event.
-    /// </summary>
     public static readonly RoutedEvent<RoutedEventArgs> ValidatedEvent =
         RoutedEvent.Register<FormField, RoutedEventArgs>(nameof(Validated), RoutingStrategies.Bubble);
 
@@ -245,7 +203,6 @@ public class FormField : TemplatedControl
     /// </summary>
     public void Validate() => Validate(force: true);
 
-    /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -253,7 +210,6 @@ public class FormField : TemplatedControl
         Validate(force: Value.Length > 0);
     }
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);

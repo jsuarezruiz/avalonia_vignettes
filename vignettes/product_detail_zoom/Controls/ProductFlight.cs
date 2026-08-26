@@ -17,27 +17,15 @@ namespace ProductDetailZoom.Controls;
 /// </remarks>
 public sealed class ProductFlight : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Progress"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ProgressProperty =
         AvaloniaProperty.Register<ProductFlight, double>(nameof(Progress));
 
-    /// <summary>
-    /// Defines the <see cref="SpriteSheet"/> property.
-    /// </summary>
     public static readonly StyledProperty<Bitmap?> SpriteSheetProperty =
         AvaloniaProperty.Register<ProductFlight, Bitmap?>(nameof(SpriteSheet));
 
-    /// <summary>
-    /// Defines the <see cref="SpriteFrame"/> property.
-    /// </summary>
     public static readonly DirectProperty<ProductFlight, double> SpriteFrameProperty =
         AvaloniaProperty.RegisterDirect<ProductFlight, double>(nameof(SpriteFrame), o => o.SpriteFrame);
 
-    /// <summary>
-    /// The last frame of the spin.
-    /// </summary>
     private const double LastFrame = 59d;
 
     private static readonly Easing Spin = new IntervalEasing(0d, 0.8d);

@@ -24,19 +24,10 @@ public sealed class LiquidSimulation
     /// </summary>
     public const int CurveCount = 4;
 
-    /// <summary>
-    /// The share of the clock the surface spends still, before anything moves.
-    /// </summary>
     private const double WaitWeight = 10d;
 
-    /// <summary>
-    /// The share spent swelling to full height.
-    /// </summary>
     private const double RiseWeight = 10d;
 
-    /// <summary>
-    /// The share spent springing back to the level.
-    /// </summary>
     private const double SettleWeight = 60d;
 
     private static readonly ElasticOutEasing SettleEasing = new() { Period = 0.3d };

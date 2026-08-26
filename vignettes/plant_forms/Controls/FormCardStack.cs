@@ -17,9 +17,6 @@ namespace PlantForms.Controls;
 /// </remarks>
 public sealed class FormCardStack : Panel
 {
-    /// <summary>
-    /// How far up the screen each page below the top is pushed.
-    /// </summary>
     private const double StackStep = 0.05d;
 
     private static readonly TimeSpan SlideDuration = TimeSpan.FromMilliseconds(300);
@@ -30,9 +27,6 @@ public sealed class FormCardStack : Panel
     private double _to;
     private double _position;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FormCardStack"/> class.
-    /// </summary>
     public FormCardStack()
     {
         _slide = new AnimationController(this, OnSlideProgressChanged) { Duration = SlideDuration };
@@ -50,10 +44,8 @@ public sealed class FormCardStack : Panel
     /// </summary>
     public bool CanPop => Index > 0;
 
-    /// <summary>
-    /// Gets how far through the stack the pages have travelled. Whole numbers are settled states,
-    /// anything between is mid slide.
-    /// </summary>
+    // Gets how far through the stack the pages have travelled. Whole numbers are settled states,
+    // anything between is mid slide.
     private double Position
     {
         get => _position;
@@ -87,7 +79,6 @@ public sealed class FormCardStack : Panel
         }
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         foreach (var child in Children)
@@ -98,7 +89,6 @@ public sealed class FormCardStack : Panel
         return availableSize;
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         foreach (var child in Children)

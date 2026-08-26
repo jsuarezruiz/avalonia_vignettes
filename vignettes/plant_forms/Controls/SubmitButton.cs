@@ -14,27 +14,15 @@ namespace PlantForms.Controls;
 /// </remarks>
 public sealed class SubmitButton : Button
 {
-    /// <summary>
-    /// Defines the <see cref="Completion"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> CompletionProperty =
         AvaloniaProperty.Register<SubmitButton, double>(nameof(Completion), 1d);
 
-    /// <summary>
-    /// Defines the <see cref="FillBrush"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> FillBrushProperty =
         AvaloniaProperty.Register<SubmitButton, IBrush?>(nameof(FillBrush));
 
-    /// <summary>
-    /// Defines the <see cref="IsErrorVisible"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsErrorVisibleProperty =
         AvaloniaProperty.Register<SubmitButton, bool>(nameof(IsErrorVisible));
 
-    /// <summary>
-    /// The height of the button itself, error line aside.
-    /// </summary>
     private const double BarHeight = 48d;
 
     static SubmitButton() => AffectsRender<SubmitButton>(CompletionProperty, FillBrushProperty);
@@ -66,7 +54,6 @@ public sealed class SubmitButton : Button
         set => SetValue(IsErrorVisibleProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);

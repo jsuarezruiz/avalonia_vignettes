@@ -10,32 +10,17 @@ namespace SpendingTracker.Controls;
 /// </summary>
 public sealed class PercentageRing : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Percent"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> PercentProperty =
         AvaloniaProperty.Register<PercentageRing, double>(nameof(Percent));
 
-    /// <summary>
-    /// Defines the <see cref="Color0"/> property.
-    /// </summary>
     public static readonly StyledProperty<Color> Color0Property =
         AvaloniaProperty.Register<PercentageRing, Color>(nameof(Color0), Colors.White);
 
-    /// <summary>
-    /// Defines the <see cref="Color1"/> property.
-    /// </summary>
     public static readonly StyledProperty<Color> Color1Property =
         AvaloniaProperty.Register<PercentageRing, Color>(nameof(Color1), Colors.Transparent);
 
-    /// <summary>
-    /// How wide the ring is drawn, before the app scale.
-    /// </summary>
     private const double DesignSize = 42d;
 
-    /// <summary>
-    /// How thick the ring is drawn, before the app scale.
-    /// </summary>
     private const double DesignThickness = 5d;
 
     private static readonly IImmutableBrush TrackBrush = new ImmutableSolidColorBrush(Color.Parse("#FF5B668C"));
@@ -76,7 +61,6 @@ public sealed class PercentageRing : Control
         set => SetValue(Color1Property, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -118,7 +102,6 @@ public sealed class PercentageRing : Control
         context.DrawGeometry(null, _fillPen, Arc(centre, radiusX, radiusY, Percent));
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         var size = DesignSize * AppScale.Of(this);
@@ -126,9 +109,6 @@ public sealed class PercentageRing : Control
         return new Size(size, size);
     }
 
-    /// <summary>
-    /// Traces the filled part of the ring, starting at the top and going anticlockwise.
-    /// </summary>
     private static StreamGeometry Arc(Point centre, double radiusX, double radiusY, double percent)
     {
         const double start = -Math.PI / 2d;

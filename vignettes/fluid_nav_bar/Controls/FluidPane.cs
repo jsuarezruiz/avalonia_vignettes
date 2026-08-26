@@ -18,21 +18,12 @@ namespace FluidNavBar.Controls;
 /// </remarks>
 public sealed class FluidPane : Control
 {
-    /// <summary>
-    /// Defines the <see cref="DipX"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> DipXProperty =
         AvaloniaProperty.Register<FluidPane, double>(nameof(DipX));
 
-    /// <summary>
-    /// Defines the <see cref="Depth"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> DepthProperty =
         AvaloniaProperty.Register<FluidPane, double>(nameof(Depth), 1d);
 
-    /// <summary>
-    /// Defines the <see cref="Fill"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> FillProperty =
         AvaloniaProperty.Register<FluidPane, IBrush?>(nameof(Fill), Brushes.White);
 
@@ -82,7 +73,6 @@ public sealed class FluidPane : Control
         set => SetValue(FillProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);

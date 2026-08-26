@@ -21,7 +21,6 @@ public sealed class SineEasing : Easing
     /// </summary>
     public double Length { get; init; } = Math.PI * 2d;
 
-    /// <inheritdoc />
     public override double Ease(double progress) =>
         (Math.Sin(Start + (progress * Length)) * 0.5d) + 0.5d;
 }

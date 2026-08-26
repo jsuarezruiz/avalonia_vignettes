@@ -16,14 +16,8 @@ namespace ParallaxTravelCardsHero.Controls;
 /// </remarks>
 internal static class SceneryClock
 {
-    /// <summary>
-    /// How far the clouds drift each frame, from <c>_CloudsState._onTick</c>.
-    /// </summary>
     private const double CloudSpeed = 0.0003d;
 
-    /// <summary>
-    /// How far the leaves travel each frame, from <c>_LeavesState._onTick</c>.
-    /// </summary>
     private const double LeafSpeed = 0.001d;
 
     private static object? _driver;

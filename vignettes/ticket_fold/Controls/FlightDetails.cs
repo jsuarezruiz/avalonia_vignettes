@@ -11,27 +11,15 @@ namespace TicketFold.Controls;
 /// </summary>
 public sealed class FlightDetails : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="BoardingPass"/> property.
-    /// </summary>
     public static readonly StyledProperty<BoardingPass?> BoardingPassProperty =
         AvaloniaProperty.Register<FlightDetails, BoardingPass?>(nameof(BoardingPass));
 
-    /// <summary>
-    /// Defines the <see cref="DepartsLabel"/> property.
-    /// </summary>
     public static readonly DirectProperty<FlightDetails, string?> DepartsLabelProperty =
         AvaloniaProperty.RegisterDirect<FlightDetails, string?>(nameof(DepartsLabel), o => o.DepartsLabel);
 
-    /// <summary>
-    /// Defines the <see cref="ArrivesLabel"/> property.
-    /// </summary>
     public static readonly DirectProperty<FlightDetails, string?> ArrivesLabelProperty =
         AvaloniaProperty.RegisterDirect<FlightDetails, string?>(nameof(ArrivesLabel), o => o.ArrivesLabel);
 
-    /// <summary>
-    /// The format behind <c>DateFormat('MMM d, H:mm')</c>.
-    /// </summary>
     private const string TimestampFormat = "MMM d, H:mm";
 
     private string? _departsLabel;

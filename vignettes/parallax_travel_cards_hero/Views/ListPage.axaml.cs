@@ -11,46 +11,25 @@ namespace ParallaxTravelCardsHero.Views;
 /// </summary>
 public partial class ListPage : ContentPage, IHeroPage
 {
-    /// <summary>
-    /// Defines the <see cref="ScreenWidth"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScreenWidthProperty =
         AvaloniaProperty.Register<ListPage, double>(nameof(ScreenWidth));
 
-    /// <summary>
-    /// Defines the <see cref="ScreenHeight"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScreenHeightProperty =
         AvaloniaProperty.Register<ListPage, double>(nameof(ScreenHeight));
 
-    /// <summary>
-    /// Defines the <see cref="CardWidth"/> property.
-    /// </summary>
     public static readonly DirectProperty<ListPage, double> CardWidthProperty =
         AvaloniaProperty.RegisterDirect<ListPage, double>(nameof(CardWidth), o => o.CardWidth);
 
-    /// <summary>
-    /// Defines the <see cref="CardHeight"/> property.
-    /// </summary>
     public static readonly DirectProperty<ListPage, double> CardHeightProperty =
         AvaloniaProperty.RegisterDirect<ListPage, double>(nameof(CardHeight), o => o.CardHeight);
 
-    /// <summary>
-    /// The card's widest, from the <c>BoxConstraints</c> in <c>_buildCityCard</c>.
-    /// </summary>
     private const double MaxCardWidth = 300d;
 
-    /// <summary>
-    /// The share of the screen's height the card is allowed, from the same constraints.
-    /// </summary>
     private const double CardHeightFactor = 0.44d;
 
     private double _cardWidth;
     private double _cardHeight;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ListPage"/> class.
-    /// </summary>
     public ListPage() => InitializeComponent();
 
     static ListPage()

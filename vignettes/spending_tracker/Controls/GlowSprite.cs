@@ -18,9 +18,6 @@ namespace SpendingTracker.Controls;
 /// </remarks>
 internal sealed class GlowSprite
 {
-    /// <summary>
-    /// How wide the sprite is drawn, in pixels. Twice the halo's size, so it minifies.
-    /// </summary>
     private const int Size = 64;
 
     private readonly WriteableBitmap _bitmap =

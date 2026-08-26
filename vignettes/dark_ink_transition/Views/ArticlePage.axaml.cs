@@ -15,9 +15,6 @@ namespace DarkInkTransition.Views;
 /// </remarks>
 public partial class ArticlePage : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="IsDark"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsDarkProperty =
         AvaloniaProperty.Register<ArticlePage, bool>(nameof(IsDark));
 
@@ -30,27 +27,15 @@ public partial class ArticlePage : UserControl
     private static readonly IBrush LightRule = new ImmutableSolidColorBrush(Color.FromArgb(0x51, 0x2B, 0x77, 0x7E));
     private static readonly IBrush DarkRule = new ImmutableSolidColorBrush(Color.FromArgb(0x51, 0x00, 0x98, 0xA3));
 
-    /// <summary>
-    /// Defines the <see cref="PageBrush"/> property.
-    /// </summary>
     public static readonly DirectProperty<ArticlePage, IBrush> PageBrushProperty =
         AvaloniaProperty.RegisterDirect<ArticlePage, IBrush>(nameof(PageBrush), o => o.PageBrush);
 
-    /// <summary>
-    /// Defines the <see cref="TextBrush"/> property.
-    /// </summary>
     public static readonly DirectProperty<ArticlePage, IBrush> TextBrushProperty =
         AvaloniaProperty.RegisterDirect<ArticlePage, IBrush>(nameof(TextBrush), o => o.TextBrush);
 
-    /// <summary>
-    /// Defines the <see cref="SubHeaderBrush"/> property.
-    /// </summary>
     public static readonly DirectProperty<ArticlePage, IBrush> SubHeaderBrushProperty =
         AvaloniaProperty.RegisterDirect<ArticlePage, IBrush>(nameof(SubHeaderBrush), o => o.SubHeaderBrush);
 
-    /// <summary>
-    /// Defines the <see cref="RuleBrush"/> property.
-    /// </summary>
     public static readonly DirectProperty<ArticlePage, IBrush> RuleBrushProperty =
         AvaloniaProperty.RegisterDirect<ArticlePage, IBrush>(nameof(RuleBrush), o => o.RuleBrush);
 
@@ -62,20 +47,15 @@ public partial class ArticlePage : UserControl
     static ArticlePage() =>
         IsDarkProperty.Changed.AddClassHandler<ArticlePage>((x, _) => x.Refresh());
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ArticlePage"/> class.
-    /// </summary>
     public ArticlePage()
     {
         InitializeComponent();
         DataContext = this;
     }
 
-    /// <summary>
-    /// Repaints the page for the current scheme. The brushes are raised rather than computed on
-    /// read, because the scheme is set after construction, by which time the bindings have already
-    /// been evaluated once and will not look again unless told to.
-    /// </summary>
+    // Repaints the page for the current scheme. The brushes are raised rather than computed on
+    // read, because the scheme is set after construction, by which time the bindings have already
+    // been evaluated once and will not look again unless told to.
     private void Refresh()
     {
         PageBrush = IsDark ? DarkPage : LightPage;

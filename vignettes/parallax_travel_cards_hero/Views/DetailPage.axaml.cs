@@ -12,46 +12,25 @@ namespace ParallaxTravelCardsHero.Views;
 /// </summary>
 public partial class DetailPage : ContentPage, IHeroPage
 {
-    /// <summary>
-    /// Defines the <see cref="ScreenWidth"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScreenWidthProperty =
         AvaloniaProperty.Register<DetailPage, double>(nameof(ScreenWidth));
 
-    /// <summary>
-    /// Defines the <see cref="ScreenHeight"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScreenHeightProperty =
         AvaloniaProperty.Register<DetailPage, double>(nameof(ScreenHeight));
 
-    /// <summary>
-    /// Defines the <see cref="ExperiencesHeight"/> property.
-    /// </summary>
     public static readonly DirectProperty<DetailPage, double> ExperiencesHeightProperty =
         AvaloniaProperty.RegisterDirect<DetailPage, double>(nameof(ExperiencesHeight), o => o.ExperiencesHeight);
 
-    /// <summary>
-    /// Defines the <see cref="ExperienceWidth"/> property.
-    /// </summary>
     public static readonly DirectProperty<DetailPage, double> ExperienceWidthProperty =
         AvaloniaProperty.RegisterDirect<DetailPage, double>(nameof(ExperienceWidth), o => o.ExperienceWidth);
 
-    /// <summary>
-    /// The share of the screen's height the row of experience cards takes.
-    /// </summary>
     private const double ExperiencesHeightFactor = 0.15d;
 
-    /// <summary>
-    /// The share of the screen's width each experience card takes.
-    /// </summary>
     private const double ExperienceWidthFactor = 0.3d;
 
     private double _experiencesHeight;
     private double _experienceWidth;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DetailPage"/> class.
-    /// </summary>
     public DetailPage() => InitializeComponent();
 
     static DetailPage()

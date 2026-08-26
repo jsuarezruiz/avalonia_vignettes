@@ -14,9 +14,6 @@ namespace SpendingTracker;
 /// </remarks>
 internal static class AppScale
 {
-    /// <summary>
-    /// The screen height the vignette's metrics were written against.
-    /// </summary>
     private const double DesignHeight = 480d;
 
     /// <summary>

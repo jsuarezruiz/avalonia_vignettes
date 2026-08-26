@@ -78,9 +78,6 @@ public sealed class FluidIconData
         return geometry;
     }
 
-    /// <summary>
-    /// A single run of points, and the length along it.
-    /// </summary>
     private sealed class Contour
     {
         private readonly Point[] _points;

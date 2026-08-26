@@ -14,44 +14,23 @@ namespace FluidNavBar.Controls;
 /// </remarks>
 public sealed class FluidIcon : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Data"/> property.
-    /// </summary>
     public static readonly StyledProperty<FluidIconData?> DataProperty =
         AvaloniaProperty.Register<FluidIcon, FluidIconData?>(nameof(Data));
 
-    /// <summary>
-    /// Defines the <see cref="FillAmount"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> FillAmountProperty =
         AvaloniaProperty.Register<FluidIcon, double>(nameof(FillAmount));
 
-    /// <summary>
-    /// Defines the <see cref="ScaleY"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScaleYProperty =
         AvaloniaProperty.Register<FluidIcon, double>(nameof(ScaleY), 1d);
 
-    /// <summary>
-    /// Defines the <see cref="IdleBrush"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> IdleBrushProperty =
         AvaloniaProperty.Register<FluidIcon, IBrush?>(nameof(IdleBrush), Brushes.Gray);
 
-    /// <summary>
-    /// Defines the <see cref="ActiveBrush"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> ActiveBrushProperty =
         AvaloniaProperty.Register<FluidIcon, IBrush?>(nameof(ActiveBrush), Brushes.Black);
 
-    /// <summary>
-    /// The icon data is authored a shade larger than it is drawn.
-    /// </summary>
     private const double DataScale = 0.9d;
 
-    /// <summary>
-    /// The stroke, in the icon's own units.
-    /// </summary>
     private const double StrokeWidth = 2.4d;
 
     static FluidIcon() =>
@@ -102,7 +81,6 @@ public sealed class FluidIcon : Control
         set => SetValue(ActiveBrushProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);

@@ -12,29 +12,17 @@ namespace ProductDetailZoom.Views;
 /// </summary>
 public partial class DetailPage : ContentPage, IHeroPage
 {
-    /// <summary>
-    /// Defines the <see cref="FrameWidth"/> property.
-    /// </summary>
     public static readonly DirectProperty<DetailPage, double> FrameWidthProperty =
         AvaloniaProperty.RegisterDirect<DetailPage, double>(nameof(FrameWidth), o => o.FrameWidth);
 
-    /// <summary>
-    /// Defines the <see cref="FrameHeight"/> property.
-    /// </summary>
     public static readonly DirectProperty<DetailPage, double> FrameHeightProperty =
         AvaloniaProperty.RegisterDirect<DetailPage, double>(nameof(FrameHeight), o => o.FrameHeight);
 
-    /// <summary>
-    /// Where the return button sits, as a fraction from the centre to the right edge.
-    /// </summary>
     private const double ShrinkAlignment = 0.6d;
 
     private double _frameWidth;
     private double _frameHeight;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DetailPage"/> class.
-    /// </summary>
     public DetailPage()
     {
         InitializeComponent();
@@ -79,7 +67,6 @@ public partial class DetailPage : ContentPage, IHeroPage
     /// </summary>
     public PulsingButton ShrinkButton => Shrink;
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         var (width, height) = ProductAssets.FrameFor(finalSize.Width, finalSize.Height);

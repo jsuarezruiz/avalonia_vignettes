@@ -9,9 +9,6 @@ namespace PlantForms.Views;
 /// </summary>
 public partial class SummaryPage : FormPage
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SummaryPage"/> class.
-    /// </summary>
     public SummaryPage() => InitializeComponent();
 
     /// <summary>

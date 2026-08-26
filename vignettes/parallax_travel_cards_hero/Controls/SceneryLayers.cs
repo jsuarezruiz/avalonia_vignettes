@@ -27,40 +27,20 @@ namespace ParallaxTravelCardsHero.Controls;
 /// </remarks>
 public sealed class SceneryLayers : Control
 {
-    /// <summary>
-    /// Defines the <see cref="AnimationValue"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> AnimationValueProperty =
         AvaloniaProperty.Register<SceneryLayers, double>(nameof(AnimationValue));
 
-    /// <summary>
-    /// Defines the <see cref="ScreenWidth"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScreenWidthProperty =
         AvaloniaProperty.Register<SceneryLayers, double>(nameof(ScreenWidth));
 
-    /// <summary>
-    /// Defines the <see cref="ScreenHeight"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScreenHeightProperty =
         AvaloniaProperty.Register<SceneryLayers, double>(nameof(ScreenHeight));
 
-    /// <summary>
-    /// Defines the <see cref="City"/> property.
-    /// </summary>
     public static readonly StyledProperty<City?> CityProperty =
         AvaloniaProperty.Register<SceneryLayers, City?>(nameof(City));
 
-    /// <summary>
-    /// The road's height factor, spelled <c>.55 * .2</c> in the original.
-    /// </summary>
     private const double RoadScale = 0.55d * 0.2d;
 
-    /// <summary>
-    /// The three leaves, each with its own drift curve, path and spin rate. The run across the card
-    /// is squeezed into the first nine tenths of the clock, so each leaf waits at the far edge
-    /// before it wraps, and the leaf's own curve runs inside that window rather than around it.
-    /// </summary>
     private static readonly Leaf[] Leaves =
     [
         new(RotationScale: 1.5d, Travel: Drift(FlutterEasings.EaseInOutSine), Path: t => (Math.Sin(t) * 15d) + 200d),
@@ -118,7 +98,6 @@ public sealed class SceneryLayers : Control
         set => SetValue(CityProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -140,7 +119,6 @@ public sealed class SceneryLayers : Control
         DrawLeaves(context, bounds, value);
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -149,7 +127,6 @@ public sealed class SceneryLayers : Control
         _ticker.Start();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
@@ -169,20 +146,11 @@ public sealed class SceneryLayers : Control
         return scale >= 1d ? bitmap.Size : bitmap.Size * scale;
     }
 
-    /// <summary>
-    /// Scales a bitmap to a given width, keeping its aspect ratio.
-    /// </summary>
     private static Size ForWidth(Bitmap bitmap, double width) =>
         new(width, width * bitmap.Size.Height / bitmap.Size.Width);
 
     private static double Lerp(double from, double to, double progress) => from + ((to - from) * progress);
 
-    /// <summary>
-    /// The road unrolls from the horizon. Three transitions are stacked on it in the original: a
-    /// fade held back until 70%, a slide, and a vertical reveal that grows a window downwards from
-    /// the top. The window's own height feeds the slide, so the road is pulled furthest up the
-    /// screen half way through and settles as the window fills.
-    /// </summary>
     private void DrawRoad(DrawingContext context, Size bounds, double value)
     {
         var opacity = RoadFade.Ease(value);
@@ -214,11 +182,6 @@ public sealed class SceneryLayers : Control
         context.DrawImage(SceneryAssets.Road, destination);
     }
 
-    /// <summary>
-    /// Two clouds crossing the sky at different heights and speeds, on a clock of their own. Both
-    /// read the same drifting position; the smaller one takes half of it, which is what keeps them
-    /// from moving as a pair.
-    /// </summary>
     private void DrawClouds(DrawingContext context, Size bounds, double value)
     {
         if (value <= 0d)
@@ -243,11 +206,6 @@ public sealed class SceneryLayers : Control
             new Rect(new Point(drift * 0.5d, ScreenHeight * 0.12d), small));
     }
 
-    /// <summary>
-    /// The skyline grows from a little over half the screen's width to all of it while it slides
-    /// down into place, and the trees fade in once it is nearly there. All three run on their own
-    /// slice of the animation, so the scene assembles rather than simply scaling up.
-    /// </summary>
     private void DrawCityAndTrees(DrawingContext context, Size bounds, double value, City city)
     {
         var sizeProgress = CitySize.Ease(value);
@@ -273,11 +231,6 @@ public sealed class SceneryLayers : Control
         }
     }
 
-    /// <summary>
-    /// The three skyline layers share a box and are bottom-aligned in it, with the strip of ground
-    /// sitting directly under it. Each layer keeps its own aspect ratio inside that box, which is
-    /// why the landmark stays tall while the city behind it stays wide.
-    /// </summary>
     private static void DrawCityImage(DrawingContext context, Size bounds, Size size, City city)
     {
         var ground = ForWidth(SceneryAssets.Ground, size.Width);
@@ -302,10 +255,6 @@ public sealed class SceneryLayers : Control
         context.DrawImage(SceneryAssets.Ground, new Rect(new Point(left, top + size.Height), ground));
     }
 
-    /// <summary>
-    /// Four trees, two small ones set back from the edges and two larger ones nearer the bottom
-    /// corners. They are placed against the card's edges but sized from the screen.
-    /// </summary>
     private void DrawTrees(DrawingContext context, Size bounds)
     {
         var back = ForWidth(SceneryAssets.Tree, ScreenWidth * 0.05d);
@@ -325,10 +274,6 @@ public sealed class SceneryLayers : Control
                 new Rect(new Point(left, bounds.Height - bottom - size.Height), size));
     }
 
-    /// <summary>
-    /// Three leaves crossing the card, each on its own easing, its own wavering path and its own
-    /// spin. They share one clock, so they cross together and reset together.
-    /// </summary>
     private void DrawLeaves(DrawingContext context, Size bounds, double value)
     {
         if (value <= 0d)
@@ -375,9 +320,6 @@ public sealed class SceneryLayers : Control
         }
     }
 
-    /// <summary>
-    /// Wraps a leaf's curve in the window its run across the card occupies.
-    /// </summary>
     private static Easing Drift(Easing curve) => new IntervalEasing(0d, 0.9d, curve);
 
     /// <summary>

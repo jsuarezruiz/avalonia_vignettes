@@ -14,9 +14,6 @@ namespace SpendingTracker.Models;
 /// </remarks>
 public sealed class Chart : INotifyPropertyChanged
 {
-    /// <summary>
-    /// The narrowest the domain is allowed to get.
-    /// </summary>
     private const double MinimumDomain = 1.2d;
 
     private double _domainStart;
@@ -25,10 +22,6 @@ public sealed class Chart : INotifyPropertyChanged
     private double _rangeEnd;
     private int _selectedDataPoint = -1;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Chart"/> class.
-    /// </summary>
-    /// <param name="dataSets">The series to plot. The shortest of them sets the domain's limit.</param>
     public Chart(params ChartDataSet[] dataSets)
     {
         DataSets = dataSets;
@@ -39,7 +32,6 @@ public sealed class Chart : INotifyPropertyChanged
         _rangeEnd = Max();
     }
 
-    /// <inheritdoc />
     public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>

@@ -14,15 +14,9 @@ namespace ConstellationsList.Controls;
 /// </remarks>
 public sealed class ConstellationTitleCard : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Constellation"/> property.
-    /// </summary>
     public static readonly StyledProperty<Constellation?> ConstellationProperty =
         AvaloniaProperty.Register<ConstellationTitleCard, Constellation?>(nameof(Constellation));
 
-    /// <summary>
-    /// Defines the <see cref="IsRedMode"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsRedModeProperty =
         AvaloniaProperty.Register<ConstellationTitleCard, bool>(nameof(IsRedMode));
 

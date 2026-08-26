@@ -18,27 +18,15 @@ namespace AvaloniaVignettes.Shared.Controls;
 /// </remarks>
 public sealed class MaterialIcon : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Data"/> property.
-    /// </summary>
     public static readonly StyledProperty<Geometry?> DataProperty =
         AvaloniaProperty.Register<MaterialIcon, Geometry?>(nameof(Data));
 
-    /// <summary>
-    /// Defines the <see cref="IconSize"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> IconSizeProperty =
         AvaloniaProperty.Register<MaterialIcon, double>(nameof(IconSize), DesignGrid);
 
-    /// <summary>
-    /// Defines the <see cref="Foreground"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> ForegroundProperty =
         TextElement.ForegroundProperty.AddOwner<MaterialIcon>();
 
-    /// <summary>
-    /// The grid Material's icon outlines are drawn on.
-    /// </summary>
     private const double DesignGrid = 24d;
 
     static MaterialIcon()
@@ -75,7 +63,6 @@ public sealed class MaterialIcon : Control
         set => SetValue(ForegroundProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -93,6 +80,5 @@ public sealed class MaterialIcon : Control
         }
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize) => new(IconSize, IconSize);
 }

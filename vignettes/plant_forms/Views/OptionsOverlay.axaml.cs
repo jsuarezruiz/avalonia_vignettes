@@ -11,15 +11,9 @@ namespace PlantForms.Views;
 /// </summary>
 public partial class OptionsOverlay : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="Title"/> property.
-    /// </summary>
     public static readonly DirectProperty<OptionsOverlay, string> TitleProperty =
         AvaloniaProperty.RegisterDirect<OptionsOverlay, string>(nameof(Title), o => o.Title);
 
-    /// <summary>
-    /// Defines the <see cref="Selected"/> property.
-    /// </summary>
     public static readonly DirectProperty<OptionsOverlay, string> SelectedProperty =
         AvaloniaProperty.RegisterDirect<OptionsOverlay, string>(nameof(Selected), o => o.Selected);
 
@@ -27,9 +21,6 @@ public partial class OptionsOverlay : UserControl
     private string _selected = string.Empty;
     private DropDownField? _field;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="OptionsOverlay"/> class.
-    /// </summary>
     public OptionsOverlay()
     {
         InitializeComponent();

@@ -15,22 +15,13 @@ namespace AvaloniaVignettes.Shared.Controls;
 /// </remarks>
 public abstract class PlaceholderBase : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Foreground"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> ForegroundProperty =
         AvaloniaProperty.Register<PlaceholderBase, IBrush?>(
             nameof(Foreground), new SolidColorBrush(Color.FromRgb(0xF2, 0xF2, 0xF2)));
 
-    /// <summary>
-    /// Defines the <see cref="Background"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> BackgroundProperty =
         AvaloniaProperty.Register<PlaceholderBase, IBrush?>(nameof(Background), Brushes.White);
 
-    /// <summary>
-    /// Defines the <see cref="CornerRadius"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> CornerRadiusProperty =
         AvaloniaProperty.Register<PlaceholderBase, double>(nameof(CornerRadius), 4d);
 
@@ -100,17 +91,11 @@ public sealed class PlaceholderCardTall : PlaceholderBase
     private const double LineHeight = 14d;
     private const double AvatarSize = 45d;
 
-    /// <summary>
-    /// The tops of the four lines, measured from the card's padding.
-    /// </summary>
     private static readonly double[] LineTops = [60d, 85d, 110d, 135d];
 
     private readonly double _titleWidth;
     private readonly double[] _lineInsets;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PlaceholderCardTall"/> class.
-    /// </summary>
     public PlaceholderCardTall()
     {
         var random = Random.Shared;
@@ -125,7 +110,6 @@ public sealed class PlaceholderCardTall : PlaceholderBase
         ];
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -155,9 +139,6 @@ public sealed class PlaceholderCardShort : PlaceholderBase
     private readonly double _firstInset;
     private readonly double _secondInset;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PlaceholderCardShort"/> class.
-    /// </summary>
     public PlaceholderCardShort()
     {
         var random = Random.Shared;
@@ -168,7 +149,6 @@ public sealed class PlaceholderCardShort : PlaceholderBase
         Height = 90d;
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -190,7 +170,6 @@ public sealed class PlaceholderCardShort : PlaceholderBase
 /// </summary>
 public sealed class PlaceholderImage : PlaceholderBase
 {
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -238,17 +217,10 @@ public sealed class PlaceholderImage : PlaceholderBase
 /// </summary>
 public sealed class PlaceholderImageWithText : PlaceholderBase
 {
-    /// <summary>
-    /// The text block below the image is a fixed 94 tall.
-    /// </summary>
     private const double TextBlockHeight = 94d;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PlaceholderImageWithText"/> class.
-    /// </summary>
     public PlaceholderImageWithText() => CornerRadius = 0d;
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);

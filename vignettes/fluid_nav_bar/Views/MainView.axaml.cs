@@ -9,27 +9,15 @@ namespace FluidNavBar.Views;
 /// </summary>
 public partial class MainView : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="TileSize"/> property.
-    /// </summary>
     public static readonly DirectProperty<MainView, double> TileSizeProperty =
         AvaloniaProperty.RegisterDirect<MainView, double>(nameof(TileSize), o => o.TileSize);
 
-    /// <summary>
-    /// The grid page is inset by 8 on each side.
-    /// </summary>
     private const double GridPadding = 8d;
 
-    /// <summary>
-    /// Portrait shows two columns; the original counts three when it is wider than tall.
-    /// </summary>
     private const int GridColumns = 2;
 
     private double _tileSize;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         InitializeComponent();
@@ -57,7 +45,6 @@ public partial class MainView : UserControl
         private set => SetAndRaise(TileSizeProperty, ref _tileSize, value);
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         TileSize = Math.Max(0d, (finalSize.Width - (GridPadding * 2d)) / GridColumns);

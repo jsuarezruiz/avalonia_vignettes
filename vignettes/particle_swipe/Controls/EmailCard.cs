@@ -11,15 +11,9 @@ namespace ParticleSwipe.Controls;
 /// </summary>
 public sealed class EmailCard : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Email"/> property.
-    /// </summary>
     public static readonly StyledProperty<Email?> EmailProperty =
         AvaloniaProperty.Register<EmailCard, Email?>(nameof(Email));
 
-    /// <summary>
-    /// Defines the <see cref="IsAlternate"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsAlternateProperty =
         AvaloniaProperty.Register<EmailCard, bool>(nameof(IsAlternate));
 

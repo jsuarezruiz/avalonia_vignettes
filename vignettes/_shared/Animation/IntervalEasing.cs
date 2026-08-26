@@ -9,12 +9,6 @@ namespace AvaloniaVignettes.Shared.Animation;
 /// </summary>
 public sealed class IntervalEasing : Easing
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="IntervalEasing"/> class.
-    /// </summary>
-    /// <param name="begin">Where the inner curve starts, as a fraction of the whole animation.</param>
-    /// <param name="end">Where the inner curve finishes.</param>
-    /// <param name="curve">The curve to run over the window; linear when null.</param>
     public IntervalEasing(double begin, double end, Easing? curve = null)
     {
         Begin = begin;
@@ -37,7 +31,6 @@ public sealed class IntervalEasing : Easing
     /// </summary>
     public Easing? Curve { get; }
 
-    /// <inheritdoc />
     public override double Ease(double progress)
     {
         var t = Math.Clamp((progress - Begin) / (End - Begin), 0d, 1d);

@@ -17,33 +17,18 @@ namespace ProductDetailZoom.Controls;
 /// </remarks>
 public sealed class PulsingButton : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Icon"/> property.
-    /// </summary>
     public static readonly StyledProperty<Avalonia.Media.Geometry?> IconProperty =
         AvaloniaProperty.Register<PulsingButton, Avalonia.Media.Geometry?>(nameof(Icon));
 
-    /// <summary>
-    /// Defines the <see cref="HaloScale"/> property.
-    /// </summary>
     public static readonly DirectProperty<PulsingButton, double> HaloScaleProperty =
         AvaloniaProperty.RegisterDirect<PulsingButton, double>(nameof(HaloScale), o => o.HaloScale);
 
-    /// <summary>
-    /// Defines the <see cref="HaloOpacity"/> property.
-    /// </summary>
     public static readonly DirectProperty<PulsingButton, double> HaloOpacityProperty =
         AvaloniaProperty.RegisterDirect<PulsingButton, double>(nameof(HaloOpacity), o => o.HaloOpacity);
 
-    /// <summary>
-    /// Defines the <see cref="FillOpacity"/> property.
-    /// </summary>
     public static readonly DirectProperty<PulsingButton, double> FillOpacityProperty =
         AvaloniaProperty.RegisterDirect<PulsingButton, double>(nameof(FillOpacity), o => o.FillOpacity);
 
-    /// <summary>
-    /// How long one pulse takes.
-    /// </summary>
     private static readonly TimeSpan PulseDuration = TimeSpan.FromMilliseconds(1200);
 
     private FrameTicker? _ticker;
@@ -92,7 +77,6 @@ public sealed class PulsingButton : TemplatedControl
         private set => SetAndRaise(FillOpacityProperty, ref _fillOpacity, value);
     }
 
-    /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -103,7 +87,6 @@ public sealed class PulsingButton : TemplatedControl
         }
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -112,7 +95,6 @@ public sealed class PulsingButton : TemplatedControl
         _ticker.Start();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);

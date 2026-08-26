@@ -19,9 +19,6 @@ public partial class MainView : UserControl
 {
     private readonly InterpolationAnimation _snap;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         Chart = new Chart(DemoData.Income, DemoData.Expense)

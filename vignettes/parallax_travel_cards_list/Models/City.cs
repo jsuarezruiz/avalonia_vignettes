@@ -13,14 +13,6 @@ public sealed class City
 {
     private const string ImageRoot = "avares://ParallaxTravelCardsList/Assets/Images";
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="City"/> class.
-    /// </summary>
-    /// <param name="name">The asset folder name, also used to build the image paths.</param>
-    /// <param name="title">The headline shown on the card.</param>
-    /// <param name="description">The supporting copy shown on the card.</param>
-    /// <param name="color">The pastel card background.</param>
-    /// <param name="hotels">The hotel recommendations for this destination.</param>
     public City(string name, string title, string description, Color color, IReadOnlyList<Hotel> hotels)
     {
         Name = name;

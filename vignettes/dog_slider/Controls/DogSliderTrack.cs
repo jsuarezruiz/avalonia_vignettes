@@ -15,27 +15,15 @@ namespace DogSlider.Controls;
 /// </remarks>
 public sealed class DogSliderTrack : Control
 {
-    /// <summary>
-    /// Defines the <see cref="HandleX"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> HandleXProperty =
         AvaloniaProperty.Register<DogSliderTrack, double>(nameof(HandleX), 230d);
 
-    /// <summary>
-    /// Defines the <see cref="ArcScaleY"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ArcScaleYProperty =
         AvaloniaProperty.Register<DogSliderTrack, double>(nameof(ArcScaleY), 1d);
 
-    /// <summary>
-    /// Defines the <see cref="ArcRadius"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ArcRadiusProperty =
         AvaloniaProperty.Register<DogSliderTrack, double>(nameof(ArcRadius), 20d);
 
-    /// <summary>
-    /// Defines the <see cref="BottomPadding"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> BottomPaddingProperty =
         AvaloniaProperty.Register<DogSliderTrack, double>(nameof(BottomPadding), 10d);
 
@@ -87,7 +75,6 @@ public sealed class DogSliderTrack : Control
         set => SetValue(BottomPaddingProperty, value);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);

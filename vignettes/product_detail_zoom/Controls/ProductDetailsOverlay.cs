@@ -19,39 +19,21 @@ namespace ProductDetailZoom.Controls;
 /// </remarks>
 public sealed class ProductDetailsOverlay : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="AnimationValue"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> AnimationValueProperty =
         AvaloniaProperty.Register<ProductDetailsOverlay, double>(nameof(AnimationValue), 1d);
 
-    /// <summary>
-    /// Defines the <see cref="FirstProgress"/> property.
-    /// </summary>
     public static readonly DirectProperty<ProductDetailsOverlay, double> FirstProgressProperty =
         AvaloniaProperty.RegisterDirect<ProductDetailsOverlay, double>(nameof(FirstProgress), o => o.FirstProgress);
 
-    /// <summary>
-    /// Defines the <see cref="SecondProgress"/> property.
-    /// </summary>
     public static readonly DirectProperty<ProductDetailsOverlay, double> SecondProgressProperty =
         AvaloniaProperty.RegisterDirect<ProductDetailsOverlay, double>(nameof(SecondProgress), o => o.SecondProgress);
 
-    /// <summary>
-    /// Defines the <see cref="ThirdProgress"/> property.
-    /// </summary>
     public static readonly DirectProperty<ProductDetailsOverlay, double> ThirdProgressProperty =
         AvaloniaProperty.RegisterDirect<ProductDetailsOverlay, double>(nameof(ThirdProgress), o => o.ThirdProgress);
 
-    /// <summary>
-    /// Defines the <see cref="HeadlineOpacity"/> property.
-    /// </summary>
     public static readonly DirectProperty<ProductDetailsOverlay, double> HeadlineOpacityProperty =
         AvaloniaProperty.RegisterDirect<ProductDetailsOverlay, double>(nameof(HeadlineOpacity), o => o.HeadlineOpacity);
 
-    /// <summary>
-    /// Defines the <see cref="HeadlineTransform"/> property.
-    /// </summary>
     public static readonly DirectProperty<ProductDetailsOverlay, ITransform?> HeadlineTransformProperty =
         AvaloniaProperty.RegisterDirect<ProductDetailsOverlay, ITransform?>(
             nameof(HeadlineTransform), o => o.HeadlineTransform);
@@ -133,9 +115,6 @@ public sealed class ProductDetailsOverlay : TemplatedControl
         private set => SetAndRaise(HeadlineTransformProperty, ref _headlineTransform, value);
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ProductDetailsOverlay"/> class.
-    /// </summary>
     public ProductDetailsOverlay()
     {
         _headlineTransform = _headline;
@@ -176,7 +155,6 @@ public sealed class ProductDetailsOverlay : TemplatedControl
         HeadlineTransform = _headline;
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         // Taken from the size being arranged into, not from Bounds: Bounds still holds the previous

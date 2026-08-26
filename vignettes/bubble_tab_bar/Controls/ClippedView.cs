@@ -16,15 +16,9 @@ namespace BubbleTabBar.Controls;
 /// </remarks>
 public sealed class ClippedView : Decorator
 {
-    /// <summary>
-    /// Defines the <see cref="ClipDirection"/> property.
-    /// </summary>
     public static readonly StyledProperty<Orientation> ClipDirectionProperty =
         AvaloniaProperty.Register<ClippedView, Orientation>(nameof(ClipDirection), Orientation.Horizontal);
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ClippedView"/> class.
-    /// </summary>
     public ClippedView() => ClipToBounds = true;
 
     /// <summary>
@@ -36,7 +30,6 @@ public sealed class ClippedView : Decorator
         set => SetValue(ClipDirectionProperty, value);
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         if (Child is not { } child)
@@ -62,7 +55,6 @@ public sealed class ClippedView : Decorator
         return new Size(width, height);
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         if (Child is not { } child)

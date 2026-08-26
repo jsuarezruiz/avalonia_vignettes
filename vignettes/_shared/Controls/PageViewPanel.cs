@@ -19,7 +19,6 @@ public sealed class PageViewPanel : Panel
 
     private PageView? Owner => _owner ??= this.FindAncestorOfType<PageView>();
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         var viewport = double.IsInfinity(availableSize.Width) ? 0d : availableSize.Width;
@@ -37,7 +36,6 @@ public sealed class PageViewPanel : Panel
         return new Size(viewport, double.IsInfinity(availableSize.Height) ? height : availableSize.Height);
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         var owner = Owner;

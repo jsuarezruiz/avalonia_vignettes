@@ -23,45 +23,24 @@ namespace DarkInkTransition.Controls;
 /// </remarks>
 public sealed class DarkInkBar : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="IsDark"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsDarkProperty =
         AvaloniaProperty.Register<DarkInkBar, bool>(nameof(IsDark));
 
-    /// <summary>
-    /// Defines the <see cref="BarBackground"/> property.
-    /// </summary>
     public static readonly DirectProperty<DarkInkBar, IBrush?> BarBackgroundProperty =
         AvaloniaProperty.RegisterDirect<DarkInkBar, IBrush?>(nameof(BarBackground), o => o.BarBackground);
 
-    /// <summary>
-    /// Defines the <see cref="BarForeground"/> property.
-    /// </summary>
     public static readonly DirectProperty<DarkInkBar, IBrush?> BarForegroundProperty =
         AvaloniaProperty.RegisterDirect<DarkInkBar, IBrush?>(nameof(BarForeground), o => o.BarForeground);
 
-    /// <summary>
-    /// Defines the <see cref="ToggleOpacity"/> property.
-    /// </summary>
     public static readonly DirectProperty<DarkInkBar, double> ToggleOpacityProperty =
         AvaloniaProperty.RegisterDirect<DarkInkBar, double>(nameof(ToggleOpacity), o => o.ToggleOpacity);
 
-    /// <summary>
-    /// Defines the <see cref="ToggleIcon"/> property.
-    /// </summary>
     public static readonly DirectProperty<DarkInkBar, Bitmap?> ToggleIconProperty =
         AvaloniaProperty.RegisterDirect<DarkInkBar, Bitmap?>(nameof(ToggleIcon), o => o.ToggleIcon);
 
-    /// <summary>
-    /// Defines the <see cref="LogoIcon"/> property.
-    /// </summary>
     public static readonly DirectProperty<DarkInkBar, Bitmap?> LogoIconProperty =
         AvaloniaProperty.RegisterDirect<DarkInkBar, Bitmap?>(nameof(LogoIcon), o => o.LogoIcon);
 
-    /// <summary>
-    /// Defines the <see cref="RuleBrush"/> property.
-    /// </summary>
     public static readonly DirectProperty<DarkInkBar, IBrush?> RuleBrushProperty =
         AvaloniaProperty.RegisterDirect<DarkInkBar, IBrush?>(nameof(RuleBrush), o => o.RuleBrush);
 
@@ -170,7 +149,6 @@ public sealed class DarkInkBar : TemplatedControl
     /// </summary>
     public void RequestToggle() => ToggleRequested?.Invoke(this, EventArgs.Empty);
 
-    /// <inheritdoc />
     protected override void OnApplyTemplate(Avalonia.Controls.Primitives.TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -181,7 +159,6 @@ public sealed class DarkInkBar : TemplatedControl
         }
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -190,16 +167,12 @@ public sealed class DarkInkBar : TemplatedControl
         Apply();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
         _ticker?.Stop();
     }
 
-    /// <summary>
-    /// Blends two colours the way Flutter's <c>HSVColor.lerp</c> does.
-    /// </summary>
     private static Color LerpHsv(Color from, Color to, double progress)
     {
         var a = from.ToHsv();

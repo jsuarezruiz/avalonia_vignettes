@@ -9,5 +9,5 @@ Drag the chart to move through the months and it snaps to a whole one when let g
 ## Running
 
 ```
-dotnet run --project SpendingTracker.csproj
+dotnet run --project Desktop/SpendingTracker.Desktop.csproj
 ```

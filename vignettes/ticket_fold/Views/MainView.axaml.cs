@@ -28,9 +28,6 @@ public partial class MainView : UserControl
     private double _scrollFrom;
     private double _scrollTo;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         InitializeComponent();

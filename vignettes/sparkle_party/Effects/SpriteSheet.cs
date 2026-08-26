@@ -16,13 +16,6 @@ public sealed class SpriteSheet
 {
     private readonly SKRect[] _frames;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SpriteSheet"/> class.
-    /// </summary>
-    /// <param name="asset">The sheet's asset name.</param>
-    /// <param name="length">How many frames it holds.</param>
-    /// <param name="frameWidth">How wide one frame is.</param>
-    /// <param name="frameHeight">How tall one frame is.</param>
     public SpriteSheet(string asset, int length, int frameWidth, int frameHeight)
     {
         using var stream = AssetLoader.Open(new Uri($"avares://SparkleParty/Assets/Images/{asset}.png"));

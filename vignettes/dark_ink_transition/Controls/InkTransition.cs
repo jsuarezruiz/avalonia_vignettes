@@ -25,9 +25,6 @@ namespace DarkInkTransition.Controls;
 /// </remarks>
 public sealed class InkTransition : Decorator
 {
-    /// <summary>
-    /// Defines the <see cref="Progress"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ProgressProperty =
         AvaloniaProperty.Register<InkTransition, double>(nameof(Progress));
 
@@ -36,36 +33,22 @@ public sealed class InkTransition : Decorator
     /// </summary>
     public static readonly TimeSpan Duration = TimeSpan.FromMilliseconds(1500);
 
-    /// <summary>
-    /// The sheet is ten frames across.
-    /// </summary>
     private const int Columns = 10;
 
-    /// <summary>
-    /// One frame's size within the sheet.
-    /// </summary>
     private const int FrameWidth = 360;
 
-    /// <summary>
-    /// One frame's height within the sheet.
-    /// </summary>
     private const int FrameHeight = 720;
 
-    /// <summary>
-    /// The run holds on the first frame, then plays to the 34th.
-    /// </summary>
     private static readonly TweenSequence Frames = new((0d, 0d, 30d), (0d, 34d, 70d));
 
     private static readonly Bitmap Sheet =
         new(AssetLoader.Open(new Uri("avares://DarkInkTransition/Assets/Images/ink_mask.png")));
 
-    /// <summary>
-    /// One brush per frame, each over a cropped view of the sheet. Pointing a single brush at the
-    /// whole sheet and moving its source rectangle looks like the obvious way to do this, but the
-    /// rectangle is not honoured well enough to trust as a mask: the sheet ends up averaged across
-    /// the page, and an averaged mask is a half-transparent reveal rather than a clean one. Cropping
-    /// the frame leaves nothing to interpret.
-    /// </summary>
+    // One brush per frame, each over a cropped view of the sheet. Pointing a single brush at the
+    // whole sheet and moving its source rectangle looks like the obvious way to do this, but the
+    // rectangle is not honoured well enough to trust as a mask: the sheet ends up averaged across
+    // the page, and an averaged mask is a half-transparent reveal rather than a clean one. Cropping
+    // the frame leaves nothing to interpret.
     private static readonly Dictionary<int, ImageBrush> Masks = [];
 
     private ImageBrush? _mask;
@@ -73,9 +56,6 @@ public sealed class InkTransition : Decorator
     static InkTransition() =>
         ProgressProperty.Changed.AddClassHandler<InkTransition>((x, _) => x.Refresh());
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="InkTransition"/> class.
-    /// </summary>
     public InkTransition() => Refresh();
 
     /// <summary>

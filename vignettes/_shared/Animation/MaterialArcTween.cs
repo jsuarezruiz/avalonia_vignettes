@@ -14,9 +14,6 @@ namespace AvaloniaVignettes.Shared.Animation;
 /// </remarks>
 public sealed class MaterialPointArcTween
 {
-    /// <summary>
-    /// How far apart the points must be on an axis before the move counts as off-axis.
-    /// </summary>
     private const double OnAxisDelta = 2d;
 
     private readonly Point _begin;

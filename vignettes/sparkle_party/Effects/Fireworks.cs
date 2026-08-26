@@ -16,15 +16,11 @@ public sealed class Fireworks : ParticleField
     private int _nextAuto = 10;
     private Point? _pending;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Fireworks"/> class.
-    /// </summary>
     public Fireworks(SpriteSheet sheet, Size size)
         : base(sheet, size)
     {
     }
 
-    /// <inheritdoc />
     public override Point? TouchPoint
     {
         get => _pending;
@@ -38,7 +34,6 @@ public sealed class Fireworks : ParticleField
         }
     }
 
-    /// <inheritdoc />
     public override void Tick()
     {
         var adding = 0;

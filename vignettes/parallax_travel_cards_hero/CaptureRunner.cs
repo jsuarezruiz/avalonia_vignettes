@@ -20,20 +20,15 @@ namespace ParallaxTravelCardsHero;
 /// </remarks>
 internal static class CaptureRunner
 {
-    /// <summary>
-    /// When to take each frame, in milliseconds from the start of the navigation. The samples
-    /// bunch up at both ends of the 1700 ms route, because that is where a hand-off between the
-    /// flying stand-in and a real control could show.
-    /// </summary>
+    // When to take each frame, in milliseconds from the start of the navigation. The samples
+    // bunch up at both ends of the 1700 ms route, because that is where a hand-off between the
+    // flying stand-in and a real control could show.
     private static readonly int[] Frames =
     [
         0, 30, 60, 120, 250, 420, 600, 850, 1100, 1360, 1530, 1640, 1690, 1720, 1760, 1820, 1950,
     ];
 
 
-    /// <summary>
-    /// Renders every frame to <paramref name="outputDirectory"/> and shuts the app down.
-    /// </summary>
     public static async Task RunAsync(Window window, string outputDirectory)
     {
         Directory.CreateDirectory(outputDirectory);
@@ -50,13 +45,10 @@ internal static class CaptureRunner
         await SampleAsync(window, view, size, outputDirectory, "back", view.BackCapture);
         await SampleAsync(window, view, size, outputDirectory, "open2", view.BeginCapture);
 
-        FrameCapture.Shutdown();
     }
 
-    /// <summary>
-    /// Runs one navigation and renders a frame at each sample point along it. The navigation plays
-    /// on its own clock, so the frames are taken from it as it goes rather than posed one at a time.
-    /// </summary>
+    // Runs one navigation and renders a frame at each sample point along it. The navigation plays
+    // on its own clock, so the frames are taken from it as it goes rather than posed one at a time.
     private static async Task SampleAsync(
         Window window,
         MainView view,

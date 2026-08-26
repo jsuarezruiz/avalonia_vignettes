@@ -13,9 +13,6 @@ namespace TicketFold.Controls;
 /// </remarks>
 public sealed class FlightBarcode : TemplatedControl
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FlightBarcode"/> class.
-    /// </summary>
     public FlightBarcode() => Tapped += OnTapped;
 
     private static void OnTapped(object? sender, TappedEventArgs e)

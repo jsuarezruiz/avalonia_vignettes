@@ -13,12 +13,6 @@ namespace Indie3D.Models;
 /// </remarks>
 public sealed class Mesh
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Mesh"/> class.
-    /// </summary>
-    /// <param name="vertices">The vertices, in model space.</param>
-    /// <param name="indices">Three indices per triangle.</param>
-    /// <param name="colour">The material's diffuse colour.</param>
     public Mesh(Vector3[] vertices, int[] indices, Color colour)
     {
         Vertices = vertices;

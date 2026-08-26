@@ -50,39 +50,21 @@ public sealed class PageScrollEventArgs : RoutedEventArgs
 /// </remarks>
 public class PageView : ItemsControl
 {
-    /// <summary>
-    /// Defines the <see cref="ViewportFraction"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ViewportFractionProperty =
         AvaloniaProperty.Register<PageView, double>(nameof(ViewportFraction), 1d);
 
-    /// <summary>
-    /// Defines the <see cref="ScrollPixels"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScrollPixelsProperty =
         AvaloniaProperty.Register<PageView, double>(nameof(ScrollPixels));
 
-    /// <summary>
-    /// Defines the <see cref="Page"/> property.
-    /// </summary>
     public static readonly DirectProperty<PageView, double> PageProperty =
         AvaloniaProperty.RegisterDirect<PageView, double>(nameof(Page), o => o.Page);
 
-    /// <summary>
-    /// Defines the <see cref="SelectedIndex"/> property.
-    /// </summary>
     public static readonly StyledProperty<int> SelectedIndexProperty =
         AvaloniaProperty.Register<PageView, int>(nameof(SelectedIndex), defaultBindingMode: Avalonia.Data.BindingMode.TwoWay);
 
-    /// <summary>
-    /// Defines the <see cref="SelectedItem"/> property.
-    /// </summary>
     public static readonly DirectProperty<PageView, object?> SelectedItemProperty =
         AvaloniaProperty.RegisterDirect<PageView, object?>(nameof(SelectedItem), o => o.SelectedItem);
 
-    /// <summary>
-    /// Defines the <see cref="IsDragging"/> property.
-    /// </summary>
     public static readonly DirectProperty<PageView, bool> IsDraggingProperty =
         AvaloniaProperty.RegisterDirect<PageView, bool>(nameof(IsDragging), o => o.IsDragging);
 
@@ -236,7 +218,6 @@ public class PageView : ItemsControl
         ScrollPixels = ClampPage(page) * PageWidth;
     }
 
-    /// <inheritdoc />
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -258,7 +239,6 @@ public class PageView : ItemsControl
         RaiseScrollEvent(ScrollStartedEvent, 0d);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -278,7 +258,6 @@ public class PageView : ItemsControl
         ScrollPixels += ApplyOverscrollFriction(requested);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -286,26 +265,22 @@ public class PageView : ItemsControl
         e.Pointer.Capture(null);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
     {
         base.OnPointerCaptureLost(e);
         EndDrag(null, null);
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
         StopSimulation();
     }
 
-    /// <summary>
-    /// Recomputes the page width after a viewport or viewport-fraction change, keeping whichever
-    /// page was on screen centred. Before the first layout there is no offset to preserve, so
-    /// <see cref="SelectedIndex"/> decides where the strip starts, this is what honours an initial
-    /// page set in markup.
-    /// </summary>
+    // Recomputes the page width after a viewport or viewport-fraction change, keeping whichever
+    // page was on screen centred. Before the first layout there is no offset to preserve, so
+    // SelectedIndex decides where the strip starts, this is what honours an initial
+    // page set in markup.
     private void RefreshPageWidth()
     {
         var width = Bounds.Width * ViewportFraction;
@@ -388,10 +363,8 @@ public class PageView : ItemsControl
 
     private double MaxScrollPixels => Math.Max(0d, (ItemCount - 1) * PageWidth);
 
-    /// <summary>
-    /// Damps a drag delta that pushes the strip past its ends, the way Flutter's
-    /// <c>BouncingScrollPhysics.applyPhysicsToUserOffset</c> does.
-    /// </summary>
+    // Damps a drag delta that pushes the strip past its ends, the way Flutter's
+    // BouncingScrollPhysics.applyPhysicsToUserOffset does.
     private double ApplyOverscrollFriction(double delta)
     {
         var pixels = ScrollPixels;
@@ -443,10 +416,8 @@ public class PageView : ItemsControl
     /// <remarks>Negated because the scroll offset grows as the pointer travels left.</remarks>
     private double EstimateScrollVelocity() => -_velocity.Estimate();
 
-    /// <summary>
-    /// Starts the spring that carries the strip to a whole page, matching
-    /// <c>PageScrollPhysics.createBallisticSimulation</c>.
-    /// </summary>
+    // Starts the spring that carries the strip to a whole page, matching
+    // PageScrollPhysics.createBallisticSimulation.
     private void StartSnapSimulation(double velocity)
     {
         var pageWidth = PageWidth;

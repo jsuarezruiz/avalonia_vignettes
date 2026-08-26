@@ -20,20 +20,11 @@ namespace DrinkRewardsList.Views;
 /// </remarks>
 public partial class MainView : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="Header"/> property.
-    /// </summary>
     public static readonly DirectProperty<MainView, HeaderMetrics> HeaderProperty =
         AvaloniaProperty.RegisterDirect<MainView, HeaderMetrics>(nameof(Header), o => o.Header);
 
-    /// <summary>
-    /// The share of the screen the header takes.
-    /// </summary>
     private const double HeaderFraction = 0.2d;
 
-    /// <summary>
-    /// The gap between cards, and the inset either side of them.
-    /// </summary>
     private const double ListPaddingSize = 20d;
 
     private static readonly TimeSpan ScrollDuration = TimeSpan.FromMilliseconds(700);
@@ -45,9 +36,6 @@ public partial class MainView : UserControl
     private double _scrollTo;
     private Drink? _selected;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         InitializeComponent();
@@ -74,7 +62,6 @@ public partial class MainView : UserControl
         private set => SetAndRaise(HeaderProperty, ref _header, value);
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         Header = new HeaderMetrics(finalSize.Height * HeaderFraction);

@@ -36,21 +36,12 @@ public interface IHeroPage
 /// </remarks>
 public sealed class HeroFlight : Canvas
 {
-    /// <summary>
-    /// Defines the <see cref="Content"/> property.
-    /// </summary>
     public static readonly StyledProperty<Control?> ContentProperty =
         AvaloniaProperty.Register<HeroFlight, Control?>(nameof(Content));
 
-    /// <summary>
-    /// Defines the <see cref="Progress"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ProgressProperty =
         AvaloniaProperty.Register<HeroFlight, double>(nameof(Progress));
 
-    /// <summary>
-    /// Defines the <see cref="ContentProgress"/> property.
-    /// </summary>
     public static readonly DirectProperty<HeroFlight, double> ContentProgressProperty =
         AvaloniaProperty.RegisterDirect<HeroFlight, double>(nameof(ContentProgress), o => o.ContentProgress);
 
@@ -72,9 +63,6 @@ public sealed class HeroFlight : Canvas
         });
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="HeroFlight"/> class.
-    /// </summary>
     public HeroFlight() => IsHitTestVisible = false;
 
     /// <summary>
@@ -160,7 +148,6 @@ public sealed class HeroFlight : Canvas
         }
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         var size = base.MeasureOverride(availableSize);
@@ -179,7 +166,6 @@ public sealed class HeroFlight : Canvas
         return size;
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         // Canvas arranges its children at their desired size; the stand-in is given the slot it is
@@ -228,10 +214,8 @@ public sealed class HeroFlight : Canvas
         }
     }
 
-    /// <summary>
-    /// Finds the hero a page hands over. A transition is given whatever the navigation hosts its
-    /// pages in rather than the page itself, so the page is looked for underneath it.
-    /// </summary>
+    // Finds the hero a page hands over. A transition is given whatever the navigation hosts its
+    // pages in rather than the page itself, so the page is looked for underneath it.
     private static Control? HeroIn(Visual? visual) => visual switch
     {
         null => null,
@@ -239,9 +223,6 @@ public sealed class HeroFlight : Canvas
         _ => visual.GetVisualDescendants().OfType<IHeroPage>().FirstOrDefault()?.Hero,
     };
 
-    /// <summary>
-    /// Where a control sits in this layer's coordinates, right now.
-    /// </summary>
     private Rect RectOf(Visual control) =>
         new(control.TranslatePoint(default, this) ?? default, control.Bounds.Size);
 
@@ -267,10 +248,8 @@ public sealed class HeroFlight : Canvas
         }
     }
 
-    /// <summary>
-    /// Hands the control back. Both ends are restored, not just the one arrived at, or the far one
-    /// stays hidden the next time it is needed.
-    /// </summary>
+    // Hands the control back. Both ends are restored, not just the one arrived at, or the far one
+    // stays hidden the next time it is needed.
     private void Land()
     {
         if (Content is { } content)

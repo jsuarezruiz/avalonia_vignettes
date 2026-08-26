@@ -16,27 +16,15 @@ namespace AvaloniaVignettes.Shared.Controls;
 /// </remarks>
 public sealed class Sprite : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Source"/> property.
-    /// </summary>
     public static readonly StyledProperty<Bitmap?> SourceProperty =
         AvaloniaProperty.Register<Sprite, Bitmap?>(nameof(Source));
 
-    /// <summary>
-    /// Defines the <see cref="FrameWidth"/> property.
-    /// </summary>
     public static readonly StyledProperty<int> FrameWidthProperty =
         AvaloniaProperty.Register<Sprite, int>(nameof(FrameWidth), 1);
 
-    /// <summary>
-    /// Defines the <see cref="FrameHeight"/> property.
-    /// </summary>
     public static readonly StyledProperty<int> FrameHeightProperty =
         AvaloniaProperty.Register<Sprite, int>(nameof(FrameHeight), 1);
 
-    /// <summary>
-    /// Defines the <see cref="Frame"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> FrameProperty =
         AvaloniaProperty.Register<Sprite, double>(nameof(Frame));
 
@@ -119,7 +107,6 @@ public sealed class Sprite : Control
         context.DrawImage(sheet, source, destination);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);

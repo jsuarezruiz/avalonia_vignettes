@@ -16,15 +16,9 @@ namespace BubbleTabBar;
 /// <remarks>Enabled with <c>--capture &lt;directory&gt;</c>.</remarks>
 internal static class CaptureRunner
 {
-    /// <summary>
-    /// Milliseconds after a tab is picked at which to grab a frame.
-    /// </summary>
     private static readonly int[] FrameTimes = [80, 200, 380, 700];
 
 
-    /// <summary>
-    /// Renders every frame to <paramref name="outputDirectory"/> and shuts the app down.
-    /// </summary>
     public static async Task RunAsync(Window window, string outputDirectory)
     {
         Directory.CreateDirectory(outputDirectory);
@@ -52,7 +46,6 @@ internal static class CaptureRunner
             }
         }
 
-        FrameCapture.Shutdown();
     }
 
 }

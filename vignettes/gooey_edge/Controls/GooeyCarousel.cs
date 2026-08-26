@@ -24,47 +24,23 @@ namespace GooeyEdge.Controls;
 /// </remarks>
 public sealed class GooeyCarousel : Panel
 {
-    /// <summary>
-    /// Defines the <see cref="SelectedIndex"/> property.
-    /// </summary>
     public static readonly DirectProperty<GooeyCarousel, int> SelectedIndexProperty =
         AvaloniaProperty.RegisterDirect<GooeyCarousel, int>(nameof(SelectedIndex), o => o.SelectedIndex);
 
-    /// <summary>
-    /// Defines the <see cref="DragIndex"/> property.
-    /// </summary>
     public static readonly DirectProperty<GooeyCarousel, int> DragIndexProperty =
         AvaloniaProperty.RegisterDirect<GooeyCarousel, int>(nameof(DragIndex), o => o.DragIndex);
 
-    /// <summary>
-    /// Defines the <see cref="IsDragCompleted"/> property.
-    /// </summary>
     public static readonly DirectProperty<GooeyCarousel, bool> IsDragCompletedProperty =
         AvaloniaProperty.RegisterDirect<GooeyCarousel, bool>(nameof(IsDragCompleted), o => o.IsDragCompleted);
 
-    /// <summary>
-    /// How far the pointer must travel before a swipe is recognised.
-    /// </summary>
     private const double SwipeActivationDistance = 20d;
 
-    /// <summary>
-    /// How much of the width ahead of the pointer must be crossed to commit the swipe.
-    /// </summary>
     private const double SwipeCompletionRatio = 0.8d;
 
-    /// <summary>
-    /// How much of the control must lie ahead of the pointer for a swipe to be allowed.
-    /// </summary>
     private const double MinimumAvailableWidthRatio = 0.5d;
 
-    /// <summary>
-    /// How far past the page the clip extends, so the edge is never cut off.
-    /// </summary>
     private const double ClipMargin = 10d;
 
-    /// <summary>
-    /// Points along the edge.
-    /// </summary>
     private const int PointCount = 25;
 
     private readonly Effects.GooeyEdge _edge = new(count: PointCount);
@@ -77,9 +53,6 @@ public sealed class GooeyCarousel : Panel
     private bool _hasDragIndex;
     private bool _isDragCompleted;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="GooeyCarousel"/> class.
-    /// </summary>
     public GooeyCarousel() => ClipToBounds = true;
 
     /// <summary>
@@ -112,7 +85,6 @@ public sealed class GooeyCarousel : Panel
         private set => SetAndRaise(IsDragCompletedProperty, ref _isDragCompleted, value);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -143,7 +115,6 @@ public sealed class GooeyCarousel : Panel
         e.Pointer.Capture(this);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -171,7 +142,6 @@ public sealed class GooeyCarousel : Panel
         _edge.ApplyTouchOffset(new Point(dx, position.Y), Bounds.Size);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -180,14 +150,12 @@ public sealed class GooeyCarousel : Panel
         e.Pointer.Capture(null);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
     {
         base.OnPointerCaptureLost(e);
         _edge.ApplyTouchOffset();
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -198,14 +166,12 @@ public sealed class GooeyCarousel : Panel
         _ticker.Start();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
         _ticker?.Stop();
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         foreach (var child in Children)
@@ -216,7 +182,6 @@ public sealed class GooeyCarousel : Panel
         return availableSize;
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         var bounds = new Rect(finalSize);
@@ -246,10 +211,8 @@ public sealed class GooeyCarousel : Panel
         }
     }
 
-    /// <summary>
-    /// Recognises the start of a swipe and picks the page being revealed: dragging right brings in
-    /// the previous page from the left edge, dragging left the next one from the right.
-    /// </summary>
+    // Recognises the start of a swipe and picks the page being revealed: dragging right brings in
+    // the previous page from the left edge, dragging left the next one from the right.
     private bool IsSwipeActive(double dx)
     {
         if (_dragDirection == 0d && Math.Abs(dx) > SwipeActivationDistance)
@@ -266,11 +229,9 @@ public sealed class GooeyCarousel : Panel
         return _dragDirection != 0d;
     }
 
-    /// <summary>
-    /// Decides whether the swipe has gone far enough to commit, measured against the width still
-    /// ahead of where the page was first grabbed. Once it has, the tensions are flipped so the edge
-    /// is drawn towards the far side instead of springing back.
-    /// </summary>
+    // Decides whether the swipe has gone far enough to commit, measured against the width still
+    // ahead of where the page was first grabbed. Once it has, the tensions are flipped so the edge
+    // is drawn towards the far side instead of springing back.
     private bool IsSwipeComplete(double dx)
     {
         if (_dragDirection == 0d)
@@ -298,9 +259,6 @@ public sealed class GooeyCarousel : Panel
         return IsDragCompleted;
     }
 
-    /// <summary>
-    /// Shows only the base page and, while a swipe is running, the page being revealed on top of it.
-    /// </summary>
     private void UpdatePageStates()
     {
         if (Children.Count == 0)

@@ -23,34 +23,19 @@ namespace DrinkRewardsList.Controls;
 /// </remarks>
 public sealed class DrinkCard : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Drink"/> property.
-    /// </summary>
     public static readonly StyledProperty<Drink?> DrinkProperty =
         AvaloniaProperty.Register<DrinkCard, Drink?>(nameof(Drink));
 
-    /// <summary>
-    /// Defines the <see cref="EarnedPoints"/> property.
-    /// </summary>
     public static readonly StyledProperty<int> EarnedPointsProperty =
         AvaloniaProperty.Register<DrinkCard, int>(nameof(EarnedPoints), 100);
 
-    /// <summary>
-    /// Defines the <see cref="IsOpen"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsOpenProperty =
         AvaloniaProperty.Register<DrinkCard, bool>(nameof(IsOpen));
 
-    /// <summary>
-    /// Defines the <see cref="PointsRemainingLabel"/> property.
-    /// </summary>
     public static readonly DirectProperty<DrinkCard, string?> PointsRemainingLabelProperty =
         AvaloniaProperty.RegisterDirect<DrinkCard, string?>(
             nameof(PointsRemainingLabel), o => o.PointsRemainingLabel);
 
-    /// <summary>
-    /// Defines the <see cref="Artwork"/> property.
-    /// </summary>
     public static readonly DirectProperty<DrinkCard, Bitmap?> ArtworkProperty =
         AvaloniaProperty.RegisterDirect<DrinkCard, Bitmap?>(nameof(Artwork), o => o.Artwork);
 
@@ -70,33 +55,18 @@ public sealed class DrinkCard : TemplatedControl
     /// </summary>
     public const double NominalHeightOpen = 290d;
 
-    /// <summary>
-    /// How far below the card the liquid starts, as a multiple of the open height.
-    /// </summary>
     private const double LiquidDrop = 1.2d;
 
     private static readonly TimeSpan OpenDuration = TimeSpan.FromMilliseconds(1500);
     private static readonly TimeSpan CloseDuration = TimeSpan.FromMilliseconds(1200);
     private static readonly TimeSpan FillDuration = TimeSpan.FromMilliseconds(3000);
 
-    /// <summary>
-    /// Flutter's <c>Curves.elasticOut</c>, which the card opens on.
-    /// </summary>
     private static readonly Easing OpenEasing = new ElasticOutEasing { Period = 0.4d };
 
-    /// <summary>
-    /// A slacker elastic, which it closes on.
-    /// </summary>
     private static readonly Easing CloseEasing = new ElasticOutEasing { Period = 0.9d };
 
-    /// <summary>
-    /// The slice of the fill clock the liquid rises over.
-    /// </summary>
     private static readonly Easing FillEasing = new IntervalEasing(0.12d, 0.45d, FlutterEasings.EaseOut);
 
-    /// <summary>
-    /// The slice the points count down over, which starts a little sooner.
-    /// </summary>
     private static readonly Easing PointsEasing = new IntervalEasing(0.1d, 0.5d, FlutterEasings.EaseOutQuart);
 
     private readonly AnimationController _height;
@@ -114,9 +84,6 @@ public sealed class DrinkCard : TemplatedControl
         EarnedPointsProperty.Changed.AddClassHandler<DrinkCard>((x, _) => x.UpdatePoints());
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DrinkCard"/> class.
-    /// </summary>
     public DrinkCard()
     {
         Height = NominalHeightClosed;
@@ -181,7 +148,6 @@ public sealed class DrinkCard : TemplatedControl
         private set => SetAndRaise(PointsRemainingLabelProperty, ref _pointsRemainingLabel, value);
     }
 
-    /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -191,7 +157,6 @@ public sealed class DrinkCard : TemplatedControl
         OnFillProgressChanged(_fill.Value);
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
@@ -251,9 +216,6 @@ public sealed class DrinkCard : TemplatedControl
         liquid.InvalidateVisual();
     }
 
-    /// <summary>
-    /// Gets how full the card can get: brim full once the drink is affordable.
-    /// </summary>
     private double MaxFillLevel =>
         Drink is { RequiredPoints: > 0 } drink ? Math.Min(1d, (double)EarnedPoints / drink.RequiredPoints) : 0d;
 

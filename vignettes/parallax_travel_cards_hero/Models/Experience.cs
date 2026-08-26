@@ -11,10 +11,6 @@ public sealed class Experience
 {
     private const string ImageRoot = "avares://ParallaxTravelCardsHero/Assets/Images/Experiences";
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Experience"/> class.
-    /// </summary>
-    /// <param name="title">The label under the picture, also the asset name once spaces are removed.</param>
     public Experience(string title)
     {
         Title = title;

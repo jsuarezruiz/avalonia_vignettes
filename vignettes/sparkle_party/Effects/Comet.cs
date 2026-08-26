@@ -16,9 +16,6 @@ public sealed class Comet : ParticleField
     private double _power;
     private Point _point;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Comet"/> class.
-    /// </summary>
     public Comet(SpriteSheet sheet, Size size)
         : base(sheet, size)
     {
@@ -26,7 +23,6 @@ public sealed class Comet : ParticleField
         _point = new Point(Width * 0.5d, Height + 50d);
     }
 
-    /// <inheritdoc />
     public override void Tick()
     {
         var target = TouchPoint ?? Center;
@@ -95,9 +91,6 @@ public sealed class Comet : ParticleField
         SetColour(index, FromHsl(hue, 1d, Rnd.Bool(0.1d) ? 1d : 0.4d));
     }
 
-    /// <summary>
-    /// How hard the comet is throwing off sparks, which follows the pointer's speed.
-    /// </summary>
     private double UpdatePower()
     {
         var power = 0.25d;

@@ -23,9 +23,6 @@ public partial class MainView : UserControl
     private bool _isDark;
     private bool _isRevealing;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         InitializeComponent();

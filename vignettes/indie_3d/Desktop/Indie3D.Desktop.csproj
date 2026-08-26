@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VignetteAssembly>Indie3D</VignetteAssembly>
+  </PropertyGroup>
+
+  <Import Project="../../_hosts/Desktop/Vignette.Desktop.props" />
+
+</Project>

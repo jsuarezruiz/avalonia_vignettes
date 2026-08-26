@@ -18,15 +18,9 @@ namespace DogSlider.Controls;
 /// </remarks>
 public sealed class BouncingIcon : Decorator
 {
-    /// <summary>
-    /// Defines the <see cref="IsShown"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsShownProperty =
         AvaloniaProperty.Register<BouncingIcon, bool>(nameof(IsShown));
 
-    /// <summary>
-    /// Defines the <see cref="MaxBounce"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> MaxBounceProperty =
         AvaloniaProperty.Register<BouncingIcon, double>(nameof(MaxBounce), 20d);
 
@@ -43,9 +37,6 @@ public sealed class BouncingIcon : Decorator
         IsShownProperty.Changed.AddClassHandler<BouncingIcon>((x, e) =>
             x.SetCurrentValue(OpacityProperty, e.GetNewValue<bool>() ? 1d : 0d));
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="BouncingIcon"/> class.
-    /// </summary>
     public BouncingIcon()
     {
         Opacity = 0d;
@@ -77,7 +68,6 @@ public sealed class BouncingIcon : Decorator
         set => SetValue(MaxBounceProperty, value);
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -86,7 +76,6 @@ public sealed class BouncingIcon : Decorator
         _timer.Start();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);

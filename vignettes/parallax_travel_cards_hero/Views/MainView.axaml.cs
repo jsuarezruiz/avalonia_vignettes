@@ -21,9 +21,6 @@ public partial class MainView : UserControl
     private readonly City _city = DemoData.City;
     private readonly FadePageTransition _transition = new();
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         InitializeComponent();

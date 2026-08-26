@@ -20,7 +20,6 @@ public sealed class NavBar : TabControl
     protected override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey) =>
         new NavBarButton();
 
-    /// <inheritdoc />
     protected override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
     {
         recycleKey = null;

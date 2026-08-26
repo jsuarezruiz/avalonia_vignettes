@@ -34,15 +34,9 @@ public sealed class GameScoreBoard : TemplatedControl
     private const string PartAwayCurrent = "PART_AwayCurrent";
     private const string PartAwayIncoming = "PART_AwayIncoming";
 
-    /// <summary>
-    /// Defines the <see cref="Game"/> property.
-    /// </summary>
     public static readonly StyledProperty<BasketballGameData?> GameProperty =
         AvaloniaProperty.Register<GameScoreBoard, BasketballGameData?>(nameof(Game));
 
-    /// <summary>
-    /// Defines the <see cref="WinnerBrush"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> WinnerBrushProperty =
         AvaloniaProperty.Register<GameScoreBoard, IBrush?>(nameof(WinnerBrush));
 
@@ -58,9 +52,6 @@ public sealed class GameScoreBoard : TemplatedControl
     private BasketballGameData? _current;
     private BasketballGameData? _incoming;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="GameScoreBoard"/> class.
-    /// </summary>
     public GameScoreBoard() =>
         _roll = new AnimationController(this, OnRollProgressChanged) { Duration = RollDuration };
 
@@ -82,7 +73,6 @@ public sealed class GameScoreBoard : TemplatedControl
         set => SetValue(WinnerBrushProperty, value);
     }
 
-    /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -96,7 +86,6 @@ public sealed class GameScoreBoard : TemplatedControl
         OnRollProgressChanged(_roll.Value);
     }
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);

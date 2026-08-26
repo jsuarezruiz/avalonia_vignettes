@@ -18,59 +18,32 @@ namespace GooeyEdge.Controls;
 /// </remarks>
 public sealed class ContentCard : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Palette"/> property.
-    /// </summary>
     public static readonly StyledProperty<string?> PaletteProperty =
         AvaloniaProperty.Register<ContentCard, string?>(nameof(Palette));
 
-    /// <summary>
-    /// Defines the <see cref="AccentBrush"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> AccentBrushProperty =
         AvaloniaProperty.Register<ContentCard, IBrush?>(nameof(AccentBrush));
 
-    /// <summary>
-    /// Defines the <see cref="Title"/> property.
-    /// </summary>
     public static readonly StyledProperty<string?> TitleProperty =
         AvaloniaProperty.Register<ContentCard, string?>(nameof(Title));
 
-    /// <summary>
-    /// Defines the <see cref="Subtitle"/> property.
-    /// </summary>
     public static readonly StyledProperty<string?> SubtitleProperty =
         AvaloniaProperty.Register<ContentCard, string?>(nameof(Subtitle));
 
-    /// <summary>
-    /// Defines the <see cref="BackgroundImage"/> property.
-    /// </summary>
     public static readonly DirectProperty<ContentCard, Bitmap?> BackgroundImageProperty =
         AvaloniaProperty.RegisterDirect<ContentCard, Bitmap?>(nameof(BackgroundImage), o => o.BackgroundImage);
 
-    /// <summary>
-    /// Defines the <see cref="IllustrationImage"/> property.
-    /// </summary>
     public static readonly DirectProperty<ContentCard, Bitmap?> IllustrationImageProperty =
         AvaloniaProperty.RegisterDirect<ContentCard, Bitmap?>(nameof(IllustrationImage), o => o.IllustrationImage);
 
-    /// <summary>
-    /// Defines the <see cref="SliderImage"/> property.
-    /// </summary>
     public static readonly DirectProperty<ContentCard, Bitmap?> SliderImageProperty =
         AvaloniaProperty.RegisterDirect<ContentCard, Bitmap?>(nameof(SliderImage), o => o.SliderImage);
 
-    /// <summary>
-    /// Defines the <see cref="BackgroundTransform"/> property.
-    /// </summary>
     public static readonly DirectProperty<ContentCard, ITransform> BackgroundTransformProperty =
         AvaloniaProperty.RegisterDirect<ContentCard, ITransform>(nameof(BackgroundTransform), o => o.BackgroundTransform);
 
     private const string ImageRoot = "avares://GooeyEdge/Assets/Images";
 
-    /// <summary>
-    /// The background drifts through a full cycle every 2000 ms.
-    /// </summary>
     private const double DriftPeriodMilliseconds = 2000d;
 
     private readonly MatrixTransform _backgroundTransform = new(Matrix.Identity);
@@ -152,7 +125,6 @@ public sealed class ContentCard : TemplatedControl
     /// </summary>
     public ITransform BackgroundTransform => _backgroundTransform;
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -161,7 +133,6 @@ public sealed class ContentCard : TemplatedControl
         _ticker.Start();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);

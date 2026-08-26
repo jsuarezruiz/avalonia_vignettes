@@ -9,7 +9,7 @@ Drag the ball along the track and the dog gives chase, then folds into a sit onc
 ## Running
 
 ```
-dotnet run --project DogSlider.csproj
+dotnet run --project Desktop/DogSlider.Desktop.csproj
 ```
 
 The original plays the dog as a Flare document. Avalonia has no runtime for that format, so the character is rebuilt from vector shapes and posed from code.

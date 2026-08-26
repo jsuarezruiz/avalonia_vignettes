@@ -23,21 +23,12 @@ namespace TicketFold.Controls;
 /// </remarks>
 public sealed class FoldingTicket : Panel
 {
-    /// <summary>
-    /// Defines the <see cref="IsOpen"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsOpenProperty =
         AvaloniaProperty.Register<FoldingTicket, bool>(nameof(IsOpen));
 
-    /// <summary>
-    /// Defines the <see cref="FoldDuration"/> property.
-    /// </summary>
     public static readonly StyledProperty<TimeSpan?> FoldDurationProperty =
         AvaloniaProperty.Register<FoldingTicket, TimeSpan?>(nameof(FoldDuration));
 
-    /// <summary>
-    /// How long each panel after the first takes to unfold, absent an explicit duration.
-    /// </summary>
     private const double MillisecondsPerSegment = 400d;
 
     private readonly AnimationController _controller;
@@ -47,9 +38,6 @@ public sealed class FoldingTicket : Panel
     static FoldingTicket() =>
         IsOpenProperty.Changed.AddClassHandler<FoldingTicket>((x, _) => x.OnIsOpenChanged());
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FoldingTicket"/> class.
-    /// </summary>
     public FoldingTicket()
     {
         ClipToBounds = true;
@@ -77,7 +65,6 @@ public sealed class FoldingTicket : Panel
         set => SetValue(FoldDurationProperty, value);
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         var closedHeight = 0d;
@@ -114,7 +101,6 @@ public sealed class FoldingTicket : Panel
         return new Size(width, closedHeight + ((openHeight - closedHeight) * reveal));
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         var movingSegments = GetSegmentCount() - 1;
@@ -156,7 +142,6 @@ public sealed class FoldingTicket : Panel
         return finalSize;
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
@@ -184,11 +169,9 @@ public sealed class FoldingTicket : Panel
     private double GetSegmentRatio(int index, int movingSegments) =>
         Math.Clamp((_foldRatio * movingSegments) + 1d - index, 0d, 1d);
 
-    /// <summary>
-    /// Picks the face each panel shows, and drops the panels that are hidden behind one still folded
-    /// over. The original stops building its tree at that point, "don't build a stack if it isn't
-    /// needed", and without the same cut the panels underneath show through the top of the ticket.
-    /// </summary>
+    // Picks the face each panel shows, and drops the panels that are hidden behind one still folded
+    // over. The original stops building its tree at that point, "don't build a stack if it isn't
+    // needed", and without the same cut the panels underneath show through the top of the ticket.
     private void UpdateSegmentStates()
     {
         var movingSegments = GetSegmentCount() - 1;

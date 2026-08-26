@@ -9,15 +9,9 @@ namespace PlantForms.Controls;
 /// </summary>
 public sealed class DropDownField : FormField
 {
-    /// <summary>
-    /// Defines the <see cref="Options"/> property.
-    /// </summary>
     public static readonly StyledProperty<IReadOnlyList<string>> OptionsProperty =
         AvaloniaProperty.Register<DropDownField, IReadOnlyList<string>>(nameof(Options), []);
 
-    /// <summary>
-    /// Defines the <see cref="OpenRequested"/> event.
-    /// </summary>
     public static readonly RoutedEvent<RoutedEventArgs> OpenRequestedEvent =
         RoutedEvent.Register<DropDownField, RoutedEventArgs>(nameof(OpenRequested), RoutingStrategies.Bubble);
 
@@ -39,7 +33,6 @@ public sealed class DropDownField : FormField
         set => SetValue(OptionsProperty, value);
     }
 
-    /// <inheritdoc />
     protected override void OnInitialized()
     {
         base.OnInitialized();

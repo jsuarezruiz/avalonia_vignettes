@@ -6,9 +6,6 @@ namespace ConstellationsList.Models;
 /// <remarks>Five of them, listed three times over, which is what gives the list its length.</remarks>
 public static class DemoData
 {
-    /// <summary>
-    /// How many times the set is repeated.
-    /// </summary>
     private const int Repeats = 3;
 
     /// <summary>

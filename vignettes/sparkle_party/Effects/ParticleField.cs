@@ -9,54 +9,19 @@ namespace SparkleParty.Effects;
 /// </summary>
 public sealed class Particle
 {
-    /// <summary>
-    /// Gets or sets how far across the field the particle is.
-    /// </summary>
     public double X { get; set; }
-
-    /// <summary>
-    /// Gets or sets how far down the field the particle is.
-    /// </summary>
     public double Y { get; set; }
-
-    /// <summary>
-    /// Gets or sets how fast it is moving across the field.
-    /// </summary>
     public double VelocityX { get; set; }
-
-    /// <summary>
-    /// Gets or sets how fast it is moving down the field.
-    /// </summary>
     public double VelocityY { get; set; }
 
     /// <summary>
     /// Gets or sets how much longer it lives. Zero means it is spent and free to reuse.
     /// </summary>
     public double Life { get; set; }
-
-    /// <summary>
-    /// Gets or sets which frame of the sheet it is drawn with.
-    /// </summary>
     public int Frame { get; set; }
-
-    /// <summary>
-    /// Gets or sets whether it runs through the sheet's frames.
-    /// </summary>
     public bool Animate { get; set; }
-
-    /// <summary>
-    /// Gets or sets how big it is drawn, where the effect varies that.
-    /// </summary>
     public double Scale { get; set; } = 1d;
-
-    /// <summary>
-    /// Gets or sets its distance towards the viewer, for the fireworks' fake depth.
-    /// </summary>
     public double Z { get; set; }
-
-    /// <summary>
-    /// Gets or sets how fast that distance is changing.
-    /// </summary>
     public double VelocityZ { get; set; }
 }
 
@@ -70,17 +35,8 @@ public sealed class Particle
 /// </remarks>
 public abstract class ParticleField
 {
-    /// <summary>
-    /// How many vertices a particle takes: two triangles.
-    /// </summary>
     private const int VerticesPerParticle = 6;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ParticleField"/> class.
-    /// </summary>
-    /// <param name="sheet">The sheet the particles are drawn from.</param>
-    /// <param name="size">The area the effect plays in.</param>
-    /// <param name="count">How many particles it has.</param>
     protected ParticleField(SpriteSheet sheet, Size size, int count = 10000)
     {
         Sheet = sheet;

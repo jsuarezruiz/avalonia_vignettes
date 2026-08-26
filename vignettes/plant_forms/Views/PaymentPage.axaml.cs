@@ -11,17 +11,11 @@ namespace PlantForms.Views;
 /// </summary>
 public partial class PaymentPage : FormPage
 {
-    /// <summary>
-    /// How long the original waits before moving the button on.
-    /// </summary>
     private static readonly TimeSpan FillDelay = TimeSpan.FromMilliseconds(500);
 
     private readonly FormProgress _progress = new();
     private readonly DispatcherTimer _fill;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PaymentPage"/> class.
-    /// </summary>
     public PaymentPage()
     {
         InitializeComponent();
@@ -31,7 +25,9 @@ public partial class PaymentPage : FormPage
         _fill = new DispatcherTimer { Interval = FillDelay };
         _fill.Tick += OnFillTick;
 
-        Purchase.Bind(SubmitButton.IsErrorVisibleProperty, new Binding(nameof(FormProgress.IsErrorVisible)) { Source = _progress });
+        Purchase.Bind(
+            SubmitButton.IsErrorVisibleProperty,
+            new Binding(nameof(FormProgress.IsErrorVisible)) { Source = _progress });
     }
 
     /// <summary>

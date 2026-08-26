@@ -17,39 +17,21 @@ namespace DarkInkTransition.Controls;
 /// </remarks>
 public sealed class DarkInkControls : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="IsDark"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsDarkProperty =
         AvaloniaProperty.Register<DarkInkControls, bool>(nameof(IsDark));
 
-    /// <summary>
-    /// Defines the <see cref="FirstOffset"/> property.
-    /// </summary>
     public static readonly DirectProperty<DarkInkControls, double> FirstOffsetProperty =
         AvaloniaProperty.RegisterDirect<DarkInkControls, double>(nameof(FirstOffset), o => o.FirstOffset);
 
-    /// <summary>
-    /// Defines the <see cref="SecondOffset"/> property.
-    /// </summary>
     public static readonly DirectProperty<DarkInkControls, double> SecondOffsetProperty =
         AvaloniaProperty.RegisterDirect<DarkInkControls, double>(nameof(SecondOffset), o => o.SecondOffset);
 
-    /// <summary>
-    /// Defines the <see cref="ThirdOffset"/> property.
-    /// </summary>
     public static readonly DirectProperty<DarkInkControls, double> ThirdOffsetProperty =
         AvaloniaProperty.RegisterDirect<DarkInkControls, double>(nameof(ThirdOffset), o => o.ThirdOffset);
 
-    /// <summary>
-    /// Defines the <see cref="ButtonBackground"/> property.
-    /// </summary>
     public static readonly DirectProperty<DarkInkControls, IBrush?> ButtonBackgroundProperty =
         AvaloniaProperty.RegisterDirect<DarkInkControls, IBrush?>(nameof(ButtonBackground), o => o.ButtonBackground);
 
-    /// <summary>
-    /// Defines the <see cref="ButtonForeground"/> property.
-    /// </summary>
     public static readonly DirectProperty<DarkInkControls, IBrush?> ButtonForegroundProperty =
         AvaloniaProperty.RegisterDirect<DarkInkControls, IBrush?>(nameof(ButtonForeground), o => o.ButtonForeground);
 
@@ -134,14 +116,12 @@ public sealed class DarkInkControls : TemplatedControl
         private set => SetAndRaise(ButtonForegroundProperty, ref _buttonForeground, value);
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
         _ticker ??= new FrameTicker(this, Advance);
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);

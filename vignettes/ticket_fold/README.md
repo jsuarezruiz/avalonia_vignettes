@@ -9,5 +9,5 @@ Tap a boarding pass and it concertinas open, one panel after another, each hingi
 ## Running
 
 ```
-dotnet run --project TicketFold.csproj
+dotnet run --project Desktop/TicketFold.Desktop.csproj
 ```

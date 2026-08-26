@@ -11,7 +11,6 @@ public sealed class OrderForm : INotifyPropertyChanged
 {
     private readonly Dictionary<string, string> _values = [];
 
-    /// <inheritdoc />
     public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>

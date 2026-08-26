@@ -9,5 +9,5 @@ Swipe between pages and the incoming one is revealed through a liquid edge that 
 ## Running
 
 ```
-dotnet run --project GooeyEdge.csproj
+dotnet run --project Desktop/GooeyEdge.Desktop.csproj
 ```

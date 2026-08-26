@@ -16,53 +16,29 @@ namespace SpendingTracker.Controls;
 /// </remarks>
 public sealed class TextTransition : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Text"/> property.
-    /// </summary>
     public static readonly StyledProperty<string?> TextProperty =
         AvaloniaProperty.Register<TextTransition, string?>(nameof(Text));
 
-    /// <summary>
-    /// Defines the <see cref="TransitionDuration"/> property.
-    /// </summary>
     public static readonly StyledProperty<TimeSpan> TransitionDurationProperty =
         AvaloniaProperty.Register<TextTransition, TimeSpan>(
             nameof(TransitionDuration),
             TimeSpan.FromMilliseconds(400));
 
-    /// <summary>
-    /// Defines the <see cref="FixedWidth"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> FixedWidthProperty =
         AvaloniaProperty.Register<TextTransition, double>(nameof(FixedWidth), double.NaN);
 
-    /// <summary>
-    /// Defines the <see cref="Current"/> property.
-    /// </summary>
     public static readonly DirectProperty<TextTransition, string?> CurrentProperty =
         AvaloniaProperty.RegisterDirect<TextTransition, string?>(nameof(Current), o => o.Current);
 
-    /// <summary>
-    /// Defines the <see cref="Incoming"/> property.
-    /// </summary>
     public static readonly DirectProperty<TextTransition, string?> IncomingProperty =
         AvaloniaProperty.RegisterDirect<TextTransition, string?>(nameof(Incoming), o => o.Incoming);
 
-    /// <summary>
-    /// Defines the <see cref="CurrentOffset"/> property.
-    /// </summary>
     public static readonly DirectProperty<TextTransition, double> CurrentOffsetProperty =
         AvaloniaProperty.RegisterDirect<TextTransition, double>(nameof(CurrentOffset), o => o.CurrentOffset);
 
-    /// <summary>
-    /// Defines the <see cref="IncomingOffset"/> property.
-    /// </summary>
     public static readonly DirectProperty<TextTransition, double> IncomingOffsetProperty =
         AvaloniaProperty.RegisterDirect<TextTransition, double>(nameof(IncomingOffset), o => o.IncomingOffset);
 
-    /// <summary>
-    /// How much taller than the font the box is, which is Flutter's default line height.
-    /// </summary>
     private const double LineHeight = 1.2d;
 
     private readonly AnimationController _roll;
@@ -76,9 +52,6 @@ public sealed class TextTransition : TemplatedControl
     static TextTransition() =>
         AffectsMeasure<TextTransition>(CurrentProperty, FixedWidthProperty, FontSizeProperty);
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TextTransition"/> class.
-    /// </summary>
     public TextTransition() => _roll = new AnimationController(this, OnRolled);
 
     /// <summary>
@@ -144,7 +117,6 @@ public sealed class TextTransition : TemplatedControl
         private set => SetAndRaise(IncomingOffsetProperty, ref _incomingOffset, value);
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -152,7 +124,6 @@ public sealed class TextTransition : TemplatedControl
         _attached = true;
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
@@ -162,7 +133,6 @@ public sealed class TextTransition : TemplatedControl
         _roll.Stop();
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         base.MeasureOverride(availableSize);
@@ -173,7 +143,6 @@ public sealed class TextTransition : TemplatedControl
         return new Size(width, FontSize * LineHeight);
     }
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);

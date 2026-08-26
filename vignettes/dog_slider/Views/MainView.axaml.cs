@@ -12,32 +12,17 @@ namespace DogSlider.Views;
 /// </remarks>
 public partial class MainView : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="SliderValue"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> SliderValueProperty =
         AvaloniaProperty.Register<MainView, double>(nameof(SliderValue));
 
-    /// <summary>
-    /// Defines the <see cref="TreatCount"/> property.
-    /// </summary>
     public static readonly DirectProperty<MainView, int> TreatCountProperty =
         AvaloniaProperty.RegisterDirect<MainView, int>(nameof(TreatCount), o => o.TreatCount);
 
-    /// <summary>
-    /// Defines the <see cref="TotalLabel"/> property.
-    /// </summary>
     public static readonly DirectProperty<MainView, string> TotalLabelProperty =
         AvaloniaProperty.RegisterDirect<MainView, string>(nameof(TotalLabel), o => o.TotalLabel);
 
-    /// <summary>
-    /// The most balls the slider can ask for.
-    /// </summary>
     private const int MaxTreats = 10;
 
-    /// <summary>
-    /// What one ball costs.
-    /// </summary>
     private const int PricePerTreat = 6;
 
     private int _treatCount;
@@ -46,9 +31,6 @@ public partial class MainView : UserControl
     static MainView() =>
         SliderValueProperty.Changed.AddClassHandler<MainView>((x, _) => x.UpdateTotals());
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         InitializeComponent();

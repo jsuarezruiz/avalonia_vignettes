@@ -20,15 +20,9 @@ namespace ParticleSwipe;
 /// </remarks>
 internal static class CaptureRunner
 {
-    /// <summary>
-    /// Milliseconds after a burst starts at which to grab a frame.
-    /// </summary>
     private static readonly int[] FrameTimes = [60, 160, 320, 520, 760, 1000];
 
 
-    /// <summary>
-    /// Renders every frame to <paramref name="outputDirectory"/> and shuts the app down.
-    /// </summary>
     public static async Task RunAsync(Window window, string outputDirectory)
     {
         Directory.CreateDirectory(outputDirectory);
@@ -48,7 +42,6 @@ internal static class CaptureRunner
         field.Field.LineExplosion(0d, SwipeItem.NominalHeight * 3d, window.ClientSize.Width);
         await CaptureSequenceAsync(view, size, outputDirectory, "delete");
 
-        FrameCapture.Shutdown();
     }
 
     private static async Task CaptureSequenceAsync(Control view, PixelSize size, string outputDirectory, string name)

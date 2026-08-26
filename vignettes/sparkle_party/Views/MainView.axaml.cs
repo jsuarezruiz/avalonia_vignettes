@@ -17,9 +17,6 @@ namespace SparkleParty.Views;
 /// </remarks>
 public partial class MainView : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="Instruction"/> property.
-    /// </summary>
     public static readonly DirectProperty<MainView, string> InstructionProperty =
         AvaloniaProperty.RegisterDirect<MainView, string>(nameof(Instruction), o => o.Instruction);
 
@@ -42,9 +39,6 @@ public partial class MainView : UserControl
     private int _index;
     private int _wanted;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         InitializeComponent();
@@ -66,7 +60,6 @@ public partial class MainView : UserControl
         private set => SetAndRaise(InstructionProperty, ref _instruction, value);
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         var arranged = base.ArrangeOverride(finalSize);

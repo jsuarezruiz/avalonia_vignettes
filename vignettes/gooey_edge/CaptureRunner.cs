@@ -20,15 +20,9 @@ namespace GooeyEdge;
 /// </remarks>
 internal static class CaptureRunner
 {
-    /// <summary>
-    /// Milliseconds after the page change at which to grab a frame.
-    /// </summary>
     private static readonly double[] SwipeFractions = [0d, 0.2d, 0.45d, 0.7d, 0.95d];
 
 
-    /// <summary>
-    /// Renders every frame to <paramref name="outputDirectory"/> and shuts the app down.
-    /// </summary>
     public static async Task RunAsync(Window window, string outputDirectory)
     {
         Directory.CreateDirectory(outputDirectory);
@@ -49,7 +43,6 @@ internal static class CaptureRunner
             FrameCapture.Write(view, size, outputDirectory, fraction.ToString("0.00", CultureInfo.InvariantCulture));
         }
 
-        FrameCapture.Shutdown();
     }
 
 }

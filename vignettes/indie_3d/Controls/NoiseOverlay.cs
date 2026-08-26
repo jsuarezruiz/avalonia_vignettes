@@ -16,15 +16,11 @@ namespace Indie3D.Controls;
 /// </remarks>
 public sealed class NoiseOverlay : Control
 {
-    /// <summary>
-    /// How strongly the grain is laid over the page.
-    /// </summary>
     private const double Strength = 0.24d;
 
     private static readonly Bitmap Noise =
         new(AssetLoader.Open(new Uri("avares://Indie3D/Assets/Images/noise.png")));
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);

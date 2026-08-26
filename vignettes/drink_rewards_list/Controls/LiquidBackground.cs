@@ -19,20 +19,11 @@ namespace DrinkRewardsList.Controls;
 /// </remarks>
 public sealed class LiquidBackground : Control
 {
-    /// <summary>
-    /// Defines the <see cref="Level"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> LevelProperty =
         AvaloniaProperty.Register<LiquidBackground, double>(nameof(Level));
 
-    /// <summary>
-    /// How far a control point at full height reaches, in pixels.
-    /// </summary>
     private const double WaveHeight = 100d;
 
-    /// <summary>
-    /// How far the near surface trails the far one.
-    /// </summary>
     private const double NearSurfaceOffset = 5d;
 
     private static readonly IBrush FarBrush =
@@ -71,7 +62,6 @@ public sealed class LiquidBackground : Control
         NearSurface.Start(flipY: false);
     }
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);

@@ -7,22 +7,15 @@ namespace SparkleParty.Effects;
 /// </summary>
 public sealed class Waterfall : ParticleField
 {
-    /// <summary>
-    /// How near the pointer has to be to push a particle.
-    /// </summary>
     private const double Reach = 100d;
 
     private double _hue;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Waterfall"/> class.
-    /// </summary>
     public Waterfall(SpriteSheet sheet, Size size)
         : base(sheet, size, Math.Min(size.Width, size.Height) > 600d ? 40000 : 20000)
     {
     }
 
-    /// <inheritdoc />
     public override void Tick()
     {
         _hue -= 1d;
@@ -72,7 +65,6 @@ public sealed class Waterfall : ParticleField
         }
     }
 
-    /// <inheritdoc />
     protected override Particle ResetParticle(int index)
     {
         var particle = base.ResetParticle(index);

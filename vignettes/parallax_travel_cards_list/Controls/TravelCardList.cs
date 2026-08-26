@@ -16,56 +16,29 @@ namespace ParallaxTravelCardsList.Controls;
 /// </remarks>
 public sealed class TravelCardList : PageView
 {
-    /// <summary>
-    /// Defines the <see cref="ScreenWidth"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScreenWidthProperty =
         AvaloniaProperty.Register<TravelCardList, double>(nameof(ScreenWidth));
 
-    /// <summary>
-    /// Defines the <see cref="ScreenHeight"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ScreenHeightProperty =
         AvaloniaProperty.Register<TravelCardList, double>(nameof(ScreenHeight));
 
-    /// <summary>
-    /// Defines the <see cref="NormalizedOffset"/> property.
-    /// </summary>
     public static readonly DirectProperty<TravelCardList, double> NormalizedOffsetProperty =
         AvaloniaProperty.RegisterDirect<TravelCardList, double>(nameof(NormalizedOffset), o => o.NormalizedOffset);
 
-    /// <summary>
-    /// Defines the <see cref="CardWidth"/> property.
-    /// </summary>
     public static readonly DirectProperty<TravelCardList, double> CardWidthProperty =
         AvaloniaProperty.RegisterDirect<TravelCardList, double>(nameof(CardWidth), o => o.CardWidth);
 
-    /// <summary>
-    /// Defines the <see cref="CardContentHeight"/> property.
-    /// </summary>
     public static readonly DirectProperty<TravelCardList, double> CardContentHeightProperty =
         AvaloniaProperty.RegisterDirect<TravelCardList, double>(nameof(CardContentHeight), o => o.CardContentHeight);
 
-    /// <summary>
-    /// Defines the <see cref="RotationY"/> property.
-    /// </summary>
     public static readonly DirectProperty<TravelCardList, double> RotationYProperty =
         AvaloniaProperty.RegisterDirect<TravelCardList, double>(nameof(RotationY), o => o.RotationY);
 
-    /// <summary>
-    /// Defines the <see cref="SelectedCity"/> property.
-    /// </summary>
     public static readonly DirectProperty<TravelCardList, City?> SelectedCityProperty =
         AvaloniaProperty.RegisterDirect<TravelCardList, City?>(nameof(SelectedCity), o => o.SelectedCity);
 
-    /// <summary>
-    /// The tilt, in degrees, a card reaches at full offset.
-    /// </summary>
     private const double MaxRotation = 20d;
 
-    /// <summary>
-    /// How much of each scrolled pixel feeds into the normalised offset.
-    /// </summary>
     private const double ScrollFactor = 0.01d;
 
     private static readonly TimeSpan SettleDuration = TimeSpan.FromMilliseconds(1000);
@@ -87,9 +60,6 @@ public sealed class TravelCardList : PageView
             x.SelectedCity = e.GetNewValue<object?>() as City);
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TravelCardList"/> class.
-    /// </summary>
     public TravelCardList()
     {
         ScrollStarted += OnScrollStarted;
@@ -165,11 +135,9 @@ public sealed class TravelCardList : PageView
         private set => SetAndRaise(CardContentHeightProperty, ref _cardContentHeight, value);
     }
 
-    /// <summary>
-    /// Recomputes the card metrics from the screen size, matching the Flutter build method:
-    /// the page is 48% of the screen height clamped to 300..400, and a card is 80% as wide as it
-    /// is tall.
-    /// </summary>
+    // Recomputes the card metrics from the screen size, matching the Flutter build method:
+    // the page is 48% of the screen height clamped to 300..400, and a card is 80% as wide as it
+    // is tall.
     private void UpdateMetrics()
     {
         if (ScreenWidth <= 0d || ScreenHeight <= 0d)

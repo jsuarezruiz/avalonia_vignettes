@@ -34,72 +34,36 @@ public enum SummaryPalette
 /// </remarks>
 public sealed class FlightSummary : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="BoardingPass"/> property.
-    /// </summary>
     public static readonly StyledProperty<BoardingPass?> BoardingPassProperty =
         AvaloniaProperty.Register<FlightSummary, BoardingPass?>(nameof(BoardingPass));
 
-    /// <summary>
-    /// Defines the <see cref="Palette"/> property.
-    /// </summary>
     public static readonly StyledProperty<SummaryPalette> PaletteProperty =
         AvaloniaProperty.Register<FlightSummary, SummaryPalette>(nameof(Palette));
 
-    /// <summary>
-    /// Defines the <see cref="IsOpen"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsOpenProperty =
         AvaloniaProperty.Register<FlightSummary, bool>(nameof(IsOpen));
 
-    /// <summary>
-    /// Defines the <see cref="PassengerLabel"/> property.
-    /// </summary>
     public static readonly DirectProperty<FlightSummary, string?> PassengerLabelProperty =
         AvaloniaProperty.RegisterDirect<FlightSummary, string?>(nameof(PassengerLabel), o => o.PassengerLabel);
 
-    /// <summary>
-    /// Defines the <see cref="BoardingLabel"/> property.
-    /// </summary>
     public static readonly DirectProperty<FlightSummary, string?> BoardingLabelProperty =
         AvaloniaProperty.RegisterDirect<FlightSummary, string?>(nameof(BoardingLabel), o => o.BoardingLabel);
 
-    /// <summary>
-    /// Defines the <see cref="OriginCode"/> property.
-    /// </summary>
     public static readonly DirectProperty<FlightSummary, string?> OriginCodeProperty =
         AvaloniaProperty.RegisterDirect<FlightSummary, string?>(nameof(OriginCode), o => o.OriginCode);
 
-    /// <summary>
-    /// Defines the <see cref="DestinationCode"/> property.
-    /// </summary>
     public static readonly DirectProperty<FlightSummary, string?> DestinationCodeProperty =
         AvaloniaProperty.RegisterDirect<FlightSummary, string?>(nameof(DestinationCode), o => o.DestinationCode);
 
-    /// <summary>
-    /// Defines the <see cref="DurationLabel"/> property.
-    /// </summary>
     public static readonly DirectProperty<FlightSummary, string?> DurationLabelProperty =
         AvaloniaProperty.RegisterDirect<FlightSummary, string?>(nameof(DurationLabel), o => o.DurationLabel);
 
-    /// <summary>
-    /// The height the plane is drawn at, and so the unit its slide is measured in.
-    /// </summary>
     private const double PlaneHeight = 20d;
 
-    /// <summary>
-    /// The aspect ratio of the plane artwork, 56 by 53.
-    /// </summary>
     private const double PlaneAspectRatio = 56d / 53d;
 
-    /// <summary>
-    /// Where the plane starts, in multiples of its own width.
-    /// </summary>
     private const double PlaneSlideFrom = -2d;
 
-    /// <summary>
-    /// Where the plane finishes, in multiples of its own width.
-    /// </summary>
     private const double PlaneSlideTo = 1d;
 
     private static readonly TimeSpan PlaneSlideDuration = TimeSpan.FromMilliseconds(1700);
@@ -121,9 +85,6 @@ public sealed class FlightSummary : TemplatedControl
         PaletteProperty.Changed.AddClassHandler<FlightSummary>((x, _) => x.OnPlaneSlideChanged(x._planeSlide.Value));
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FlightSummary"/> class.
-    /// </summary>
     public FlightSummary()
     {
         _planeSlide = new AnimationController(this, OnPlaneSlideChanged)
@@ -205,7 +166,6 @@ public sealed class FlightSummary : TemplatedControl
         private set => SetAndRaise(DurationLabelProperty, ref _durationLabel, value);
     }
 
-    /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -219,7 +179,6 @@ public sealed class FlightSummary : TemplatedControl
         }
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);

@@ -33,9 +33,6 @@ public enum SwipeAction
 /// </summary>
 public sealed class SwipeActionEventArgs : RoutedEventArgs
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SwipeActionEventArgs"/> class.
-    /// </summary>
     public SwipeActionEventArgs(RoutedEvent routedEvent, object source, SwipeAction action)
         : base(routedEvent, source) => Action = action;
 
@@ -61,52 +58,28 @@ public sealed class SwipeActionEventArgs : RoutedEventArgs
 /// </remarks>
 public sealed class SwipeItem : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Email"/> property.
-    /// </summary>
     public static readonly StyledProperty<Email?> EmailProperty =
         AvaloniaProperty.Register<SwipeItem, Email?>(nameof(Email));
 
-    /// <summary>
-    /// Defines the <see cref="IsAlternate"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsAlternateProperty =
         AvaloniaProperty.Register<SwipeItem, bool>(nameof(IsAlternate));
 
-    /// <summary>
-    /// Defines the <see cref="IndicatorBrush"/> property.
-    /// </summary>
     public static readonly DirectProperty<SwipeItem, IBrush> IndicatorBrushProperty =
         AvaloniaProperty.RegisterDirect<SwipeItem, IBrush>(nameof(IndicatorBrush), o => o.IndicatorBrush);
 
-    /// <summary>
-    /// Defines the <see cref="IndicatorTransform"/> property.
-    /// </summary>
     public static readonly DirectProperty<SwipeItem, ITransform> IndicatorTransformProperty =
         AvaloniaProperty.RegisterDirect<SwipeItem, ITransform>(nameof(IndicatorTransform), o => o.IndicatorTransform);
 
-    /// <summary>
-    /// Defines the <see cref="ContentTransform"/> property.
-    /// </summary>
     public static readonly DirectProperty<SwipeItem, ITransform> ContentTransformProperty =
         AvaloniaProperty.RegisterDirect<SwipeItem, ITransform>(nameof(ContentTransform), o => o.ContentTransform);
 
-    /// <summary>
-    /// Defines the <see cref="ContentOpacity"/> property.
-    /// </summary>
     public static readonly DirectProperty<SwipeItem, double> ContentOpacityProperty =
         AvaloniaProperty.RegisterDirect<SwipeItem, double>(nameof(ContentOpacity), o => o.ContentOpacity);
 
-    /// <summary>
-    /// Defines the <see cref="IndicatorAlignment"/> property.
-    /// </summary>
     public static readonly DirectProperty<SwipeItem, HorizontalAlignment> IndicatorAlignmentProperty =
         AvaloniaProperty.RegisterDirect<SwipeItem, HorizontalAlignment>(
             nameof(IndicatorAlignment), o => o.IndicatorAlignment);
 
-    /// <summary>
-    /// Defines the <see cref="IndicatorGlow"/> property.
-    /// </summary>
     public static readonly DirectProperty<SwipeItem, BoxShadows> IndicatorGlowProperty =
         AvaloniaProperty.RegisterDirect<SwipeItem, BoxShadows>(nameof(IndicatorGlow), o => o.IndicatorGlow);
 
@@ -132,24 +105,12 @@ public sealed class SwipeItem : TemplatedControl
     /// </summary>
     public const double NominalHeight = 110d;
 
-    /// <summary>
-    /// The colour of the delete indicator and its wash.
-    /// </summary>
     private static readonly Color DeleteColor = Color.FromRgb(0xCB, 0x4A, 0x65);
 
-    /// <summary>
-    /// The colour of the favourite indicator and its wash.
-    /// </summary>
     private static readonly Color FavoriteColor = Color.FromRgb(0x4A, 0xC0, 0xCB);
 
-    /// <summary>
-    /// How far past <see cref="SwipeDistance"/> the row can be dragged at all.
-    /// </summary>
     private const double MaxOverscroll = SwipeDistance * 1.2d;
 
-    /// <summary>
-    /// How far the pointer must travel before the drag is taken as a swipe.
-    /// </summary>
     private const double DragSlop = 4d;
 
     private static readonly SpringDescription ReleaseSpring =
@@ -193,9 +154,6 @@ public sealed class SwipeItem : TemplatedControl
             x.PseudoClasses.Set(":alternate", e.GetNewValue<bool>()));
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SwipeItem"/> class.
-    /// </summary>
     public SwipeItem()
     {
         Height = NominalHeight;
@@ -329,7 +287,6 @@ public sealed class SwipeItem : TemplatedControl
         _collapse.Reverse();
     }
 
-    /// <inheritdoc />
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -350,7 +307,6 @@ public sealed class SwipeItem : TemplatedControl
         _velocity.Add(e, _pressOrigin.X);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -393,7 +349,6 @@ public sealed class SwipeItem : TemplatedControl
         SetOffset(_offset - ApplyPhysicsToUserOffset(delta));
     }
 
-    /// <inheritdoc />
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -408,7 +363,6 @@ public sealed class SwipeItem : TemplatedControl
         e.Pointer.Capture(null);
     }
 
-    /// <inheritdoc />
     protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
     {
         base.OnPointerCaptureLost(e);
@@ -421,7 +375,6 @@ public sealed class SwipeItem : TemplatedControl
         _isPressed = false;
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
@@ -495,10 +448,8 @@ public sealed class SwipeItem : TemplatedControl
         }
     }
 
-    /// <summary>
-    /// Moves the row and, as the original's scroll listener does, checks on every pixel whether the
-    /// swipe has gone far enough to act on.
-    /// </summary>
+    // Moves the row and, as the original's scroll listener does, checks on every pixel whether the
+    // swipe has gone far enough to act on.
     private void SetOffset(double offset)
     {
         _offset = offset;

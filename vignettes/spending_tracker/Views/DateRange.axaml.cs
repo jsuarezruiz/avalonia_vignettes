@@ -14,27 +14,15 @@ namespace SpendingTracker.Views;
 /// </remarks>
 public partial class DateRange : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="Chart"/> property.
-    /// </summary>
     public static readonly StyledProperty<Chart?> ChartProperty =
         AvaloniaProperty.Register<DateRange, Chart?>(nameof(Chart));
 
-    /// <summary>
-    /// Defines the <see cref="From"/> property.
-    /// </summary>
     public static readonly DirectProperty<DateRange, string> FromProperty =
         AvaloniaProperty.RegisterDirect<DateRange, string>(nameof(From), o => o.From);
 
-    /// <summary>
-    /// Defines the <see cref="To"/> property.
-    /// </summary>
     public static readonly DirectProperty<DateRange, string> ToProperty =
         AvaloniaProperty.RegisterDirect<DateRange, string>(nameof(To), o => o.To);
 
-    /// <summary>
-    /// The year the data starts in.
-    /// </summary>
     private const int StartYear = 2018;
 
     private static readonly string[] MonthNames =
@@ -47,9 +35,6 @@ public partial class DateRange : UserControl
     private string _from = string.Empty;
     private string _to = string.Empty;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DateRange"/> class.
-    /// </summary>
     public DateRange()
     {
         InitializeComponent();
@@ -84,7 +69,6 @@ public partial class DateRange : UserControl
         private set => SetAndRaise(ToProperty, ref _to, value);
     }
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);

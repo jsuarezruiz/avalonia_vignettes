@@ -10,14 +10,8 @@ namespace BasketballPullToRefresh.Models;
 /// <param name="Extent">The height the pull is measured against.</param>
 public sealed record PullMetrics(double Extent)
 {
-    /// <summary>
-    /// The share of the screen the area is allowed to take.
-    /// </summary>
     private const double ScreenShare = 0.325d;
 
-    /// <summary>
-    /// The tallest the area ever gets, however tall the screen is.
-    /// </summary>
     private const double MaxExtent = 180d;
 
     /// <summary>

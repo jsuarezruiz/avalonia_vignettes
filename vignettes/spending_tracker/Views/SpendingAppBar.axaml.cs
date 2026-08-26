@@ -8,9 +8,6 @@ namespace SpendingTracker.Views;
 /// </summary>
 public partial class SpendingAppBar : UserControl
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SpendingAppBar"/> class.
-    /// </summary>
     public SpendingAppBar() => InitializeComponent();
 
     private void InitializeComponent() => AvaloniaXamlLoader.Load(this);

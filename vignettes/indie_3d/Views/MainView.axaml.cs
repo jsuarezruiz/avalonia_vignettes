@@ -21,24 +21,12 @@ namespace Indie3D.Views;
 /// </remarks>
 public partial class MainView : UserControl
 {
-    /// <summary>
-    /// The tallest a photograph is ever drawn, which is what they are decoded to.
-    /// </summary>
     private const int ArtworkHeight = 820;
 
-    /// <summary>
-    /// How long a name takes to wipe in.
-    /// </summary>
     private static readonly TimeSpan TitleDuration = TimeSpan.FromMilliseconds(400);
 
-    /// <summary>
-    /// How far the camera leans as the pages are dragged past it.
-    /// </summary>
     private const double CameraSwing = 8d;
 
-    /// <summary>
-    /// How long the second name waits before following the first.
-    /// </summary>
     private static readonly TimeSpan TitleStagger = TimeSpan.FromMilliseconds(200);
 
     private ShapeScene? _scene;
@@ -50,12 +38,10 @@ public partial class MainView : UserControl
     private ArtistPage[] _pages = [];
     private TimeSpan _lastTick;
     private bool _hasTicked;
+    private bool _sceneLoadStarted;
     private int _pageIndex;
     private double _lastPage;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         InitializeComponent();
@@ -66,10 +52,6 @@ public partial class MainView : UserControl
         {
             page.Artwork = Load($"artist_{i + 1}", ArtworkHeight);
         }
-
-        // Reading the models and settling them into a field takes a moment, which the original
-        // spends showing that it is loading rather than on the frame.
-        _ = LoadSceneAsync();
 
         _topTitles = [.. _pages.Select(page => Controller(value => page.Title.TopProgress = 1d - value))];
         _bottomTitles = [.. _pages.Select(page => Controller(value => page.Title.BottomProgress = 1d - value))];
@@ -106,16 +88,19 @@ public partial class MainView : UserControl
         _scene = scene;
     }
 
-    /// <inheritdoc />
-    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    protected override async void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
 
-        // A ticker asks its top level for frames, so it can only start once there is one.
         _ticker.Start();
+
+        if (!_sceneLoadStarted)
+        {
+            _sceneLoadStarted = true;
+            await LoadSceneAsync();
+        }
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         _scene?.SetViewport(finalSize);
@@ -123,10 +108,8 @@ public partial class MainView : UserControl
         return base.ArrangeOverride(finalSize);
     }
 
-    /// <summary>
-    /// Loads a photograph at the size it is drawn at. The originals are 2048 square and are shown
-    /// about a third of that, and every frame of drifting shapes recomposites them.
-    /// </summary>
+    // Loads a photograph at the size it is drawn at. The originals are 2048 square and are shown
+    // about a third of that, and every frame of drifting shapes recomposites them.
     private static Bitmap Load(string name, int height) => Bitmap.DecodeToHeight(
         AssetLoader.Open(new Uri($"avares://Indie3D/Assets/Images/{name}.png")),
         height);
@@ -159,11 +142,9 @@ public partial class MainView : UserControl
         }
     }
 
-    /// <summary>
-    /// Follows the strip as it is dragged. Everything comes from where the pages are rather than
-    /// from the drag itself, so a page changed in code swings the camera and wipes the name in the
-    /// same way a swipe does.
-    /// </summary>
+    // Follows the strip as it is dragged. Everything comes from where the pages are rather than
+    // from the drag itself, so a page changed in code swings the camera and wipes the name in the
+    // same way a swipe does.
     private void OnPageMoved(double page)
     {
         // The camera leans away as a page leaves and comes back as the next one lands, which is

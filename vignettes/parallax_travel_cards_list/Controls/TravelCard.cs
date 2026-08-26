@@ -11,75 +11,39 @@ namespace ParallaxTravelCardsList.Controls;
 /// </summary>
 public sealed class TravelCard : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="Title"/> property.
-    /// </summary>
     public static readonly StyledProperty<string?> TitleProperty =
         AvaloniaProperty.Register<TravelCard, string?>(nameof(Title));
 
-    /// <summary>
-    /// Defines the <see cref="Description"/> property.
-    /// </summary>
     public static readonly StyledProperty<string?> DescriptionProperty =
         AvaloniaProperty.Register<TravelCard, string?>(nameof(Description));
 
-    /// <summary>
-    /// Defines the <see cref="CardBackground"/> property.
-    /// </summary>
     public static readonly StyledProperty<IBrush?> CardBackgroundProperty =
         AvaloniaProperty.Register<TravelCard, IBrush?>(nameof(CardBackground));
 
-    /// <summary>
-    /// Defines the <see cref="BackImage"/> property.
-    /// </summary>
     public static readonly StyledProperty<Bitmap?> BackImageProperty =
         AvaloniaProperty.Register<TravelCard, Bitmap?>(nameof(BackImage));
 
-    /// <summary>
-    /// Defines the <see cref="MiddleImage"/> property.
-    /// </summary>
     public static readonly StyledProperty<Bitmap?> MiddleImageProperty =
         AvaloniaProperty.Register<TravelCard, Bitmap?>(nameof(MiddleImage));
 
-    /// <summary>
-    /// Defines the <see cref="FrontImage"/> property.
-    /// </summary>
     public static readonly StyledProperty<Bitmap?> FrontImageProperty =
         AvaloniaProperty.Register<TravelCard, Bitmap?>(nameof(FrontImage));
 
-    /// <summary>
-    /// Defines the <see cref="ParallaxOffset"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> ParallaxOffsetProperty =
         AvaloniaProperty.Register<TravelCard, double>(nameof(ParallaxOffset));
 
-    /// <summary>
-    /// Defines the <see cref="CardWidth"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> CardWidthProperty =
         AvaloniaProperty.Register<TravelCard, double>(nameof(CardWidth), 250d);
 
-    /// <summary>
-    /// Defines the <see cref="CardHeight"/> property.
-    /// </summary>
     public static readonly StyledProperty<double> CardHeightProperty =
         AvaloniaProperty.Register<TravelCard, double>(nameof(CardHeight));
 
-    /// <summary>
-    /// Defines the <see cref="ArtworkReserve"/> property.
-    /// </summary>
     public static readonly DirectProperty<TravelCard, double> ArtworkReserveProperty =
         AvaloniaProperty.RegisterDirect<TravelCard, double>(nameof(ArtworkReserve), o => o.ArtworkReserve);
 
-    /// <summary>
-    /// Defines the <see cref="CardShadow"/> property.
-    /// </summary>
     public static readonly DirectProperty<TravelCard, BoxShadows> CardShadowProperty =
         AvaloniaProperty.RegisterDirect<TravelCard, BoxShadows>(nameof(CardShadow), o => o.CardShadow);
 
-    /// <summary>
-    /// The height reserved for the artwork, as a fraction of <see cref="CardHeight"/>.
-    /// </summary>
     private const double ArtworkReserveFactor = 0.57d;
 
     // Flutter's Colors.black12.
@@ -94,9 +58,6 @@ public sealed class TravelCard : TemplatedControl
         CardHeightProperty.Changed.AddClassHandler<TravelCard>((x, _) => x.UpdateArtworkReserve());
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TravelCard"/> class.
-    /// </summary>
     public TravelCard() => UpdateShadow();
 
     /// <summary>

@@ -8,9 +8,6 @@ namespace PlantForms.Views;
 /// </summary>
 public partial class Header : UserControl
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Header"/> class.
-    /// </summary>
     public Header() => InitializeComponent();
 
     private void InitializeComponent() => AvaloniaXamlLoader.Load(this);

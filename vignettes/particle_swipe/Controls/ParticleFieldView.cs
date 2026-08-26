@@ -20,9 +20,6 @@ public sealed class ParticleFieldView : Control
 {
     private const string SpriteUri = "avares://ParticleSwipe/Assets/Images/circle_spritesheet.png";
 
-    /// <summary>
-    /// The sheet holds 15 frames of 10x10 pixels.
-    /// </summary>
     private const int SpriteFrames = 15;
 
     private const int SpriteFrameSize = 10;
@@ -31,9 +28,6 @@ public sealed class ParticleFieldView : Control
 
     private FrameTicker? _ticker;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ParticleFieldView"/> class.
-    /// </summary>
     public ParticleFieldView() => IsHitTestVisible = false;
 
     /// <summary>
@@ -41,7 +35,6 @@ public sealed class ParticleFieldView : Control
     /// </summary>
     public ParticleField Field { get; } = new();
 
-    /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
         base.Render(context);
@@ -64,7 +57,6 @@ public sealed class ParticleFieldView : Control
         }
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -73,17 +65,14 @@ public sealed class ParticleFieldView : Control
         _ticker.Start();
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
         _ticker?.Stop();
     }
 
-    /// <summary>
-    /// Picks the sprite frame for a particle. The sheet is run through twice over a particle's life
-    /// and backwards, so the ring the frames draw closes in as the particle dies.
-    /// </summary>
+    // Picks the sprite frame for a particle. The sheet is run through twice over a particle's life
+    // and backwards, so the ring the frames draw closes in as the particle dies.
     private static int GetFrameIndex(double life) =>
         (int)Math.Floor(SpriteFrames * life * 2d % SpriteFrames);
 

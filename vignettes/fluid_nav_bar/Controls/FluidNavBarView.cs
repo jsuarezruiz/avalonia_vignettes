@@ -23,21 +23,12 @@ namespace FluidNavBar.Controls;
 /// </remarks>
 public sealed class FluidNavBarView : TabControl
 {
-    /// <summary>
-    /// Defines the <see cref="DipX"/> property.
-    /// </summary>
     public static readonly DirectProperty<FluidNavBarView, double> DipXProperty =
         AvaloniaProperty.RegisterDirect<FluidNavBarView, double>(nameof(DipX), o => o.DipX);
 
-    /// <summary>
-    /// Defines the <see cref="PaneDepth"/> property.
-    /// </summary>
     public static readonly DirectProperty<FluidNavBarView, double> PaneDepthProperty =
         AvaloniaProperty.RegisterDirect<FluidNavBarView, double>(nameof(PaneDepth), o => o.PaneDepth);
 
-    /// <summary>
-    /// Defines the <see cref="IsSelectionEnabled"/> property.
-    /// </summary>
     public static readonly DirectProperty<FluidNavBarView, bool> IsSelectionEnabledProperty =
         AvaloniaProperty.RegisterDirect<FluidNavBarView, bool>(nameof(IsSelectionEnabled), o => o.IsSelectionEnabled);
 
@@ -46,9 +37,6 @@ public sealed class FluidNavBarView : TabControl
     /// </summary>
     public const double NominalHeight = 56d;
 
-    /// <summary>
-    /// The buttons never spread wider than this, however wide the screen is.
-    /// </summary>
     private const double MaxButtonStripWidth = 400d;
 
     private static readonly TimeSpan TravelDuration = TimeSpan.FromMilliseconds(620);
@@ -100,7 +88,6 @@ public sealed class FluidNavBarView : TabControl
         private set => SetAndRaise(IsSelectionEnabledProperty, ref _isSelectionEnabled, value);
     }
 
-    /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
         var result = base.ArrangeOverride(finalSize);
@@ -116,7 +103,6 @@ public sealed class FluidNavBarView : TabControl
         return result;
     }
 
-    /// <inheritdoc />
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -124,17 +110,12 @@ public sealed class FluidNavBarView : TabControl
         _ticker ??= new FrameTicker(this, Advance);
     }
 
-    /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
         _ticker?.Stop();
     }
 
-    /// <summary>
-    /// Where the dip belongs for a given button. The buttons are spread evenly across a strip no
-    /// wider than 400, so this is the middle of the index'th share of it.
-    /// </summary>
     private double PositionOf(int index, double width)
     {
         const double count = 3d;

@@ -18,33 +18,18 @@ namespace SpendingTracker.Views;
 /// </remarks>
 public partial class CategoryList : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="Chart"/> property.
-    /// </summary>
     public static readonly StyledProperty<Chart?> ChartProperty =
         AvaloniaProperty.Register<CategoryList, Chart?>(nameof(Chart));
 
-    /// <summary>
-    /// Defines the <see cref="Bills"/> property.
-    /// </summary>
     public static readonly DirectProperty<CategoryList, double> BillsProperty =
         AvaloniaProperty.RegisterDirect<CategoryList, double>(nameof(Bills), o => o.Bills);
 
-    /// <summary>
-    /// Defines the <see cref="Personal"/> property.
-    /// </summary>
     public static readonly DirectProperty<CategoryList, double> PersonalProperty =
         AvaloniaProperty.RegisterDirect<CategoryList, double>(nameof(Personal), o => o.Personal);
 
-    /// <summary>
-    /// Defines the <see cref="Restaurants"/> property.
-    /// </summary>
     public static readonly DirectProperty<CategoryList, double> RestaurantsProperty =
         AvaloniaProperty.RegisterDirect<CategoryList, double>(nameof(Restaurants), o => o.Restaurants);
 
-    /// <summary>
-    /// How tall the strip is, before the app scale.
-    /// </summary>
     private const double DesignHeight = 120d;
 
     private Chart? _subscribed;
@@ -53,9 +38,6 @@ public partial class CategoryList : UserControl
     private double _personal;
     private double _restaurants;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CategoryList"/> class.
-    /// </summary>
     public CategoryList()
     {
         InitializeComponent();
@@ -101,7 +83,6 @@ public partial class CategoryList : UserControl
         private set => SetAndRaise(RestaurantsProperty, ref _restaurants, value);
     }
 
-    /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
         base.MeasureOverride(availableSize);
@@ -111,7 +92,6 @@ public partial class CategoryList : UserControl
             DesignHeight * AppScale.Of(this));
     }
 
-    /// <inheritdoc />
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);

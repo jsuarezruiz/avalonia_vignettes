@@ -18,15 +18,9 @@ namespace TicketFold.Controls;
 /// </remarks>
 public sealed class Ticket : TemplatedControl
 {
-    /// <summary>
-    /// Defines the <see cref="BoardingPass"/> property.
-    /// </summary>
     public static readonly StyledProperty<BoardingPass?> BoardingPassProperty =
         AvaloniaProperty.Register<Ticket, BoardingPass?>(nameof(BoardingPass));
 
-    /// <summary>
-    /// Defines the <see cref="IsOpen"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsOpenProperty =
         AvaloniaProperty.Register<Ticket, bool>(nameof(IsOpen));
 
@@ -48,9 +42,6 @@ public sealed class Ticket : TemplatedControl
     /// </summary>
     public const double NominalClosedHeight = 160d;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Ticket"/> class.
-    /// </summary>
     public Ticket() => Tapped += OnTapped;
 
     /// <summary>

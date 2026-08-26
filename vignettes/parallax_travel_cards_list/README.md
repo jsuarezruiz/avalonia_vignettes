@@ -9,5 +9,5 @@ Drag through the cards and the three artwork layers slide past each other while 
 ## Running
 
 ```
-dotnet run --project ParallaxTravelCardsList.csproj
+dotnet run --project Desktop/ParallaxTravelCardsList.Desktop.csproj
 ```

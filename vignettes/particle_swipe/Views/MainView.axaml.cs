@@ -21,21 +21,12 @@ namespace ParticleSwipe.Views;
 /// </remarks>
 public partial class MainView : UserControl
 {
-    /// <summary>
-    /// How long a delete waits before its particles are thrown.
-    /// </summary>
     private static readonly TimeSpan ExplosionDelay = TimeSpan.FromMilliseconds(100);
 
-    /// <summary>
-    /// Where a favourite burst is centred, measured from the row's top left corner.
-    /// </summary>
     private static readonly Point FavoriteBurstOffset = new(60d, 46d);
 
     private readonly ObservableCollection<Email> _inbox = DemoData.CreateInbox();
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MainView"/> class.
-    /// </summary>
     public MainView()
     {
         InitializeComponent();
@@ -93,10 +84,8 @@ public partial class MainView : UserControl
         }
     }
 
-    /// <summary>
-    /// Re-applies the alternating row fills. Deleting a row shifts every row below it, so the
-    /// shading has to be handed out again rather than fixed when the row was created.
-    /// </summary>
+    // Re-applies the alternating row fills. Deleting a row shifts every row below it, so the
+    // shading has to be handed out again rather than fixed when the row was created.
     private void UpdateRowShading()
     {
         for (var i = 0; i < Messages.ItemCount; i++)

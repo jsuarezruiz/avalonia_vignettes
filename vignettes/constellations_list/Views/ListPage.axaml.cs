@@ -19,21 +19,12 @@ namespace ConstellationsList.Views;
 /// </remarks>
 public partial class ListPage : UserControl
 {
-    /// <summary>
-    /// How far an entry is nudged past the edge it aligns to.
-    /// </summary>
     private const double EdgeNudge = 25d;
 
-    /// <summary>
-    /// The gap above and below each entry.
-    /// </summary>
     private const double VerticalPadding = 24d;
 
     private double _previousOffset;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ListPage"/> class.
-    /// </summary>
     public ListPage()
     {
         InitializeComponent();

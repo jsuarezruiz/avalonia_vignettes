@@ -21,38 +21,20 @@ namespace ConstellationsList.Views;
 /// </remarks>
 public partial class DetailPage : UserControl
 {
-    /// <summary>
-    /// Defines the <see cref="Constellation"/> property.
-    /// </summary>
     public static readonly StyledProperty<Constellation?> ConstellationProperty =
         AvaloniaProperty.Register<DetailPage, Constellation?>(nameof(Constellation));
 
-    /// <summary>
-    /// Defines the <see cref="ChartImage"/> property.
-    /// </summary>
     public static readonly DirectProperty<DetailPage, Bitmap?> ChartImageProperty =
         AvaloniaProperty.RegisterDirect<DetailPage, Bitmap?>(nameof(ChartImage), o => o.ChartImage);
 
-    /// <summary>
-    /// Defines the <see cref="LabelImage"/> property.
-    /// </summary>
     public static readonly DirectProperty<DetailPage, Bitmap?> LabelImageProperty =
         AvaloniaProperty.RegisterDirect<DetailPage, Bitmap?>(nameof(LabelImage), o => o.LabelImage);
 
-    /// <summary>
-    /// Defines the <see cref="IsRedMode"/> property.
-    /// </summary>
     public static readonly StyledProperty<bool> IsRedModeProperty =
         AvaloniaProperty.Register<DetailPage, bool>(nameof(IsRedMode));
 
-    /// <summary>
-    /// The slice of the clock the chart swells over.
-    /// </summary>
     private static readonly Easing ChartEasing = new IntervalEasing(0.4d, 0.8d, FlutterEasings.EaseOutQuad);
 
-    /// <summary>
-    /// The slice the lettering fades in over, which starts later and runs to the end.
-    /// </summary>
     private static readonly Easing LabelEasing = new IntervalEasing(0.6d, 1d, FlutterEasings.EaseOutQuad);
 
     private readonly ScaleTransform _chartScale = new(0d, 0d);
@@ -61,9 +43,6 @@ public partial class DetailPage : UserControl
     private Bitmap? _labelImage;
     private readonly AnimationController _reveal;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DetailPage"/> class.
-    /// </summary>
     public DetailPage()
     {
         InitializeComponent();
@@ -133,11 +112,9 @@ public partial class DetailPage : UserControl
         _reveal.Forward();
     }
 
-    /// <summary>
-    /// Loads the artwork here rather than binding the file locations straight at the images: a
-    /// binding hands the target a <see cref="Uri"/>, which is not converted to an image at runtime,
-    /// and the pictures simply never appear.
-    /// </summary>
+    // Loads the artwork here rather than binding the file locations straight at the images: a
+    // binding hands the target a Uri, which is not converted to an image at runtime,
+    // and the pictures simply never appear.
     private void LoadArtwork()
     {
         if (Constellation is not { } constellation)
