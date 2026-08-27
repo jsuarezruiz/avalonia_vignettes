@@ -1,8 +1,5 @@
 using System.Globalization;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
 using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using DrinkRewardsList.Controls;
@@ -22,30 +19,19 @@ internal static class CaptureRunner
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        Directory.CreateDirectory(outputDirectory);
-
-        await Task.Delay(700);
-
-        var view = FrameCapture.Find<MainView>(window);
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 700);
         var cards = window.GetVisualDescendants().OfType<DrinkCard>().ToList();
-        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
 
-        FrameCapture.Write(view, size, outputDirectory, "closed");
+        capture.Write("closed");
 
         // The first card is affordable and fills to the brim; the third only part way.
         foreach (var (index, name) in new[] { (0, "coffee"), (2, "latte") })
         {
             cards[index].IsOpen = true;
 
-            var elapsed = 0;
-
-            foreach (var time in FrameTimes)
-            {
-                await Task.Delay(Math.Max(0, time - elapsed));
-                elapsed = time;
-
-                FrameCapture.Write(view, size, outputDirectory, $"{name}_{time.ToString("0000", CultureInfo.InvariantCulture)}");
-            }
+            await capture.SampleAsync(
+                FrameTimes,
+                time => $"{name}_{time.ToString("0000", CultureInfo.InvariantCulture)}");
 
             cards[index].IsOpen = false;
             await Task.Delay(1400);

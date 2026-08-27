@@ -1,4 +1,5 @@
 using Avalonia.Media;
+using AvaloniaVignettes.Shared.Models;
 
 namespace ParallaxTravelCardsList.Models;
 

@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="using:ParallaxTravelCardsList.Controls"
                     xmlns:models="using:ParallaxTravelCardsList.Models"
-                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls">
+                    xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+                    xmlns:sharedModels="using:AvaloniaVignettes.Shared.Models">
 
   <ControlTheme x:Key="{x:Type controls:HotelList}" TargetType="controls:HotelList">
 
@@ -13,7 +14,7 @@
     </Setter>
 
     <Setter Property="ItemTemplate">
-      <DataTemplate x:DataType="models:Hotel">
+      <DataTemplate x:DataType="sharedModels:Hotel">
         <Grid ColumnDefinitions="*,Auto">
 
           <StackPanel Grid.Column="0" VerticalAlignment="Center">

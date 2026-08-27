@@ -1,8 +1,4 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
-using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using ConstellationsList.Views;
 
@@ -18,25 +14,21 @@ internal static class CaptureRunner
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        Directory.CreateDirectory(outputDirectory);
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 900);
+        var view = capture.View;
 
-        await Task.Delay(900);
-
-        var view = FrameCapture.Find<MainView>(window);
-        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
-
-        FrameCapture.Write(view, size, outputDirectory, "list");
+        capture.Write("list");
 
         // Drive the field by hand to show what a fast scroll does to it.
         var stars = FrameCapture.Find<Controls.StarField>(window);
 
         stars.Speed = 8d;
         await Task.Delay(400);
-        FrameCapture.Write(view, size, outputDirectory, "scrolling");
+        capture.Write("scrolling");
 
         stars.Speed = 0.2d;
         await Task.Delay(400);
-        FrameCapture.Write(view, size, outputDirectory, "idle");
+        capture.Write("idle");
 
         // Open a constellation so the chart, the lettering and the flight are all exercised.
         var page = new Views.DetailPage
@@ -48,15 +40,7 @@ internal static class CaptureRunner
         view.ShowDetailForCapture(page);
         page.Reveal(TimeSpan.FromMilliseconds(1500));
 
-        var elapsed = 0;
-
-        foreach (var time in (int[])[500, 1000, 1800])
-        {
-            await Task.Delay(time - elapsed);
-            elapsed = time;
-
-            FrameCapture.Write(view, size, outputDirectory, $"detail_{time:0000}");
-        }
+        await capture.SampleAsync((int[])[500, 1000, 1800], time => $"detail_{time:0000}");
 
     }
 

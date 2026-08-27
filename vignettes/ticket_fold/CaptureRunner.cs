@@ -1,9 +1,5 @@
 using System.Globalization;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
-using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using TicketFold.Controls;
 using TicketFold.Views;
@@ -25,29 +21,18 @@ internal static class CaptureRunner
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        Directory.CreateDirectory(outputDirectory);
-
         // Let the window settle so the bindings that depend on its bounds have run.
-        await Task.Delay(700);
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 700);
 
-        var view = FrameCapture.Find<MainView>(window);
-        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
-
-        FrameCapture.Write(view, size, outputDirectory, "closed");
+        capture.Write("closed");
 
         var ticket = FrameCapture.Find<Ticket>(window);
 
         ticket.IsOpen = true;
 
-        var elapsed = 0;
-
-        foreach (var time in FrameTimes)
-        {
-            await Task.Delay(Math.Max(0, time - elapsed));
-            elapsed = time;
-
-            FrameCapture.Write(view, size, outputDirectory, time.ToString("0000", CultureInfo.InvariantCulture));
-        }
+        await capture.SampleAsync(
+            FrameTimes,
+            time => time.ToString("0000", CultureInfo.InvariantCulture));
 
     }
 

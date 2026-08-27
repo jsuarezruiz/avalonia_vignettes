@@ -1,10 +1,5 @@
 using System.Globalization;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
-using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using ParallaxTravelCardsHero.Views;
 
@@ -31,50 +26,31 @@ internal static class CaptureRunner
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        Directory.CreateDirectory(outputDirectory);
-
         // Let the window settle so the bindings that depend on its bounds have run.
-        await Task.Delay(600);
-
-        var view = FrameCapture.Find<MainView>(window);
-        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 600);
+        var view = capture.View;
 
         // A full round trip and then a second opening: the second one is what would catch a flight
         // that starts from wherever the previous one finished.
-        await SampleAsync(window, view, size, outputDirectory, "open1", view.BeginCapture);
-        await SampleAsync(window, view, size, outputDirectory, "back", view.BackCapture);
-        await SampleAsync(window, view, size, outputDirectory, "open2", view.BeginCapture);
+        await SampleAsync(capture, "open1", view.BeginCapture);
+        await SampleAsync(capture, "back", view.BackCapture);
+        await SampleAsync(capture, "open2", view.BeginCapture);
 
     }
 
     // Runs one navigation and renders a frame at each sample point along it. The navigation plays
     // on its own clock, so the frames are taken from it as it goes rather than posed one at a time.
     private static async Task SampleAsync(
-        Window window,
-        MainView view,
-        PixelSize size,
-        string outputDirectory,
+        CaptureSession<MainView> capture,
         string prefix,
         Action navigate)
     {
-        var elapsed = 0;
-
         navigate();
 
-        foreach (var at in Frames)
-        {
-            if (at > elapsed)
-            {
-                await Task.Delay(at - elapsed);
-                elapsed = at;
-            }
-
-            window.UpdateLayout();
-
-            var name = string.Format(CultureInfo.InvariantCulture, "{0}_{1:0000}", prefix, at);
-
-            FrameCapture.Write(view, size, outputDirectory, name);
-        }
+        await capture.SampleAsync(
+            Frames,
+            at => string.Format(CultureInfo.InvariantCulture, "{0}_{1:0000}", prefix, at),
+            _ => capture.Window.UpdateLayout());
 
         // Let the navigation finish before the next one starts.
         await Task.Delay(400);

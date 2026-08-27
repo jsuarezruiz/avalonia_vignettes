@@ -1,10 +1,9 @@
 using System.Globalization;
 
-namespace ParallaxTravelCardsHero.Models;
+namespace AvaloniaVignettes.Shared.Models;
 
 /// <summary>
-/// A hotel recommendation shown under the city card. Port of <c>demo_data.dart</c>'s
-/// <c>HotelData</c>.
+/// A hotel recommendation shared by the two travel-card vignettes.
 /// </summary>
 /// <param name="Name">The hotel name.</param>
 /// <param name="Rating">The star rating, from 0 to 5.</param>
@@ -13,12 +12,12 @@ namespace ParallaxTravelCardsHero.Models;
 public sealed record Hotel(string Name, double Rating, int Reviews, int Price)
 {
     /// <summary>
-    /// Gets the rating formatted the way Dart prints a double, for example <c>5.0</c>.
+    /// Gets the rating with one decimal place, matching Dart's presentation of a double.
     /// </summary>
     public string RatingLabel => Rating.ToString("0.0", CultureInfo.InvariantCulture);
 
     /// <summary>
-    /// Gets the review count in the parentheses the design calls for.
+    /// Gets the review count in the parentheses the designs call for.
     /// </summary>
     public string ReviewsLabel => $"({Reviews})";
 
@@ -28,7 +27,8 @@ public sealed record Hotel(string Name, double Rating, int Reviews, int Price)
     public string PriceLabel => $"${Price}";
 
     /// <summary>
-    /// Gets one entry per whole star, so the rating can be data-bound to a row of icons.
+    /// Gets one entry per whole star, clamped to the documented rating range.
     /// </summary>
-    public IReadOnlyList<int> Stars { get; } = Enumerable.Range(0, (int)Math.Round(Rating)).ToArray();
+    public IReadOnlyList<int> Stars { get; } =
+        Enumerable.Range(0, Math.Clamp((int)Rating, 0, 5)).ToArray();
 }

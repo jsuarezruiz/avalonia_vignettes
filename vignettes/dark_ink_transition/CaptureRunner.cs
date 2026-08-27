@@ -1,8 +1,4 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
-using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using DarkInkTransition.Views;
 
@@ -16,35 +12,31 @@ internal static class CaptureRunner
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        Directory.CreateDirectory(outputDirectory);
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 900);
+        var view = capture.View;
 
-        await Task.Delay(900);
-
-        var view = FrameCapture.Find<MainView>(window);
-        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
-
-        FrameCapture.Write(view, size, outputDirectory, "1_light");
+        capture.Write("1_light");
 
         // Into the dark: one frame early in the spread, one late, one settled. The ink runs 1500.
         view.Toggle();
 
         await Task.Delay(400);
-        FrameCapture.Write(view, size, outputDirectory, "2_ink_spreading");
+        capture.Write("2_ink_spreading");
 
         await Task.Delay(600);
-        FrameCapture.Write(view, size, outputDirectory, "3_ink_closing");
+        capture.Write("3_ink_closing");
 
         await Task.Delay(900);
-        FrameCapture.Write(view, size, outputDirectory, "4_dark");
+        capture.Write("4_dark");
 
         // And back again, caught once mid way.
         view.Toggle();
 
         await Task.Delay(700);
-        FrameCapture.Write(view, size, outputDirectory, "5_returning");
+        capture.Write("5_returning");
 
         await Task.Delay(1200);
-        FrameCapture.Write(view, size, outputDirectory, "6_light_again");
+        capture.Write("6_light_again");
 
     }
 

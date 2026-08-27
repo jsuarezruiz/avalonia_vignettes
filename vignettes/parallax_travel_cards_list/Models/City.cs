@@ -2,6 +2,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Media.Immutable;
 using Avalonia.Platform;
+using AvaloniaVignettes.Shared.Models;
 
 namespace ParallaxTravelCardsList.Models;
 

@@ -1,9 +1,5 @@
 using System.Globalization;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
-using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using GooeyEdge.Controls;
 using GooeyEdge.Views;
@@ -25,22 +21,16 @@ internal static class CaptureRunner
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        Directory.CreateDirectory(outputDirectory);
-
         // Let the window settle so the bindings that depend on its bounds have run.
-        await Task.Delay(700);
-
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 700);
         var carousel = FrameCapture.Find<GooeyCarousel>(window);
-
-        var view = FrameCapture.Find<MainView>(window);
-        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
 
         foreach (var fraction in SwipeFractions)
         {
             await carousel.RunCaptureSwipeAsync(fraction);
             await Task.Delay(60);
 
-            FrameCapture.Write(view, size, outputDirectory, fraction.ToString("0.00", CultureInfo.InvariantCulture));
+            capture.Write(fraction.ToString("0.00", CultureInfo.InvariantCulture));
         }
 
     }

@@ -3,9 +3,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Input;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
-using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using BasketballPullToRefresh.Views;
 
@@ -28,16 +25,12 @@ internal static class CaptureRunner
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        Directory.CreateDirectory(outputDirectory);
-
-        await Task.Delay(600);
-
-        var view = FrameCapture.Find<MainView>(window);
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 600);
+        var view = capture.View;
         var presenter = FrameCapture.Find<ScrollContentPresenter>(view);
-        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
         var gesture = 1;
 
-        FrameCapture.Write(view, size, outputDirectory, "rest");
+        capture.Write("rest");
 
         // Pull down in stages: the hoop shrinks, and the caption changes once the pull counts.
         foreach (var distance in (double[])[60d, 120d, 200d])
@@ -47,21 +40,15 @@ internal static class CaptureRunner
 
             await Task.Delay(200);
 
-            FrameCapture.Write(view, size, outputDirectory, $"pull_{Name(distance)}");
+            capture.Write($"pull_{Name(distance)}");
         }
 
         // Let go past the threshold: the ball is thrown.
         presenter.RaiseEvent(new PullGestureEndedEventArgs(gesture, PullDirection.TopToBottom));
 
-        var elapsed = 0;
-
-        foreach (var time in (int[])[200, 500, 800, 1200, 1600, 2000, 2400, 2900])
-        {
-            await Task.Delay(time - elapsed);
-            elapsed = time;
-
-            FrameCapture.Write(view, size, outputDirectory, $"throw_{Name(time)}");
-        }
+        await capture.SampleAsync(
+            (int[])[200, 500, 800, 1200, 1600, 2000, 2400, 2900],
+            time => $"throw_{Name(time)}");
 
     }
 

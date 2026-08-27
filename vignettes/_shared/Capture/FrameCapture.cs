@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
@@ -7,7 +8,7 @@ namespace AvaloniaVignettes.Shared.Capture;
 
 /// <summary>
 /// The parts of <c>--capture</c> that do not vary: reading the directory off the command line,
-/// writing one frame out, and closing the app once the last frame is written.
+/// preparing a session, sampling it on a timeline and writing frames.
 /// </summary>
 /// <remarks>
 /// Only the sequence of frames says anything about the vignette it belongs to, so that is all each
@@ -38,6 +39,32 @@ public static class FrameCapture
         ?? throw new InvalidOperationException($"No {typeof(T).Name} was found in the visual tree.");
 
     /// <summary>
+    /// Lets a window finish its first layout, then gathers the state every capture sequence needs.
+    /// </summary>
+    public static async Task<CaptureSession<TView>> StartAsync<TView>(
+        Window window,
+        string outputDirectory,
+        int settleMilliseconds)
+        where TView : Control
+    {
+        ArgumentNullException.ThrowIfNull(window);
+        ArgumentException.ThrowIfNullOrWhiteSpace(outputDirectory);
+        ArgumentOutOfRangeException.ThrowIfNegative(settleMilliseconds);
+
+        Directory.CreateDirectory(outputDirectory);
+
+        if (settleMilliseconds > 0)
+        {
+            await Task.Delay(settleMilliseconds);
+        }
+
+        var view = Find<TView>(window);
+        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
+
+        return new CaptureSession<TView>(window, view, size, outputDirectory);
+    }
+
+    /// <summary>
     /// Renders <paramref name="view"/> at <paramref name="size"/> and writes it to
     /// <paramref name="name"/>.png under <paramref name="outputDirectory"/>.
     /// </summary>
@@ -52,4 +79,71 @@ public static class FrameCapture
         Console.WriteLine($"captured {file}");
     }
 
+}
+
+/// <summary>
+/// The window, view, dimensions and destination shared by one vignette capture sequence.
+/// </summary>
+public sealed class CaptureSession<TView>
+    where TView : Control
+{
+    internal CaptureSession(Window window, TView view, PixelSize size, string outputDirectory)
+    {
+        Window = window;
+        View = view;
+        Size = size;
+        OutputDirectory = outputDirectory;
+    }
+
+    public Window Window { get; }
+
+    public TView View { get; }
+
+    public PixelSize Size { get; }
+
+    public string OutputDirectory { get; }
+
+    /// <summary>
+    /// Writes a named frame using this session's view, dimensions and destination.
+    /// </summary>
+    public void Write(string name) => FrameCapture.Write(View, Size, OutputDirectory, name);
+
+    /// <summary>
+    /// Captures frames at ascending millisecond offsets from the moment this method is called.
+    /// </summary>
+    public async Task SampleAsync(
+        IEnumerable<int> frameTimes,
+        Func<int, string> nameFrame,
+        Action<int>? prepareFrame = null)
+    {
+        ArgumentNullException.ThrowIfNull(frameTimes);
+        ArgumentNullException.ThrowIfNull(nameFrame);
+
+        var times = frameTimes.ToArray();
+
+        for (var index = 0; index < times.Length; index++)
+        {
+            ArgumentOutOfRangeException.ThrowIfNegative(times[index]);
+
+            if (index > 0 && times[index] < times[index - 1])
+            {
+                throw new ArgumentException("Frame times must be in ascending order.", nameof(frameTimes));
+            }
+        }
+
+        var clock = Stopwatch.StartNew();
+
+        foreach (var time in times)
+        {
+            var remaining = time - clock.ElapsedMilliseconds;
+
+            if (remaining > 0)
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(remaining));
+            }
+
+            prepareFrame?.Invoke(time);
+            Write(nameFrame(time));
+        }
+    }
 }

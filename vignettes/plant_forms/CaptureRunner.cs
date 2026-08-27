@@ -1,8 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
 using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using PlantForms.Controls;
@@ -19,29 +17,17 @@ internal static class CaptureRunner
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        Directory.CreateDirectory(outputDirectory);
-
-        await Task.Delay(600);
-
-        var view = FrameCapture.Find<MainView>(window);
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 600);
+        var view = capture.View;
         var stack = FrameCapture.Find<FormCardStack>(window);
         var pages = stack.GetVisualChildren().OfType<FormPage>().ToList();
-        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
 
-        FrameCapture.Write(view, size, outputDirectory, "1_summary");
+        capture.Write("1_summary");
 
         // Push the second page and watch it slide up over the first.
         stack.Push();
 
-        var elapsed = 0;
-
-        foreach (var time in (int[])[80, 160, 400])
-        {
-            await Task.Delay(time - elapsed);
-            elapsed = time;
-
-            FrameCapture.Write(view, size, outputDirectory, $"2_push_{time:0000}");
-        }
+        await capture.SampleAsync((int[])[80, 160, 400], time => $"2_push_{time:0000}");
 
         // Fill the information page in, which fills its button up.
         var information = pages.OfType<InformationPage>().FirstOrDefault()
@@ -49,7 +35,7 @@ internal static class CaptureRunner
 
         Fill(information, "email", "javier@example.com");
         await Task.Delay(100);
-        FrameCapture.Write(view, size, outputDirectory, "3_email");
+        capture.Write("3_email");
 
         foreach (var (key, value) in new[]
         {
@@ -66,7 +52,7 @@ internal static class CaptureRunner
         await Task.Delay(200);
         ScrollToEnd(information);
         await Task.Delay(100);
-        FrameCapture.Write(view, size, outputDirectory, "4_information_filled");
+        capture.Write("4_information_filled");
 
         // An unfinished page fills its button only as far as it has got, and says so when pressed.
         var postal = information.GetVisualDescendants().OfType<FormField>().First(x => x.FieldKey == "postal");
@@ -75,7 +61,7 @@ internal static class CaptureRunner
         FrameCapture.Find<SubmitButton>(information)
             .RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         await Task.Delay(100);
-        FrameCapture.Write(view, size, outputDirectory, "5_incomplete");
+        capture.Write("5_incomplete");
 
         postal.Value = "41001";
         await Task.Delay(100);
@@ -85,7 +71,7 @@ internal static class CaptureRunner
         options.Show(FrameCapture.Find<DropDownField>(information));
 
         await Task.Delay(200);
-        FrameCapture.Write(view, size, outputDirectory, "6_options");
+        capture.Write("6_options");
 
         options.IsVisible = false;
         await Task.Delay(100);
@@ -103,16 +89,16 @@ internal static class CaptureRunner
         Fill(payment, "ccCode", "123");
 
         await Task.Delay(700);
-        FrameCapture.Write(view, size, outputDirectory, "7_payment");
+        capture.Write("7_payment");
 
         ScrollToEnd(payment);
         await Task.Delay(200);
-        FrameCapture.Write(view, size, outputDirectory, "7b_payment_end");
+        capture.Write("7b_payment_end");
 
         // And back down the stack.
         stack.Pop();
         await Task.Delay(150);
-        FrameCapture.Write(view, size, outputDirectory, "8_pop");
+        capture.Write("8_pop");
 
     }
 

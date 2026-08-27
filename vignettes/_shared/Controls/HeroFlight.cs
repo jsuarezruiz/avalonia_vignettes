@@ -238,7 +238,7 @@ public sealed class HeroFlight : Canvas
         // Only a change of size needs a fresh measure. Where the two slots are the same size, a
         // shared element that transforms in place rather than travelling, re-measuring every frame
         // would put a full layout pass between each one for nothing.
-        if (_path is not null && _path.Lerp(_current).Size != _measured)
+        if (_path.Lerp(_current).Size != _measured)
         {
             InvalidateMeasure();
         }

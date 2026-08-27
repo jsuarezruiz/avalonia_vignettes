@@ -3,6 +3,7 @@
              xmlns:controls="using:ParallaxTravelCardsHero.Controls"
              xmlns:models="using:ParallaxTravelCardsHero.Models"
              xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
+             xmlns:sharedModels="using:AvaloniaVignettes.Shared.Models"
              x:Class="ParallaxTravelCardsHero.Views.ListPage"
              x:DataType="models:City"
              x:Name="Root"
@@ -49,7 +50,7 @@
             </ItemsPanelTemplate>
           </ItemsControl.ItemsPanel>
           <ItemsControl.ItemTemplate>
-            <DataTemplate x:DataType="models:Hotel">
+            <DataTemplate x:DataType="sharedModels:Hotel">
               <Grid ColumnDefinitions="*,Auto">
 
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">

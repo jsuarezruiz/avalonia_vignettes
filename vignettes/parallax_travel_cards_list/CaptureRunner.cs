@@ -1,9 +1,5 @@
 using System.Globalization;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
-using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using ParallaxTravelCardsList.Controls;
 using ParallaxTravelCardsList.Views;
@@ -35,15 +31,9 @@ internal static class CaptureRunner
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        Directory.CreateDirectory(outputDirectory);
-
         // Let the window settle so the bindings that depend on its bounds have run.
-        await Task.Delay(600);
-
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 600);
         var cards = FrameCapture.Find<TravelCardList>(window);
-
-        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
-        var view = FrameCapture.Find<MainView>(window);
 
         foreach (var (page, offset) in Frames)
         {
@@ -60,7 +50,7 @@ internal static class CaptureRunner
                 page,
                 offset);
 
-            FrameCapture.Write(view, size, outputDirectory, name);
+            capture.Write(name);
         }
 
     }

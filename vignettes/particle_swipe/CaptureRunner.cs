@@ -1,9 +1,5 @@
 using System.Globalization;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
-using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using ParticleSwipe.Controls;
 using ParticleSwipe.Views;
@@ -25,36 +21,22 @@ internal static class CaptureRunner
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        Directory.CreateDirectory(outputDirectory);
-
         // Let the window settle so the rows have been measured.
-        await Task.Delay(700);
-
-        var view = FrameCapture.Find<MainView>(window);
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 700);
         var field = FrameCapture.Find<ParticleFieldView>(window);
-        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
 
-        FrameCapture.Write(view, size, outputDirectory, "rest");
+        capture.Write("rest");
 
         field.Field.PointExplosion(60d, 46d + SwipeItem.NominalHeight, count: 100);
-        await CaptureSequenceAsync(view, size, outputDirectory, "favorite");
+        await capture.SampleAsync(
+            FrameTimes,
+            time => $"favorite_{time.ToString("0000", CultureInfo.InvariantCulture)}");
 
         field.Field.LineExplosion(0d, SwipeItem.NominalHeight * 3d, window.ClientSize.Width);
-        await CaptureSequenceAsync(view, size, outputDirectory, "delete");
+        await capture.SampleAsync(
+            FrameTimes,
+            time => $"delete_{time.ToString("0000", CultureInfo.InvariantCulture)}");
 
-    }
-
-    private static async Task CaptureSequenceAsync(Control view, PixelSize size, string outputDirectory, string name)
-    {
-        var elapsed = 0;
-
-        foreach (var time in FrameTimes)
-        {
-            await Task.Delay(Math.Max(0, time - elapsed));
-            elapsed = time;
-
-            FrameCapture.Write(view, size, outputDirectory, $"{name}_{time.ToString("0000", CultureInfo.InvariantCulture)}");
-        }
     }
 
 }

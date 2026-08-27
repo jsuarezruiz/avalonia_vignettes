@@ -1,8 +1,5 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
-using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using Indie3D.Views;
 
@@ -16,22 +13,10 @@ internal static class CaptureRunner
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        Directory.CreateDirectory(outputDirectory);
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 900);
+        var view = capture.View;
 
-        await Task.Delay(900);
-
-        var view = FrameCapture.Find<MainView>(window);
-        var size = new PixelSize((int)window.ClientSize.Width, (int)window.ClientSize.Height);
-
-        var elapsed = 0;
-
-        foreach (var time in (int[])[0, 600])
-        {
-            await Task.Delay(time - elapsed);
-            elapsed = time;
-
-            FrameCapture.Write(view, size, outputDirectory, $"1_drift_{time:0000}");
-        }
+        await capture.SampleAsync((int[])[0, 600], time => $"1_drift_{time:0000}");
 
         // Each page brings its own model, colour and artist.
         var pages = FrameCapture.Find<AvaloniaVignettes.Shared.Controls.PageView>(view);
@@ -42,17 +27,17 @@ internal static class CaptureRunner
 
             // Mid flight: the name of the page being left is wiping out, the next has yet to arrive.
             await Task.Delay(120);
-            FrameCapture.Write(view, size, outputDirectory, $"2_page_{page}_wiping");
+            capture.Write($"2_page_{page}_wiping");
 
             await Task.Delay(800);
-            FrameCapture.Write(view, size, outputDirectory, $"2_page_{page}");
+            capture.Write($"2_page_{page}");
         }
 
         // A tap shoves the shapes of the page away from it.
-        view.Tap(new Point(size.Width / 2d, size.Height / 2d));
+        view.Tap(new Point(capture.Size.Width / 2d, capture.Size.Height / 2d));
 
         await Task.Delay(500);
-        FrameCapture.Write(view, size, outputDirectory, "3_tapped");
+        capture.Write("3_tapped");
 
     }
 

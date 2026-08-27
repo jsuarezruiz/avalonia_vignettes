@@ -1,6 +1,7 @@
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using AvaloniaVignettes.Shared.Models;
 
 namespace ParallaxTravelCardsHero.Models;
 
