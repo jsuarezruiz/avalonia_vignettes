@@ -9,5 +9,5 @@ Pull the scores down and a basketball spins around the hoop while they reload.
 ## Running
 
 ```
-dotnet run --project Desktop/BasketballPullToRefresh.Desktop.csproj
+dotnet run --project BasketballPullToRefresh.Desktop/BasketballPullToRefresh.Desktop.csproj
 ```

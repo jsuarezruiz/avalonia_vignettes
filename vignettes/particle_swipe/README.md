@@ -9,5 +9,5 @@ Swipe a row left to delete it and it bursts into particles; swipe right to star 
 ## Running
 
 ```
-dotnet run --project Desktop/ParticleSwipe.Desktop.csproj
+dotnet run --project ParticleSwipe.Desktop/ParticleSwipe.Desktop.csproj
 ```

@@ -9,7 +9,7 @@ Twenty thousand particles in four presets: a comet that chases the pointer, fire
 ## Running
 
 ```
-dotnet run --project Desktop/SparkleParty.Desktop.csproj
+dotnet run --project SparkleParty.Desktop/SparkleParty.Desktop.csproj
 ```
 
 Every particle is drawn as two textured triangles and the whole field goes to Skia in one `drawVertices` call, the same as the original.

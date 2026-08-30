@@ -1,6 +1,6 @@
 using System.Globalization;
+using System.ComponentModel;
 using Avalonia.Controls;
-using Avalonia.Data;
 using Avalonia.Interactivity;
 using PlantForms.Controls;
 using PlantForms.Models;
@@ -28,8 +28,9 @@ public partial class InformationPage : FormPage
 
         AddHandler(FormField.ValidatedEvent, OnFieldValidated);
 
-        Continue.Bind(SubmitButton.CompletionProperty, Bound(nameof(FormProgress.Completion)));
-        Continue.Bind(SubmitButton.IsErrorVisibleProperty, Bound(nameof(FormProgress.IsErrorVisible)));
+        Continue.Completion = _progress.Completion;
+        Continue.IsErrorVisible = _progress.IsErrorVisible;
+        _progress.PropertyChanged += OnProgressPropertyChanged;
     }
 
     /// <summary>
@@ -38,8 +39,6 @@ public partial class InformationPage : FormPage
     protected override Type StyleKeyOverride => typeof(FormPage);
 
     private OrderForm Order => DataContext as OrderForm ?? new OrderForm();
-
-    private Binding Bound(string property) => new(property) { Source = _progress };
 
     protected override void OnDataContextChanged(EventArgs e)
     {
@@ -54,6 +53,19 @@ public partial class InformationPage : FormPage
         Country.Value = Order[FormKeys.Country];
 
         BuildCountryFields();
+    }
+
+    private void OnProgressPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName is null or nameof(FormProgress.Completion))
+        {
+            Continue.Completion = _progress.Completion;
+        }
+
+        if (e.PropertyName is null or nameof(FormProgress.IsErrorVisible))
+        {
+            Continue.IsErrorVisible = _progress.IsErrorVisible;
+        }
     }
 
     private static string TitleFor(string key) => string.Join(

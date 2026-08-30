@@ -9,5 +9,5 @@ Tap a card and it springs open, then fills with liquid that sloshes as it settle
 ## Running
 
 ```
-dotnet run --project Desktop/DrinkRewardsList.Desktop.csproj
+dotnet run --project DrinkRewardsList.Desktop/DrinkRewardsList.Desktop.csproj
 ```

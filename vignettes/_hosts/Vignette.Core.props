@@ -17,7 +17,4 @@
     <ProjectReference Include="$(MSBuildThisFileDirectory)../_shared/AvaloniaVignettes.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Android/**;Desktop/**;iOS/**" />
-  </ItemGroup>
 </Project>

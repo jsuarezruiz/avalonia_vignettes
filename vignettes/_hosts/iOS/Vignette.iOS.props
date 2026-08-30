@@ -23,6 +23,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(MSBuildProjectDirectory)/../$(VignetteAssembly).csproj" />
+    <ProjectReference Include="$(MSBuildProjectDirectory)/../$(VignetteAssembly)/$(VignetteAssembly).csproj" />
   </ItemGroup>
+
+  <!-- Avalonia's core package carries desktop designer support as a runtime asset.
+       It is unused on iOS and produces linker warnings if it reaches the app bundle. -->
+  <Target Name="RemoveAvaloniaDesignerSupportFromiOSBundle"
+          AfterTargets="_ComputeAssembliesToPostprocessOnPublish">
+    <ItemGroup>
+      <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)"
+                             Condition="'%(Filename)' == 'Avalonia.DesignerSupport'" />
+    </ItemGroup>
+  </Target>
 </Project>

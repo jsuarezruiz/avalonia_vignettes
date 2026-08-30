@@ -1,4 +1,4 @@
-using Avalonia.Data;
+using System.ComponentModel;
 using Avalonia.Threading;
 using Avalonia.Interactivity;
 using PlantForms.Controls;
@@ -25,9 +25,8 @@ public partial class PaymentPage : FormPage
         _fill = new DispatcherTimer { Interval = FillDelay };
         _fill.Tick += OnFillTick;
 
-        Purchase.Bind(
-            SubmitButton.IsErrorVisibleProperty,
-            new Binding(nameof(FormProgress.IsErrorVisible)) { Source = _progress });
+        Purchase.IsErrorVisible = _progress.IsErrorVisible;
+        _progress.PropertyChanged += OnProgressPropertyChanged;
     }
 
     /// <summary>
@@ -36,6 +35,14 @@ public partial class PaymentPage : FormPage
     protected override Type StyleKeyOverride => typeof(FormPage);
 
     private OrderForm Order => DataContext as OrderForm ?? new OrderForm();
+
+    private void OnProgressPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName is null or nameof(FormProgress.IsErrorVisible))
+        {
+            Purchase.IsErrorVisible = _progress.IsErrorVisible;
+        }
+    }
 
     private void OnFieldValidated(object? sender, RoutedEventArgs e)
     {

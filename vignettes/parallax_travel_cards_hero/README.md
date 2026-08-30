@@ -9,5 +9,5 @@ Tap the city card and it opens into a full scene, with the road unrolling from t
 ## Running
 
 ```
-dotnet run --project Desktop/ParallaxTravelCardsHero.Desktop.csproj
+dotnet run --project ParallaxTravelCardsHero.Desktop/ParallaxTravelCardsHero.Desktop.csproj
 ```

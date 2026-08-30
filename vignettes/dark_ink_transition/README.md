@@ -9,5 +9,5 @@ Ink spreads across the article to carry it between the light and dark schemes, m
 ## Running
 
 ```
-dotnet run --project Desktop/DarkInkTransition.Desktop.csproj
+dotnet run --project DarkInkTransition.Desktop/DarkInkTransition.Desktop.csproj
 ```

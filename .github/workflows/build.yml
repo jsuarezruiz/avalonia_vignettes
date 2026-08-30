@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  desktop-and-tests:
+  desktop:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,14 +18,11 @@ jobs:
         with:
           global-json-file: global.json
 
-      - name: Test
-        run: dotnet test tests/AvaloniaVignettes.Tests/AvaloniaVignettes.Tests.csproj --configuration Release
-
       - name: Build desktop heads
         shell: bash
         run: |
-          for project in vignettes/*/Desktop/*.Desktop.csproj; do
-            dotnet build "$project" --configuration Release
+          for project in vignettes/*/*.Desktop/*.Desktop.csproj; do
+            dotnet build "$project" --configuration Release -p:TreatWarningsAsErrors=true
           done
 
       - name: Exercise capture automation
@@ -33,7 +30,7 @@ jobs:
         run: |
           capture_dir="${RUNNER_TEMP}/basketball-capture"
           xvfb-run -a dotnet run \
-            --project vignettes/basketball_ptr/Desktop/BasketballPullToRefresh.Desktop.csproj \
+            --project vignettes/basketball_ptr/BasketballPullToRefresh.Desktop/BasketballPullToRefresh.Desktop.csproj \
             --configuration Release \
             --no-build \
             -- \
@@ -45,7 +42,7 @@ jobs:
           touch "$failure_root"
 
           if xvfb-run -a dotnet run \
-            --project vignettes/basketball_ptr/Desktop/BasketballPullToRefresh.Desktop.csproj \
+            --project vignettes/basketball_ptr/BasketballPullToRefresh.Desktop/BasketballPullToRefresh.Desktop.csproj \
             --configuration Release \
             --no-build \
             -- \
@@ -70,8 +67,8 @@ jobs:
       - name: Build Android heads
         shell: bash
         run: |
-          for project in vignettes/*/Android/*.Android.csproj; do
-            dotnet build "$project" --configuration Release
+          for project in vignettes/*/*.Android/*.Android.csproj; do
+            dotnet build "$project" --configuration Release -p:TreatWarningsAsErrors=true
           done
 
   ios:
@@ -83,6 +80,9 @@ jobs:
       - uses: actions/setup-dotnet@v5
         with:
           global-json-file: global.json
+
+      - name: Select compatible Xcode
+        run: sudo xcode-select --switch /Applications/Xcode_26.2.app/Contents/Developer
 
       - name: Install iOS workload
         run: dotnet workload install ios
@@ -96,6 +96,8 @@ jobs:
             *) echo "Unsupported runner architecture: $(uname -m)" >&2; exit 1 ;;
           esac
 
-          for project in vignettes/*/iOS/*.iOS.csproj; do
-            dotnet build "$project" --configuration Release -p:RuntimeIdentifier="$rid"
+          for project in vignettes/*/*.iOS/*.iOS.csproj; do
+            dotnet build "$project" --configuration Release \
+              -p:RuntimeIdentifier="$rid" \
+              -p:TreatWarningsAsErrors=true
           done

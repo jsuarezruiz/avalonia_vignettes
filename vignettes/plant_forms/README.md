@@ -9,5 +9,5 @@ A checkout in three pages, each sliding up over the last. The submit button fill
 ## Running
 
 ```
-dotnet run --project Desktop/PlantForms.Desktop.csproj
+dotnet run --project PlantForms.Desktop/PlantForms.Desktop.csproj
 ```

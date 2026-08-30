@@ -9,5 +9,5 @@ A navigation bar whose buttons change size, shape and colour as they are picked.
 ## Running
 
 ```
-dotnet run --project Desktop/BubbleTabBar.Desktop.csproj
+dotnet run --project BubbleTabBar.Desktop/BubbleTabBar.Desktop.csproj
 ```

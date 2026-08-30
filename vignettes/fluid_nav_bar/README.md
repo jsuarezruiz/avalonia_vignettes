@@ -9,5 +9,5 @@ The bar's top edge dips under whichever button is picked, and sloshes as that di
 ## Running
 
 ```
-dotnet run --project Desktop/FluidNavBar.Desktop.csproj
+dotnet run --project FluidNavBar.Desktop/FluidNavBar.Desktop.csproj
 ```

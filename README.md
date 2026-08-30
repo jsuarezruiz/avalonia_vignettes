@@ -113,9 +113,9 @@ Drag the chart through the months and it snaps to a whole one when let go, with 
 Needs the .NET 10 SDK. Each vignette has a reusable app project plus Desktop, Android and iOS heads. For example:
 
 ```
-dotnet run --project vignettes/basketball_ptr/Desktop/BasketballPullToRefresh.Desktop.csproj
-dotnet build vignettes/basketball_ptr/Android/BasketballPullToRefresh.Android.csproj
-dotnet build vignettes/basketball_ptr/iOS/BasketballPullToRefresh.iOS.csproj -p:RuntimeIdentifier=iossimulator-arm64
+dotnet run --project vignettes/basketball_ptr/BasketballPullToRefresh.Desktop/BasketballPullToRefresh.Desktop.csproj
+dotnet build vignettes/basketball_ptr/BasketballPullToRefresh.Android/BasketballPullToRefresh.Android.csproj
+dotnet build vignettes/basketball_ptr/BasketballPullToRefresh.iOS/BasketballPullToRefresh.iOS.csproj -p:RuntimeIdentifier=iossimulator-arm64
 ```
 
 Android and iOS builds require their corresponding .NET workloads and native SDKs. Open `AvaloniaVignettes.slnx` to work with every platform project together.

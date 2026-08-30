@@ -9,5 +9,5 @@ Swipe between artists while a field of 3D shapes drifts behind and in front of t
 ## Running
 
 ```
-dotnet run --project Desktop/Indie3D.Desktop.csproj
+dotnet run --project Indie3D.Desktop/Indie3D.Desktop.csproj
 ```

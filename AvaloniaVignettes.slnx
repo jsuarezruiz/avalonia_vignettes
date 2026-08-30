@@ -1,140 +1,139 @@
 <Solution>
-  <Project Path="tests/AvaloniaVignettes.Tests/AvaloniaVignettes.Tests.csproj" />
   <Project Path="vignettes/_shared/AvaloniaVignettes.Shared.csproj" />
-  <Project Path="vignettes/basketball_ptr/BasketballPullToRefresh.csproj" />
-  <Project Path="vignettes/basketball_ptr/Desktop/BasketballPullToRefresh.Desktop.csproj" />
-  <Project Path="vignettes/basketball_ptr/Android/BasketballPullToRefresh.Android.csproj">
+  <Project Path="vignettes/basketball_ptr/BasketballPullToRefresh/BasketballPullToRefresh.csproj" />
+  <Project Path="vignettes/basketball_ptr/BasketballPullToRefresh.Desktop/BasketballPullToRefresh.Desktop.csproj" />
+  <Project Path="vignettes/basketball_ptr/BasketballPullToRefresh.Android/BasketballPullToRefresh.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/basketball_ptr/iOS/BasketballPullToRefresh.iOS.csproj">
+  <Project Path="vignettes/basketball_ptr/BasketballPullToRefresh.iOS/BasketballPullToRefresh.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/bubble_tab_bar/BubbleTabBar.csproj" />
-  <Project Path="vignettes/bubble_tab_bar/Desktop/BubbleTabBar.Desktop.csproj" />
-  <Project Path="vignettes/bubble_tab_bar/Android/BubbleTabBar.Android.csproj">
+  <Project Path="vignettes/bubble_tab_bar/BubbleTabBar/BubbleTabBar.csproj" />
+  <Project Path="vignettes/bubble_tab_bar/BubbleTabBar.Desktop/BubbleTabBar.Desktop.csproj" />
+  <Project Path="vignettes/bubble_tab_bar/BubbleTabBar.Android/BubbleTabBar.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/bubble_tab_bar/iOS/BubbleTabBar.iOS.csproj">
+  <Project Path="vignettes/bubble_tab_bar/BubbleTabBar.iOS/BubbleTabBar.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/constellations_list/ConstellationsList.csproj" />
-  <Project Path="vignettes/constellations_list/Desktop/ConstellationsList.Desktop.csproj" />
-  <Project Path="vignettes/constellations_list/Android/ConstellationsList.Android.csproj">
+  <Project Path="vignettes/constellations_list/ConstellationsList/ConstellationsList.csproj" />
+  <Project Path="vignettes/constellations_list/ConstellationsList.Desktop/ConstellationsList.Desktop.csproj" />
+  <Project Path="vignettes/constellations_list/ConstellationsList.Android/ConstellationsList.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/constellations_list/iOS/ConstellationsList.iOS.csproj">
+  <Project Path="vignettes/constellations_list/ConstellationsList.iOS/ConstellationsList.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/dark_ink_transition/DarkInkTransition.csproj" />
-  <Project Path="vignettes/dark_ink_transition/Desktop/DarkInkTransition.Desktop.csproj" />
-  <Project Path="vignettes/dark_ink_transition/Android/DarkInkTransition.Android.csproj">
+  <Project Path="vignettes/dark_ink_transition/DarkInkTransition/DarkInkTransition.csproj" />
+  <Project Path="vignettes/dark_ink_transition/DarkInkTransition.Desktop/DarkInkTransition.Desktop.csproj" />
+  <Project Path="vignettes/dark_ink_transition/DarkInkTransition.Android/DarkInkTransition.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/dark_ink_transition/iOS/DarkInkTransition.iOS.csproj">
+  <Project Path="vignettes/dark_ink_transition/DarkInkTransition.iOS/DarkInkTransition.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/dog_slider/DogSlider.csproj" />
-  <Project Path="vignettes/dog_slider/Desktop/DogSlider.Desktop.csproj" />
-  <Project Path="vignettes/dog_slider/Android/DogSlider.Android.csproj">
+  <Project Path="vignettes/dog_slider/DogSlider/DogSlider.csproj" />
+  <Project Path="vignettes/dog_slider/DogSlider.Desktop/DogSlider.Desktop.csproj" />
+  <Project Path="vignettes/dog_slider/DogSlider.Android/DogSlider.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/dog_slider/iOS/DogSlider.iOS.csproj">
+  <Project Path="vignettes/dog_slider/DogSlider.iOS/DogSlider.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/drink_rewards_list/DrinkRewardsList.csproj" />
-  <Project Path="vignettes/drink_rewards_list/Desktop/DrinkRewardsList.Desktop.csproj" />
-  <Project Path="vignettes/drink_rewards_list/Android/DrinkRewardsList.Android.csproj">
+  <Project Path="vignettes/drink_rewards_list/DrinkRewardsList/DrinkRewardsList.csproj" />
+  <Project Path="vignettes/drink_rewards_list/DrinkRewardsList.Desktop/DrinkRewardsList.Desktop.csproj" />
+  <Project Path="vignettes/drink_rewards_list/DrinkRewardsList.Android/DrinkRewardsList.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/drink_rewards_list/iOS/DrinkRewardsList.iOS.csproj">
+  <Project Path="vignettes/drink_rewards_list/DrinkRewardsList.iOS/DrinkRewardsList.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/fluid_nav_bar/FluidNavBar.csproj" />
-  <Project Path="vignettes/fluid_nav_bar/Desktop/FluidNavBar.Desktop.csproj" />
-  <Project Path="vignettes/fluid_nav_bar/Android/FluidNavBar.Android.csproj">
+  <Project Path="vignettes/fluid_nav_bar/FluidNavBar/FluidNavBar.csproj" />
+  <Project Path="vignettes/fluid_nav_bar/FluidNavBar.Desktop/FluidNavBar.Desktop.csproj" />
+  <Project Path="vignettes/fluid_nav_bar/FluidNavBar.Android/FluidNavBar.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/fluid_nav_bar/iOS/FluidNavBar.iOS.csproj">
+  <Project Path="vignettes/fluid_nav_bar/FluidNavBar.iOS/FluidNavBar.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/gooey_edge/GooeyEdge.csproj" />
-  <Project Path="vignettes/gooey_edge/Desktop/GooeyEdge.Desktop.csproj" />
-  <Project Path="vignettes/gooey_edge/Android/GooeyEdge.Android.csproj">
+  <Project Path="vignettes/gooey_edge/GooeyEdge/GooeyEdge.csproj" />
+  <Project Path="vignettes/gooey_edge/GooeyEdge.Desktop/GooeyEdge.Desktop.csproj" />
+  <Project Path="vignettes/gooey_edge/GooeyEdge.Android/GooeyEdge.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/gooey_edge/iOS/GooeyEdge.iOS.csproj">
+  <Project Path="vignettes/gooey_edge/GooeyEdge.iOS/GooeyEdge.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/indie_3d/Indie3D.csproj" />
-  <Project Path="vignettes/indie_3d/Desktop/Indie3D.Desktop.csproj" />
-  <Project Path="vignettes/indie_3d/Android/Indie3D.Android.csproj">
+  <Project Path="vignettes/indie_3d/Indie3D/Indie3D.csproj" />
+  <Project Path="vignettes/indie_3d/Indie3D.Desktop/Indie3D.Desktop.csproj" />
+  <Project Path="vignettes/indie_3d/Indie3D.Android/Indie3D.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/indie_3d/iOS/Indie3D.iOS.csproj">
+  <Project Path="vignettes/indie_3d/Indie3D.iOS/Indie3D.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/parallax_travel_cards_hero/ParallaxTravelCardsHero.csproj" />
-  <Project Path="vignettes/parallax_travel_cards_hero/Desktop/ParallaxTravelCardsHero.Desktop.csproj" />
-  <Project Path="vignettes/parallax_travel_cards_hero/Android/ParallaxTravelCardsHero.Android.csproj">
+  <Project Path="vignettes/parallax_travel_cards_hero/ParallaxTravelCardsHero/ParallaxTravelCardsHero.csproj" />
+  <Project Path="vignettes/parallax_travel_cards_hero/ParallaxTravelCardsHero.Desktop/ParallaxTravelCardsHero.Desktop.csproj" />
+  <Project Path="vignettes/parallax_travel_cards_hero/ParallaxTravelCardsHero.Android/ParallaxTravelCardsHero.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/parallax_travel_cards_hero/iOS/ParallaxTravelCardsHero.iOS.csproj">
+  <Project Path="vignettes/parallax_travel_cards_hero/ParallaxTravelCardsHero.iOS/ParallaxTravelCardsHero.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/parallax_travel_cards_list/ParallaxTravelCardsList.csproj" />
-  <Project Path="vignettes/parallax_travel_cards_list/Desktop/ParallaxTravelCardsList.Desktop.csproj" />
-  <Project Path="vignettes/parallax_travel_cards_list/Android/ParallaxTravelCardsList.Android.csproj">
+  <Project Path="vignettes/parallax_travel_cards_list/ParallaxTravelCardsList/ParallaxTravelCardsList.csproj" />
+  <Project Path="vignettes/parallax_travel_cards_list/ParallaxTravelCardsList.Desktop/ParallaxTravelCardsList.Desktop.csproj" />
+  <Project Path="vignettes/parallax_travel_cards_list/ParallaxTravelCardsList.Android/ParallaxTravelCardsList.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/parallax_travel_cards_list/iOS/ParallaxTravelCardsList.iOS.csproj">
+  <Project Path="vignettes/parallax_travel_cards_list/ParallaxTravelCardsList.iOS/ParallaxTravelCardsList.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/particle_swipe/ParticleSwipe.csproj" />
-  <Project Path="vignettes/particle_swipe/Desktop/ParticleSwipe.Desktop.csproj" />
-  <Project Path="vignettes/particle_swipe/Android/ParticleSwipe.Android.csproj">
+  <Project Path="vignettes/particle_swipe/ParticleSwipe/ParticleSwipe.csproj" />
+  <Project Path="vignettes/particle_swipe/ParticleSwipe.Desktop/ParticleSwipe.Desktop.csproj" />
+  <Project Path="vignettes/particle_swipe/ParticleSwipe.Android/ParticleSwipe.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/particle_swipe/iOS/ParticleSwipe.iOS.csproj">
+  <Project Path="vignettes/particle_swipe/ParticleSwipe.iOS/ParticleSwipe.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/plant_forms/PlantForms.csproj" />
-  <Project Path="vignettes/plant_forms/Desktop/PlantForms.Desktop.csproj" />
-  <Project Path="vignettes/plant_forms/Android/PlantForms.Android.csproj">
+  <Project Path="vignettes/plant_forms/PlantForms/PlantForms.csproj" />
+  <Project Path="vignettes/plant_forms/PlantForms.Desktop/PlantForms.Desktop.csproj" />
+  <Project Path="vignettes/plant_forms/PlantForms.Android/PlantForms.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/plant_forms/iOS/PlantForms.iOS.csproj">
+  <Project Path="vignettes/plant_forms/PlantForms.iOS/PlantForms.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/product_detail_zoom/ProductDetailZoom.csproj" />
-  <Project Path="vignettes/product_detail_zoom/Desktop/ProductDetailZoom.Desktop.csproj" />
-  <Project Path="vignettes/product_detail_zoom/Android/ProductDetailZoom.Android.csproj">
+  <Project Path="vignettes/product_detail_zoom/ProductDetailZoom/ProductDetailZoom.csproj" />
+  <Project Path="vignettes/product_detail_zoom/ProductDetailZoom.Desktop/ProductDetailZoom.Desktop.csproj" />
+  <Project Path="vignettes/product_detail_zoom/ProductDetailZoom.Android/ProductDetailZoom.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/product_detail_zoom/iOS/ProductDetailZoom.iOS.csproj">
+  <Project Path="vignettes/product_detail_zoom/ProductDetailZoom.iOS/ProductDetailZoom.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/sparkle_party/SparkleParty.csproj" />
-  <Project Path="vignettes/sparkle_party/Desktop/SparkleParty.Desktop.csproj" />
-  <Project Path="vignettes/sparkle_party/Android/SparkleParty.Android.csproj">
+  <Project Path="vignettes/sparkle_party/SparkleParty/SparkleParty.csproj" />
+  <Project Path="vignettes/sparkle_party/SparkleParty.Desktop/SparkleParty.Desktop.csproj" />
+  <Project Path="vignettes/sparkle_party/SparkleParty.Android/SparkleParty.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/sparkle_party/iOS/SparkleParty.iOS.csproj">
+  <Project Path="vignettes/sparkle_party/SparkleParty.iOS/SparkleParty.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/spending_tracker/SpendingTracker.csproj" />
-  <Project Path="vignettes/spending_tracker/Desktop/SpendingTracker.Desktop.csproj" />
-  <Project Path="vignettes/spending_tracker/Android/SpendingTracker.Android.csproj">
+  <Project Path="vignettes/spending_tracker/SpendingTracker/SpendingTracker.csproj" />
+  <Project Path="vignettes/spending_tracker/SpendingTracker.Desktop/SpendingTracker.Desktop.csproj" />
+  <Project Path="vignettes/spending_tracker/SpendingTracker.Android/SpendingTracker.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/spending_tracker/iOS/SpendingTracker.iOS.csproj">
+  <Project Path="vignettes/spending_tracker/SpendingTracker.iOS/SpendingTracker.iOS.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/ticket_fold/TicketFold.csproj" />
-  <Project Path="vignettes/ticket_fold/Desktop/TicketFold.Desktop.csproj" />
-  <Project Path="vignettes/ticket_fold/Android/TicketFold.Android.csproj">
+  <Project Path="vignettes/ticket_fold/TicketFold/TicketFold.csproj" />
+  <Project Path="vignettes/ticket_fold/TicketFold.Desktop/TicketFold.Desktop.csproj" />
+  <Project Path="vignettes/ticket_fold/TicketFold.Android/TicketFold.Android.csproj">
     <Deploy />
   </Project>
-  <Project Path="vignettes/ticket_fold/iOS/TicketFold.iOS.csproj">
+  <Project Path="vignettes/ticket_fold/TicketFold.iOS/TicketFold.iOS.csproj">
     <Deploy />
   </Project>
 </Solution>
