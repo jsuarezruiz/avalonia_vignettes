@@ -91,7 +91,7 @@ public sealed class DogSliderTrack : Control
         var radius = new Size(ArcRadius, Math.Abs(arcHeight));
 
         // A dip that has been pushed the other way sweeps the opposite way round.
-        var sweep = arcHeight < 0d ? SweepDirection.CounterClockwise : SweepDirection.Clockwise;
+        var sweep = arcHeight < 0d ? SweepDirection.Clockwise : SweepDirection.CounterClockwise;
 
         context.DrawGeometry(null, AccentPen, BuildHalf(
             new Point(0d, lineY),

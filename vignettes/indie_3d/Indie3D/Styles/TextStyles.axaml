@@ -4,6 +4,7 @@
   <Style Selector="TextBlock.chip">
     <Setter Property="FontFamily" Value="{StaticResource DisplayFont}" />
     <Setter Property="FontSize" Value="10.5" />
+    <Setter Property="LineHeight" Value="15.015" />
     <Setter Property="FontWeight" Value="Bold" />
     <Setter Property="LetterSpacing" Value="2" />
     <Setter Property="Foreground" Value="White" />
@@ -12,6 +13,7 @@
   <Style Selector="TextBlock.explore">
     <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
     <Setter Property="FontSize" Value="14" />
+    <Setter Property="LineHeight" Value="20.02" />
     <Setter Property="FontWeight" Value="Bold" />
     <Setter Property="LetterSpacing" Value="1.1" />
     <Setter Property="Foreground" Value="Black" />

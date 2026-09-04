@@ -182,7 +182,11 @@ public sealed class GooeyEdge
     /// <param name="margin">
     /// How far past the control the region extends, so the stroke of the edge is never cut off.
     /// </param>
-    public Geometry BuildGeometry(Size size, double margin = 0d)
+    /// <param name="completion">
+    /// Blends the simulated edge towards full coverage as a native page transition completes.
+    /// At one the incoming page covers the viewport before the outgoing page is recycled.
+    /// </param>
+    public Geometry BuildGeometry(Size size, double margin = 0d, double completion = 0d)
     {
         var geometry = new StreamGeometry();
 
@@ -193,7 +197,7 @@ public sealed class GooeyEdge
 
         using var context = geometry.Open();
 
-        var transform = new EdgeTransform(this, size, margin);
+        var transform = new EdgeTransform(this, size, margin, completion);
 
         // The far corners sit a whole margin past the edge, so the region always runs clear of the
         // control it is closing off.
@@ -245,11 +249,13 @@ public sealed class GooeyEdge
         private readonly double _width;
         private readonly double _height;
         private readonly double _margin;
+        private readonly double _completion;
 
-        public EdgeTransform(GooeyEdge edge, Size size, double margin)
+        public EdgeTransform(GooeyEdge edge, Size size, double margin, double completion)
         {
             _side = edge.Side;
             _margin = margin;
+            _completion = Math.Clamp(completion, 0d, 1d);
 
             var vertical = _side is GooeyEdgeSide.Top or GooeyEdgeSide.Bottom;
 
@@ -265,6 +271,6 @@ public sealed class GooeyEdge
             _ => new Point((_width * y) - _margin, _height * (1d - x)),
         };
 
-        public Point Apply(GooeyPoint point) => Apply(point.X, point.Y);
+        public Point Apply(GooeyPoint point) => Apply(point.X + ((1d - point.X) * _completion), point.Y);
     }
 }

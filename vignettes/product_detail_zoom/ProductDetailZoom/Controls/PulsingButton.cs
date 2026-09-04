@@ -1,7 +1,5 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Interactivity;
 using AvaloniaVignettes.Shared.Animation;
 
 namespace ProductDetailZoom.Controls;
@@ -15,7 +13,7 @@ namespace ProductDetailZoom.Controls;
 /// full while fading from 70% to nothing, and the fill breathes between 70% and 90% opacity on the
 /// same clock, so the button itself pulses very slightly in step with the ring leaving it.
 /// </remarks>
-public sealed class PulsingButton : TemplatedControl
+public sealed class PulsingButton : Button
 {
     public static readonly StyledProperty<Avalonia.Media.Geometry?> IconProperty =
         AvaloniaProperty.Register<PulsingButton, Avalonia.Media.Geometry?>(nameof(Icon));
@@ -35,11 +33,6 @@ public sealed class PulsingButton : TemplatedControl
     private double _haloScale = 0.5d;
     private double _haloOpacity = 0.7d;
     private double _fillOpacity = 0.7d;
-
-    /// <summary>
-    /// Raised when the button is pressed.
-    /// </summary>
-    public event EventHandler? Pressed;
 
     /// <summary>
     /// Gets or sets the glyph drawn in the middle, on the usual 24 unit grid.
@@ -75,16 +68,6 @@ public sealed class PulsingButton : TemplatedControl
     {
         get => _fillOpacity;
         private set => SetAndRaise(FillOpacityProperty, ref _fillOpacity, value);
-    }
-
-    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-    {
-        base.OnApplyTemplate(e);
-
-        if (e.NameScope.Find<Button>("PART_Button") is { } button)
-        {
-            button.Click += (_, _) => Pressed?.Invoke(this, EventArgs.Empty);
-        }
     }
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)

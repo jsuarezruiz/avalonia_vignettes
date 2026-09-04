@@ -35,11 +35,12 @@
             Content="BUY NOW $349.95" />
 
     <controls:PulsingButton x:Name="Shrink"
+                            AutomationProperties.Name="Zoom out"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Icon="{StaticResource RemoveIconGeometry}"
                             Opacity="0"
-                            Pressed="OnShrinkPressed" />
+                            Click="OnShrinkClicked" />
 
   </Panel>
 

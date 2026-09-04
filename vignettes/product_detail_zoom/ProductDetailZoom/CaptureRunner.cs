@@ -20,10 +20,8 @@ internal static class CaptureRunner
         capture.Write("1_product");
 
         // The whole real path: the press, its 300 of fade, then the three second route with the
-        // speaker spinning through the black middle of it. The pulsing button is a template around
-        // a plain one, and the press lives on the one inside.
-        FrameCapture.Find<Button>(product.ZoomButton)
-            .RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        // speaker spinning through the black middle of it. Exercise the native Button.Click route.
+        product.ZoomButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
 
         await Task.Delay(1000);
         capture.Write("2_leaving");

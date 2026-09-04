@@ -162,7 +162,7 @@ public sealed class OutlinedText : Control
             return default;
         }
 
-        return new Size(formatted.Width, double.IsNaN(LineHeight) ? formatted.Height : LineHeight);
+        return new Size(formatted.WidthIncludingTrailingWhitespace, double.IsNaN(LineHeight) ? formatted.Height : LineHeight);
     }
 
     private FormattedText? Build()

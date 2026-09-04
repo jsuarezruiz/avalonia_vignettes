@@ -1,6 +1,10 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+  <Style Selector="TextBlock">
+    <Setter Property="LetterSpacing" Value="0.25" />
+  </Style>
+
   <!--
     One class per TextStyle in styles.dart.
 
@@ -70,7 +74,7 @@
     <!-- Flutter spreads a squeezed line box proportionally across ascent and descent; Avalonia
          keeps the glyph top-aligned in it. This shifts the painted text onto Flutter's baseline
          without touching the box the layout sees. -->
-    <Setter Property="RenderTransform" Value="translate(0px, 7.01px)" />
+    <Setter Property="RenderTransform" Value="translate(0px, -1px)" />
     <Setter Property="Foreground" Value="{StaticResource HotelHeadingBrush}" />
   </Style>
 

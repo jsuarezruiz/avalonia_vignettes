@@ -26,13 +26,16 @@ public partial class MainView : UserControl
     private static readonly Point FavoriteBurstOffset = new(60d, 46d);
 
     private readonly ObservableCollection<Email> _inbox = DemoData.CreateInbox();
+    private bool _shadingQueued;
 
     public MainView()
     {
         InitializeComponent();
 
         Messages.ItemsSource = _inbox;
-        Messages.ContainerPrepared += (_, _) => UpdateRowShading();
+        Messages.ContainerPrepared += (_, _) => QueueRowShading();
+        Messages.ContainerIndexChanged += (_, _) => QueueRowShading();
+        Loaded += (_, _) => QueueRowShading();
 
         _inbox.CollectionChanged += OnInboxChanged;
 
@@ -40,7 +43,22 @@ public partial class MainView : UserControl
         AddHandler(SwipeItem.RemovedEvent, OnRowRemoved);
     }
 
-    private void OnInboxChanged(object? sender, NotifyCollectionChangedEventArgs e) => UpdateRowShading();
+    private void OnInboxChanged(object? sender, NotifyCollectionChangedEventArgs e) => QueueRowShading();
+
+    private void QueueRowShading()
+    {
+        if (_shadingQueued)
+            return;
+
+        _shadingQueued = true;
+        // ContainerPrepared precedes the data template's visual children. Wait until the rows
+        // exist; otherwise every lookup misses and the entire inbox keeps the first row's fill.
+        Dispatcher.UIThread.Post(() =>
+        {
+            _shadingQueued = false;
+            UpdateRowShading();
+        }, DispatcherPriority.Loaded);
+    }
 
     private void OnSwipeAction(object? sender, SwipeActionEventArgs e)
     {

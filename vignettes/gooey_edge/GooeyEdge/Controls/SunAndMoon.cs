@@ -1,11 +1,11 @@
 using Avalonia;
 using Avalonia.Animation;
-using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Styling;
+using AvaloniaVignettes.Shared.Animation;
 
 namespace GooeyEdge.Controls;
 
@@ -70,7 +70,7 @@ public sealed class SunAndMoon : Panel
             {
                 Property = RotationAngleProperty,
                 Duration = RotationDuration,
-                Easing = new CubicEaseOut(),
+                Easing = FlutterEasings.EaseOut,
             },
         ];
 
@@ -140,7 +140,9 @@ public sealed class SunAndMoon : Panel
         _currentIndex = Index;
 
         // The Flutter original tweens 1 -> 0 turns, so a rising index turns the sky backwards.
-        SetCurrentValue(RotationAngleProperty, -(_currentIndex / 3d) * 360d);
+        // Set the target as a local value. SetCurrentValue can be replaced by the animated
+        // effective value while a transition is running, leaving a later turn at zero.
+        RotationAngle = -(_currentIndex / 3d) * 360d;
 
         var visible = ((_currentIndex % 3) + 3) % 3;
 

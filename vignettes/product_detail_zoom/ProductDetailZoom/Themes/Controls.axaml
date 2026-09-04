@@ -3,49 +3,13 @@
                     xmlns:controls="using:ProductDetailZoom.Controls"
                     xmlns:shared="using:AvaloniaVignettes.Shared.Controls">
 
-  <!--
-    The pulsing button's disc is drawn by its own ellipse, so the hosting button contributes no
-    surface of its own, only the darker tint the original gives it under the pointer and on press.
-  -->
-  <ControlTheme x:Key="BarePulsingButtonTheme" TargetType="Button">
-    <Setter Property="Template">
-      <ControlTemplate>
-        <Panel>
-          <!--
-            CircleBorder inscribes the circle in the shorter side, so the ink is a 28 disc however
-            wide the button's tap target is, not an ellipse stretched across it.
-          -->
-          <Ellipse Name="PART_Tint"
-                   Width="28"
-                   Height="28"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Fill="Transparent" />
-          <ContentPresenter Name="PART_ContentPresenter"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Content="{TemplateBinding Content}"
-                            Padding="0" />
-        </Panel>
-      </ControlTemplate>
-    </Setter>
-
-    <Style Selector="^:pointerover /template/ Ellipse#PART_Tint">
-      <Setter Property="Fill" Value="{StaticResource AccentPressedBrush}" />
-    </Style>
-
-    <Style Selector="^:pressed /template/ Ellipse#PART_Tint">
-      <Setter Property="Fill" Value="{StaticResource AccentPressedBrush}" />
-    </Style>
-  </ControlTheme>
-
   <ControlTheme x:Key="{x:Type controls:PulsingButton}" TargetType="controls:PulsingButton">
     <Setter Property="Width" Value="70" />
     <Setter Property="Height" Value="70" />
     <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Panel>
+        <Panel Background="Transparent">
 
           <!-- The halo: a 28 radius circle, swelling from half size to full as it fades. -->
           <Ellipse Width="56"
@@ -61,40 +25,35 @@
             </Ellipse.RenderTransform>
           </Ellipse>
 
-          <!--
-            The button itself is only 28 across: MaterialButton is given a height of 28 and a
-            CircleBorder, which inscribes the circle in the shorter side. The 70 square around it is
-            the hit area, which is what the halo's SizedBox provides in the original.
-          -->
-          <Button Name="PART_Button"
-                  AutomationProperties.Name="Zoom in"
-                  Theme="{StaticResource BarePulsingButtonTheme}"
-                  Width="70"
-                  Height="28"
-                  Padding="0"
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"
-                  CornerRadius="14"
-                  Background="Transparent"
-                  BorderThickness="0"
-                  Cursor="Hand">
-            <Panel>
-              <Ellipse Width="28"
-                       Height="28"
-                       HorizontalAlignment="Center"
-                       Fill="{StaticResource AccentBrush}"
-                       Opacity="{TemplateBinding FillOpacity}" />
-              <shared:MaterialIcon IconSize="24"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Data="{TemplateBinding Icon}"
-                                   Foreground="{StaticResource ForegroundBrush}" />
-            </Panel>
-          </Button>
+          <!-- The custom Button keeps a 70 square hit target around its 28 pixel visible disc. -->
+          <Panel Width="70"
+                 Height="28"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center">
+            <Ellipse Name="PART_Fill"
+                     Width="28"
+                     Height="28"
+                     HorizontalAlignment="Center"
+                     Fill="{StaticResource AccentBrush}"
+                     Opacity="{TemplateBinding FillOpacity}" />
+            <shared:MaterialIcon IconSize="24"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Data="{TemplateBinding Icon}"
+                                 Foreground="{StaticResource ForegroundBrush}" />
+          </Panel>
 
         </Panel>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^:pointerover /template/ Ellipse#PART_Fill">
+      <Setter Property="Fill" Value="{StaticResource AccentPressedBrush}" />
+    </Style>
+
+    <Style Selector="^:pressed /template/ Ellipse#PART_Fill">
+      <Setter Property="Fill" Value="{StaticResource AccentPressedBrush}" />
+    </Style>
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type controls:SpeakerSpec}" TargetType="controls:SpeakerSpec">

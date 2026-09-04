@@ -20,7 +20,7 @@
     <Setter Property="LineHeight" Value="35.2" />
     <Setter Property="ClipToBounds" Value="False" />
     <!-- Flutter splits a squeezed line box across ascent and descent; Avalonia tops it out. -->
-    <Setter Property="RenderTransform" Value="translate(0px, -10.1px)" />
+    <Setter Property="RenderTransform" Value="translate(0px, -6.1px)" />
     <Setter Property="TextDecorations" Value="Underline" />
     <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
   </Style>
@@ -32,11 +32,12 @@
     <Setter Property="LineHeight" Value="30" />
     <Setter Property="ClipToBounds" Value="False" />
     <!-- Same again: without this the stacked titles are cut off by the card in front. -->
-    <Setter Property="RenderTransform" Value="translate(0px, -11.5px)" />
+    <Setter Property="RenderTransform" Value="translate(0px, -9.5px)" />
     <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
   </Style>
 
   <Style Selector="TextBlock.formSection">
+    <Setter Property="LineHeight" Value="22.857143" />
     <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
     <Setter Property="FontSize" Value="16" />
     <Setter Property="FontWeight" Value="SemiBold" />
@@ -53,6 +54,7 @@
   </Style>
 
   <Style Selector="TextBlock.productName">
+    <Setter Property="LineHeight" Value="28.571429" />
     <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
     <Setter Property="FontSize" Value="20" />
     <Setter Property="FontWeight" Value="SemiBold" />
@@ -68,10 +70,11 @@
     <Setter Property="LineHeight" Value="36" />
     <Setter Property="ClipToBounds" Value="False" />
     <!-- A line box larger than the font's own is split the same way, so the price sits lower. -->
-    <Setter Property="RenderTransform" Value="translate(0px, 10px)" />
+    <Setter Property="RenderTransform" Value="translate(0px, 2px)" />
   </Style>
 
   <Style Selector="TextBlock.orderLabel">
+    <Setter Property="LineHeight" Value="20" />
     <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
     <Setter Property="FontSize" Value="14" />
     <Setter Property="FontWeight" Value="Medium" />
@@ -80,6 +83,7 @@
   </Style>
 
   <Style Selector="TextBlock.orderPrice">
+    <Setter Property="LineHeight" Value="20" />
     <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
     <Setter Property="FontSize" Value="14" />
     <Setter Property="FontWeight" Value="SemiBold" />
@@ -88,6 +92,7 @@
   </Style>
 
   <Style Selector="TextBlock.orderTotalLabel">
+    <Setter Property="LineHeight" Value="22.857143" />
     <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
     <Setter Property="FontSize" Value="16" />
     <Setter Property="FontWeight" Value="Medium" />
@@ -96,6 +101,7 @@
   </Style>
 
   <Style Selector="TextBlock.orderTotal">
+    <Setter Property="LineHeight" Value="28.571429" />
     <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
     <Setter Property="FontSize" Value="20" />
     <Setter Property="FontWeight" Value="Bold" />
@@ -281,6 +287,8 @@
   </Style>
 
   <Style Selector="TextBox.formInput /template/ TextBlock#PART_Placeholder">
+    <Setter Property="Opacity" Value="1" />
+    <Setter Property="LetterSpacing" Value="0.5" />
     <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
     <Setter Property="FontSize" Value="16" />
     <Setter Property="FontWeight" Value="Medium" />

@@ -1,4 +1,3 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
@@ -9,15 +8,6 @@ namespace FluidNavBar.Views;
 /// </summary>
 public partial class MainView : UserControl
 {
-    public static readonly DirectProperty<MainView, double> TileSizeProperty =
-        AvaloniaProperty.RegisterDirect<MainView, double>(nameof(TileSize), o => o.TileSize);
-
-    private const double GridPadding = 8d;
-
-    private const int GridColumns = 2;
-
-    private double _tileSize;
-
     public MainView()
     {
         InitializeComponent();
@@ -33,24 +23,6 @@ public partial class MainView : UserControl
     /// Gets one entry per tile on the grid page, as the original's 30.
     /// </summary>
     public IReadOnlyList<int> Tiles { get; } = [.. Enumerable.Range(0, 30)];
-
-    /// <summary>
-    /// Gets the side of one grid tile. A Flutter <c>GridView.count</c> lays its cells out square
-    /// unless told otherwise, and a <see cref="UniformGrid"/> instead takes its row height from the
-    /// tallest cell, so the side is worked out here and given to each tile.
-    /// </summary>
-    public double TileSize
-    {
-        get => _tileSize;
-        private set => SetAndRaise(TileSizeProperty, ref _tileSize, value);
-    }
-
-    protected override Size ArrangeOverride(Size finalSize)
-    {
-        TileSize = Math.Max(0d, (finalSize.Width - (GridPadding * 2d)) / GridColumns);
-
-        return base.ArrangeOverride(finalSize);
-    }
 
     private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
 }

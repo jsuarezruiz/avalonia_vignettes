@@ -216,7 +216,6 @@ public sealed class SceneryLayers : Control
         // The skyline starts raised and drops to its resting place over the second half.
         var offsetY = Lerp(-ScreenHeight * 0.112d, 0d, CityPosition.Ease(value));
 
-        using var _ = context.PushClip(new Rect(bounds));
         using var __ = context.PushTransform(Matrix.CreateTranslation(0d, offsetY));
 
         DrawCityImage(context, bounds, size, city);

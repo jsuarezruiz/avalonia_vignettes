@@ -3,6 +3,7 @@ using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using AvaloniaVignettes.Shared.Animation;
 using DogSlider.Effects;
@@ -22,13 +23,13 @@ namespace DogSlider.Controls;
 /// back on an elastic curve.
 /// </para>
 /// </remarks>
-public sealed class DogSlider : TemplatedControl
+public sealed class DogSlider : Slider
 {
-    public static readonly StyledProperty<double> ValueProperty =
-        AvaloniaProperty.Register<DogSlider, double>(nameof(Value), defaultBindingMode: Avalonia.Data.BindingMode.TwoWay);
-
     public static readonly StyledProperty<double> HorizontalPaddingProperty =
         AvaloniaProperty.Register<DogSlider, double>(nameof(HorizontalPadding), 40d);
+
+    public static readonly DirectProperty<DogSlider, Thickness> TrackMarginProperty =
+        AvaloniaProperty.RegisterDirect<DogSlider, Thickness>(nameof(TrackMargin), o => o.TrackMargin);
 
     public static readonly StyledProperty<double> ArcRadiusProperty =
         AvaloniaProperty.Register<DogSlider, double>(nameof(ArcRadius), 15d);
@@ -80,10 +81,19 @@ public sealed class DogSlider : TemplatedControl
     private double _arcScaleY = 1d;
     private double _handleX;
     private bool _isArrowVisible = true;
-    private bool _isDragging;
+    private bool _isInteracting;
 
     static DogSlider()
     {
+        MinimumProperty.OverrideDefaultValue<DogSlider>(0d);
+        MaximumProperty.OverrideDefaultValue<DogSlider>(1d);
+        SmallChangeProperty.OverrideDefaultValue<DogSlider>(0.05d);
+        LargeChangeProperty.OverrideDefaultValue<DogSlider>(0.1d);
+        HorizontalPaddingProperty.Changed.AddClassHandler<DogSlider>((x, e) =>
+        {
+            x.RaisePropertyChanged(TrackMarginProperty, new Thickness(e.GetOldValue<double>(), 0d), x.TrackMargin);
+            x.UpdateHandleFromValue(x.Bounds.Width);
+        });
         ValueProperty.Changed.AddClassHandler<DogSlider>((x, _) => x.OnValueChanged());
         ArcRadiusProperty.Changed.AddClassHandler<DogSlider>((x, e) =>
             x.OnArcRadiusChanged(e.GetOldValue<double>()));
@@ -95,15 +105,11 @@ public sealed class DogSlider : TemplatedControl
 
         _physics.MoveStarted += (_, _) => SetDogWalking(true);
         _physics.DestinationReached += (_, _) => SetDogWalking(false);
-    }
 
-    /// <summary>
-    /// Gets or sets how far along the slider is, from 0 to 1.
-    /// </summary>
-    public double Value
-    {
-        get => GetValue(ValueProperty);
-        set => SetValue(ValueProperty, value);
+        // Track buttons/Thumb handle the routed events. Observe the tunnel without handling or
+        // capturing them so the artwork still animates when native Slider consumes the input.
+        AddHandler(PointerPressedEvent, ObservePress, RoutingStrategies.Tunnel, handledEventsToo: true);
+        AddHandler(PointerReleasedEvent, ObserveRelease, RoutingStrategies.Tunnel, handledEventsToo: true);
     }
 
     /// <summary>
@@ -114,6 +120,11 @@ public sealed class DogSlider : TemplatedControl
         get => GetValue(HorizontalPaddingProperty);
         set => SetValue(HorizontalPaddingProperty, value);
     }
+
+    /// <summary>
+    /// Gets the native track's horizontal inset.
+    /// </summary>
+    public Thickness TrackMargin => new(HorizontalPadding, 0d);
 
     /// <summary>
     /// Gets or sets the width of the dip the ball rests in.
@@ -179,46 +190,33 @@ public sealed class DogSlider : TemplatedControl
     {
         base.OnApplyTemplate(e);
         _dog = e.NameScope.Find<DogView>("PART_Dog");
+
+        // Flutter creates the dog at OffscreenX before the delayed physics ticker starts. Position
+        // the templated dog immediately as well; otherwise Canvas.Left defaults to zero and the
+        // sitting pose covers the ball until the first physics update, making the first drag look
+        // unlike every subsequent one.
+        UpdateDog();
     }
 
-    protected override void OnPointerPressed(PointerPressedEventArgs e)
+    private void ObservePress(object? sender, PointerPressedEventArgs e)
     {
-        base.OnPointerPressed(e);
-
         if (!e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
         {
             return;
         }
 
-        _isDragging = true;
-        e.Pointer.Capture(this);
-
+        // Avalonia's Slider owns the value change, pointer capture and keyboard behavior. The
+        // vignette only layers its ball-hop animation on top of that standard interaction.
+        _isInteracting = true;
         StartBall(1d, PressDuration);
-        MoveHandleTo(e.GetPosition(this).X);
     }
 
-    protected override void OnPointerMoved(PointerEventArgs e)
-    {
-        base.OnPointerMoved(e);
-
-        if (_isDragging)
-        {
-            MoveHandleTo(e.GetPosition(this).X);
-        }
-    }
-
-    protected override void OnPointerReleased(PointerReleasedEventArgs e)
-    {
-        base.OnPointerReleased(e);
-
-        EndDrag();
-        e.Pointer.Capture(null);
-    }
+    private void ObserveRelease(object? sender, PointerReleasedEventArgs e) => EndInteraction();
 
     protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
     {
         base.OnPointerCaptureLost(e);
-        EndDrag();
+        EndInteraction();
     }
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
@@ -260,44 +258,16 @@ public sealed class DogSlider : TemplatedControl
         UpdateDog();
     }
 
-    private void EndDrag()
+    private void EndInteraction()
     {
-        if (!_isDragging)
-        {
-            return;
-        }
-
-        _isDragging = false;
+        if (!_isInteracting) return;
+        _isInteracting = false;
         StartBall(0d, ReleaseDuration);
-    }
-
-    private void MoveHandleTo(double x)
-    {
-        var travel = Bounds.Width - HorizontalPadding;
-
-        if (travel <= HorizontalPadding)
-        {
-            return;
-        }
-
-        var oldBallLeft = BallLeft;
-
-        HandleX = Math.Clamp(x, HorizontalPadding, Bounds.Width - HorizontalPadding);
-        RaisePropertyChanged(BallLeftProperty, oldBallLeft, BallLeft);
-
-        SetCurrentValue(
-            ValueProperty,
-            (HandleX - HorizontalPadding) / (Bounds.Width - (HorizontalPadding * 2d)));
-
-        UpdateTarget();
     }
 
     private void OnValueChanged()
     {
-        if (!_isDragging)
-        {
-            UpdateHandleFromValue(Bounds.Width);
-        }
+        UpdateHandleFromValue(Bounds.Width);
 
         // The nudge only belongs at zero, and the value can get there without the ball being touched.
         UpdateArrowVisibility();
@@ -377,6 +347,9 @@ public sealed class DogSlider : TemplatedControl
 
         dog.IsFlipped = _physics.IsFlipped;
 
-        Canvas.SetLeft(dog, _physics.Position - (dog.Bounds.Width / 2d));
+        // During OnApplyTemplate the child has not been arranged yet, but its explicit template
+        // width is already available. Using that width keeps the initial pose fully off-screen.
+        var width = dog.Bounds.Width > 0d ? dog.Bounds.Width : dog.Width;
+        Canvas.SetLeft(dog, _physics.Position - (width / 2d));
     }
 }

@@ -5,12 +5,34 @@
 
   <!-- A bar button: the icon and nothing else, as the original's TextButton with a clear overlay. -->
   <ControlTheme x:Key="BarButtonTheme" TargetType="Button">
-    <Setter Property="Padding" Value="16,8" />
+    <Setter Property="Padding" Value="16,4" />
+    <Setter Property="MinWidth" Value="64" />
+    <Setter Property="MinHeight" Value="32" />
     <Setter Property="Cursor" Value="Hand" />
     <Setter Property="Template">
       <ControlTemplate>
         <ContentPresenter Name="PART_ContentPresenter"
                           Background="Transparent"
+                          HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center"
+                          BorderThickness="0"
+                          Padding="{TemplateBinding Padding}"
+                          Content="{TemplateBinding Content}" />
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="BarToggleButtonTheme" TargetType="ToggleButton">
+    <Setter Property="Padding" Value="16,4" />
+    <Setter Property="MinWidth" Value="64" />
+    <Setter Property="MinHeight" Value="32" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter"
+                          Background="Transparent"
+                          HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center"
                           BorderThickness="0"
                           Padding="{TemplateBinding Padding}"
                           Content="{TemplateBinding Content}" />
@@ -27,21 +49,24 @@
             <Grid ColumnDefinitions="Auto,*,Auto,*,Auto">
 
               <Button Grid.Column="0" Theme="{StaticResource BarButtonTheme}" AutomationProperties.Name="Back">
-                <shared:MaterialIcon IconSize="24"
+                <shared:MaterialIcon IconSize="18"
                                      Data="{StaticResource BackIconGeometry}"
                                      Foreground="{Binding BarForeground, RelativeSource={RelativeSource TemplatedParent}}" />
               </Button>
 
               <Button Grid.Column="2" Theme="{StaticResource BarButtonTheme}" AutomationProperties.Name="Home">
-                <Image Width="24" Height="24" Source="{TemplateBinding LogoIcon}" />
+                <Rectangle Width="18" Height="18" Fill="{TemplateBinding BarForeground}"
+                           OpacityMask="{Binding LogoMask, RelativeSource={RelativeSource TemplatedParent}}" />
               </Button>
 
-              <Button Grid.Column="4" Name="PART_Toggle" Theme="{StaticResource BarButtonTheme}" AutomationProperties.Name="Toggle dark mode">
-                <Image Width="24"
-                       Height="24"
-                       Source="{TemplateBinding ToggleIcon}"
-                       Opacity="{TemplateBinding ToggleOpacity}" />
-              </Button>
+              <ToggleButton Grid.Column="4"
+                            Name="PART_Toggle"
+                            Theme="{StaticResource BarToggleButtonTheme}"
+                            IsChecked="{TemplateBinding IsDark}"
+                            AutomationProperties.Name="Toggle dark mode">
+                <Rectangle Width="18" Height="18" Fill="{TemplateBinding BarForeground}"
+                           Opacity="{TemplateBinding ToggleOpacity}" OpacityMask="{TemplateBinding ToggleMask}" />
+              </ToggleButton>
 
             </Grid>
           </Border>
@@ -53,6 +78,16 @@
     </Setter>
   </ControlTheme>
 
+  <ControlTheme x:Key="MiniActionTheme" TargetType="Button">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Background="{TemplateBinding Background}" CornerRadius="12"
+                          Content="{TemplateBinding Content}" HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center" />
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
   <ControlTheme x:Key="{x:Type controls:DarkInkControls}" TargetType="controls:DarkInkControls">
     <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
@@ -60,41 +95,41 @@
         <!-- Three mini floating action buttons, 40 across, ten apart. -->
         <StackPanel Orientation="Horizontal" Spacing="20" ClipToBounds="False">
 
-          <Panel Width="40" Height="40">
-            <Panel.RenderTransform>
+          <Button Width="40" Height="40" Theme="{StaticResource MiniActionTheme}"
+                  Background="{TemplateBinding ButtonBackground}" AutomationProperties.Name="Bookmark">
+            <Button.RenderTransform>
               <TranslateTransform Y="{Binding FirstOffset, RelativeSource={RelativeSource TemplatedParent}}" />
-            </Panel.RenderTransform>
-            <Ellipse Fill="{TemplateBinding ButtonBackground}" />
+            </Button.RenderTransform>
             <shared:MaterialIcon IconSize="24"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center"
                                  Data="{StaticResource BookmarkIconGeometry}"
                                  Foreground="{Binding ButtonForeground, RelativeSource={RelativeSource TemplatedParent}}" />
-          </Panel>
+          </Button>
 
-          <Panel Width="40" Height="40">
-            <Panel.RenderTransform>
+          <Button Width="40" Height="40" Theme="{StaticResource MiniActionTheme}"
+                  Background="{TemplateBinding ButtonBackground}" AutomationProperties.Name="More">
+            <Button.RenderTransform>
               <TranslateTransform Y="{Binding SecondOffset, RelativeSource={RelativeSource TemplatedParent}}" />
-            </Panel.RenderTransform>
-            <Ellipse Fill="{TemplateBinding ButtonBackground}" />
+            </Button.RenderTransform>
             <shared:MaterialIcon IconSize="24"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center"
                                  Data="{StaticResource MoreIconGeometry}"
                                  Foreground="{Binding ButtonForeground, RelativeSource={RelativeSource TemplatedParent}}" />
-          </Panel>
+          </Button>
 
-          <Panel Width="40" Height="40">
-            <Panel.RenderTransform>
+          <Button Width="40" Height="40" Theme="{StaticResource MiniActionTheme}"
+                  Background="{TemplateBinding ButtonBackground}" AutomationProperties.Name="Next">
+            <Button.RenderTransform>
               <TranslateTransform Y="{Binding ThirdOffset, RelativeSource={RelativeSource TemplatedParent}}" />
-            </Panel.RenderTransform>
-            <Ellipse Fill="{TemplateBinding ButtonBackground}" />
+            </Button.RenderTransform>
             <shared:MaterialIcon IconSize="24"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center"
                                  Data="{StaticResource ForwardIconGeometry}"
                                  Foreground="{Binding ButtonForeground, RelativeSource={RelativeSource TemplatedParent}}" />
-          </Panel>
+          </Button>
 
         </StackPanel>
       </ControlTemplate>

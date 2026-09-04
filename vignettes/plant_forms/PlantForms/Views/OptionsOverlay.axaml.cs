@@ -15,7 +15,7 @@ public partial class OptionsOverlay : UserControl
         AvaloniaProperty.RegisterDirect<OptionsOverlay, string>(nameof(Title), o => o.Title);
 
     public static readonly DirectProperty<OptionsOverlay, string> SelectedProperty =
-        AvaloniaProperty.RegisterDirect<OptionsOverlay, string>(nameof(Selected), o => o.Selected);
+        AvaloniaProperty.RegisterDirect<OptionsOverlay, string>(nameof(Selected), o => o.Selected, (o, value) => o.Selected = value);
 
     private string _title = string.Empty;
     private string _selected = string.Empty;

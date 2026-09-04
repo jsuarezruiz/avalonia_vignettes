@@ -45,7 +45,7 @@ public partial class MainView : UserControl
 
         _scroll = new AnimationController(this, OnScrollProgressChanged) { Duration = ScrollDuration };
 
-        AddHandler(DrinkCard.TappedCardEvent, OnCardTapped);
+        AddHandler(Button.ClickEvent, OnCardClicked);
     }
 
     /// <summary>
@@ -69,19 +69,19 @@ public partial class MainView : UserControl
         return base.ArrangeOverride(finalSize);
     }
 
-    private void OnCardTapped(object? sender, RoutedEventArgs e)
+    private void OnCardClicked(object? sender, RoutedEventArgs e)
     {
         if (e.Source is not DrinkCard card || card.Drink is not { } drink)
         {
             return;
         }
 
-        // Tapping the open card shuts it; tapping any other one moves the selection across.
-        _selected = Equals(_selected, drink) ? null : drink;
+        // ToggleButton has already applied the user's choice by the time Click bubbles here.
+        _selected = card.IsChecked == true ? drink : null;
 
         foreach (var other in this.GetVisualDescendants().OfType<DrinkCard>())
         {
-            other.IsOpen = other.Drink is { } d && Equals(d, _selected);
+            other.IsChecked = other.Drink is { } d && Equals(d, _selected);
         }
 
         if (_selected is null)

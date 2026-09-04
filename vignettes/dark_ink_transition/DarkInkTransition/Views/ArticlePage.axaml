@@ -5,7 +5,7 @@
              x:DataType="views:ArticlePage"
              x:Name="Root">
 
-  <ScrollViewer x:Name="Scroller" HorizontalScrollBarVisibility="Disabled">
+  <ScrollViewer x:Name="Scroller" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
     <!-- Container(color:, padding: 37): the colour fills, and the inset is inside it. -->
     <Border Background="{Binding PageBrush}" Padding="37">
       <StackPanel>

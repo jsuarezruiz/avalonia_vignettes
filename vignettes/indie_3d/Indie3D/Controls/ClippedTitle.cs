@@ -1,8 +1,8 @@
-using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Media.TextFormatting;
 using Indie3D.Models;
 
 namespace Indie3D.Controls;
@@ -43,7 +43,6 @@ public sealed class ClippedTitle : Control
 
     private const double BottomWipeOffset = -10d;
 
-    private const double Ascent = 0.95d;
     private const double NaturalLine = 1.25d;
 
     private readonly (string Text, double Size, double Spacing, double Y, double Width)[] _cacheKeys = new (string, double, double, double, double)[2];
@@ -141,17 +140,18 @@ public sealed class ClippedTitle : Control
         double progress,
         double wipeOffset)
     {
-        var box = size * lineFactor;
+        var unroundedBox = size * lineFactor;
+        var box = Math.Round(unroundedBox, MidpointRounding.AwayFromZero);
 
         if (text.Length == 0)
         {
             return box;
         }
 
-        // Flutter shares a squeezed line box between the ascent and the descent, where Avalonia
-        // would leave the glyphs at the top of it.
-        var lift = size * Ascent * (1d - (box / (size * NaturalLine)));
-        var glyphs = Glyphs(line, text, size, spacing, y - lift);
+        // The original inherits Material's even leading distribution: split the removed line
+        // height equally above/below the baseline, then apply Flutter's pixel-rounded line box.
+        var lineOffset = (unroundedBox - size * NaturalLine) / 2d + box - unroundedBox;
+        var glyphs = Glyphs(line, text, size, spacing, y + lineOffset);
 
         using var wipe = context.PushClip(new Rect(
             0d,
@@ -179,49 +179,21 @@ public sealed class ClippedTitle : Control
         return _cached[line]!;
     }
 
-    // Lays the glyphs out one at a time so the line can carry letter spacing, and right aligns the
-    // result. Kerning is lost, which display type at this spacing does not miss.
+    // Use the native text shaper so letter spacing and kerning match the original paragraph.
     private Geometry BuildGlyphs(string text, double size, double spacing, double y)
     {
         var typeface = new Typeface(Fonts.Display, weight: FontWeight.Bold);
-        var advances = new double[text.Length];
-        var group = new GeometryGroup();
-        var width = 0d;
-
-        for (var i = 0; i < text.Length; i++)
+        using var layout = new TextLayout(text, typeface, size, Brushes.White, letterSpacing: spacing);
+        var group = new GeometryGroup { FillRule = FillRule.NonZero };
+        var x = Bounds.Width - layout.Width;
+        foreach (var run in layout.TextLines[0].TextRuns.OfType<ShapedTextRun>())
         {
-            advances[i] = Measure(text[i], typeface, size);
-            width += advances[i] + (i < text.Length - 1 ? spacing : 0d);
-        }
-
-        var x = Bounds.Width - width;
-
-        for (var i = 0; i < text.Length; i++)
-        {
-            var formatted = new FormattedText(
-                text[i].ToString(),
-                CultureInfo.InvariantCulture,
-                FlowDirection.LeftToRight,
-                typeface,
-                size,
-                Brushes.White);
-
-            if (formatted.BuildGeometry(new Point(x, y)) is { } glyph)
-            {
-                group.Children.Add(glyph);
-            }
-
-            x += advances[i] + spacing;
+            var glyphs = run.GlyphRun.BuildGeometry();
+            glyphs.Transform = new TranslateTransform(x, y);
+            group.Children.Add(glyphs);
+            x += run.Size.Width;
         }
 
         return group;
     }
-
-    private static double Measure(char character, Typeface typeface, double size) => new FormattedText(
-        character.ToString(),
-        CultureInfo.InvariantCulture,
-        FlowDirection.LeftToRight,
-        typeface,
-        size,
-        Brushes.White).WidthIncludingTrailingWhitespace;
 }

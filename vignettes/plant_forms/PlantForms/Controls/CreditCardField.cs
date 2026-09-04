@@ -58,12 +58,15 @@ public sealed class CreditCardField : FormField
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
+        // Let the template consume the user's raw edit first. Formatting before the base call lets
+        // that original edit win after the nested formatted Value change, leaving the TextBox with
+        // unpunctuated digits even though this control already holds the formatted value.
+        base.OnPropertyChanged(change);
+
         if (change.Property == ValueProperty && !_isFormatting)
         {
             Format();
         }
-
-        base.OnPropertyChanged(change);
 
         if (change.Property == NetworkProperty || change.Property == CardInputTypeProperty)
         {

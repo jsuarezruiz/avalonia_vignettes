@@ -17,8 +17,11 @@
         </Border>
       </ControlTemplate>
     </Setter>
+    <Style Selector="^:pointerover /template/ Border">
+      <Setter Property="Background" Value="#0A000000" />
+    </Style>
     <Style Selector="^:pressed /template/ Border">
-      <Setter Property="Opacity" Value="0.7" />
+      <Setter Property="Background" Value="#1F000000" />
     </Style>
   </ControlTheme>
 

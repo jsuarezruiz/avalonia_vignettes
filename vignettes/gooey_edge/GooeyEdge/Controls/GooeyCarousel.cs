@@ -1,31 +1,31 @@
+using System.Collections.Generic;
+using System.Threading;
 using Avalonia;
+using Avalonia.Animation;
+using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
+using Avalonia.Styling;
 using AvaloniaVignettes.Shared.Animation;
+using AvaloniaVignettes.Shared.Controls;
 using GooeyEdge.Effects;
 
 namespace GooeyEdge.Controls;
 
 /// <summary>
-/// Swipes between full-bleed pages, revealing the incoming one through a liquid edge that follows
-/// the pointer. Port of <c>gooey_carousel.dart</c>.
+/// An Avalonia <see cref="Carousel"/> whose native page transition reveals the incoming page
+/// through a liquid edge.
 /// </summary>
 /// <remarks>
-/// Two pages are on screen while a swipe is in progress: the current one underneath, and the
-/// incoming one on top, clipped to the wobbling edge. Once the drag passes its threshold the edge
-/// stops being pulled back and is drawn the rest of the way across on its own, so letting go
-/// mid-flight still completes the transition.
-/// <para>
-/// The swap into the base page is deferred until the next gesture begins. That is what lets the
-/// reveal outlive the page change and finish at its own pace, and it is the reason this is a panel
-/// rather than a <see cref="Carousel"/>: a carousel commits first and then animates for a duration
-/// it owns, tearing the transition down as soon as it reaches the end.
-/// </para>
+/// <see cref="Carousel"/> owns selection, keyboard navigation, pointer capture and swipe
+/// recognition. This specialization supplies only the visual transition and tracks the pointer's
+/// vertical position so the liquid edge follows the gesture.
 /// </remarks>
-public sealed class GooeyCarousel : Panel
+public sealed class GooeyCarousel : SwipeCarousel
 {
-    public static readonly DirectProperty<GooeyCarousel, int> SelectedIndexProperty =
-        AvaloniaProperty.RegisterDirect<GooeyCarousel, int>(nameof(SelectedIndex), o => o.SelectedIndex);
+    private static readonly StyledProperty<double> TransitionProgressProperty =
+        AvaloniaProperty.Register<GooeyCarousel, double>("TransitionProgress");
 
     public static readonly DirectProperty<GooeyCarousel, int> DragIndexProperty =
         AvaloniaProperty.RegisterDirect<GooeyCarousel, int>(nameof(DragIndex), o => o.DragIndex);
@@ -33,42 +33,42 @@ public sealed class GooeyCarousel : Panel
     public static readonly DirectProperty<GooeyCarousel, bool> IsDragCompletedProperty =
         AvaloniaProperty.RegisterDirect<GooeyCarousel, bool>(nameof(IsDragCompleted), o => o.IsDragCompleted);
 
-    private const double SwipeActivationDistance = 20d;
+    internal static readonly TimeSpan TransitionDuration = TimeSpan.FromMilliseconds(500);
 
-    private const double SwipeCompletionRatio = 0.8d;
-
-    private const double MinimumAvailableWidthRatio = 0.5d;
-
+    private const double CompletionRatio = 0.8d;
     private const double ClipMargin = 10d;
-
     private const int PointCount = 25;
 
     private readonly Effects.GooeyEdge _edge = new(count: PointCount);
-
+    private readonly GooeyPageTransition _transition;
     private FrameTicker? _ticker;
-    private Point _dragOrigin;
-    private double _dragDirection;
-    private int _selectedIndex;
+    private Visual? _incomingPage;
+    private Visual? _outgoingPage;
+    private Point _pointerPosition;
+    private bool _isForward;
     private int _dragIndex;
-    private bool _hasDragIndex;
+    private int _committedIndex;
     private bool _isDragCompleted;
+    private double _progress;
 
-    public GooeyCarousel() => ClipToBounds = true;
-
-    /// <summary>
-    /// Gets the index of the page underneath.
-    /// </summary>
-    public int SelectedIndex
+    static GooeyCarousel()
     {
-        get => _selectedIndex;
-        private set => SetAndRaise(SelectedIndexProperty, ref _selectedIndex, value);
+        IsSwipeEnabledProperty.OverrideDefaultValue<GooeyCarousel>(true);
+        TransitionProgressProperty.Changed.AddClassHandler<GooeyCarousel>((x, e) =>
+            x.ApplyTransition(e.GetNewValue<double>()));
+    }
+
+    public GooeyCarousel()
+    {
+        ClipToBounds = true;
+        _transition = new GooeyPageTransition(this);
+        PageTransition = _transition;
+        AddHandler(PointerPressedEvent, ObservePointer, RoutingStrategies.Tunnel, handledEventsToo: true);
+        AddHandler(PointerMovedEvent, ObservePointer, RoutingStrategies.Tunnel, handledEventsToo: true);
     }
 
     /// <summary>
-    /// Gets the index of the page being revealed, which keeps the last swipe's value until the next
-    /// one starts. The Flutter original clears its own to null between gestures and passes
-    /// <c>_dragIndex ?? 0</c> on, but the sun and moon overlay only reads the index when a swipe has
-    /// completed, so it never sees the difference.
+    /// Gets the index of the page being revealed.
     /// </summary>
     public int DragIndex
     {
@@ -77,7 +77,7 @@ public sealed class GooeyCarousel : Panel
     }
 
     /// <summary>
-    /// Gets a value indicating whether the current swipe has passed its threshold.
+    /// Gets a value indicating whether the liquid reveal has crossed its completion threshold.
     /// </summary>
     public bool IsDragCompleted
     {
@@ -85,83 +85,18 @@ public sealed class GooeyCarousel : Panel
         private set => SetAndRaise(IsDragCompletedProperty, ref _isDragCompleted, value);
     }
 
-    protected override void OnPointerPressed(PointerPressedEventArgs e)
-    {
-        base.OnPointerPressed(e);
+    /// <summary>
+    /// Uses the native <see cref="Carousel"/> theme for this transition specialization.
+    /// </summary>
+    protected override Type StyleKeyOverride => typeof(Carousel);
 
-        if (!e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
-        {
-            return;
-        }
-
-        // The previous swipe is only folded into the base page now, which is what let its reveal
-        // run to completion after the pointer was lifted.
-        if (_hasDragIndex && IsDragCompleted)
-        {
-            SelectedIndex = DragIndex;
-        }
-
-        _hasDragIndex = false;
-        IsDragCompleted = false;
-        _dragDirection = 0d;
-        _dragOrigin = e.GetPosition(this);
-
-        _edge.FarEdgeTension = 0d;
-        _edge.EdgeTension = 0.01d;
-        _edge.Reset();
-        _edge.ApplyTouchOffset();
-
-        UpdatePageStates();
-        e.Pointer.Capture(this);
-    }
-
-    protected override void OnPointerMoved(PointerEventArgs e)
-    {
-        base.OnPointerMoved(e);
-
-        if (!Equals(e.Pointer.Captured, this))
-        {
-            return;
-        }
-
-        var position = e.GetPosition(this);
-        var dx = position.X - _dragOrigin.X;
-
-        if (!IsSwipeActive(dx) || IsSwipeComplete(dx))
-        {
-            return;
-        }
-
-        // A right-hand edge measures its pull from the opposite side, so the simulation only ever
-        // sees a line being drawn away from its own edge.
-        if (_dragDirection == -1d)
-        {
-            dx = Bounds.Width + dx;
-        }
-
-        _edge.ApplyTouchOffset(new Point(dx, position.Y), Bounds.Size);
-    }
-
-    protected override void OnPointerReleased(PointerReleasedEventArgs e)
-    {
-        base.OnPointerReleased(e);
-
-        _edge.ApplyTouchOffset();
-        e.Pointer.Capture(null);
-    }
-
-    protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
-    {
-        base.OnPointerCaptureLost(e);
-        _edge.ApplyTouchOffset();
-    }
+    private void ObservePointer(object? sender, PointerEventArgs e) =>
+        _pointerPosition = e.GetPosition(this);
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
-
-        UpdatePageStates();
-
+        _pointerPosition = new Point(Bounds.Width / 2d, Bounds.Height / 2d);
         _ticker ??= new FrameTicker(this, OnTick);
         _ticker.Start();
     }
@@ -172,164 +107,205 @@ public sealed class GooeyCarousel : Panel
         _ticker?.Stop();
     }
 
-    protected override Size MeasureOverride(Size availableSize)
+    private void BeginTransition(Visual? from, Visual? to, bool forward, bool programmatic)
     {
-        foreach (var child in Children)
+        if (!ReferenceEquals(_incomingPage, to) || !ReferenceEquals(_outgoingPage, from) || _isForward != forward)
         {
-            child.Measure(availableSize);
-        }
+            if (_incomingPage is not null)
+            {
+                _incomingPage.Clip = null;
+                _incomingPage.ZIndex = 0;
+            }
 
-        return availableSize;
+            _incomingPage = to;
+            _outgoingPage = from;
+            _isForward = forward;
+            IsDragCompleted = false;
+            _progress = 0d;
+
+            if (programmatic)
+            {
+                _pointerPosition = new Point(Bounds.Width / 2d, Bounds.Height / 2d);
+            }
+
+            // Selection wraps, but the sky's rotation must keep turning in the same direction.
+            // The Flutter source also keeps an unbounded logical index for this reason.
+            var step = forward ? 1 : -1;
+            var target = _committedIndex + step;
+            if (programmatic && NormalizeIndex(target) != SelectedIndex)
+            {
+                var distance = SelectedIndex - NormalizeIndex(_committedIndex);
+                if (WrapSelection && forward && distance < 0) distance += ItemCount;
+                if (WrapSelection && !forward && distance > 0) distance -= ItemCount;
+                target = _committedIndex + distance;
+            }
+            DragIndex = target;
+
+            _edge.Side = forward ? GooeyEdgeSide.Right : GooeyEdgeSide.Left;
+            _edge.FarEdgeTension = 0d;
+            _edge.EdgeTension = 0.01d;
+            _edge.Reset();
+            _edge.ApplyTouchOffset();
+
+            if (_incomingPage is not null)
+            {
+                _incomingPage.ZIndex = 1;
+            }
+
+            if (_outgoingPage is not null)
+            {
+                _outgoingPage.ZIndex = 0;
+                _outgoingPage.Clip = null;
+            }
+        }
     }
 
-    protected override Size ArrangeOverride(Size finalSize)
+    private void ApplyTransition(double progress)
     {
-        var bounds = new Rect(finalSize);
+        progress = Math.Clamp(progress, 0d, 1d);
+        _progress = progress;
 
-        foreach (var child in Children)
+        if (_incomingPage is null)
         {
-            child.Arrange(bounds);
+            return;
         }
 
-        return finalSize;
+        if (progress <= 0d)
+        {
+            IsDragCompleted = false;
+            _edge.Reset();
+            _incomingPage.Clip = _edge.BuildGeometry(Bounds.Size, ClipMargin);
+            _edge.ApplyTouchOffset();
+            return;
+        }
+
+        if (progress >= 1d)
+        {
+            _committedIndex = DragIndex;
+            IsDragCompleted = true;
+            _incomingPage.Clip = null;
+            return;
+        }
+
+        if (!IsDragCompleted && progress >= CompletionRatio)
+        {
+            IsDragCompleted = !IsSwiping;
+            _edge.FarEdgeTension = 0.01d;
+            _edge.EdgeTension = 0d;
+            _edge.ApplyTouchOffset();
+        }
+
+        if (!IsDragCompleted)
+        {
+            var width = Math.Max(1d, Bounds.Width);
+            var x = _isForward ? width * (1d - progress) : width * progress;
+            var y = Math.Clamp(_pointerPosition.Y, 0d, Math.Max(0d, Bounds.Height));
+            _edge.ApplyTouchOffset(new Point(x, y), Bounds.Size);
+        }
     }
 
     private void OnTick(TimeSpan elapsed)
     {
         _edge.Tick(elapsed);
 
-        if (!_hasDragIndex || GetPage(DragIndex) is not { } page)
+        if (_incomingPage is not null && _progress > 0d && _progress < 1d && Bounds.Width > 0d && Bounds.Height > 0d)
         {
-            return;
-        }
-
-        var size = Bounds.Size;
-
-        if (size.Width > 0d && size.Height > 0d)
-        {
-            page.Clip = _edge.BuildGeometry(size, ClipMargin);
+            var completion = Math.Clamp((_progress - 0.6d) / 0.4d, 0d, 1d);
+            _incomingPage.Clip = _edge.BuildGeometry(Bounds.Size, ClipMargin, completion);
         }
     }
 
-    // Recognises the start of a swipe and picks the page being revealed: dragging right brings in
-    // the previous page from the left edge, dragging left the next one from the right.
-    private bool IsSwipeActive(double dx)
+    private int NormalizeIndex(int index)
     {
-        if (_dragDirection == 0d && Math.Abs(dx) > SwipeActivationDistance)
+        if (ItemCount == 0)
         {
-            _dragDirection = Math.Sign(dx);
-            _edge.Side = _dragDirection == 1d ? GooeyEdgeSide.Left : GooeyEdgeSide.Right;
-
-            DragIndex = SelectedIndex - (int)_dragDirection;
-            _hasDragIndex = true;
-
-            UpdatePageStates();
+            return 0;
         }
 
-        return _dragDirection != 0d;
+        if (WrapSelection)
+        {
+            return (index % ItemCount + ItemCount) % ItemCount;
+        }
+
+        return Math.Clamp(index, 0, ItemCount - 1);
     }
 
-    // Decides whether the swipe has gone far enough to commit, measured against the width still
-    // ahead of where the page was first grabbed. Once it has, the tensions are flipped so the edge
-    // is drawn towards the far side instead of springing back.
-    private bool IsSwipeComplete(double dx)
+    private void ResetVisual(Visual visual)
     {
-        if (_dragDirection == 0d)
+        visual.Clip = null;
+        visual.ZIndex = 0;
+
+        if (ReferenceEquals(visual, _incomingPage))
         {
-            return false;
+            _incomingPage = null;
         }
 
-        if (IsDragCompleted)
+        if (ReferenceEquals(visual, _outgoingPage))
         {
-            return true;
+            _outgoingPage = null;
         }
-
-        var width = Bounds.Width;
-        var available = _dragDirection == 1d ? width - _dragOrigin.X : _dragOrigin.X;
-        var ratio = dx * _dragDirection / available;
-
-        if (ratio > SwipeCompletionRatio && available / width > MinimumAvailableWidthRatio)
-        {
-            IsDragCompleted = true;
-            _edge.FarEdgeTension = 0.01d;
-            _edge.EdgeTension = 0d;
-            _edge.ApplyTouchOffset();
-        }
-
-        return IsDragCompleted;
     }
 
-    private void UpdatePageStates()
+    private sealed class GooeyPageTransition(GooeyCarousel owner) : IProgressPageTransition
     {
-        if (Children.Count == 0)
+        public async Task Start(
+            Visual? from,
+            Visual? to,
+            bool forward,
+            CancellationToken cancellationToken)
         {
-            return;
-        }
-
-        var basePage = GetPage(SelectedIndex);
-        var dragPage = _hasDragIndex ? GetPage(DragIndex) : null;
-
-        foreach (var child in Children)
-        {
-            var isDragPage = ReferenceEquals(child, dragPage);
-
-            child.IsVisible = isDragPage || ReferenceEquals(child, basePage);
-            child.ZIndex = isDragPage ? 1 : 0;
-
-            if (!isDragPage)
+            // Carousel compares numeric indices for programmatic navigation. Across a wrapped
+            // boundary that comparison points the wrong way for the continuous sky rotation.
+            if (owner.WrapSelection && owner.ItemCount > 2)
             {
-                child.Clip = null;
+                var origin = owner.NormalizeIndex(owner._committedIndex);
+                if (origin == owner.ItemCount - 1 && owner.SelectedIndex == 0) forward = true;
+                else if (origin == 0 && owner.SelectedIndex == owner.ItemCount - 1) forward = false;
+            }
+            owner.BeginTransition(from, to, forward, programmatic: true);
+            owner.SetCurrentValue(TransitionProgressProperty, 0d);
+            owner.ApplyTransition(0d);
+
+            var animation = new Avalonia.Animation.Animation
+            {
+                Duration = TransitionDuration,
+                Easing = new QuadraticEaseOut(),
+                FillMode = FillMode.Forward,
+                Children =
+                {
+                    new KeyFrame
+                    {
+                        Cue = new Cue(0d),
+                        Setters = { new Setter(TransitionProgressProperty, 0d) },
+                    },
+                    new KeyFrame
+                    {
+                        Cue = new Cue(1d),
+                        Setters = { new Setter(TransitionProgressProperty, 1d) },
+                    },
+                },
+            };
+
+            await animation.RunAsync(owner, cancellationToken);
+
+            if (!cancellationToken.IsCancellationRequested)
+            {
+                owner.ApplyTransition(1d);
             }
         }
-    }
 
-    /// <summary>
-    /// Drives a swipe across the control without a pointer, stepping through the same handlers a
-    /// drag would. Used only by the screenshot harness.
-    /// </summary>
-    internal async Task RunCaptureSwipeAsync(double fraction, int steps = 30)
-    {
-        var width = Bounds.Width;
-        var y = Bounds.Height / 2d;
-
-        _dragOrigin = new Point(width * 0.92d, y);
-        _dragDirection = 0d;
-        _hasDragIndex = false;
-        IsDragCompleted = false;
-
-        _edge.FarEdgeTension = 0d;
-        _edge.EdgeTension = 0.01d;
-        _edge.Reset();
-        _edge.ApplyTouchOffset();
-
-        UpdatePageStates();
-
-        for (var i = 1; i <= steps; i++)
+        public void Update(
+            double progress,
+            Visual? from,
+            Visual? to,
+            bool forward,
+            double pageLength,
+            IReadOnlyList<PageTransitionItem> visibleItems)
         {
-            var dx = -width * fraction * i / steps;
-
-            if (IsSwipeActive(dx) && !IsSwipeComplete(dx))
-            {
-                _edge.ApplyTouchOffset(new Point(width + dx, y), Bounds.Size);
-            }
-
-            await Task.Delay(16);
+            owner.BeginTransition(from, to, forward, programmatic: false);
+            owner.ApplyTransition(progress);
         }
 
-        _edge.ApplyTouchOffset();
-    }
-
-    /// <summary>
-    /// Gets the page at <paramref name="index"/>, wrapping the way Flutter's modulo does.
-    /// </summary>
-    private Control? GetPage(int index)
-    {
-        if (Children.Count == 0)
-        {
-            return null;
-        }
-
-        var count = Children.Count;
-        return Children[((index % count) + count) % count];
+        public void Reset(Visual visual) => owner.ResetVisual(visual);
     }
 }

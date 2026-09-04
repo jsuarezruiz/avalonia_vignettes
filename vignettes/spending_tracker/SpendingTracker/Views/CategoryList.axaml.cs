@@ -10,11 +10,8 @@ namespace SpendingTracker.Views;
 /// <c>spending_category_list.dart</c>.
 /// </summary>
 /// <remarks>
-/// The shares are random and add up to one, and a fresh set is drawn whenever the window moves on to
-/// a different month, which is what the rings count between. The original redraws them on every
-/// notification the chart sends rather than only on the ones that change the month, because rebuilds
-/// in Flutter reach the whole subtree; there is nothing to rebuild here, so this follows what the
-/// month check was written to do.
+/// The shares are random and add up to one. Like the original Flutter subtree, they refresh when
+/// the chart changes, including selection of another month without moving the visible domain.
 /// </remarks>
 public partial class CategoryList : UserControl
 {
@@ -33,7 +30,6 @@ public partial class CategoryList : UserControl
     private const double DesignHeight = 120d;
 
     private Chart? _subscribed;
-    private int _month;
     private double _bills;
     private double _personal;
     private double _restaurants;
@@ -110,19 +106,16 @@ public partial class CategoryList : UserControl
 
         if (_subscribed is { } chart)
         {
-            _month = chart.RoundedDomainStart;
             chart.PropertyChanged += OnChartChanged;
         }
     }
 
     private void OnChartChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (Chart is not { } chart || chart.RoundedDomainStart == _month)
+        if (Chart is null)
         {
             return;
         }
-
-        _month = chart.RoundedDomainStart;
 
         Draw();
     }

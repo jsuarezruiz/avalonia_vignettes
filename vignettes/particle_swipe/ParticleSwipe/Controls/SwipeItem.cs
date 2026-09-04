@@ -3,11 +3,11 @@ using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Input.GestureRecognizers;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 using AvaloniaVignettes.Shared.Animation;
-using AvaloniaVignettes.Shared.Input;
 using ParticleSwipe.Models;
 
 namespace ParticleSwipe.Controls;
@@ -127,8 +127,6 @@ public sealed class SwipeItem : TemplatedControl
     private readonly TranslateTransform _indicatorTranslate = new();
     private readonly ScaleTransform _contentScale = new();
     private readonly TranslateTransform _contentTranslate = new();
-    private readonly VelocityTracker _velocity = new();
-
     private readonly AnimationController _favoriteReturn;
     private readonly AnimationController _collapse;
 
@@ -137,12 +135,9 @@ public sealed class SwipeItem : TemplatedControl
 
     private double _offset;
     private double _contentOpacity = 1d;
-    private double _lastPointerX;
     private double _favoriteReturnFrom;
     private HorizontalAlignment _indicatorAlignment = HorizontalAlignment.Right;
     private BoxShadows _indicatorGlow;
-    private Point _pressOrigin;
-    private bool _isPressed;
     private bool _isDragging;
     private bool _isPerformingAction;
     private bool _isRemoving;
@@ -176,6 +171,16 @@ public sealed class SwipeItem : TemplatedControl
 
         _favoriteReturn = new AnimationController(this, OnFavoriteReturnChanged) { Duration = FavoriteReturnDuration };
         _collapse = new AnimationController(this, OnCollapseChanged) { Duration = CollapseDuration };
+
+        GestureRecognizers.Add(new SwipeGestureRecognizer
+        {
+            CanHorizontallySwipe = true,
+            IsMouseEnabled = true,
+            Threshold = DragSlop,
+        });
+
+        AddHandler(InputElement.SwipeGestureEvent, OnSwipeGesture);
+        AddHandler(InputElement.SwipeGestureEndedEvent, OnSwipeGestureEnded);
 
         UpdateVisualState();
     }
@@ -273,7 +278,6 @@ public sealed class SwipeItem : TemplatedControl
 
         _isRemoving = true;
         _isDragging = false;
-        _isPressed = false;
         _spring = null;
         _springTicker?.Stop();
 
@@ -287,92 +291,36 @@ public sealed class SwipeItem : TemplatedControl
         _collapse.Reverse();
     }
 
-    protected override void OnPointerPressed(PointerPressedEventArgs e)
+    private void OnSwipeGesture(object? sender, SwipeGestureEventArgs e)
     {
-        base.OnPointerPressed(e);
-
-        if (_isRemoving || !e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+        if (_isRemoving)
         {
             return;
         }
-
-        _isPressed = true;
-        _pressOrigin = e.GetPosition(this);
-        _lastPointerX = _pressOrigin.X;
-
-        _spring = null;
-        _springTicker?.Stop();
-
-        _velocity.Clear();
-        _velocity.Add(e, _pressOrigin.X);
-    }
-
-    protected override void OnPointerMoved(PointerEventArgs e)
-    {
-        base.OnPointerMoved(e);
-
-        if (_isRemoving || (!_isPressed && !_isDragging))
-        {
-            return;
-        }
-
-        var position = e.GetPosition(this);
 
         if (!_isDragging)
         {
-            var fromOriginX = position.X - _pressOrigin.X;
-            var fromOriginY = position.Y - _pressOrigin.Y;
-
-            // A drag that sets off vertically belongs to the list, not to the row.
-            if (Math.Abs(fromOriginY) > DragSlop && Math.Abs(fromOriginY) > Math.Abs(fromOriginX))
-            {
-                _isPressed = false;
-                return;
-            }
-
-            if (Math.Abs(fromOriginX) <= DragSlop)
-            {
-                return;
-            }
-
             _isDragging = true;
-            e.Pointer.Capture(this);
+            _spring = null;
+            _springTicker?.Stop();
         }
 
-        var delta = position.X - _lastPointerX;
-
-        _lastPointerX = position.X;
-        _velocity.Add(e, position.X);
-
-        // The offset grows as the pointer travels left, so the applied delta is subtracted, exactly
-        // as the original's scroll position does with `pixels -= applyPhysicsToUserOffset(delta)`.
-        SetOffset(_offset - ApplyPhysicsToUserOffset(delta));
+        // SwipeGestureRecognizer reports previous minus current, while the original physics takes
+        // current minus previous. Preserve the original resistance curve by reversing it here.
+        SetOffset(_offset - ApplyPhysicsToUserOffset(-e.Delta.X));
+        e.Handled = true;
     }
 
-    protected override void OnPointerReleased(PointerReleasedEventArgs e)
+    private void OnSwipeGestureEnded(object? sender, SwipeGestureEndedEventArgs e)
     {
-        base.OnPointerReleased(e);
-
-        if (_isDragging)
+        if (!_isDragging)
         {
-            _velocity.Add(e, e.GetPosition(this).X);
-            EndDrag();
+            return;
         }
 
-        _isPressed = false;
-        e.Pointer.Capture(null);
-    }
-
-    protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
-    {
-        base.OnPointerCaptureLost(e);
-
-        if (_isDragging)
-        {
-            EndDrag();
-        }
-
-        _isPressed = false;
+        // Both the gesture velocity and our offset use previous-minus-current (left is positive).
+        EndDrag(e.Velocity.X);
+        e.Handled = true;
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
@@ -408,7 +356,7 @@ public sealed class SwipeItem : TemplatedControl
         return offset * ratio;
     }
 
-    private void EndDrag()
+    private void EndDrag(double velocity)
     {
         _isDragging = false;
 
@@ -417,8 +365,8 @@ public sealed class SwipeItem : TemplatedControl
             return;
         }
 
-        // The tracker measures the pointer, whose direction is the opposite of the offset's.
-        StartSpring(-_velocity.Estimate());
+        // The native recognizer reports velocity in the same sign as this control's offset.
+        StartSpring(velocity);
     }
 
     private void StartSpring(double velocity)

@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Media;
 using Avalonia.Reactive;
 using AvaloniaVignettes.Shared.Animation;
 using BasketballPullToRefresh.Controls;
@@ -31,14 +32,19 @@ public partial class MainView : UserControl
     public static readonly DirectProperty<MainView, PullMetrics> MetricsProperty =
         AvaloniaProperty.RegisterDirect<MainView, PullMetrics>(nameof(Metrics), o => o.Metrics);
 
-    private static readonly TimeSpan CloseDuration = TimeSpan.FromMilliseconds(150);
+    private const double FlutterControllerMilliseconds = 400d;
+    private const double FlutterPullToController = 0.83d;
+    private const double RelaxedControllerValue = 0.22d;
+    private const double RelaxedPull = BasketballHoop.MaxPull * (1d - RelaxedControllerValue);
 
     private readonly IReadOnlyList<GameSlot> _games = DemoData.CreateInitialGames();
-    private readonly AnimationController _close;
+    private readonly AnimationController _pullAnimation;
+    private readonly TranslateTransform _scoresTranslation = new();
 
     private PullMetrics _metrics = PullMetrics.ForScreen(0d);
     private RefreshVisualizerState _state = RefreshVisualizerState.Idle;
-    private double _pullOnRelease;
+    private double _pullAnimationFrom;
+    private double _pullAnimationTo;
     private bool _isRefreshing;
 
     public MainView()
@@ -47,12 +53,14 @@ public partial class MainView : UserControl
 
         DataContext = this;
         Games.ItemsSource = _games;
+        ScoresScroller.RenderTransform = _scoresTranslation;
+        ScoresScroller.RenderTransformOrigin = RelativePoint.TopLeft;
 
-        _close = new AnimationController(this, OnCloseProgressChanged) { Duration = CloseDuration };
+        _pullAnimation = new AnimationController(this, OnPullAnimationProgressChanged);
 
         Refresh.AddHandler(InputElement.PullGestureEvent, OnPullGesture);
-        Refresh.AddHandler(InputElement.PullGestureEndedEvent, OnPullGestureEnded);
         Refresh.RefreshRequested += OnRefreshRequested;
+        GestureScroller.ScrollChanged += OnGestureScrollerScrollChanged;
 
         // The container's own threshold decides when letting go would refresh.
         Visualizer
@@ -72,28 +80,28 @@ public partial class MainView : UserControl
     protected override Size ArrangeOverride(Size finalSize)
     {
         Metrics = PullMetrics.ForScreen(finalSize.Height);
+        UpdateScoresTranslation();
 
         return base.ArrangeOverride(finalSize);
     }
 
     private void OnPullGesture(object? sender, PullGestureEventArgs e)
     {
-        // A new pull takes over from a close still running.
-        _close.Stop();
-
-        Hoop.Pull = Metrics.Extent > 0d
-            ? Math.Clamp(e.Delta.Y / Metrics.Extent, 0d, BasketballHoop.MaxPull)
-            : 0d;
-    }
-
-    private void OnPullGestureEnded(object? sender, PullGestureEndedEventArgs e)
-    {
-        // The container has already decided whether the pull counted: it handles the same event
-        // further down, on the presenter the gesture came from.
-        if (_state != RefreshVisualizerState.Refreshing)
+        if (_isRefreshing)
         {
-            Close();
+            return;
         }
+
+        // A new pull takes over from a close still running.
+        _pullAnimation.Stop();
+
+        SetPull(Metrics.Extent > 0d
+            ? Math.Clamp(e.Delta.Y / Metrics.Extent, 0d, BasketballHoop.MaxPull)
+            : 0d);
+
+        // The refresh recognizer has captured this pointer. Marking its routed event handled keeps
+        // the nested ScrollViewer from also adjusting its offset during the same mouse movement.
+        e.Handled = true;
     }
 
     private async void OnRefreshRequested(object? sender, RefreshRequestedEventArgs e)
@@ -111,6 +119,10 @@ public partial class MainView : UserControl
         // original's DoneLoadingNotification does, so the list closes while the ball drops away.
         var deferral = e.GetDeferral();
 
+        // Flutter does not leave the list at its 120% over-pull. Its 400 ms controller moves from
+        // the release value to 0.22, which settles a full pull at 93.6% while the ball is in flight.
+        RelaxForRefresh();
+
         try
         {
             await Hoop.ThrowAsync();
@@ -122,32 +134,80 @@ public partial class MainView : UserControl
         }
         finally
         {
-            _isRefreshing = false;
-
             deferral.Complete();
+            _isRefreshing = false;
             Close();
         }
     }
 
     private void OnVisualizerStateChanged(RefreshVisualizerState state)
     {
+        var previousState = _state;
         _state = state;
 
         Hoop.IsPending = state == RefreshVisualizerState.Pending;
+
+        // Let RefreshContainer process release first. Closing directly from PullGestureEnded races
+        // its Pending -> Refreshing transition and can cancel a valid mouse refresh.
+        if (state == RefreshVisualizerState.Idle &&
+            previousState is RefreshVisualizerState.Interacting or RefreshVisualizerState.Pending)
+        {
+            Close();
+        }
     }
 
     private void Close()
     {
-        _pullOnRelease = Hoop.Pull;
-
-        if (_pullOnRelease <= 0d)
+        if (Hoop.Pull <= 0d)
         {
             return;
         }
 
-        _close.SetValue(0d);
-        _close.Forward();
+        // _reset() forwards Flutter's 400 ms controller from 1 - pull * .83, so the remaining
+        // duration is proportional to the amount of pull still visible.
+        AnimatePullTo(
+            0d,
+            TimeSpan.FromMilliseconds(FlutterControllerMilliseconds * Hoop.Pull * FlutterPullToController));
     }
 
-    private void OnCloseProgressChanged(double progress) => Hoop.Pull = _pullOnRelease * (1d - progress);
+    private void RelaxForRefresh()
+    {
+        var controllerValue = Math.Clamp(1d - (Hoop.Pull * FlutterPullToController), 0d, 1d);
+        var duration = TimeSpan.FromMilliseconds(
+            FlutterControllerMilliseconds * Math.Abs(RelaxedControllerValue - controllerValue));
+
+        AnimatePullTo(RelaxedPull, duration);
+    }
+
+    private void AnimatePullTo(double target, TimeSpan duration)
+    {
+        _pullAnimationFrom = Hoop.Pull;
+        _pullAnimationTo = target;
+        _pullAnimation.Duration = duration;
+        _pullAnimation.SetValue(0d);
+        _pullAnimation.Forward();
+    }
+
+    private void OnPullAnimationProgressChanged(double progress) =>
+        SetPull(_pullAnimationFrom + ((_pullAnimationTo - _pullAnimationFrom) * progress));
+
+    private void SetPull(double pull)
+    {
+        Hoop.Pull = pull;
+        UpdateScoresTranslation();
+    }
+
+    private void UpdateScoresTranslation()
+    {
+        _scoresTranslation.Y = Math.Min(Hoop.Pull * Metrics.Extent, Metrics.Height);
+    }
+
+    private void OnGestureScrollerScrollChanged(object? sender, ScrollChangedEventArgs e)
+    {
+        if (Hoop.Pull <= 0d && !_isRefreshing && ScoresScroller.Offset != GestureScroller.Offset)
+        {
+            ScoresScroller.Offset = GestureScroller.Offset;
+        }
+    }
+
 }

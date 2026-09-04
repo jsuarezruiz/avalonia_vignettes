@@ -1,47 +1,89 @@
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using ConstellationsList.Views;
 
 namespace ConstellationsList;
 
 /// <summary>
-/// Grabs the list and then a constellation's detail page, so the star field and the flight can be
-/// checked without a human scrolling or tapping.
+/// Records the same two journeys as the original preview: Aries flies from the list into its detail
+/// page and back, the list is flung and settles, then Cetus flies into its detail page.
 /// </summary>
 /// <remarks>Enabled with <c>--capture &lt;directory&gt;</c>.</remarks>
 internal static class CaptureRunner
 {
+    private static readonly TimeSpan FirstDetailHold = TimeSpan.FromMilliseconds(4700);
+
+    private static readonly TimeSpan ReturnDuration = TimeSpan.FromMilliseconds(1000);
+
+    private static readonly TimeSpan ScrollOutDuration = TimeSpan.FromMilliseconds(700);
+
+    private static readonly TimeSpan ScrollBackDuration = TimeSpan.FromMilliseconds(1750);
+
+    private static readonly TimeSpan BeforeSecondFlight = TimeSpan.FromMilliseconds(890);
+
+    private static readonly TimeSpan SecondDetailHold = TimeSpan.FromMilliseconds(3735);
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
-        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 900);
-        var view = capture.View;
+        var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 700);
 
         capture.Write("list");
 
-        // Drive the field by hand to show what a fast scroll does to it.
-        var stars = FrameCapture.Find<Controls.StarField>(window);
+        // Use the real row click path. It runs the shared-element card flight, page cross-fade,
+        // star-flight sequence and delayed chart reveal together.
+        Click(RowAt(window, 0));
+        await Task.Delay(FirstDetailHold);
+        capture.Write("aries_detail");
 
-        stars.Speed = 8d;
-        await Task.Delay(400);
-        capture.Write("scrolling");
+        Click(ReturnButton(window));
+        await Task.Delay(ReturnDuration);
+        capture.Write("returned");
 
-        stars.Speed = 0.2d;
-        await Task.Delay(400);
-        capture.Write("idle");
+        // Recreate the original preview's quick fling and rebound. Updating the native
+        // ScrollViewer also exercises the normal ScrollChanged -> star-speed event path.
+        var scroller = FrameCapture.Find<ScrollViewer>(window);
+        await AnimateScrollAsync(scroller, 850d, ScrollOutDuration);
+        await AnimateScrollAsync(scroller, 160d, ScrollBackDuration);
+        capture.Write("scrolled");
 
-        // Open a constellation so the chart, the lettering and the flight are all exercised.
-        var page = new Views.DetailPage
-        {
-            Constellation = Models.DemoData.Constellations[3],
-            IsRedMode = true,
-        };
+        await Task.Delay(BeforeSecondFlight);
 
-        view.ShowDetailForCapture(page);
-        page.Reveal(TimeSpan.FromMilliseconds(1500));
-
-        await capture.SampleAsync((int[])[500, 1000, 1800], time => $"detail_{time:0000}");
-
+        Click(RowAt(window, 3));
+        await Task.Delay(SecondDetailHold);
+        capture.Write("cetus_detail");
     }
 
+    private static Button RowAt(Visual root, int index) =>
+        root.GetVisualDescendants()
+            .OfType<Button>()
+            .Where(button => button.Classes.Contains("constellationRow"))
+            .ElementAt(index);
+
+    private static Button ReturnButton(Visual root) =>
+        root.GetVisualDescendants()
+            .OfType<Button>()
+            .Single(button => !button.Classes.Contains("constellationRow"));
+
+    private static void Click(Button button) =>
+        button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+
+    private static async Task AnimateScrollAsync(ScrollViewer scroller, double target, TimeSpan duration)
+    {
+        const int frameMilliseconds = 35;
+
+        var start = scroller.Offset.Y;
+        var frames = Math.Max(1, (int)Math.Ceiling(duration.TotalMilliseconds / frameMilliseconds));
+
+        for (var frame = 1; frame <= frames; frame++)
+        {
+            var progress = frame / (double)frames;
+            var eased = 1d - Math.Pow(1d - progress, 2d);
+
+            scroller.Offset = new Vector(0d, start + ((target - start) * eased));
+            await Task.Delay(frameMilliseconds);
+        }
+    }
 }

@@ -1,4 +1,6 @@
 using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using AvaloniaVignettes.Shared.Animation;
 using AvaloniaVignettes.Shared.Controls;
 using ParallaxTravelCardsList.Models;
@@ -9,12 +11,12 @@ namespace ParallaxTravelCardsList.Controls;
 /// The paged strip of travel cards. Port of <c>travel_card_list.dart</c>'s <c>TravelCardListState</c>.
 /// </summary>
 /// <remarks>
-/// On top of the paging <see cref="PageView"/> provides, this tracks a normalised drag offset:
+/// On top of the paging <see cref="Carousel"/> provides, this tracks a normalised drag offset:
 /// every scroll notification nudges it by <c>delta * 0.01</c>, and lifting the pointer springs it
 /// back to zero on an elastic curve. That single value drives both the 3D tilt of the cards and the
 /// parallax of the artwork inside them.
 /// </remarks>
-public sealed class TravelCardList : PageView
+public sealed class TravelCardList : ProgressCarousel
 {
     public static readonly StyledProperty<double> ScreenWidthProperty =
         AvaloniaProperty.Register<TravelCardList, double>(nameof(ScreenWidth));
@@ -151,12 +153,8 @@ public sealed class TravelCardList : PageView
         Height = pageHeight;
         CardWidth = pageWidth;
 
-        // The Flutter original passes `_cardHeight - 50` here, but only since commit d26dfd2
-        // ("Layout and responsiveness fixes", March 2024). That shortened the scene enough that the
-        // tallest artwork no longer fits: London's front layer renders 199 px against a 187 px
-        // baseline, so its spire is clipped flat by the scene's own bounds. The published preview
-        // predates that change and shows the spires intact, so the earlier value is used.
-        CardContentHeight = pageHeight;
+        // Match the synced source's renderer height, rather than the older showcase GIF.
+        CardContentHeight = pageHeight - 50d;
 
         // PageController takes a fraction of the viewport rather than a pixel width.
         ViewportFraction = pageWidth / ScreenWidth;
@@ -169,7 +167,20 @@ public sealed class TravelCardList : PageView
     internal void SetCaptureState(double page, double normalizedOffset)
     {
         StopSettle();
-        ScrollPixels = page * PageWidth;
+
+        SelectedIndex = Math.Clamp(
+            (int)Math.Round(page, MidpointRounding.AwayFromZero),
+            0,
+            Math.Max(0, ItemCount - 1));
+
+        // The native carousel panel scrolls in logical page units. Its public IScrollable surface
+        // lets the capture harness hold it between pages without reimplementing carousel layout.
+        if (ItemsPanelRoot is IScrollable scrollable)
+        {
+            scrollable.Offset = scrollable.Offset.WithX(page);
+        }
+
+        ReportPage(page);
         NormalizedOffset = normalizedOffset;
     }
 

@@ -66,7 +66,7 @@ public partial class MainView : UserControl
 
     private void UpdateTotals()
     {
-        TreatCount = (int)Math.Round(SliderValue * MaxTreats);
+        TreatCount = (int)Math.Round(SliderValue * MaxTreats, MidpointRounding.AwayFromZero);
         TotalLabel = $"${TreatCount * PricePerTreat} CAD";
     }
 }

@@ -1,7 +1,6 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Input;
-using Avalonia.Interactivity;
 using TicketFold.Models;
 
 namespace TicketFold.Controls;
@@ -16,19 +15,13 @@ namespace TicketFold.Controls;
 /// its reverse into view. Opening the ticket swings it down to reveal the details on its front, and
 /// the dark summary that was underneath all along.
 /// </remarks>
-public sealed class Ticket : TemplatedControl
+public sealed class Ticket : ToggleButton
 {
     public static readonly StyledProperty<BoardingPass?> BoardingPassProperty =
         AvaloniaProperty.Register<Ticket, BoardingPass?>(nameof(BoardingPass));
 
-    public static readonly StyledProperty<bool> IsOpenProperty =
-        AvaloniaProperty.Register<Ticket, bool>(nameof(IsOpen));
-
-    /// <summary>
-    /// Raised after a tap has folded the ticket open or shut.
-    /// </summary>
-    public static readonly RoutedEvent<RoutedEventArgs> ToggledEvent =
-        RoutedEvent.Register<Ticket, RoutedEventArgs>(nameof(Toggled), RoutingStrategies.Bubble);
+    public static readonly DirectProperty<Ticket, bool> IsOpenProperty =
+        AvaloniaProperty.RegisterDirect<Ticket, bool>(nameof(IsOpen), o => o.IsOpen);
 
     /// <summary>
     /// The height the list assumes an open ticket has. The real height is a little more; these are
@@ -42,16 +35,11 @@ public sealed class Ticket : TemplatedControl
     /// </summary>
     public const double NominalClosedHeight = 160d;
 
-    public Ticket() => Tapped += OnTapped;
+    private bool _isOpen;
 
-    /// <summary>
-    /// Occurs after a tap has folded the ticket open or shut.
-    /// </summary>
-    public event EventHandler<RoutedEventArgs>? Toggled
-    {
-        add => AddHandler(ToggledEvent, value);
-        remove => RemoveHandler(ToggledEvent, value);
-    }
+    static Ticket() =>
+        IsCheckedProperty.Changed.AddClassHandler<Ticket>((x, e) =>
+            x.IsOpen = e.GetNewValue<bool?>() == true);
 
     /// <summary>
     /// Gets or sets the boarding pass this ticket shows.
@@ -67,14 +55,7 @@ public sealed class Ticket : TemplatedControl
     /// </summary>
     public bool IsOpen
     {
-        get => GetValue(IsOpenProperty);
-        set => SetValue(IsOpenProperty, value);
-    }
-
-    private void OnTapped(object? sender, TappedEventArgs e)
-    {
-        SetCurrentValue(IsOpenProperty, !IsOpen);
-
-        RaiseEvent(new RoutedEventArgs(ToggledEvent, this));
+        get => _isOpen;
+        private set => SetAndRaise(IsOpenProperty, ref _isOpen, value);
     }
 }

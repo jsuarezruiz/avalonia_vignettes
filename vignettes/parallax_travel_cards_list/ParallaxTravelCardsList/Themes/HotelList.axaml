@@ -29,7 +29,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                   <DataTemplate>
-                    <Path Classes="star" Data="{StaticResource StarIconGeometry}" />
+                    <shared:MaterialIcon IconSize="13" Foreground="{StaticResource StarBrush}" Data="{StaticResource StarIconGeometry}" />
                   </DataTemplate>
                 </ItemsControl.ItemTemplate>
               </ItemsControl>
@@ -64,11 +64,7 @@
               MaxWidth="400"
               Height="{TemplateBinding SectionHeight}">
 
-          <!--
-            The current Dart uses CrossAxisAlignment.center, which centres this over the rows. The
-            published preview aligns it with the rows' left edge, so that is what is used here.
-          -->
-          <TextBlock Grid.Row="0" Classes="hotelsHeading" Text="HOTELS" HorizontalAlignment="Left" />
+          <TextBlock Grid.Row="0" Classes="hotelsHeading" Text="HOTELS" HorizontalAlignment="Center" />
 
           <ItemsPresenter Grid.Row="1"
                           x:Name="PART_FadeHost"

@@ -83,4 +83,6 @@ public partial class ListPage : ContentPage, IHeroPage
     /// Gets the card, which is the end of the flight that lives on this page.
     /// </summary>
     public Control Hero => Card;
+
+    internal Button OpenCardButton => OpenCard;
 }

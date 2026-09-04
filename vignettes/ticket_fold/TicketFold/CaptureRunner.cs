@@ -7,17 +7,21 @@ using TicketFold.Views;
 namespace TicketFold;
 
 /// <summary>
-/// Renders the vignette part-way through a fold so the panels can be checked against the Flutter
-/// reference without a human tapping anything.
+/// Renders a complete open-and-close cycle so both directions of the fold can be checked against
+/// the Flutter reference without a human tapping anything.
 /// </summary>
 /// <remarks>
-/// Enabled with <c>--capture &lt;directory&gt;</c>. The first ticket is folded open and frames are
-/// grabbed as it goes, each named for the milliseconds elapsed since the tap.
+/// Enabled with <c>--capture &lt;directory&gt;</c>. The first ticket is folded open, held long enough to
+/// read, and folded shut again. The two sets of sampled frames are named for the milliseconds
+/// elapsed since each toggle.
 /// </remarks>
 internal static class CaptureRunner
 {
     private static readonly int[] FrameTimes = [0, 100, 200, 300, 400, 500, 600, 700, 900, 1400];
 
+    private static readonly TimeSpan OpenHold = TimeSpan.FromMilliseconds(1400);
+
+    private static readonly TimeSpan FinalHold = TimeSpan.FromMilliseconds(210);
 
     public static async Task RunAsync(Window window, string outputDirectory)
     {
@@ -28,12 +32,22 @@ internal static class CaptureRunner
 
         var ticket = FrameCapture.Find<Ticket>(window);
 
-        ticket.IsOpen = true;
+        ticket.IsChecked = true;
 
         await capture.SampleAsync(
             FrameTimes,
             time => time.ToString("0000", CultureInfo.InvariantCulture));
 
+        await Task.Delay(OpenHold);
+
+        ticket.IsChecked = false;
+
+        await capture.SampleAsync(
+            FrameTimes,
+            time => $"close_{time.ToString("0000", CultureInfo.InvariantCulture)}");
+
+        // Give the loop a short, readable closed state before its first frame comes around again.
+        await Task.Delay(FinalHold);
     }
 
 }

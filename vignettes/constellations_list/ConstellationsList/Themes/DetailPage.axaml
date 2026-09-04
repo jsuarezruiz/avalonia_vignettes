@@ -2,7 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <ControlTheme x:Key="ReturnButtonTheme" TargetType="Button">
-    <Setter Property="Padding" Value="48,12" />
+    <Setter Property="Padding">
+      <OnPlatform x:TypeArguments="Thickness" Default="48,12" macOS="48,6" Windows="48,6" Linux="48,6" />
+    </Setter>
     <Setter Property="Background" Value="Black" />
     <Setter Property="Foreground" Value="{StaticResource StarInkBrush}" />
     <Setter Property="FontFamily" Value="{StaticResource ContentFont}" />

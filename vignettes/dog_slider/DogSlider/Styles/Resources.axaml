@@ -5,7 +5,8 @@
   <FontFamily x:Key="LightFont">avares://DogSlider/Assets/Fonts#Quicksand Light</FontFamily>
   <FontFamily x:Key="SemiBoldFont">avares://DogSlider/Assets/Fonts#Quicksand SemiBold</FontFamily>
 
-  <SolidColorBrush x:Key="PageBackgroundBrush" Color="White" />
+  <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FFFEF7FF" />
+  <SolidColorBrush x:Key="TextBrush" Color="#FF1D1B20" />
   <SolidColorBrush x:Key="InkBrush" Color="#FF174D4C" />
   <SolidColorBrush x:Key="CountBrush" Color="#FF00A6A4" />
   <SolidColorBrush x:Key="ButtonBrush" Color="#FF2CB5B5" />

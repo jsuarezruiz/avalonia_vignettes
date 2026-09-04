@@ -196,7 +196,7 @@ public class FormField : TemplatedControl
     /// The height Material gives an outlined field of <paramref name="lines"/> lines: its content
     /// padding is 24 above and 16 below, and a line of the form's 16 point type is 19.2 high.
     /// </summary>
-    public static double BoxHeightFor(int lines) => 24d + (lines * 19.2d) + 16d;
+    public static double BoxHeightFor(int lines) => 48d + (Math.Max(1, lines) - 1) * 24d;
 
     /// <summary>
     /// Checks the field and reports the result, whatever the user has done so far.

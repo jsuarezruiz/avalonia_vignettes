@@ -20,20 +20,43 @@
         </RefreshVisualizer>
       </RefreshContainer.Visualizer>
 
-      <Panel>
+      <Panel ClipToBounds="True">
+
+        <!-- RefreshContainer adapts the first ScrollViewer it finds. Keep its native gesture,
+             threshold and deferral machinery on this transparent surface; its compositor offset
+             can then never fight the visible list. Scroll changes are mirrored in code. -->
+        <ScrollViewer Name="GestureScroller"
+                      Background="Transparent"
+                      HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Hidden"
+                      IsScrollChainingEnabled="False"
+                      ZIndex="2">
+          <Border MinHeight="1409"
+                  Height="{Binding #Games.Bounds.Height}"
+                  Background="Transparent" />
+        </ScrollViewer>
 
         <!-- The scene the list uncovers as it is pulled down. -->
         <Panel Height="{Binding Metrics.Height}"
                VerticalAlignment="Top"
-               Background="{StaticResource PullBackgroundBrush}">
+               Background="{StaticResource PullBackgroundBrush}"
+               ClipToBounds="True"
+               IsHitTestVisible="False">
           <TextBlock Classes="pullCaption"
                      Text="{Binding #Hoop.Caption}"
                      VerticalAlignment="Top"
                      Margin="{Binding Metrics.CaptionMargin}" />
-          <controls:BasketballHoop Name="Hoop" Extent="{Binding Metrics.Extent}" />
+          <controls:BasketballHoop Name="Hoop"
+                                   Height="{Binding Metrics.Height}"
+                                   VerticalAlignment="Top"
+                                   Extent="{Binding Metrics.Extent}" />
         </Panel>
 
-        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <!-- The visible score surface follows the same pull value as the hoop. -->
+        <ScrollViewer Name="ScoresScroller"
+                      IsHitTestVisible="False"
+                      VerticalScrollBarVisibility="Hidden"
+                      ZIndex="1">
           <ItemsControl Name="Games" Background="{StaticResource PageBackgroundBrush}">
 
             <ItemsControl.ItemsPanel>

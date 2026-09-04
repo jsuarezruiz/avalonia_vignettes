@@ -41,6 +41,9 @@ public sealed class DarkInkBar : TemplatedControl
     public static readonly DirectProperty<DarkInkBar, Bitmap?> LogoIconProperty =
         AvaloniaProperty.RegisterDirect<DarkInkBar, Bitmap?>(nameof(LogoIcon), o => o.LogoIcon);
 
+    public static readonly DirectProperty<DarkInkBar, IBrush?> ToggleMaskProperty =
+        AvaloniaProperty.RegisterDirect<DarkInkBar, IBrush?>(nameof(ToggleMask), o => o.ToggleMask);
+
     public static readonly DirectProperty<DarkInkBar, IBrush?> RuleBrushProperty =
         AvaloniaProperty.RegisterDirect<DarkInkBar, IBrush?>(nameof(RuleBrush), o => o.RuleBrush);
 
@@ -58,6 +61,8 @@ public sealed class DarkInkBar : TemplatedControl
     private static readonly Bitmap Moon = Load("icon-moon");
     private static readonly Bitmap Sun = Load("icon-sun");
     private static readonly Bitmap Logo = Load("icon-r");
+    private static readonly IBrush MoonMask = new ImageBrush(Moon) { Stretch = Stretch.Uniform };
+    private static readonly IBrush SunMask = new ImageBrush(Sun) { Stretch = Stretch.Uniform };
 
     private readonly Ramp _ramp = new();
     private readonly SolidColorBrush _backgroundInk = new();
@@ -69,6 +74,7 @@ public sealed class DarkInkBar : TemplatedControl
     private IBrush? _barForeground;
     private double _toggleOpacity = 1d;
     private Bitmap? _toggleIcon = Moon;
+    private IBrush? _toggleMask = MoonMask;
     private IBrush? _ruleBrush;
 
     static DarkInkBar() =>
@@ -135,6 +141,16 @@ public sealed class DarkInkBar : TemplatedControl
 
     private Bitmap? _logoIcon = Logo;
 
+    /// <summary>Gets the image alpha mask used to tint the logo with the animated foreground.</summary>
+    public IBrush LogoMask { get; } = new ImageBrush(Logo) { Stretch = Stretch.Uniform };
+
+    /// <summary>Gets the moon or sun alpha mask. Brushes do not have a templated parent themselves.</summary>
+    public IBrush? ToggleMask
+    {
+        get => _toggleMask;
+        private set => SetAndRaise(ToggleMaskProperty, ref _toggleMask, value);
+    }
+
     /// <summary>
     /// Gets the rule under the bar, which snaps rather than fading.
     /// </summary>
@@ -153,7 +169,7 @@ public sealed class DarkInkBar : TemplatedControl
     {
         base.OnApplyTemplate(e);
 
-        if (e.NameScope.Find("PART_Toggle") is Avalonia.Controls.Button toggle)
+        if (e.NameScope.Find("PART_Toggle") is ToggleButton toggle)
         {
             toggle.Click += (_, _) => RequestToggle();
         }
@@ -227,6 +243,7 @@ public sealed class DarkInkBar : TemplatedControl
 
         // Swapped at the half way point, which is inside the window where it is invisible.
         ToggleIcon = value > 0.5d ? Sun : Moon;
+        ToggleMask = value > 0.5d ? SunMask : MoonMask;
 
         // The rule snaps rather than fading, as the original's does.
         RuleBrush = IsDark ? DarkRule : LightRule;

@@ -224,9 +224,8 @@ public sealed class FlightSummary : TemplatedControl
 
         PassengerLabel = pass.PassengerName.ToUpperInvariant();
 
-        // Flutter formats the boarding time through MaterialLocalizations, which is 'h:mm a' for the
-        // en_US locale the vignette runs in.
-        BoardingLabel = $"BOARDING {pass.BoardingTime.ToString("h:mm tt", CultureInfo.InvariantCulture)}";
+        // Match the 24-hour boarding times in the original desktop reference.
+        BoardingLabel = $"BOARDING {pass.BoardingTime.ToString("HH:mm", CultureInfo.InvariantCulture)}";
 
         OriginCode = pass.Origin.Code.ToUpperInvariant();
         DestinationCode = pass.Destination.Code.ToUpperInvariant();

@@ -4,8 +4,12 @@
                     xmlns:controls="using:DrinkRewardsList.Controls">
 
   <ControlTheme x:Key="RedeemButtonTheme" TargetType="Button">
-    <Setter Property="MinWidth" Value="200" />
-    <Setter Property="Height" Value="40" />
+    <!-- Flutter's modern TextButton does not consume the enclosing legacy ButtonTheme size. -->
+    <Setter Property="MinWidth" Value="64" />
+    <Setter Property="Height">
+      <OnPlatform x:TypeArguments="x:Double" Default="40" macOS="32" Windows="32" Linux="32" />
+    </Setter>
+    <Setter Property="Padding" Value="12,0" />
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="Background" Value="{StaticResource AccentBrush}" />
     <Setter Property="Foreground" Value="{StaticResource OnCardBrush}" />
@@ -15,7 +19,7 @@
     <Setter Property="Cursor" Value="Hand" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="{TemplateBinding Background}" CornerRadius="24">
+        <Border Background="{TemplateBinding Background}" CornerRadius="24" Padding="{TemplateBinding Padding}">
           <ContentPresenter Content="{TemplateBinding Content}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center" />
@@ -173,6 +177,12 @@
 
     <Style Selector="^:affordable /template/ Button#PART_Redeem">
       <Setter Property="Opacity" Value="1" />
+      <!--
+        This mirrors the original's seemingly inverted TextButton callback exactly: affordable
+        rewards pass the tap through to the enclosing card, which closes it, while unaffordable
+        rewards keep an enabled no-op button that absorbs the tap.
+      -->
+      <Setter Property="IsEnabled" Value="False" />
     </Style>
   </ControlTheme>
 

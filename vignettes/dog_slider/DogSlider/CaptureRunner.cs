@@ -33,6 +33,13 @@ internal static class CaptureRunner
         // Let the dog actually reach the ball and fold into a sit.
         await Task.Delay(2500);
         capture.Write("sitting");
+        FrameCapture.Write(FrameCapture.Find<DogView>(window), new Avalonia.PixelSize(100, 100),
+            outputDirectory, "original_sit_pose");
+
+        if (Math.Abs(slider.HandleX - (40d + 0.55d * (window.ClientSize.Width - 80d))) > 0.01d)
+            throw new InvalidOperationException("The native slider value and the artwork handle diverged.");
+        if (capture.View.TreatCount != 6 || capture.View.TotalLabel != "$36 CAD")
+            throw new InvalidOperationException("Half-up count rounding no longer matches Flutter.");
 
         // Back to zero: the dog turns round and leaves.
         slider.Value = 0d;

@@ -11,18 +11,18 @@
 
     <!-- AppBar: flat, white, a menu icon leading and a search icon trailing. -->
     <Grid DockPanel.Dock="Top" Height="56" Background="{StaticResource ScreenBackgroundBrush}">
-      <Path Classes="appBarIcon"
+      <shared:MaterialIcon IconSize="24" Foreground="{StaticResource AppBarIconBrush}" VerticalAlignment="Center"
             Data="{StaticResource MenuIconGeometry}"
             HorizontalAlignment="Left"
             Margin="16,0,0,0" />
-      <Path Classes="appBarIcon"
+      <shared:MaterialIcon IconSize="24" Foreground="{StaticResource AppBarIconBrush}" VerticalAlignment="Center"
             Data="{StaticResource SearchIconGeometry}"
             HorizontalAlignment="Right"
             Margin="{StaticResource ScreenPaddingThickness}" />
     </Grid>
 
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-      <StackPanel>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center">
+      <StackPanel VerticalAlignment="Center">
 
         <TextBlock Classes="appHeader"
                    Margin="{StaticResource ScreenPaddingThickness}"

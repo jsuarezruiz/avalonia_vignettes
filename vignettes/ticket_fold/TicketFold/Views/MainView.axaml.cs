@@ -39,10 +39,10 @@ public partial class MainView : UserControl
             Duration = ScrollDuration,
         };
 
-        AddHandler(Ticket.ToggledEvent, OnTicketToggled);
+        AddHandler(Button.ClickEvent, OnTicketClicked);
     }
 
-    private void OnTicketToggled(object? sender, RoutedEventArgs e)
+    private void OnTicketClicked(object? sender, RoutedEventArgs e)
     {
         if (e.Source is not Ticket ticket || IndexOf(ticket) is var index && index < 0)
         {

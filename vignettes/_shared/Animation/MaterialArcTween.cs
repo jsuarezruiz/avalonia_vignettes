@@ -114,16 +114,24 @@ public sealed class MaterialPointArcTween
 }
 
 /// <summary>
-/// Interpolates a rectangle by running its top-left and bottom-right corners along their own arcs.
-/// Port of Flutter's <c>MaterialRectArcTween</c>, the tween a <c>Hero</c> flight uses by default
-/// under a <c>MaterialApp</c>.
+/// Interpolates a rectangle by running the opposite corners of the diagonal that best supports the
+/// direction of travel along their own arcs. Port of Flutter's <c>MaterialRectArcTween</c>, the
+/// tween a <c>Hero</c> flight uses by default under a <c>MaterialApp</c>.
 /// </summary>
 public sealed class MaterialRectArcTween
 {
     private readonly Rect _begin;
     private readonly Rect _end;
-    private readonly MaterialPointArcTween _topLeft;
-    private readonly MaterialPointArcTween _bottomRight;
+    private static readonly (Corner Begin, Corner End)[] Diagonals =
+    [
+        (Corner.TopLeft, Corner.BottomRight),
+        (Corner.BottomRight, Corner.TopLeft),
+        (Corner.TopRight, Corner.BottomLeft),
+        (Corner.BottomLeft, Corner.TopRight),
+    ];
+
+    private readonly MaterialPointArcTween _beginArc;
+    private readonly MaterialPointArcTween _endArc;
 
     /// <summary>
     /// Initializes a new tween running from <paramref name="begin"/> to <paramref name="end"/>.
@@ -132,8 +140,12 @@ public sealed class MaterialRectArcTween
     {
         _begin = begin;
         _end = end;
-        _topLeft = new MaterialPointArcTween(begin.TopLeft, end.TopLeft);
-        _bottomRight = new MaterialPointArcTween(begin.BottomRight, end.BottomRight);
+
+        var centersVector = end.Center - begin.Center;
+        var diagonal = Diagonals.MaxBy(candidate => Support(begin, centersVector, candidate));
+
+        _beginArc = new MaterialPointArcTween(CornerOf(begin, diagonal.Begin), CornerOf(end, diagonal.Begin));
+        _endArc = new MaterialPointArcTween(CornerOf(begin, diagonal.End), CornerOf(end, diagonal.End));
     }
 
     /// <summary>
@@ -151,9 +163,38 @@ public sealed class MaterialRectArcTween
             return _end;
         }
 
-        var topLeft = _topLeft.Lerp(progress);
-        var bottomRight = _bottomRight.Lerp(progress);
+        var first = _beginArc.Lerp(progress);
+        var second = _endArc.Lerp(progress);
 
-        return new Rect(topLeft, bottomRight);
+        return new Rect(
+            Math.Min(first.X, second.X),
+            Math.Min(first.Y, second.Y),
+            Math.Abs(second.X - first.X),
+            Math.Abs(second.Y - first.Y));
+    }
+
+    private static double Support(Rect begin, Vector centers, (Corner Begin, Corner End) diagonal)
+    {
+        var delta = CornerOf(begin, diagonal.End) - CornerOf(begin, diagonal.Begin);
+        var length = Math.Sqrt((delta.X * delta.X) + (delta.Y * delta.Y));
+
+        return ((centers.X * delta.X) + (centers.Y * delta.Y)) / length;
+    }
+
+    private static Point CornerOf(Rect rect, Corner corner) => corner switch
+    {
+        Corner.TopLeft => rect.TopLeft,
+        Corner.TopRight => rect.TopRight,
+        Corner.BottomLeft => rect.BottomLeft,
+        Corner.BottomRight => rect.BottomRight,
+        _ => throw new ArgumentOutOfRangeException(nameof(corner)),
+    };
+
+    private enum Corner
+    {
+        TopLeft,
+        TopRight,
+        BottomLeft,
+        BottomRight,
     }
 }

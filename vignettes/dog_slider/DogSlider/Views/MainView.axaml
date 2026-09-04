@@ -6,33 +6,43 @@
              x:Class="DogSlider.Views.MainView"
              x:DataType="views:MainView">
 
+  <UserControl.Styles>
+    <!-- The reference inherits Material bodyMedium's tracking. -->
+    <Style Selector="TextBlock">
+      <Setter Property="LetterSpacing" Value="0.25" />
+    </Style>
+  </UserControl.Styles>
+
   <DockPanel Background="{StaticResource PageBackgroundBrush}">
 
     <!-- Top nav: back, logo, basket. -->
     <Grid DockPanel.Dock="Top" Margin="12" ColumnDefinitions="Auto,*,Auto">
-      <shared:MaterialIcon Grid.Column="0"
+      <Button Grid.Column="0" Theme="{StaticResource NavButtonTheme}" AutomationProperties.Name="Back">
+        <shared:MaterialIcon
                            Data="{StaticResource BackIcon}"
                            IconSize="32"
                            VerticalAlignment="Center"
                            Foreground="{StaticResource InkBrush}" />
+      </Button>
       <Image Grid.Column="1"
              Source="avares://DogSlider/Assets/Images/logo.png"
              Height="26"
              Stretch="Uniform"
-             HorizontalAlignment="Left"
-             Margin="12,0,0,0" />
-      <shared:MaterialIcon Grid.Column="2"
+             HorizontalAlignment="Center" />
+      <Button Grid.Column="2" Theme="{StaticResource NavButtonTheme}" AutomationProperties.Name="Shopping basket">
+        <shared:MaterialIcon
                            Data="{StaticResource BasketIcon}"
                            IconSize="32"
                            VerticalAlignment="Center"
                            Foreground="{StaticResource InkBrush}" />
+      </Button>
     </Grid>
 
     <!-- Cart bar. -->
     <Border DockPanel.Dock="Bottom"
             Height="90"
             Padding="22,0"
-            Background="{StaticResource PageBackgroundBrush}"
+            Background="White"
             BoxShadow="0 0 20 0 #1A000000">
       <Grid MaxWidth="500" VerticalAlignment="Center" ColumnDefinitions="Auto,6,Auto,*,Auto">
         <TextBlock Grid.Column="0"
@@ -40,14 +50,14 @@
                    VerticalAlignment="Center"
                    FontFamily="{StaticResource BodyFont}"
                    FontSize="16"
-                   Foreground="{StaticResource InkBrush}" />
+                   Foreground="{StaticResource TextBrush}" />
         <TextBlock Grid.Column="2"
                    Text="{Binding TotalLabel}"
                    VerticalAlignment="Center"
                    FontFamily="{StaticResource BodyFont}"
                    FontWeight="Bold"
                    FontSize="16"
-                   Foreground="{StaticResource InkBrush}" />
+                   Foreground="{StaticResource TextBrush}" />
         <Button Grid.Column="4"
                 Theme="{StaticResource AddToCartButtonTheme}"
                 Content="ADD TO CART" />
@@ -64,15 +74,15 @@
       <Grid Margin="0,40,0,0" RowDefinitions="*,*">
         <Image Grid.Row="0"
                Source="avares://DogSlider/Assets/Images/background.png"
-               Height="150"
+               Height="150" Width="1659.898477"
                Stretch="Uniform"
                VerticalAlignment="Bottom"
                HorizontalAlignment="Center" />
 
-        <Grid Grid.Row="1" RowDefinitions="2*,8*">
-          <Image Grid.Row="0"
+        <Grid Grid.Row="1" RowDefinitions="*,Auto,9*">
+          <Image Grid.Row="1"
                  Source="avares://DogSlider/Assets/Images/ground.png"
-                 Height="80"
+                 Height="80" Width="656.271186"
                  Stretch="Uniform"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Center" />
@@ -82,39 +92,44 @@
       <StackPanel MaxWidth="400" Margin="32,0" VerticalAlignment="Top">
         <TextBlock Text="How many fetch balls&#x0a;does your dog want?"
                    TextAlignment="Center"
-                   FontFamily="{StaticResource LightFont}"
+                   FontFamily="{StaticResource BodyFont}"
                    FontSize="26"
-                   Foreground="{StaticResource InkBrush}" />
+                   LineHeight="37.142857"
+                   Foreground="{StaticResource TextBrush}" />
         <Panel Height="24" />
         <TextBlock Text="{Binding TreatCount}"
                    TextAlignment="Center"
                    FontFamily="{StaticResource SemiBoldFont}"
                    FontSize="48"
+                   LineHeight="68.571429"
                    Foreground="{StaticResource CountBrush}" />
       </StackPanel>
 
       <controls:DogSlider Name="Slider" VerticalAlignment="Center" Value="{Binding SliderValue, Mode=TwoWay}" />
 
       <StackPanel MaxWidth="500" Margin="26,0" VerticalAlignment="Bottom">
+        <StackPanel.Styles>
+          <Style Selector="TextBlock">
+            <Setter Property="LineHeight" Value="18.571429" />
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+          </Style>
+        </StackPanel.Styles>
         <TextBlock Text="PRODUCT DETAIL"
                    FontFamily="{StaticResource SemiBoldFont}"
-                   FontSize="14"
-                   Foreground="{StaticResource InkBrush}" />
+                   FontSize="14" LineHeight="20" />
         <Panel Height="8" />
         <TextBlock Text="Fetch Tennis Ball - 2.0 inch"
                    FontFamily="{StaticResource BodyFont}"
                    FontWeight="Bold"
-                   FontSize="13"
-                   Foreground="{StaticResource InkBrush}" />
+                   FontSize="13" />
         <Panel Height="8" />
-        <TextBlock Text="Colour: Green" FontFamily="{StaticResource BodyFont}" FontSize="13" Foreground="{StaticResource InkBrush}" />
-        <TextBlock Text="Size: 2.5 inch" FontFamily="{StaticResource BodyFont}" FontSize="13" Foreground="{StaticResource InkBrush}" />
+        <TextBlock Text="Colour: Green" FontFamily="{StaticResource BodyFont}" FontSize="13" />
+        <TextBlock Text="Size: 2.5 inch" FontFamily="{StaticResource BodyFont}" FontSize="13" />
         <Panel Height="8" />
         <TextBlock Text="For stimulating playtime that encourages pets to leap and chase. Made from a high-quality natural latex and designed for the game of fetch. "
                    TextWrapping="Wrap"
                    FontFamily="{StaticResource BodyFont}"
-                   FontSize="13"
-                   Foreground="{StaticResource InkBrush}" />
+                   FontSize="13" />
         <Panel Height="16" />
       </StackPanel>
     </Panel>

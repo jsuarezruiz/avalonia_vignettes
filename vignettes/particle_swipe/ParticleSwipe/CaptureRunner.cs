@@ -1,5 +1,6 @@
 using System.Globalization;
 using Avalonia.Controls;
+using Avalonia.VisualTree;
 using AvaloniaVignettes.Shared.Capture;
 using ParticleSwipe.Controls;
 using ParticleSwipe.Views;
@@ -24,6 +25,9 @@ internal static class CaptureRunner
         // Let the window settle so the rows have been measured.
         var capture = await FrameCapture.StartAsync<MainView>(window, outputDirectory, 700);
         var field = FrameCapture.Find<ParticleFieldView>(window);
+        var rows = capture.View.GetVisualDescendants().OfType<SwipeItem>().ToArray();
+        if (rows.Length < 2 || rows.Where((row, index) => row.IsAlternate != (index % 2 != 0)).Any())
+            throw new InvalidOperationException("Inbox row shading must alternate after templates are realized.");
 
         capture.Write("rest");
 

@@ -63,7 +63,7 @@ public partial class MainView : UserControl
         _stagger = new DispatcherTimer { Interval = TitleStagger };
         _stagger.Tick += OnStaggerTick;
 
-        Pages.GetObservable(PageView.PageProperty).Subscribe(
+        Pages.GetObservable(ProgressCarousel.PageProperty).Subscribe(
             new AnonymousObserver<double>(OnPageMoved));
 
         _ticker = new FrameTicker(this, OnTick);

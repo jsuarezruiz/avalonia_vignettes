@@ -57,16 +57,20 @@
     </Grid>
 
     <!-- Plain in the original too: no label, no validation, just a box to type into. -->
-    <Border Classes="formBox" Height="116.8">
+    <Border Classes="formBox" Height="120">
       <TextBox Name="Instructions"
                AutomationProperties.Name="Special instructions"
                Classes="formInput"
+               Padding="12,12"
                AcceptsReturn="True"
                TextWrapping="Wrap"
                VerticalContentAlignment="Top"
                PlaceholderText="Special Instructions"
                Text="{Binding Instructions, Mode=TwoWay}" />
     </Border>
+
+    <!-- The original InputDecoration reserves its empty helper-text row below the box. -->
+    <Panel Height="27.2" />
 
     <controls:SubmitButton Name="Next" Margin="37,18" Click="OnNextClick">
       <TextBlock Classes="submitButtonText" Text="Next" />

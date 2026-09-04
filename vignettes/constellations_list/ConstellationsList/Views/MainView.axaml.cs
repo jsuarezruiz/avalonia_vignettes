@@ -50,6 +50,7 @@ public partial class MainView : UserControl
     private Control? _flightTarget;
     private Rect _flightFrom;
     private Rect _flightTo;
+    private MaterialRectArcTween? _cardRectTween;
 
     public MainView()
     {
@@ -201,6 +202,7 @@ public partial class MainView : UserControl
         _flightTo = to.Bounds.Width > 0d
             ? RectOf(to)
             : new Rect((Bounds.Width - _flightFrom.Width) / 2d, 24d, _flightFrom.Width, _flightFrom.Height);
+        _cardRectTween = new MaterialRectArcTween(_flightFrom, _flightTo);
 
         // Left to size itself: both ends draw the same text at the same size, and pinning the copy
         // to the departure width made it land at a different width from the card it hands over to.
@@ -227,13 +229,14 @@ public partial class MainView : UserControl
             return;
         }
 
-        // Easing the two axes differently bows the path, which is what Flutter's arc tween does
-        // rather than sliding the card along a straight line.
-        var x = Lerp(_flightFrom.X, _flightTo.X, FlutterEasings.EaseIn.Ease(progress));
-        var y = Lerp(_flightFrom.Y, _flightTo.Y, FlutterEasings.EaseOut.Ease(progress));
+        // Flutter's Hero uses MaterialRectArcTween by default. Both opposite corners travel on
+        // circular arcs, so the card follows the same bowed path and also interpolates its bounds.
+        var bounds = _cardRectTween?.Lerp(progress) ?? _flightTo;
 
-        Canvas.SetLeft(card, x);
-        Canvas.SetTop(card, y);
+        Canvas.SetLeft(card, bounds.X);
+        Canvas.SetTop(card, bounds.Y);
+        card.Width = bounds.Width;
+        card.Height = bounds.Height;
 
         if (progress < 1d)
         {
@@ -257,8 +260,4 @@ public partial class MainView : UserControl
 
     private void OnStarFlightChanged(double progress) => Stars.Speed = FlightSpeedAt(progress);
 
-    /// <summary>
-    /// Shows a detail page directly. Used only by the screenshot harness.
-    /// </summary>
-    internal void ShowDetailForCapture(DetailPage page) => Pages.Content = page;
 }

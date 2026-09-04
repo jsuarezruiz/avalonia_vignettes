@@ -46,16 +46,16 @@ public partial class ListPage : UserControl
 
     private void Build()
     {
-        // Seeded so the indents are identical on every run. The sequence differs from Dart's, since
-        // the two runtimes' generators do not agree, but the intent, stable and varied, is kept.
-        var random = new Random(1);
+        // Exact Random(1).nextInt(4) * 20 sequence from the original Dart list. System.Random(1)
+        // produces a different layout even though both are deterministic.
+        double[] indents = [20, 0, 60, 60, 60, 60, 20, 0, 20, 0, 20, 40, 60, 20, 0];
 
         for (var index = 0; index < DemoData.Constellations.Count; index++)
         {
             var isRedMode = index % 2 == 1;
 
             // The design asked for the first entry to be left alone and the rest to vary.
-            var indent = index == 0 ? 20d : random.Next(4) * 20d;
+            var indent = indents[index % indents.Length];
 
             var card = new ConstellationTitleCard
             {
@@ -63,25 +63,26 @@ public partial class ListPage : UserControl
                 IsRedMode = isRedMode,
             };
 
-            var row = new Border
+            var row = new Button
             {
-                Child = card,
-                // The indent carries the nudge with it. Without that the transform shifts each row
-                // outside the scroll presenter's clip, which crops the outermost 25px: the leading
-                // letter of a left-hand entry, the trailing one of a right-hand entry.
+                Content = card,
                 Padding = new Thickness(
-                    isRedMode ? 0d : indent + EdgeNudge,
+                    isRedMode ? 0d : indent,
                     VerticalPadding,
-                    isRedMode ? indent + EdgeNudge : 0d,
+                    isRedMode ? indent : 0d,
                     VerticalPadding),
                 HorizontalAlignment = HorizontalAlignment.Stretch,
+                HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                VerticalContentAlignment = VerticalAlignment.Stretch,
                 Background = Brushes.Transparent,
+                BorderThickness = default,
                 Cursor = new Cursor(StandardCursorType.Hand),
                 RenderTransform = new TranslateTransform(isRedMode ? EdgeNudge : -EdgeNudge, 0d),
             };
 
+            row.Classes.Add("constellationRow");
             card.HorizontalAlignment = isRedMode ? HorizontalAlignment.Right : HorizontalAlignment.Left;
-            row.Tapped += (_, _) => EntryTapped?.Invoke(this, card);
+            row.Click += (_, _) => EntryTapped?.Invoke(this, card);
 
             Entries.Items.Add(row);
         }

@@ -3,12 +3,30 @@
                     xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
                     xmlns:controls="using:DogSlider.Controls">
 
+  <ControlTheme x:Key="NavButtonTheme" TargetType="Button">
+    <Setter Property="Width" Value="48" />
+    <Setter Property="Height" Value="48" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}">
+          <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
   <ControlTheme x:Key="AddToCartButtonTheme" TargetType="Button">
-    <Setter Property="Padding" Value="32,16" />
+    <!-- Flutter's desktop compact visual density reduces the vertical button padding. -->
+    <Setter Property="Padding">
+      <OnPlatform x:TypeArguments="Thickness" Default="32,16" macOS="32,8" Windows="32,8" Linux="32,8" />
+    </Setter>
     <Setter Property="Background" Value="{StaticResource ButtonBrush}" />
     <Setter Property="Foreground" Value="{StaticResource OnButtonBrush}" />
     <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
     <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="LetterSpacing" Value="0.1" />
     <Setter Property="Cursor" Value="Hand" />
     <Setter Property="Template">
       <ControlTemplate>
@@ -22,6 +40,25 @@
     <Style Selector="^:pressed /template/ Border">
       <Setter Property="Opacity" Value="0.85" />
     </Style>
+  </ControlTheme>
+
+  <!-- Invisible native Slider parts own hit testing, pointer capture and keyboard input. -->
+  <ControlTheme x:Key="DogSliderTrackButtonTheme" TargetType="Button">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" />
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="DogSliderThumbTheme" TargetType="Thumb">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" />
+      </ControlTemplate>
+    </Setter>
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type controls:DogSlider}" TargetType="controls:DogSlider">
@@ -42,9 +79,9 @@
           <!-- The dog is positioned by the slider from its own physics. -->
           <Canvas>
             <controls:DogView Name="PART_Dog"
-                              Canvas.Bottom="28"
+                              Canvas.Bottom="21"
                               Width="100"
-                              Height="64" />
+                              Height="100" />
           </Canvas>
 
           <Canvas>
@@ -65,6 +102,28 @@
               </controls:BouncingIcon>
             </Panel>
           </Canvas>
+
+          <!--
+            The artwork follows Value, while this standard Track supplies the Slider interaction.
+            Its margin makes the native thumb centre use the vignette's forty-pixel end stops.
+          -->
+          <Track Name="PART_Track"
+                 Margin="{TemplateBinding TrackMargin}"
+                 Minimum="{TemplateBinding Minimum}"
+                 Maximum="{TemplateBinding Maximum}"
+                 Value="{TemplateBinding Value}"
+                 Orientation="{TemplateBinding Orientation}"
+                 IsDirectionReversed="{TemplateBinding IsDirectionReversed}">
+            <Track.DecreaseButton>
+              <Button Name="PART_DecreaseButton" Theme="{StaticResource DogSliderTrackButtonTheme}" />
+            </Track.DecreaseButton>
+            <Track.IncreaseButton>
+              <Button Name="PART_IncreaseButton" Theme="{StaticResource DogSliderTrackButtonTheme}" />
+            </Track.IncreaseButton>
+            <Track.Thumb>
+              <Thumb Theme="{StaticResource DogSliderThumbTheme}" Width="1" />
+            </Track.Thumb>
+          </Track>
         </Panel>
       </ControlTemplate>
     </Setter>

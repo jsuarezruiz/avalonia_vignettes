@@ -4,7 +4,9 @@
              x:Class="GooeyEdge.Views.MainView">
 
   <Panel>
-    <controls:GooeyCarousel x:Name="Carousel">
+    <controls:GooeyCarousel x:Name="Carousel"
+                             IsSwipeEnabled="True"
+                             WrapSelection="True">
 
       <controls:ContentCard Palette="Red"
                             AccentBrush="{StaticResource RedAccentBrush}"

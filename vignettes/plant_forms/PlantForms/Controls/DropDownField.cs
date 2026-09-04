@@ -1,4 +1,7 @@
 using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Metadata;
+using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 
 namespace PlantForms.Controls;
@@ -7,8 +10,11 @@ namespace PlantForms.Controls;
 /// A field that picks from a list, which it opens as a page of its own. Port of
 /// <c>dropdown_menu.dart</c>.
 /// </summary>
+[TemplatePart(PartOpenButton, typeof(Button))]
 public sealed class DropDownField : FormField
 {
+    private const string PartOpenButton = "PART_OpenButton";
+
     public static readonly StyledProperty<IReadOnlyList<string>> OptionsProperty =
         AvaloniaProperty.Register<DropDownField, IReadOnlyList<string>>(nameof(Options), []);
 
@@ -33,12 +39,27 @@ public sealed class DropDownField : FormField
         set => SetValue(OptionsProperty, value);
     }
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
+    private Button? _openButton;
 
-        Tapped += (_, _) => RaiseEvent(new RoutedEventArgs(OpenRequestedEvent));
+    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+    {
+        if (_openButton is not null)
+        {
+            _openButton.Click -= OnOpenClicked;
+        }
+
+        base.OnApplyTemplate(e);
+
+        _openButton = e.NameScope.Find<Button>(PartOpenButton);
+
+        if (_openButton is not null)
+        {
+            _openButton.Click += OnOpenClicked;
+        }
     }
+
+    private void OnOpenClicked(object? sender, RoutedEventArgs e) =>
+        RaiseEvent(new RoutedEventArgs(OpenRequestedEvent));
 
     /// <summary>
     /// A choice counts as made as soon as there is one, as the original's does.

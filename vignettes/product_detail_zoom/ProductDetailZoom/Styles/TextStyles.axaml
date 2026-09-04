@@ -33,6 +33,7 @@
   </Style>
 
   <Style Selector="TextBlock.headline">
+    <Setter Property="RenderTransform" Value="translate(0px, -8px)" />
     <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
     <Setter Property="FontWeight" Value="Black" />
     <Setter Property="FontSize" Value="52" />
@@ -63,7 +64,9 @@
     on the button and inherited by the presenter that renders it.
   -->
   <Style Selector="Button.pill">
-    <Setter Property="Height" Value="55" />
+    <Setter Property="Height">
+      <OnPlatform x:TypeArguments="x:Double" Default="55" macOS="47" Windows="47" Linux="47" />
+    </Setter>
     <Setter Property="CornerRadius" Value="50" />
     <!-- CrossAxisAlignment.stretch: both pills take the full width, so they match. -->
     <Setter Property="HorizontalAlignment" Value="Stretch" />

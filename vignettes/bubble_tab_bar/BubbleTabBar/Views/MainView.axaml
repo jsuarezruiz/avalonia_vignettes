@@ -12,7 +12,7 @@
                            Icon="{StaticResource HomeIcon}"
                            ExpandedWidth="110"
                            AccentBrush="{StaticResource HomeAccentBrush}">
-      <ScrollViewer>
+      <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <ItemsControl ItemsSource="{Binding CardItems}">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
@@ -29,7 +29,7 @@
                            Icon="{StaticResource ImageIcon}"
                            ExpandedWidth="110"
                            AccentBrush="{StaticResource GalleryAccentBrush}">
-      <ScrollViewer>
+      <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <ItemsControl ItemsSource="{Binding GridItems}">
           <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
@@ -50,16 +50,25 @@
                            ExpandedWidth="115"
                            AccentBrush="{StaticResource CameraAccentBrush}">
 
-      <!-- The shutter button wears the tab's own accent, as Flutter's FAB takes the theme's. -->
+      <!-- Current Flutter's Material FAB uses primaryContainer and a 16px rounded square. -->
       <Panel Background="Black">
-        <Panel Width="90"
+        <Button Width="90"
                Height="90"
+               Background="#EADDFF"
+               CornerRadius="16"
+               Padding="8"
                Margin="0,0,0,32"
                HorizontalAlignment="Center"
-               VerticalAlignment="Bottom">
-          <Ellipse Fill="{StaticResource CameraAccentBrush}" />
-          <Ellipse Margin="8" Fill="#4DFFFFFF" />
-        </Panel>
+               VerticalAlignment="Bottom"
+               AutomationProperties.Name="Shutter">
+          <Button.Template>
+            <ControlTemplate>
+              <Border Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
+                <Ellipse Fill="#4DFFFFFF" />
+              </Border>
+            </ControlTemplate>
+          </Button.Template>
+        </Button>
       </Panel>
     </controls:NavBarButton>
 
@@ -67,7 +76,7 @@
                            Icon="{StaticResource FavoriteBorderIcon}"
                            ExpandedWidth="100"
                            AccentBrush="{StaticResource LikesAccentBrush}">
-      <ScrollViewer>
+      <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <ItemsControl ItemsSource="{Binding CardItems}">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
@@ -84,7 +93,7 @@
                            Icon="{StaticResource SaveIcon}"
                            ExpandedWidth="105"
                            AccentBrush="{StaticResource SavedAccentBrush}">
-      <ScrollViewer>
+      <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <ItemsControl ItemsSource="{Binding GridItems}">
           <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>

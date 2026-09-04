@@ -2,7 +2,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
-using Avalonia.Input;
 using Avalonia.Interactivity;
 
 namespace PlantForms.Controls;
@@ -12,7 +11,7 @@ namespace PlantForms.Controls;
 /// it. Port of <c>form_page.dart</c>.
 /// </summary>
 [TemplatePart(PartRoot, typeof(Grid))]
-[TemplatePart(PartBackArea, typeof(Control))]
+[TemplatePart(PartBackArea, typeof(Button))]
 public class FormPage : ContentControl
 {
     private const string PartRoot = "PART_Root";
@@ -79,9 +78,9 @@ public class FormPage : ContentControl
 
         _root = e.NameScope.Find<Grid>(PartRoot);
 
-        if (e.NameScope.Find<Control>(PartBackArea) is { } backArea)
+        if (e.NameScope.Find<Button>(PartBackArea) is { } backArea)
         {
-            backArea.Tapped += OnBackAreaTapped;
+            backArea.Click += OnBackAreaClicked;
         }
 
         ApplyProportion();
@@ -97,7 +96,7 @@ public class FormPage : ContentControl
         }
     }
 
-    private void OnBackAreaTapped(object? sender, TappedEventArgs e) =>
+    private void OnBackAreaClicked(object? sender, RoutedEventArgs e) =>
         RaiseEvent(new RoutedEventArgs(BackRequestedEvent));
 
     private void ApplyProportion()

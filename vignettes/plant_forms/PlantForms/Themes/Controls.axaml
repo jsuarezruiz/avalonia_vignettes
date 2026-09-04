@@ -10,8 +10,18 @@
         <!-- The rows are re-weighted from Proportion; these are the settings it starts at. -->
         <Grid Name="PART_Root" RowDefinitions="15*,85*">
 
-          <!-- Tapping the scene above the card goes back a page. -->
-          <Panel Name="PART_BackArea" Grid.Row="0" Background="Transparent" />
+          <!-- A real button makes the exposed scene a keyboard- and automation-aware back action. -->
+          <Button Name="PART_BackArea"
+                  Grid.Row="0"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  AutomationProperties.Name="Back">
+            <Button.Template>
+              <ControlTemplate>
+                <Border Background="{TemplateBinding Background}" />
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
 
           <Border Grid.Row="1"
                   Background="{StaticResource CardBrush}"
@@ -98,7 +108,8 @@
           </Panel>
 
           <!-- Material's helper row: an 8 point gap and a line of helper type, always reserved. -->
-          <Panel Height="27.2" />
+          <!-- Empty helper text still reserves its 25.6 logical-pixel Material subtext row. -->
+          <Panel Height="25.6" />
         </StackPanel>
 
       </ControlTemplate>
@@ -119,12 +130,28 @@
       <ControlTemplate>
 
         <StackPanel>
-          <Border Height="48"
+          <Button Name="PART_OpenButton"
+                  Height="48"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch"
+                  Padding="12,0"
                   CornerRadius="4"
                   BorderThickness="1"
                   BorderBrush="{StaticResource LightGrayBrush}"
-                  Background="Transparent">
-            <DockPanel Margin="12,0">
+                  Background="Transparent"
+                  AutomationProperties.Name="{TemplateBinding Helper}">
+            <Button.Template>
+              <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                  <ContentPresenter Content="{TemplateBinding Content}" HorizontalContentAlignment="Stretch" />
+                </Border>
+              </ControlTemplate>
+            </Button.Template>
+            <DockPanel>
               <TextBlock DockPanel.Dock="Right"
                          Classes="dropdownArrow"
                          Margin="0,0,3,0"
@@ -135,9 +162,10 @@
                          VerticalAlignment="Center"
                          Text="{TemplateBinding Value}" />
             </DockPanel>
-          </Border>
+          </Button>
 
-          <Panel Height="27.2" />
+          <!-- DropdownButtonFormField uses the smaller default helper style. -->
+          <Panel Height="20.8" />
         </StackPanel>
 
       </ControlTemplate>

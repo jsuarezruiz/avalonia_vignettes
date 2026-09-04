@@ -21,7 +21,7 @@ namespace DrinkRewardsList.Controls;
 /// the fill rides on: the liquid rises over a slice near the start, the points count down over an
 /// overlapping slice, and the surface keeps sloshing long after both have finished.
 /// </remarks>
-public sealed class DrinkCard : TemplatedControl
+public sealed class DrinkCard : ToggleButton
 {
     public static readonly StyledProperty<Drink?> DrinkProperty =
         AvaloniaProperty.Register<DrinkCard, Drink?>(nameof(Drink));
@@ -29,8 +29,8 @@ public sealed class DrinkCard : TemplatedControl
     public static readonly StyledProperty<int> EarnedPointsProperty =
         AvaloniaProperty.Register<DrinkCard, int>(nameof(EarnedPoints), 100);
 
-    public static readonly StyledProperty<bool> IsOpenProperty =
-        AvaloniaProperty.Register<DrinkCard, bool>(nameof(IsOpen));
+    public static readonly DirectProperty<DrinkCard, bool> IsOpenProperty =
+        AvaloniaProperty.RegisterDirect<DrinkCard, bool>(nameof(IsOpen), o => o.IsOpen);
 
     public static readonly DirectProperty<DrinkCard, string?> PointsRemainingLabelProperty =
         AvaloniaProperty.RegisterDirect<DrinkCard, string?>(
@@ -38,12 +38,6 @@ public sealed class DrinkCard : TemplatedControl
 
     public static readonly DirectProperty<DrinkCard, Bitmap?> ArtworkProperty =
         AvaloniaProperty.RegisterDirect<DrinkCard, Bitmap?>(nameof(Artwork), o => o.Artwork);
-
-    /// <summary>
-    /// Raised when the card is tapped.
-    /// </summary>
-    public static readonly RoutedEvent<RoutedEventArgs> TappedCardEvent =
-        RoutedEvent.Register<DrinkCard, RoutedEventArgs>(nameof(TappedCard), RoutingStrategies.Bubble);
 
     /// <summary>
     /// The height of a closed card. The list scrolls by this, so it is public.
@@ -76,10 +70,12 @@ public sealed class DrinkCard : TemplatedControl
     private Bitmap? _artwork;
     private string? _pointsRemainingLabel;
     private double _heightFrom = NominalHeightClosed;
+    private bool _isOpen;
 
     static DrinkCard()
     {
-        IsOpenProperty.Changed.AddClassHandler<DrinkCard>((x, e) => x.OnIsOpenChanged(e));
+        IsCheckedProperty.Changed.AddClassHandler<DrinkCard>((x, e) =>
+            x.IsOpen = e.GetNewValue<bool?>() == true);
         DrinkProperty.Changed.AddClassHandler<DrinkCard>((x, _) => x.OnDrinkChanged());
         EarnedPointsProperty.Changed.AddClassHandler<DrinkCard>((x, _) => x.UpdatePoints());
     }
@@ -91,16 +87,6 @@ public sealed class DrinkCard : TemplatedControl
         _height = new AnimationController(this, OnHeightProgressChanged) { Duration = OpenDuration };
         _fill = new AnimationController(this, OnFillProgressChanged) { Duration = FillDuration };
 
-        Tapped += (_, _) => RaiseEvent(new RoutedEventArgs(TappedCardEvent, this));
-    }
-
-    /// <summary>
-    /// Occurs when the card is tapped.
-    /// </summary>
-    public event EventHandler<RoutedEventArgs>? TappedCard
-    {
-        add => AddHandler(TappedCardEvent, value);
-        remove => RemoveHandler(TappedCardEvent, value);
     }
 
     /// <summary>
@@ -126,8 +112,14 @@ public sealed class DrinkCard : TemplatedControl
     /// </summary>
     public bool IsOpen
     {
-        get => GetValue(IsOpenProperty);
-        set => SetValue(IsOpenProperty, value);
+        get => _isOpen;
+        private set
+        {
+            if (SetAndRaise(IsOpenProperty, ref _isOpen, value))
+            {
+                OnIsOpenChanged(value);
+            }
+        }
     }
 
     /// <summary>
@@ -165,10 +157,8 @@ public sealed class DrinkCard : TemplatedControl
         _fill.Stop();
     }
 
-    private void OnIsOpenChanged(AvaloniaPropertyChangedEventArgs e)
+    private void OnIsOpenChanged(bool isOpen)
     {
-        var isOpen = e.GetNewValue<bool>();
-
         PseudoClasses.Set(":open", isOpen);
 
         if (isOpen)

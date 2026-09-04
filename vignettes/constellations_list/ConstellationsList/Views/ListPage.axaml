@@ -5,12 +5,26 @@
              x:Class="ConstellationsList.Views.ListPage"
              x:DataType="models:Constellation">
 
+  <UserControl.Styles>
+    <Style Selector="Button.constellationRow">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </ControlTemplate>
+      </Setter>
+    </Style>
+  </UserControl.Styles>
+
   <!--
     The guide is held to 600 wide and centred. MaxWidth rather than Width, because Flutter clamps a
     Container's width to the constraints it is given (on a narrower screen its 600 becomes the
     screen width), whereas Avalonia's Width is taken literally and would hang off both edges.
   -->
-  <Panel MaxWidth="600" HorizontalAlignment="Center">
+  <Panel MaxWidth="600" HorizontalAlignment="Stretch">
 
     <ScrollViewer Name="Scroller" VerticalScrollBarVisibility="Hidden">
       <ItemsControl Name="Entries" Margin="0,150,0,200" />
@@ -30,25 +44,27 @@
 
     <TextBlock Text="GUIDE TO THE STARS"
                Width="180"
-               Margin="16,16,0,0"
+               Margin="16,12,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                TextWrapping="Wrap"
                FontFamily="{StaticResource HeaderFont}"
                FontSize="28"
+               LetterSpacing="0.25"
                LineHeight="29.4"
                ClipToBounds="False"
                Foreground="{StaticResource StarInkBrush}" />
 
     <TextBlock Text="New York City (USA, NY) 40.71 °N - 74.01 °W"
                Width="120"
-               Margin="0,12,16,0"
+               Margin="0,8,16,0"
                HorizontalAlignment="Right"
                VerticalAlignment="Top"
                TextAlignment="Right"
                TextWrapping="Wrap"
                FontFamily="{StaticResource ContentFont}"
                FontSize="10"
+               LetterSpacing="0.25"
                LineHeight="18"
                Foreground="{StaticResource MutedInkBrush}" />
   </Panel>

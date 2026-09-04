@@ -12,4 +12,6 @@ Drag the ball along the track and the dog gives chase, then folds into a sit onc
 dotnet run --project DogSlider.Desktop/DogSlider.Desktop.csproj
 ```
 
-The original plays the dog as a Flare document. Avalonia has no runtime for that format, so the character is rebuilt from vector shapes and posed from code.
+The control derives from Avalonia's `Slider`: its native `Track` and `Thumb` own mouse, touch, keyboard, capture, and value changes. The artwork adds the ball hop and dog chase on top.
+
+The original Flare dog's paths and poses are drawn as native Avalonia vector geometry, including its walk and front-facing sit. See [the reproducible exporter](tools/README.md) for source provenance and timing. No Flutter or Flare runtime is required by the Avalonia application.

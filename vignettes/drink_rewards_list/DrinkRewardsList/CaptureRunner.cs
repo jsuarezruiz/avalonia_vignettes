@@ -27,13 +27,13 @@ internal static class CaptureRunner
         // The first card is affordable and fills to the brim; the third only part way.
         foreach (var (index, name) in new[] { (0, "coffee"), (2, "latte") })
         {
-            cards[index].IsOpen = true;
+            cards[index].IsChecked = true;
 
             await capture.SampleAsync(
                 FrameTimes,
                 time => $"{name}_{time.ToString("0000", CultureInfo.InvariantCulture)}");
 
-            cards[index].IsOpen = false;
+            cards[index].IsChecked = false;
             await Task.Delay(1400);
         }
 

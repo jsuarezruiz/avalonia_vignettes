@@ -23,7 +23,7 @@
     </controls:FluidNavBarView.PageTransition>
 
     <controls:FluidNavBarButton Icon="{x:Static controls:FluidIconData.Home}">
-      <ScrollViewer Padding="20,20,20,0">
+      <ScrollViewer Padding="20,20,20,0" VerticalScrollBarVisibility="Hidden">
         <ItemsControl ItemsSource="{Binding Rows}">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
@@ -35,7 +35,7 @@
     </controls:FluidNavBarButton>
 
     <controls:FluidNavBarButton Icon="{x:Static controls:FluidIconData.User}">
-      <ScrollViewer Padding="20,20,20,0">
+      <ScrollViewer Padding="20,20,20,0" VerticalScrollBarVisibility="Hidden">
         <ItemsControl ItemsSource="{Binding Rows}">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
@@ -47,7 +47,7 @@
     </controls:FluidNavBarButton>
 
     <controls:FluidNavBarButton Icon="{x:Static controls:FluidIconData.Window}">
-      <ScrollViewer Padding="8,20,8,0">
+      <ScrollViewer Padding="8,20,8,0" VerticalScrollBarVisibility="Hidden">
         <ItemsControl ItemsSource="{Binding Tiles}">
           <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
@@ -56,7 +56,9 @@
           </ItemsControl.ItemsPanel>
           <ItemsControl.ItemTemplate>
             <DataTemplate>
-              <shared:PlaceholderImageWithText Height="{Binding TileSize, RelativeSource={RelativeSource AncestorType=views:MainView}}" />
+              <Border Height="{Binding $self.Bounds.Width}" Padding="10">
+                <shared:PlaceholderImageWithText />
+              </Border>
             </DataTemplate>
           </ItemsControl.ItemTemplate>
         </ItemsControl>

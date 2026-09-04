@@ -69,6 +69,7 @@
                          TextWrapping="Wrap"
                          FontFamily="{StaticResource SerifFont}"
                          FontSize="30"
+                         LetterSpacing="0.25"
                          LineHeight="36"
                          ClipToBounds="False"
                          Foreground="{StaticResource OnCardBrush}" />
@@ -79,6 +80,7 @@
                          TextWrapping="Wrap"
                          FontFamily="{StaticResource BodyLightFont}"
                          FontSize="14"
+                         LetterSpacing="0.25"
                          Foreground="{StaticResource OnCardBrush}" />
 
               <Button Grid.Row="5"

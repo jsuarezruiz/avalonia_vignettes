@@ -78,6 +78,7 @@
                     <TextBlock Classes="detailsCardTitle"
                                DockPanel.Dock="Bottom"
                                Margin="8"
+                               TextAlignment="Center"
                                Text="{Binding Title}" />
 
                     <Image Source="{Binding Image}" Stretch="UniformToFill" ClipToBounds="True" />

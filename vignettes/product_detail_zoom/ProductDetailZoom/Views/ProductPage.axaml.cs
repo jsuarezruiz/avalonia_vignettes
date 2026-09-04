@@ -127,5 +127,6 @@ public partial class ProductPage : ContentPage, IHeroPage
         return base.ArrangeOverride(finalSize);
     }
 
-    private void OnZoomPressed(object? sender, EventArgs e) => ZoomRequested?.Invoke(this, EventArgs.Empty);
+    private void OnZoomClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e) =>
+        ZoomRequested?.Invoke(this, EventArgs.Empty);
 }

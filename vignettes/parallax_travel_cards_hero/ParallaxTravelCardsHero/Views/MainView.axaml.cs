@@ -1,5 +1,5 @@
 using Avalonia.Controls;
-using Avalonia.Input;
+using Avalonia.Interactivity;
 using AvaloniaVignettes.Shared.Controls;
 using ParallaxTravelCardsHero.Controls;
 using ParallaxTravelCardsHero.Models;
@@ -31,7 +31,7 @@ public partial class MainView : UserControl
         _transition.HeroFlight = Flight;
         Navigation.PageTransition = _transition;
 
-        List.Hero.Tapped += OnCardTapped;
+        List.OpenCardButton.Click += OnCardClicked;
         SizeChanged += (_, e) =>
         {
             if (_detail is not null)
@@ -47,14 +47,14 @@ public partial class MainView : UserControl
     /// <summary>
     /// Opens the card, so <c>--capture</c> can sample frames as the navigation plays.
     /// </summary>
-    internal void BeginCapture() => OnCardTapped(this, null!);
+    internal void BeginCapture() => List.OpenCardButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
 
     /// <summary>
     /// Goes back, so <c>--capture</c> can sample the return the same way.
     /// </summary>
     internal void BackCapture() => OnBackRequested(this, EventArgs.Empty);
 
-    private async void OnCardTapped(object? sender, TappedEventArgs e)
+    private async void OnCardClicked(object? sender, RoutedEventArgs e)
     {
         if (Navigation.IsNavigating || Navigation.CanGoBack)
         {

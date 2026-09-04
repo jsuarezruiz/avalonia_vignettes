@@ -84,5 +84,6 @@ public partial class DetailPage : ContentPage, IHeroPage
         return result;
     }
 
-    private void OnShrinkPressed(object? sender, EventArgs e) => ShrinkRequested?.Invoke(this, EventArgs.Empty);
+    private void OnShrinkClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e) =>
+        ShrinkRequested?.Invoke(this, EventArgs.Empty);
 }

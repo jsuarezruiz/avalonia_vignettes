@@ -5,8 +5,9 @@
 
   <ControlTheme x:Key="{x:Type controls:CityScenery}" TargetType="controls:CityScenery">
 
-    <!-- Flutter's Stack clips what its children overflow, and the scene relies on that. -->
-    <Setter Property="ClipToBounds" Value="True" />
+    <!-- Flutter's Stack does not clip overflow introduced only by a child's paint transform.
+         The raised Eiffel Tower and the card shadow must extend beyond the closed card. -->
+    <Setter Property="ClipToBounds" Value="False" />
 
     <Setter Property="Template">
       <ControlTemplate>

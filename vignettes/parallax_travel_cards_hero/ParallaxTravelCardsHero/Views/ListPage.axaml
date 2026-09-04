@@ -28,8 +28,14 @@
                  TextWrapping="Wrap"
                  Text="Get ready for your trip!" />
 
-      <controls:CityScenery x:Name="Card"
-                            Margin="0,50"
+      <Button x:Name="OpenCard" Margin="0,50" Padding="0" Background="Transparent"
+              BorderThickness="0" HorizontalAlignment="Center" AutomationProperties.Name="Explore Paris">
+        <Button.Template>
+          <ControlTemplate>
+            <ContentPresenter Content="{TemplateBinding Content}" Background="{TemplateBinding Background}" />
+          </ControlTemplate>
+        </Button.Template>
+        <controls:CityScenery x:Name="Card"
                             HorizontalAlignment="Center"
                             Cursor="Hand"
                             City="{Binding}"
@@ -37,6 +43,7 @@
                             Height="{Binding #Root.CardHeight}"
                             ScreenWidth="{Binding #Root.ScreenWidth}"
                             ScreenHeight="{Binding #Root.ScreenHeight}" />
+      </Button>
 
       <!-- The hotel section. Styles.hzScreenPadding * 1.5 horizontally, 20 below. -->
       <StackPanel Margin="{StaticResource HotelSectionPadding}">

@@ -173,7 +173,6 @@ public sealed class TextTransition : TemplatedControl
         Incoming = text;
 
         _roll.Duration = TransitionDuration;
-        _roll.SetValue(0d);
         _roll.Forward();
     }
 
