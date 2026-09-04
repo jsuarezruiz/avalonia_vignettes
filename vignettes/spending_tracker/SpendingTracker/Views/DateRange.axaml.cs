@@ -27,7 +27,7 @@ public partial class DateRange : UserControl
 
     private static readonly string[] MonthNames =
     [
-        "January", "Febuary", "March", "April", "May", "June",
+        "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December",
     ];
 
