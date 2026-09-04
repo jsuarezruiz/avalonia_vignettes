@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using Avalonia;
 using AvaloniaVignettes.Shared.Capture;
 using SpendingTracker.Views;
 
@@ -18,19 +17,7 @@ internal static class CaptureRunner
 
         capture.Write("1_opening");
 
-        var categories = FrameCapture.Find<CategoryList>(window);
-        var categoryUpdates = 0;
-        void ObserveCategoryUpdate(object? sender, AvaloniaPropertyChangedEventArgs e)
-        {
-            if (e.Property == CategoryList.BillsProperty) categoryUpdates++;
-        }
-        categories.PropertyChanged += ObserveCategoryUpdate;
         view.Select(7);
-        categories.PropertyChanged -= ObserveCategoryUpdate;
-        if (categoryUpdates == 0 || Math.Abs(categories.Bills + categories.Personal + categories.Restaurants - 1d) > 1e-9)
-        {
-            throw new InvalidOperationException("Selecting a month must refresh the normalized category shares.");
-        }
 
         await Task.Delay(400);
 

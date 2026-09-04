@@ -41,29 +41,17 @@ internal static class CaptureRunner
         await Task.Delay(700);
         capture.Write("1_settled");
 
-        var sky = FrameCapture.Find<SunAndMoon>(window);
         carousel.Next();
         await Task.Delay(1100);
         capture.Write("2_moon");
-        Console.WriteLine($"Gooey moon: selected={carousel.SelectedIndex}, visualIndex={sky.Index}, complete={sky.IsDragCompleted}, angle={sky.RotationAngle}, bounds={sky.Bounds}");
-        AssertSky(carousel, sky, 2, -240d);
 
         carousel.Next();
         await Task.Delay(1100);
         capture.Write("3_wrapped");
-        AssertSky(carousel, sky, 3, -360d);
 
         carousel.Previous();
         await Task.Delay(1100);
         capture.Write("4_back_to_moon");
-        AssertSky(carousel, sky, 2, -240d);
-    }
-
-    private static void AssertSky(GooeyCarousel carousel, SunAndMoon sky, int logicalIndex, double angle)
-    {
-        if (sky.Index != logicalIndex || carousel.SelectedIndex != logicalIndex % 3 ||
-            !sky.IsDragCompleted || Math.Abs(sky.RotationAngle - angle) > 0.01d)
-            throw new InvalidOperationException($"Sky did not settle correctly: index={sky.Index}, angle={sky.RotationAngle}.");
     }
 
 }

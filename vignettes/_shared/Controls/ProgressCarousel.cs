@@ -217,7 +217,7 @@ public class ProgressCarousel : SwipeCarousel
     }
 
     /// <summary>
-    /// Reports a fractional page supplied by a deterministic capture harness.
+    /// Reports a fractional page supplied by a specialized carousel implementation.
     /// </summary>
     protected void ReportPage(double page)
     {
