@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>FluidNavBar</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.fluidnavbar</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.fluidnavbar</ApplicationId>
     <ApplicationTitle>Fluid Button Bar</ApplicationTitle>
   </PropertyGroup>
 

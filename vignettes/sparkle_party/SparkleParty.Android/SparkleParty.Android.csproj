@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>SparkleParty</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.sparkleparty</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.sparkleparty</ApplicationId>
     <ApplicationTitle>Sparkle Party Particles</ApplicationTitle>
   </PropertyGroup>
 

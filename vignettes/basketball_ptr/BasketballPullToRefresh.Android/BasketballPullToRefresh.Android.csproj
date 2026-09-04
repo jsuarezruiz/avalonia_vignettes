@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>BasketballPullToRefresh</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.basketballpulltorefresh</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.basketballpulltorefresh</ApplicationId>
     <ApplicationTitle>Sports App Pull To Refresh</ApplicationTitle>
   </PropertyGroup>
 

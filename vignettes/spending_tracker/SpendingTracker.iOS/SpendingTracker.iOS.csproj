@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>SpendingTracker</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.spendingtracker</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.spendingtracker</ApplicationId>
     <ApplicationTitle>BudgetTracker Graphs</ApplicationTitle>
   </PropertyGroup>
 

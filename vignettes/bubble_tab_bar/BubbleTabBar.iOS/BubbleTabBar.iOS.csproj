@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>BubbleTabBar</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.bubbletabbar</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.bubbletabbar</ApplicationId>
     <ApplicationTitle>Icon Flip Button Bar</ApplicationTitle>
   </PropertyGroup>
 

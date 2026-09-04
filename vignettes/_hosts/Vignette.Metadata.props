@@ -1,0 +1,90 @@
+<Project>
+  <PropertyGroup>
+    <ApplicationId Condition="'$(ApplicationId)' == ''">com.jsuarezruiz.$(VignetteAssembly.ToLowerInvariant())</ApplicationId>
+    <ApplicationDisplayVersion Condition="'$(ApplicationDisplayVersion)' == ''">1.0</ApplicationDisplayVersion>
+    <ApplicationVersion Condition="'$(ApplicationVersion)' == ''">1</ApplicationVersion>
+    <Version Condition="'$(Version)' == ''">1.0.0</Version>
+    <Authors>Javier Suárez Ruiz; Avalonia Vignettes contributors</Authors>
+    <Company>Avalonia Vignettes</Company>
+    <Copyright>© 2026 Avalonia Vignettes contributors</Copyright>
+    <NeutralLanguage>en</NeutralLanguage>
+    <RepositoryUrl>https://github.com/jsuarezruiz/avalonia_vignettes</RepositoryUrl>
+    <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'BasketballPullToRefresh'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Sports App Pull To Refresh</ApplicationTitle>
+    <VignetteDescription>A custom pull to refresh where a basketball spins around the hoop while scores reload.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'BubbleTabBar'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Icon Flip Button Bar</ApplicationTitle>
+    <VignetteDescription>A playful navigation bar whose buttons change size, shape, and color as they are selected.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'ConstellationsList'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Guide To the Stars Particles</ApplicationTitle>
+    <VignetteDescription>An animated star guide with a reactive starfield, scrolling constellations, and detail transitions.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'DarkInkTransition'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Article Dark Mode</ApplicationTitle>
+    <VignetteDescription>An article reader where animated ink spreads across the page between light and dark themes.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'DogSlider'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Dog Toy Slider</ApplicationTitle>
+    <VignetteDescription>A characterful slider where a dog chases a ball and settles into a sit.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'DrinkRewardsList'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Liquid Rewards Cards</ApplicationTitle>
+    <VignetteDescription>Interactive rewards cards that spring open and fill with animated, sloshing liquid.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'FluidNavBar'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Fluid Button Bar</ApplicationTitle>
+    <VignetteDescription>A fluid navigation bar whose surface dips and sloshes beneath the selected action.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'GooeyEdge'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Mindfulness Gooey Transition</ApplicationTitle>
+    <VignetteDescription>A mindfulness carousel with a liquid page edge that follows swipe gestures.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'Indie3D'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Feature Artist Carousel</ApplicationTitle>
+    <VignetteDescription>An artist carousel surrounded by drifting three-dimensional shapes and bold typography.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'ParallaxTravelCardsHero'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Paris Travel Hero Transition</ApplicationTitle>
+    <VignetteDescription>A travel card that expands into a layered Paris scene with an animated hero transition.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'ParallaxTravelCardsList'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Travel Cards</ApplicationTitle>
+    <VignetteDescription>A tactile travel-card list with layered parallax scenery and three-dimensional tilt.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'ParticleSwipe'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Inbox Swipe Particles</ApplicationTitle>
+    <VignetteDescription>An inbox where swipe actions burst into expressive animated particle effects.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'PlantForms'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Plant Shopping Cart</ApplicationTitle>
+    <VignetteDescription>A polished plant checkout flow with progressive forms, validation, and animated submission.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'ProductDetailZoom'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Product Zoom Transition</ApplicationTitle>
+    <VignetteDescription>A product page with a cinematic zoom, spinning speaker, and animated detail callouts.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'SparkleParty'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Sparkle Party Particles</ApplicationTitle>
+    <VignetteDescription>A high-performance particle playground with fireworks, comets, pinwheels, and waterfalls.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'SpendingTracker'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">BudgetTracker Graphs</ApplicationTitle>
+    <VignetteDescription>An animated spending tracker with draggable monthly charts and rolling totals.</VignetteDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(VignetteAssembly)' == 'TicketFold'">
+    <ApplicationTitle Condition="'$(ApplicationTitle)' == ''">Boarding Pass Cards</ApplicationTitle>
+    <VignetteDescription>Boarding passes that unfold panel by panel with a tactile concertina animation.</VignetteDescription>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyTitle>$(ApplicationTitle)</AssemblyTitle>
+    <Product>$(ApplicationTitle)</Product>
+    <Description>$(VignetteDescription)</Description>
+    <PackageDescription>$(VignetteDescription)</PackageDescription>
+  </PropertyGroup>
+</Project>

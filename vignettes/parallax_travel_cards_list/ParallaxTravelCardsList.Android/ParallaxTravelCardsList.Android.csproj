@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>ParallaxTravelCardsList</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.parallaxtravelcardslist</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.parallaxtravelcardslist</ApplicationId>
     <ApplicationTitle>Travel Cards</ApplicationTitle>
   </PropertyGroup>
 

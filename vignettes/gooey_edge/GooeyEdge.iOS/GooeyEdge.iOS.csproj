@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>GooeyEdge</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.gooeyedge</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.gooeyedge</ApplicationId>
     <ApplicationTitle>Mindfulness Gooey Transition</ApplicationTitle>
   </PropertyGroup>
 

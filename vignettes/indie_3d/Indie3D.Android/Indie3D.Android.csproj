@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>Indie3D</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.indie3d</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.indie3d</ApplicationId>
     <ApplicationTitle>Feature Artist Carousel</ApplicationTitle>
   </PropertyGroup>
 

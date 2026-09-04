@@ -1,10 +1,20 @@
 <Project>
+  <Import Project="$(MSBuildThisFileDirectory)../Vignette.Metadata.props" />
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
+    <ApplicationIcon>$(MSBuildProjectDirectory)/Assets/AppIcon.ico</ApplicationIcon>
+    <MacOSApplicationIcon>$(MSBuildProjectDirectory)/Assets/AppIcon.icns</MacOSApplicationIcon>
     <ApplicationManifest>$(MSBuildProjectDirectory)/../$(VignetteAssembly)/app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
+    <AvaloniaResource Include="$(MSBuildProjectDirectory)/Assets/AppIcon.png" Link="Assets/AppIcon.png" />
+    <None Update="Assets/AppIcon.icns" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)MacOSDockIcon.cs" Link="MacOSDockIcon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Program.cs" Link="Program.cs" />
     <Using Include="$(VignetteAssembly).App" Alias="VignetteApp" />
   </ItemGroup>

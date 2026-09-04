@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>ParticleSwipe</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.particleswipe</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.particleswipe</ApplicationId>
     <ApplicationTitle>Inbox Swipe Particles</ApplicationTitle>
   </PropertyGroup>
 

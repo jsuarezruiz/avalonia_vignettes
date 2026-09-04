@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>DrinkRewardsList</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.drinkrewardslist</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.drinkrewardslist</ApplicationId>
     <ApplicationTitle>Liquid Rewards Cards</ApplicationTitle>
   </PropertyGroup>
 

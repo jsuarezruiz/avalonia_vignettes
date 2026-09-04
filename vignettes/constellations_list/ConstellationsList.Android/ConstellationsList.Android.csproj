@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>ConstellationsList</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.constellationslist</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.constellationslist</ApplicationId>
     <ApplicationTitle>Guide To the Stars Particles</ApplicationTitle>
   </PropertyGroup>
 

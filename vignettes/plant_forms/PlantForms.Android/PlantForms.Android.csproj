@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>PlantForms</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.plantforms</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.plantforms</ApplicationId>
     <ApplicationTitle>Plant Shopping Cart</ApplicationTitle>
   </PropertyGroup>
 

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>DarkInkTransition</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.darkinktransition</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.darkinktransition</ApplicationId>
     <ApplicationTitle>Article Dark Mode</ApplicationTitle>
   </PropertyGroup>
 

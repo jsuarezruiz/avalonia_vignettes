@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>TicketFold</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.ticketfold</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.ticketfold</ApplicationId>
     <ApplicationTitle>Boarding Pass Cards</ApplicationTitle>
   </PropertyGroup>
 

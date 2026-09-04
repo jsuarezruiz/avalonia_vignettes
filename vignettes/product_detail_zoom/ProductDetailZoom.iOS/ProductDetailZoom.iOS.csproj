@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>ProductDetailZoom</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.productdetailzoom</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.productdetailzoom</ApplicationId>
     <ApplicationTitle>Product Zoom Transition</ApplicationTitle>
   </PropertyGroup>
 

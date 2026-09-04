@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VignetteAssembly>DogSlider</VignetteAssembly>
-    <ApplicationId>org.avaloniavignettes.dogslider</ApplicationId>
+    <ApplicationId>com.jsuarezruiz.dogslider</ApplicationId>
     <ApplicationTitle>Dog Toy Slider</ApplicationTitle>
   </PropertyGroup>
 

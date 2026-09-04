@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform;
 using Avalonia.Threading;
 using AvaloniaVignettes.Shared.Capture;
 
@@ -17,6 +18,7 @@ public static class VignetteLifetime
         {
             case IClassicDesktopStyleApplicationLifetime desktop:
                 var window = createWindow();
+                ApplyDesktopIcon(window);
                 desktop.MainWindow = window;
 
                 if (FrameCapture.GetOutputDirectory(desktop.Args ?? []) is { } outputDirectory)
@@ -35,6 +37,15 @@ public static class VignetteLifetime
                 singleView.MainView = new TView();
                 break;
         }
+    }
+
+    private static void ApplyDesktopIcon(Window window)
+    {
+        var assemblyName = System.Reflection.Assembly.GetEntryAssembly()?.GetName().Name
+            ?? window.GetType().Assembly.GetName().Name;
+        var iconUri = new Uri($"avares://{assemblyName}/Assets/AppIcon.png");
+        using var iconStream = AssetLoader.Open(iconUri);
+        window.Icon = new WindowIcon(iconStream);
     }
 
     private static async Task RunCaptureAsync(
