@@ -120,7 +120,7 @@ dotnet build vignettes/basketball_ptr/BasketballPullToRefresh.iOS/BasketballPull
 
 Android and iOS builds require their corresponding .NET workloads and native SDKs. Open `AvaloniaVignettes.slnx` to work with every platform project together.
 
-[`vignettes/_shared`](vignettes/_shared) holds what they have in common: Flutter's animation controller, ticker and curves, a `PageView`, `Hero` flights, perspective transforms.
+[`vignettes/_shared`](vignettes/_shared) holds what they have in common: Flutter's animation controller, ticker and curves, fractional progress for Avalonia's native `Carousel`, `Hero` flights, and perspective transforms.
 
 ## Licence
 

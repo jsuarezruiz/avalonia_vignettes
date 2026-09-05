@@ -87,6 +87,7 @@ Bundled fonts
 --------------------------------------------------------------------------------
 
 The font files under Assets/Fonts are redistributed under their own terms, not
-under this project's licence. Roboto is licensed under the Apache License 2.0;
-the remainder are licensed under the SIL Open Font License 1.1, which requires
-its text to accompany the fonts. Those licence files are not yet bundled here.
+under this project's licence. Open Sans and Roboto are licensed under the
+Apache License 2.0; the remaining families are licensed under the SIL Open Font
+License 1.1. Their full licence texts, family mapping, copyright notices and
+Reserved Font Names are bundled under LICENSES/fonts.
