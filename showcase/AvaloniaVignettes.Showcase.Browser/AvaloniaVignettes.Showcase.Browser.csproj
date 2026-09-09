@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-browser</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../AvaloniaVignettes.Showcase/AvaloniaVignettes.Showcase.csproj" />
+  </ItemGroup>
+
+  <!-- The host discovers these views and their XAML resources dynamically. -->
+  <ItemGroup>
+    <TrimmerRootAssembly Include="AvaloniaVignettes.Showcase" />
+    <TrimmerRootAssembly Include="BasketballPullToRefresh" />
+    <TrimmerRootAssembly Include="BubbleTabBar" />
+    <TrimmerRootAssembly Include="ConstellationsList" />
+    <TrimmerRootAssembly Include="DarkInkTransition" />
+    <TrimmerRootAssembly Include="DogSlider" />
+    <TrimmerRootAssembly Include="DrinkRewardsList" />
+    <TrimmerRootAssembly Include="FluidNavBar" />
+    <TrimmerRootAssembly Include="GooeyEdge" />
+    <TrimmerRootAssembly Include="Indie3D" />
+    <TrimmerRootAssembly Include="ParallaxTravelCardsHero" />
+    <TrimmerRootAssembly Include="ParallaxTravelCardsList" />
+    <TrimmerRootAssembly Include="ParticleSwipe" />
+    <TrimmerRootAssembly Include="PlantForms" />
+    <TrimmerRootAssembly Include="ProductDetailZoom" />
+    <TrimmerRootAssembly Include="SparkleParty" />
+    <TrimmerRootAssembly Include="SpendingTracker" />
+    <TrimmerRootAssembly Include="TicketFold" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,149 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:models="using:AvaloniaVignettes.Showcase.Models"
+             x:Class="AvaloniaVignettes.Showcase.Views.MainView"
+             x:CompileBindings="False"
+             Background="#F7F7F5">
+
+  <Grid RowDefinitions="58,*,164">
+
+    <Border Grid.Row="0"
+            Padding="26,0"
+            Background="#FFFFFF"
+            BorderBrush="#E7E6E2"
+            BorderThickness="0,0,0,1">
+      <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+        <!-- One text layout gives both runs the same typographic baseline. -->
+        <TextBlock FontSize="17"
+                   FontWeight="SemiBold"
+                   Foreground="#18171C"
+                   VerticalAlignment="Center">
+          <Run Text="Avalonia Vignettes" />
+          <Run Text="  Live showcase"
+               FontSize="12"
+               FontWeight="Normal"
+               Foreground="#96939B" />
+        </TextBlock>
+
+        <HyperlinkButton Name="ViewCodeButton"
+                         Grid.Column="1"
+                         Classes="viewCode"
+                         Content="View code  ↗"
+                         VerticalAlignment="Center" />
+      </Grid>
+    </Border>
+
+    <Grid Grid.Row="1" RowDefinitions="Auto,*,Auto">
+
+      <StackPanel Grid.Row="0"
+                  Margin="24,16,24,4"
+                  HorizontalAlignment="Center"
+                  Spacing="3">
+        <TextBlock Name="SelectedCategory"
+                   Classes="eyebrow"
+                   HorizontalAlignment="Center" />
+        <TextBlock Name="SelectedTitle"
+                   FontSize="24"
+                   FontWeight="SemiBold"
+                   Foreground="#18171C"
+                   HorizontalAlignment="Center" />
+        <TextBlock Name="SelectedDescription"
+                   MaxWidth="520"
+                   FontSize="11"
+                   Foreground="#797780"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   HorizontalAlignment="Center" />
+      </StackPanel>
+
+      <Viewbox Grid.Row="1"
+               Stretch="Uniform"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Stretch"
+               Margin="0,8">
+        <!-- The extra canvas keeps the soft shadow inside the Viewbox's measured bounds. -->
+        <Grid Width="502" Height="956">
+          <Border Width="414"
+                  Height="868"
+                  Padding="11"
+                  CornerRadius="54"
+                  Background="#18181B"
+                  BorderBrush="#09090B"
+                  BorderThickness="1"
+                  BoxShadow="0 12 32 0 #26000000"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center">
+            <Border CornerRadius="43"
+                    ClipToBounds="True"
+                    Background="#050506">
+              <ThemeVariantScope Name="SampleTheme">
+                <ContentControl Name="SampleHost"
+                                Width="390"
+                                Height="844"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch" />
+              </ThemeVariantScope>
+            </Border>
+          </Border>
+        </Grid>
+      </Viewbox>
+
+      <TextBlock Name="SelectedInstruction"
+                 Grid.Row="2"
+                 Margin="24,4,24,14"
+                 FontSize="12"
+                 FontWeight="SemiBold"
+                 Foreground="#5F5C66"
+                 TextAlignment="Center"
+                 HorizontalAlignment="Center" />
+    </Grid>
+
+    <Border Grid.Row="2"
+            Padding="18,12,18,10"
+            Background="#FFFFFF"
+            BorderBrush="#E7E6E2"
+            BorderThickness="0,1,0,0">
+      <ListBox Name="SampleList"
+               Classes="sampleList"
+               ItemsSource="{Binding Samples}"
+               SelectionChanged="OnSampleSelectionChanged"
+               ScrollViewer.HorizontalScrollBarVisibility="Auto"
+               ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        <ListBox.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Horizontal" Spacing="9" />
+          </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+        <ListBox.ItemTemplate>
+          <DataTemplate DataType="models:VignetteSample">
+            <Grid Width="164"
+                  Height="118"
+                  Margin="6"
+                  ColumnDefinitions="54,*">
+              <Border Width="54"
+                      Height="106"
+                      CornerRadius="7"
+                      ClipToBounds="True"
+                      Background="#F0EFEC">
+                <Image Source="{Binding Preview}"
+                       Stretch="UniformToFill" />
+              </Border>
+
+              <StackPanel Grid.Column="1"
+                          Margin="11,5,2,4"
+                          Spacing="4">
+                <TextBlock Classes="sampleNumber" Text="{Binding Number}" />
+                <TextBlock Classes="sampleCategory" Text="{Binding Category}" />
+                <TextBlock Classes="sampleTitle"
+                           Text="{Binding Title}"
+                           MaxLines="3"
+                           TextWrapping="Wrap" />
+              </StackPanel>
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </Border>
+  </Grid>
+
+</UserControl>

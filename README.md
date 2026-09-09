@@ -118,6 +118,15 @@ dotnet build vignettes/basketball_ptr/BasketballPullToRefresh.Android/Basketball
 dotnet build vignettes/basketball_ptr/BasketballPullToRefresh.iOS/BasketballPullToRefresh.iOS.csproj -p:RuntimeIdentifier=iossimulator-arm64
 ```
 
+There is also a live showcase that collects every vignette in a sample selector and runs the selected view inside a phone frame. It has desktop and WebAssembly heads:
+
+[Open the live WebAssembly showcase](https://avalonia-vignettes-showcase.jsuarezruiz.chatgpt.site).
+
+```
+dotnet run --project showcase/AvaloniaVignettes.Showcase.Desktop/AvaloniaVignettes.Showcase.Desktop.csproj
+dotnet run --project showcase/AvaloniaVignettes.Showcase.Browser/AvaloniaVignettes.Showcase.Browser.csproj
+```
+
 Android and iOS builds require their corresponding .NET workloads and native SDKs. Open `AvaloniaVignettes.slnx` to work with every platform project together.
 
 [`vignettes/_shared`](vignettes/_shared) holds what they have in common: Flutter's animation controller, ticker and curves, fractional progress for Avalonia's native `Carousel`, `Hero` flights, and perspective transforms.

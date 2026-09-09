@@ -1,4 +1,9 @@
 <Solution>
+  <Folder Name="/showcase/">
+    <Project Path="showcase/AvaloniaVignettes.Showcase/AvaloniaVignettes.Showcase.csproj" />
+    <Project Path="showcase/AvaloniaVignettes.Showcase.Desktop/AvaloniaVignettes.Showcase.Desktop.csproj" />
+    <Project Path="showcase/AvaloniaVignettes.Showcase.Browser/AvaloniaVignettes.Showcase.Browser.csproj" />
+  </Folder>
   <Project Path="vignettes/_shared/AvaloniaVignettes.Shared.csproj" />
   <Project Path="vignettes/basketball_ptr/BasketballPullToRefresh/BasketballPullToRefresh.csproj" />
   <Project Path="vignettes/basketball_ptr/BasketballPullToRefresh.Desktop/BasketballPullToRefresh.Desktop.csproj" />

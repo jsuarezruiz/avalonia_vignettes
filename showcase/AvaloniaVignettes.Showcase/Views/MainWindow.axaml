@@ -1,0 +1,12 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="using:AvaloniaVignettes.Showcase.Views"
+        x:Class="AvaloniaVignettes.Showcase.Views.MainWindow"
+        Title="Avalonia Vignettes Showcase"
+        Width="1280"
+        Height="860"
+        MinWidth="820"
+        MinHeight="620"
+        Background="#F7F7F5">
+  <views:MainView />
+</Window>

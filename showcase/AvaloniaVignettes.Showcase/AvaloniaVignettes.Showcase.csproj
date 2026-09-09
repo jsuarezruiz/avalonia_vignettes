@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../vignettes/basketball_ptr/BasketballPullToRefresh/BasketballPullToRefresh.csproj" />
+    <ProjectReference Include="../../vignettes/bubble_tab_bar/BubbleTabBar/BubbleTabBar.csproj" />
+    <ProjectReference Include="../../vignettes/constellations_list/ConstellationsList/ConstellationsList.csproj" />
+    <ProjectReference Include="../../vignettes/dark_ink_transition/DarkInkTransition/DarkInkTransition.csproj" />
+    <ProjectReference Include="../../vignettes/dog_slider/DogSlider/DogSlider.csproj" />
+    <ProjectReference Include="../../vignettes/drink_rewards_list/DrinkRewardsList/DrinkRewardsList.csproj" />
+    <ProjectReference Include="../../vignettes/fluid_nav_bar/FluidNavBar/FluidNavBar.csproj" />
+    <ProjectReference Include="../../vignettes/gooey_edge/GooeyEdge/GooeyEdge.csproj" />
+    <ProjectReference Include="../../vignettes/indie_3d/Indie3D/Indie3D.csproj" />
+    <ProjectReference Include="../../vignettes/parallax_travel_cards_hero/ParallaxTravelCardsHero/ParallaxTravelCardsHero.csproj" />
+    <ProjectReference Include="../../vignettes/parallax_travel_cards_list/ParallaxTravelCardsList/ParallaxTravelCardsList.csproj" />
+    <ProjectReference Include="../../vignettes/particle_swipe/ParticleSwipe/ParticleSwipe.csproj" />
+    <ProjectReference Include="../../vignettes/plant_forms/PlantForms/PlantForms.csproj" />
+    <ProjectReference Include="../../vignettes/product_detail_zoom/ProductDetailZoom/ProductDetailZoom.csproj" />
+    <ProjectReference Include="../../vignettes/sparkle_party/SparkleParty/SparkleParty.csproj" />
+    <ProjectReference Include="../../vignettes/spending_tracker/SpendingTracker/SpendingTracker.csproj" />
+    <ProjectReference Include="../../vignettes/ticket_fold/TicketFold/TicketFold.csproj" />
+  </ItemGroup>
+
+</Project>
