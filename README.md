@@ -120,7 +120,9 @@ dotnet build vignettes/basketball_ptr/BasketballPullToRefresh.iOS/BasketballPull
 
 There is also a live showcase that collects every vignette in a sample selector and runs the selected view inside a phone frame. It has desktop and WebAssembly heads:
 
-[Open the live WebAssembly showcase](https://avalonia-vignettes-showcase.jsuarezruiz.chatgpt.site).
+[Open the live WebAssembly showcase](https://jsuarezruiz.github.io/avalonia_vignettes/).
+
+The compiled WebAssembly showcase is hosted by the public [`jsuarezruiz.github.io`](https://github.com/jsuarezruiz/jsuarezruiz.github.io) GitHub Pages repository; this source repository remains private.
 
 ```
 dotnet run --project showcase/AvaloniaVignettes.Showcase.Desktop/AvaloniaVignettes.Showcase.Desktop.csproj
