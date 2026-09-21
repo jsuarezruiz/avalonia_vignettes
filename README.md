@@ -136,3 +136,4 @@ Android and iOS builds require their corresponding .NET workloads and native SDK
 ## Licence
 
 MIT, and so are the originals. See [LICENSE](LICENSE).
+Third-party notices, including the upstream Flutter Vignettes copyright notice, live in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
