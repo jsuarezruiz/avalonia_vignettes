@@ -175,7 +175,7 @@ public static class VignetteCatalog
             category,
             description,
             instruction,
-            LoadPreview(preview),
+            new Lazy<Bitmap>(() => LoadPreview(preview)),
             new Uri($"https://github.com/jsuarezruiz/avalonia_vignettes/tree/main/vignettes/{preview}"),
             theme,
             static () => new TView(),

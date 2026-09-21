@@ -1,11 +1,12 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:models="using:AvaloniaVignettes.Showcase.Models"
+             xmlns:views="using:AvaloniaVignettes.Showcase.Views"
              x:Class="AvaloniaVignettes.Showcase.Views.MainView"
-             x:CompileBindings="False"
+             x:DataType="views:MainView"
              Background="#F7F7F5">
 
-  <Grid RowDefinitions="58,*,164">
+  <Grid RowDefinitions="48,*,144">
 
     <Border Grid.Row="0"
             Padding="26,0"
@@ -99,7 +100,7 @@
     </Grid>
 
     <Border Grid.Row="2"
-            Padding="18,12,18,10"
+            Padding="18,8,18,8"
             Background="#FFFFFF"
             BorderBrush="#E7E6E2"
             BorderThickness="0,1,0,0">
@@ -111,21 +112,21 @@
                ScrollViewer.VerticalScrollBarVisibility="Disabled">
         <ListBox.ItemsPanel>
           <ItemsPanelTemplate>
-            <StackPanel Orientation="Horizontal" Spacing="9" />
+            <VirtualizingStackPanel Orientation="Horizontal" Margin="0,0,-9,0" />
           </ItemsPanelTemplate>
         </ListBox.ItemsPanel>
         <ListBox.ItemTemplate>
           <DataTemplate DataType="models:VignetteSample">
-            <Grid Width="164"
-                  Height="118"
+            <Grid Width="150"
+                  Height="106"
                   Margin="6"
-                  ColumnDefinitions="54,*">
-              <Border Width="54"
-                      Height="106"
+                  ColumnDefinitions="50,*">
+              <Border Width="50"
+                      Height="94"
                       CornerRadius="7"
                       ClipToBounds="True"
                       Background="#F0EFEC">
-                <Image Source="{Binding Preview}"
+                <Image Source="{Binding Preview.Value}"
                        Stretch="UniformToFill" />
               </Border>
 

@@ -11,7 +11,7 @@ public sealed record VignetteSample(
     string Category,
     string Description,
     string Instruction,
-    Bitmap Preview,
+    Lazy<Bitmap> Preview,
     Uri CodeUri,
     ThemeVariant Theme,
     Func<Control> CreateView,
