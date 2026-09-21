@@ -61,7 +61,7 @@
                HorizontalAlignment="Center"
                VerticalAlignment="Stretch"
                Margin="0,8">
-        <!-- The extra canvas keeps the soft shadow inside the Viewbox's measured bounds. -->
+        <!-- The extra grid keeps the soft shadow inside the Viewbox's measured bounds. -->
         <Grid Width="502" Height="956">
           <Border Width="414"
                   Height="868"

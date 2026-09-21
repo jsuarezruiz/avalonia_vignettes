@@ -17,11 +17,6 @@ public sealed class EmailCard : TemplatedControl
     public static readonly StyledProperty<bool> IsAlternateProperty =
         AvaloniaProperty.Register<EmailCard, bool>(nameof(IsAlternate));
 
-    /// <summary>
-    /// The time every message claims to have arrived at, hard coded in the original.
-    /// </summary>
-    public const string ReceivedLabel = "11:45 PM";
-
     static EmailCard()
     {
         EmailProperty.Changed.AddClassHandler<EmailCard>((x, e) => x.OnEmailChanged(e));

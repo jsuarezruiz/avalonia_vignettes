@@ -76,7 +76,6 @@ public static class FrameCapture
         var file = $"{name}.png";
 
         bitmap.Save(Path.Combine(outputDirectory, file), new PngBitmapEncoderOptions());
-        Console.WriteLine($"captured {file}");
     }
 
 }

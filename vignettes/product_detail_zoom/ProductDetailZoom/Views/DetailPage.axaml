@@ -5,7 +5,6 @@
              xmlns:views="using:ProductDetailZoom.Views"
              x:Class="ProductDetailZoom.Views.DetailPage"
              x:DataType="views:DetailPage"
-             x:Name="Root"
              NavigationPage.HasNavigationBar="False"
              Background="{StaticResource ScreenBackgroundBrush}">
 

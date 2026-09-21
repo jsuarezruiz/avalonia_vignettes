@@ -165,11 +165,6 @@ public class ProgressCarousel : SwipeCarousel
     /// </summary>
     protected override Type StyleKeyOverride => typeof(Carousel);
 
-    /// <summary>
-    /// Selects a page using the carousel's normal programmatic transition.
-    /// </summary>
-    public void MoveToPage(int page) => SelectedIndex = Math.Clamp(page, 0, Math.Max(0, ItemCount - 1));
-
     private void OnSwipeGesture(object? sender, SwipeGestureEventArgs e)
     {
         if (!IsSwiping || _swipeId == e.Id)

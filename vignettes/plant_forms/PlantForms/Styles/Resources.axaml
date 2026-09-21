@@ -1,6 +1,5 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:sys="using:System">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <!-- Barlow names its weights as one family, so the weight picks the face. -->
   <FontFamily x:Key="BodyFont">avares://PlantForms/Assets/Fonts#Barlow</FontFamily>
@@ -19,10 +18,6 @@
   <SolidColorBrush x:Key="CardBrush" Color="White" />
   <SolidColorBrush x:Key="CardBorderBrush" Color="#FFD4D4D4" />
   <SolidColorBrush x:Key="OptionsBackgroundBrush" Color="#FFF4F4F4" />
-
-  <sys:Double x:Key="FormRadius">20</sys:Double>
-  <sys:Double x:Key="HorizontalPadding">37</sys:Double>
-  <sys:Double x:Key="VerticalFormPadding">18</sys:Double>
 
   <Thickness x:Key="FormPagePadding">37,18,37,0</Thickness>
   <CornerRadius x:Key="FormPageRadius">20,20,0,0</CornerRadius>

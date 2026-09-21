@@ -95,6 +95,10 @@ public sealed class FlexPanel : Panel
     /// <summary>
     /// Sets whether <paramref name="control"/> takes what the other children leave.
     /// </summary>
+    /// <remarks>
+    /// Required by the XAML compiler for the <c>Flexible</c> attached property; do not remove
+    /// even though no C# code calls it directly.
+    /// </remarks>
     public static void SetFlexible(Control control, bool value) => control.SetValue(FlexibleProperty, value);
 
     protected override Size MeasureOverride(Size availableSize)

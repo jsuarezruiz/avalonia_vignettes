@@ -4,7 +4,6 @@
              xmlns:shared="using:AvaloniaVignettes.Shared.Controls"
              xmlns:views="using:ProductDetailZoom.Views"
              x:Class="ProductDetailZoom.Views.MainView"
-             x:Name="Root"
              ClipToBounds="True"
              Background="{StaticResource ScreenBackgroundBrush}">
 

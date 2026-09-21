@@ -14,11 +14,6 @@ public readonly record struct SpringDescription(double Mass, double Stiffness, d
     /// </summary>
     public static SpringDescription FromDampingRatio(double mass, double stiffness, double ratio = 1d) =>
         new(mass, stiffness, ratio * 2d * Math.Sqrt(mass * stiffness));
-
-    /// <summary>
-    /// The spring Flutter's <c>ScrollPhysics</c> uses for every ballistic scroll simulation.
-    /// </summary>
-    public static SpringDescription ScrollDefault { get; } = FromDampingRatio(mass: 0.5, stiffness: 100d, ratio: 1.1);
 }
 
 /// <summary>
@@ -93,16 +88,6 @@ public sealed class SpringSimulation
         var offset = _x(time);
 
         return IsSettled(offset, _dx(time)) ? _endPosition : _endPosition + offset;
-    }
-
-    /// <summary>
-    /// Gets the velocity at <paramref name="time"/> seconds after the simulation started.
-    /// </summary>
-    public double VelocityAt(double time)
-    {
-        var velocity = _dx(time);
-
-        return IsSettled(_x(time), velocity) ? 0d : velocity;
     }
 
     /// <summary>

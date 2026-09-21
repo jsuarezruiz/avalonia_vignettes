@@ -29,7 +29,7 @@
       thrown while the rows carry on scrolling underneath.
     -->
     <Panel>
-      <ScrollViewer Name="Scroller" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+      <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
         <ItemsControl Name="Messages">
           <ItemsControl.ItemTemplate>
             <DataTemplate DataType="models:Email">

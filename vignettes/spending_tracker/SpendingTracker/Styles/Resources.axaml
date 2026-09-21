@@ -7,7 +7,6 @@
   <!-- app_colors.dart -->
   <SolidColorBrush x:Key="Bg0Brush" Color="#FF252B40" />
   <SolidColorBrush x:Key="Bg1Brush" Color="#FF313852" />
-  <SolidColorBrush x:Key="Accent0Brush" Color="#FF4A78ED" />
   <SolidColorBrush x:Key="Accent1Brush" Color="#FF4C5780" />
   <SolidColorBrush x:Key="Text0Brush" Color="#FFC3C8D9" />
   <SolidColorBrush x:Key="Text1Brush" Color="#FFDCE2F5" />

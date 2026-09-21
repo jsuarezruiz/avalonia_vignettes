@@ -32,11 +32,6 @@ public sealed class FluidNavBarView : TabControl
     public static readonly DirectProperty<FluidNavBarView, bool> IsSelectionEnabledProperty =
         AvaloniaProperty.RegisterDirect<FluidNavBarView, bool>(nameof(IsSelectionEnabled), o => o.IsSelectionEnabled);
 
-    /// <summary>
-    /// The bar's height, from <c>FluidNavBar.nominalHeight</c>.
-    /// </summary>
-    public const double NominalHeight = 56d;
-
     private const double MaxButtonStripWidth = 400d;
 
     private static readonly TimeSpan TravelDuration = TimeSpan.FromMilliseconds(620);

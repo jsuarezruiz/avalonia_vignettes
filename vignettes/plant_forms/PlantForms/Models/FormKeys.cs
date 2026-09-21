@@ -17,8 +17,4 @@ public static class FormKeys
     public const string Email = "email";
     public const string Phone = "phone";
     public const string CardNumber = "ccNumber";
-    public const string CardName = "ccName";
-    public const string CardCode = "ccCode";
-    public const string CardExpiry = "ccExpDate";
-    public const string Coupon = "coupon";
 }

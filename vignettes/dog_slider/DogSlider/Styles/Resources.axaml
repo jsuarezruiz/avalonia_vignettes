@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <FontFamily x:Key="BodyFont">avares://DogSlider/Assets/Fonts#Quicksand</FontFamily>
-  <FontFamily x:Key="LightFont">avares://DogSlider/Assets/Fonts#Quicksand Light</FontFamily>
   <FontFamily x:Key="SemiBoldFont">avares://DogSlider/Assets/Fonts#Quicksand SemiBold</FontFamily>
 
   <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FFFEF7FF" />

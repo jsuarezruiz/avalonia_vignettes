@@ -18,7 +18,6 @@
     <!-- The artist stands in the bottom four fifths of the page, scaled to fill that height. -->
     <Grid RowDefinitions="20*,80*">
       <Image Grid.Row="1"
-             Name="Artist"
              Source="{Binding Artwork}"
              Stretch="UniformToFill"
              HorizontalAlignment="Center" />

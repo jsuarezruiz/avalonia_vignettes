@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 
@@ -17,8 +16,7 @@ public sealed class FlightBarcode : TemplatedControl
 
     private static void OnTapped(object? sender, TappedEventArgs e)
     {
+        // Swallow the tap so it never reaches the ticket and folds it shut.
         e.Handled = true;
-
-        Debug.WriteLine("Button was pressed");
     }
 }

@@ -37,11 +37,6 @@ public sealed class NavBarButton : TabItem
     public static readonly DirectProperty<NavBarButton, ITransform> IconTransformProperty =
         AvaloniaProperty.RegisterDirect<NavBarButton, ITransform>(nameof(IconTransform), o => o.IconTransform);
 
-    /// <summary>
-    /// The width of a pill showing nothing but its icon.
-    /// </summary>
-    public const double CollapsedWidth = 56d;
-
     private const double IconTurnDegrees = 180d;
 
     private static readonly TimeSpan IconTurnDuration = TimeSpan.FromMilliseconds(350);

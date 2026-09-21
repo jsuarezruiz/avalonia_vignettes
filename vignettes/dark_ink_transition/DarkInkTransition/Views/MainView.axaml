@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="using:DarkInkTransition.Controls"
              x:Class="DarkInkTransition.Views.MainView"
-             x:Name="Root"
              Background="White">
 
   <!-- The whole demo toggles on a tap, which is how the original shows the transition off. -->

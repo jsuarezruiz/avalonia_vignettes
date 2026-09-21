@@ -3,21 +3,6 @@
 
   <FontFamily x:Key="SerifFont">avares://DarkInkTransition/Assets/Fonts#Merriweather</FontFamily>
 
-  <!-- The two poles every colour in the vignette lerps between. -->
-  <Color x:Key="DarkColor">#FF171137</Color>
-  <Color x:Key="LightColor">#FF67ECDC</Color>
-
-  <SolidColorBrush x:Key="LightPageBrush" Color="White" />
-  <SolidColorBrush x:Key="DarkPageBrush" Color="#FF313466" />
-  <SolidColorBrush x:Key="LightTextBrush" Color="#FF210A3B" />
-  <SolidColorBrush x:Key="DarkTextBrush" Color="#FFBCFEEA" />
-  <SolidColorBrush x:Key="LightSubHeaderBrush" Color="#FF008F9C" />
-  <SolidColorBrush x:Key="DarkSubHeaderBrush" Color="#FF00EBAC" />
-  <SolidColorBrush x:Key="LightRuleBrush" Color="#512B777E" />
-  <SolidColorBrush x:Key="DarkRuleBrush" Color="#510098A3" />
-  <SolidColorBrush x:Key="LightBarRuleBrush" Color="#FF2B777E" />
-  <SolidColorBrush x:Key="DarkBarRuleBrush" Color="#FF0098A3" />
-
   <!-- Material icons, on the usual 24 unit grid. -->
   <StreamGeometry x:Key="BackIconGeometry">M17.77,3.77L16,2L6,12l10,10l1.77-1.77L9.54,12L17.77,3.77z</StreamGeometry>
   <StreamGeometry x:Key="BookmarkIconGeometry">M17,3H7C5.9,3,5,3.9,5,5v16l7-3l7,3V5C19,3.9,18.1,3,17,3z M17,18l-5-2.18L7,18V5h10V18z</StreamGeometry>

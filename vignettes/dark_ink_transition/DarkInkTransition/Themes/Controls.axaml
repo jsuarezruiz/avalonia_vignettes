@@ -92,7 +92,7 @@
     <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
-        <!-- Three mini floating action buttons, 40 across, ten apart. -->
+        <!-- Three mini floating action buttons, 40 across, 20 apart. -->
         <StackPanel Orientation="Horizontal" Spacing="20" ClipToBounds="False">
 
           <Button Width="40" Height="40" Theme="{StaticResource MiniActionTheme}"

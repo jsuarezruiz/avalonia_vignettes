@@ -5,7 +5,6 @@
              xmlns:views="using:ProductDetailZoom.Views"
              x:Class="ProductDetailZoom.Views.ProductPage"
              x:DataType="views:ProductPage"
-             x:Name="Root"
              NavigationPage.HasNavigationBar="False"
              Background="{StaticResource ScreenBackgroundBrush}">
 
@@ -52,8 +51,7 @@
                             Click="OnZoomClicked" />
 
     <!-- The write-up and the two calls to action, in the bottom 43% of the screen. -->
-    <shared:FlexPanel x:Name="CopyPanel"
-                      MainAxisAlignment="SpaceEvenly"
+    <shared:FlexPanel MainAxisAlignment="SpaceEvenly"
                       VerticalAlignment="Bottom"
                       Margin="40,0"
                       Height="{Binding CopyHeight}">

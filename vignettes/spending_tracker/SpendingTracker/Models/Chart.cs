@@ -160,41 +160,6 @@ public sealed class Chart : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Gets the average of a series over the months on screen.
-    /// </summary>
-    public double Mean(int dataSetIndex)
-    {
-        var values = DataSets[dataSetIndex].Slice(RoundedDomainStart, RoundedDomainEnd);
-        var sum = 0d;
-
-        foreach (var value in values)
-        {
-            sum += value;
-        }
-
-        return sum / values.Length;
-    }
-
-    /// <summary>
-    /// Gets the middle value of a series over the months on screen.
-    /// </summary>
-    public double Median(int dataSetIndex)
-    {
-        var sorted = DataSets[dataSetIndex].Slice(RoundedDomainStart, RoundedDomainEnd).ToArray();
-
-        Array.Sort(sorted);
-
-        if (sorted.Length < 2)
-        {
-            return sorted[0];
-        }
-
-        var middle = sorted.Length / 2;
-
-        return (sorted.Length & 1) == 0 ? (sorted[middle] + sorted[middle - 1]) / 2d : sorted[middle];
-    }
-
-    /// <summary>
     /// Gets where the selected month sits across the domain, from 0 to 1.
     /// </summary>
     public double SelectedX() =>

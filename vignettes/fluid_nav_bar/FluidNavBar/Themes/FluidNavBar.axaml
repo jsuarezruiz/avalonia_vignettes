@@ -56,7 +56,7 @@
 
   <ControlTheme x:Key="{x:Type controls:FluidNavBarButton}" TargetType="controls:FluidNavBarButton">
 
-    <!-- FluidNavBarButton.nominalExtent. -->
+    <!-- The button box: 64 across, matching the Width and Height set below. -->
     <Setter Property="Width" Value="64" />
     <Setter Property="Height" Value="64" />
     <Setter Property="Cursor" Value="Hand" />

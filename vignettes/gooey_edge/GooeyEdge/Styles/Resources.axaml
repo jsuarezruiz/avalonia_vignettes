@@ -3,7 +3,6 @@
 
   <!-- Open Sans registers its light and semibold weights under their own family names. -->
   <FontFamily x:Key="SerifFont">avares://GooeyEdge/Assets/Fonts#DM Serif Display</FontFamily>
-  <FontFamily x:Key="BodyFont">avares://GooeyEdge/Assets/Fonts#Open Sans</FontFamily>
   <FontFamily x:Key="BodyLightFont">avares://GooeyEdge/Assets/Fonts#Open Sans Light</FontFamily>
   <FontFamily x:Key="BodySemiBoldFont">avares://GooeyEdge/Assets/Fonts#Open Sans Semibold</FontFamily>
 

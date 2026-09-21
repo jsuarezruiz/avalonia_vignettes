@@ -106,12 +106,6 @@ public partial class ProductPage : ContentPage, IHeroPage
         set => SetValue(CopySlideProperty, value);
     }
 
-    /// <summary>
-    /// Gets the write-up, which slides aside as the zoom begins. Only this moves, the buttons
-    /// below it stay put, as they do in the original.
-    /// </summary>
-    public Control Copy => Description;
-
     static ProductPage() =>
         CopySlideProperty.Changed.AddClassHandler<ProductPage>((x, e) =>
             x._slide.X = e.GetNewValue<double>() * x.Description.Bounds.Width);
