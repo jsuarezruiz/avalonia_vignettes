@@ -122,7 +122,7 @@ There is also a live showcase that collects every vignette in a sample selector 
 
 [Open the live WebAssembly showcase](https://jsuarezruiz.github.io/avalonia_vignettes/).
 
-The compiled WebAssembly showcase is hosted by the public [`jsuarezruiz.github.io`](https://github.com/jsuarezruiz/jsuarezruiz.github.io) GitHub Pages repository; this source repository remains private.
+The [Pages workflow](.github/workflows/pages.yml) publishes the WebAssembly head to the `gh-pages` branch on every push to `main`, and GitHub Pages serves it from there.
 
 ```
 dotnet run --project showcase/AvaloniaVignettes.Showcase.Desktop/AvaloniaVignettes.Showcase.Desktop.csproj
